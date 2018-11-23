@@ -23,19 +23,19 @@ public class BlockDenDenMushi extends BlockContainer
 		super(Material.rock);
 	}
 
-	public void onBlockPlacedBy(World world, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack stack)
+	public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase entity, ItemStack stack)
 	{
-		int rotation = MathHelper.floor_double(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F + 2.5D) & 0x3;
-		world.setBlock(par2, par3, par4, ListMisc.DenDenMushi, rotation, 2);
+		int rotation = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 0x3;
+		world.setBlock(posX, posY, posZ, ListMisc.DenDenMushi, rotation, 2);
 	}
-	
+
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
 	{
 		FMLNetworkHandler.openGui(par5EntityPlayer, MainMod.getMineMineNoMi(), 2, par1World, par2, par3, par4);
 		return true;
 	}
 
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
+//	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
 
 	public boolean isOpaqueCube() {return false;}
 

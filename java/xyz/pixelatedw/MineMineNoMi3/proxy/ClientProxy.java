@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityFX;
 import net.minecraft.entity.Entity;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
 import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockDenDenMushi;
@@ -42,20 +40,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBazooka;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBrickBat;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityFist;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityHydra;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMeigo;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityNoroBeam;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPaw;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPheasant;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityShark;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntitySpear;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityTrident;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYukiRabi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -82,9 +68,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 
 public class ClientProxy extends CommonProxy
 {
@@ -146,7 +130,6 @@ public class ClientProxy extends CommonProxy
 
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ListMisc.DenDenMushi), new RenderItemDenDenMushi(new RenderBlockDenDenMushi(), new TileEntityDenDenMushi()));
 		
 		/* 
 		//Temp

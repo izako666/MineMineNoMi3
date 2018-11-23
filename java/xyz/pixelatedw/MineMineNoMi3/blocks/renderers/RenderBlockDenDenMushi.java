@@ -23,30 +23,28 @@ public class RenderBlockDenDenMushi extends TileEntitySpecialRenderer
 		this.model = new ModelBlockDenDenMushi();
 	}
 
-	public void renderTileEntityAt(TileEntityDenDenMushi tile, double x, double y, double z, float f1)
+	public void renderTileEntityAt(TileEntity te, double posX, double posY, double posZ, float timeSinceLastTick) 
 	{
-		int rotation = 0;
-		if (tile.getWorldObj() != null)
-			rotation = tile.getBlockMetadata();
+		TileEntityDenDenMushi te2 = (TileEntityDenDenMushi)te;
 		
-		GL11.glPushMatrix();		
-			GL11.glMatrixMode(GL11.GL_MODELVIEW);
-			GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+		int rotation = 0;
+	    if (te2.getWorldObj() != null)
+	        rotation = te2.getBlockMetadata();
+		
+		bindTexture(texture);
+
+		GL11.glPushMatrix();
+			GL11.glTranslated(posX + 0.5, posY + 1.5, posZ + 0.5);
+			GL11.glScalef(1, 1, 1);
 			GL11.glRotatef(180, 0F, 0F, 1F);
 			
-			this.bindTexture(texture);
-			
-			Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-			
 			GL11.glPushMatrix();
-				GL11.glRotatef(rotation * 90, 0.0F, 1.0F, 0.0F);
-				this.model.render();
+				GL11.glRotatef(rotation * 90, 0F, 1F, 0F);
+				model.render();
 			GL11.glPopMatrix();
+			
 		GL11.glPopMatrix();
+		
 	}
-	
-	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float f1)
-	{
-		this.renderTileEntityAt((TileEntityDenDenMushi)tile, x, y, z, f1);
-	}
+
 }
