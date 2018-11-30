@@ -56,7 +56,7 @@ public class GomuAbilities
 
 			player.addPotionEffect(new PotionEffect(Potion.jump.id, 25, 2, false));
 			
-			if(passiveTimer >= 30)
+			if(passiveTimer >= 600)
 			{
 				props.setGear(1);
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -94,7 +94,7 @@ public class GomuAbilities
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 
-			if(passiveTimer >= 60)
+			if(passiveTimer >= 1200)
 			{
 				props.setGear(1);
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -137,7 +137,7 @@ public class GomuAbilities
 			if(!player.worldObj.isRemote)
 	    		WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GEARSECOND, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			
-			if(passiveTimer >= 60)
+			if(passiveTimer >= 1200)
 			{
 				props.setGear(1);
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);

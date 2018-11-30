@@ -40,8 +40,10 @@ public class ListAttributes
 	public static AbilityAttribute FIDDLEBANFF = new AbilityAttribute("Fiddle Banff").setAbilityCooldown(7);
 	public static AbilityAttribute KOKUTEICROSS = new AbilityAttribute("Kokutei Cross").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	
-//	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(500).addTasks(Tasks.sagariNoRyusei);
-//	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(150).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).addTasks(Tasks.moko);
+	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(20).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("51585B").setProjectileSize(50, 50, 50).setProjectileDamage(50).setProjectileExplosion(20, false);
+	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(10).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0});
+	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityPassive();
+	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityCooldown(10).setAbilityPassive();
 	
 	public static AbilityAttribute BLACKWORLD = new AbilityAttribute("Black World").setAbilityCooldown(25).addEffects(EffectType.AOE, new PotionEffect(Potion.moveSlowdown.id, 200, 100), new PotionEffect(Potion.digSlowdown.id, 200, 100), new PotionEffect(Potion.blindness.id, 200, 2)).setEffectRadius(20);
 	public static AbilityAttribute DARKMATTER = new AbilityAttribute("Dark Matter").setAbilityCooldown(12).setProjectileModel(new ModelSphere()).setProjectileColor("000000").setProjectileSize(7, 7, 7);

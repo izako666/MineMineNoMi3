@@ -89,7 +89,7 @@ public class ItoAbilities
 		{		
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KUMONOSUGAKI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			
-			if(passiveTimer >= 15)
+			if(passiveTimer >= 300)
 			{
 				this.setPassiveActive(false);
 				this.startCooldown();
