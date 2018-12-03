@@ -57,6 +57,7 @@ public class Ability
 	{
 		if(!isOnCooldown)
 		{
+			
 			if(projectile != null)
 			{
 				if(this.attr.isRepeater())

@@ -206,21 +206,25 @@ public class EventsPersistence
 						else if(props.getUsedFruit().equalsIgnoreCase("gasugasu") )
 							particleToUse = ID.PARTICLE_ICON_GASU;
 						else if(props.getUsedFruit().equalsIgnoreCase("sunasuna") )
-							particleToUse = ID.PARTICLE_ICON_SUNA2;							
+							particleToUse = ID.PARTICLE_ICON_SUNA2;
+
 						
-						for (int i = 0; i < 10; i++)
-						{							
-							double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-							double offsetY = (new Random().nextInt(13) + 1.0D - 10.0D) / 10.0D;
-							double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-								
-							MainMod.proxy.spawnCustomParticles(player, 
-									new EntityParticleFX(player.worldObj, particleToUse, 
-											player.posX + offsetX, 
-											player.posY + 0.5 + offsetY, 
-											player.posZ + offsetZ, 
-											0, 0, 0)
-									.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(5));
+						if(particleToUse != null)
+						{
+							for (int i = 0; i < 10; i++)
+							{							
+								double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+								double offsetY = (new Random().nextInt(13) + 1.0D - 10.0D) / 10.0D;
+								double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
+									
+								MainMod.proxy.spawnCustomParticles(player, 
+										new EntityParticleFX(player.worldObj, particleToUse, 
+												player.posX + offsetX, 
+												player.posY + 0.5 + offsetY, 
+												player.posZ + offsetZ, 
+												0, 0, 0)
+										.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(5));
+							}
 						}
 					}
 				}

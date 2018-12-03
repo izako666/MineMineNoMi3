@@ -42,7 +42,6 @@ public class WyTelemetry
 	
 	private static void sendData(String data)
 	{
-		System.out.println(urlConnection);
 		if(MainConfig.enableTelemetry && !data.isEmpty() && data != null)
 		{
 			try 
