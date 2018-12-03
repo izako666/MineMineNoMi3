@@ -140,7 +140,7 @@ public class OpeAbilities
 				this.endPassive(player);
 			}
 
-			if (passiveTimer >= 8)
+			if (passiveTimer >= 160)
 			{
 				this.setPassiveActive(false);
 				this.setCooldownActive(true);

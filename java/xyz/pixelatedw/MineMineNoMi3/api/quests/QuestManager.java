@@ -10,13 +10,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 
 public class QuestManager
 {
-
-	private static final double VERSION = 1.00;
-	
-	static
-	{
-		WyDebug.debug("Quest Core System version " + VERSION + " loaded!");
-	}
 	
 	private static QuestManager instance;
 	public static QuestManager instance()

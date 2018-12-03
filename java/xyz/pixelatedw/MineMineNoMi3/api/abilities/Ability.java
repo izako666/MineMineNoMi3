@@ -369,10 +369,10 @@ public class Ability
 				int passiveTimer = 0;
 				while(passiveActive)
 				{
-					duringPassive(player, passiveTimer++/24);
+					duringPassive(player, passiveTimer++);
 					try 
 					{
-						Thread.sleep(24);
+						Thread.sleep(20);
 					} 
 					catch (InterruptedException e) 
 					{
@@ -404,7 +404,7 @@ public class Ability
 						duringCooldown(player, ticksForCooldown);
 						try 
 						{
-							Thread.sleep(24);
+							Thread.sleep(20);
 						} 
 						catch (InterruptedException e) 
 						{
@@ -431,7 +431,7 @@ public class Ability
 						duringCharging(player, ticksForCharge);
 						try 
 						{
-							Thread.sleep(24);
+							Thread.sleep(20);
 						} 
 						catch (InterruptedException e) 
 						{

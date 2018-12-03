@@ -39,7 +39,7 @@ public class DokuAbilities
 
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
-			if(passiveTimer > 20)
+			if(passiveTimer > 400)
 			{
 				this.setPassiveActive(false);
 				this.startCooldown();
@@ -88,7 +88,7 @@ public class DokuAbilities
 		
 		public void duringPassive(EntityPlayer player, int passiveTimer) 
 		{
-			if(passiveTimer >= 40)
+			if(passiveTimer >= 800)
 			{
 				this.setPassiveActive(false);
 				this.setCooldownActive(true);

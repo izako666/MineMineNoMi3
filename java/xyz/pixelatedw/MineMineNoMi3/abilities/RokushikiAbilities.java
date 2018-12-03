@@ -131,7 +131,7 @@ public class RokushikiAbilities
 		
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
-			if(passiveTimer > 20)
+			if(passiveTimer > 400)
 			{
 				this.setPassiveActive(false);
 				this.startCooldown();
