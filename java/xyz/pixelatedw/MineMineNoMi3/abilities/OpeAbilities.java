@@ -1,20 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.client.C0APacketAnimation;
 import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -30,8 +20,6 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
-import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OpeProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
@@ -40,6 +28,11 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class OpeAbilities
 {
@@ -184,33 +177,23 @@ public class OpeAbilities
 			{
 				if (!this.isOnCooldown)
 				{
-					EntityLivingBase prevEntity = null;
-					Random r = player.worldObj.rand;
-
-					int loops = r.nextInt(2) + 1;
-
-					for (int i = 0; i < loops + 1; i++)
-					{
-						for (EntityLivingBase entity : WyHelper.getEntitiesNear(player, 40))
-						{
-							if (DevilFruitsHelper.isEntityInRoom(entity))
-							{
-								if (prevEntity == null)
-									prevEntity = entity;
-								else
-								{
-									int nPosX = (int) prevEntity.posX;
-									int nPosY = (int) prevEntity.posY;
-									int nPosZ = (int) prevEntity.posZ;
-
-									prevEntity.setPosition(entity.posX + WyMathHelper.randomWithRange(-5, 5), entity.posY, entity.posZ + WyMathHelper.randomWithRange(-5, 5));
-									entity.setPosition(nPosX + WyMathHelper.randomWithRange(-5, 5), nPosY, nPosZ + WyMathHelper.randomWithRange(-5, 5));
-								}
-							}
+					int sphereSize = 0;
+					while (sphereSize < 40) {
+						List<EntityLivingBase> entityList = WyHelper.getEntitiesNear(player,sphereSize);
+						if (entityList.size() > 0) {
+							EntityLivingBase entity = entityList.get( (int) WyMathHelper.randomWithRange(0,entityList.size()-1));
+							if(DevilFruitsHelper.isEntityInRoom(entity)){
+								System.out.println("Ok");
+								double[] beforeCoords = new double[]{player.posX,player.posY,player.posZ};
+								player.setPositionAndRotation(entity.posX,entity.posY,entity.posZ,entity.rotationYaw,entity.rotationPitch);
+								player.setPositionAndUpdate(entity.posX,entity.posY,entity.posZ);
+								entity.setPositionAndUpdate(beforeCoords[0],beforeCoords[1],beforeCoords[2]);
+								break;
 						}
+						}
+						sphereSize += 1;
 					}
-				}
-
+					}
 				super.use(player);
 			}
 			else
@@ -276,6 +259,7 @@ public class OpeAbilities
 			WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_ELTHOR, target.posX, target.posY, target.posZ), (EntityPlayerMP) player);
 		}
 	}
+
 
 	public static class Room extends Ability
 	{

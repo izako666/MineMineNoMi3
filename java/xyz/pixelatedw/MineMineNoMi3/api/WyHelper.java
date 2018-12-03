@@ -204,7 +204,9 @@ public class WyHelper
 				e.getStackTrace();
 			}
 
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/fruits.txt"), "UTF-8")))
+			try (Writer writer = new
+					BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/fruits.txt"), "UTF-" +
+					"8")))
 			{
 				for (Item f : Values.devilfruits)
 				{
