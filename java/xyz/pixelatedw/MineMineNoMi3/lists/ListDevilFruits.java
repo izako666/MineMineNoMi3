@@ -1,9 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BaneAbilities;
@@ -24,6 +20,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HoroAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ItoAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.JuryoAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KageAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.KiloAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MaguAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeraAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities;
@@ -82,7 +79,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 public class ListDevilFruits 
 {
 	
-	public static AkumaNoMi MeraMeraNoMi, HieHieNoMi, BaneBaneNoMi, PikaPikaNoMi, GomuGomuNoMi, SukeSukeNoMi,
+	public static AkumaNoMi  MeraMeraNoMi, HieHieNoMi, BaneBaneNoMi, PikaPikaNoMi, GomuGomuNoMi, SukeSukeNoMi,
 			OpeOpeNoMi, NoroNoroNoMi, GoroGoroNoMi, MokuMokuNoMi, NikyuNikyuNoMi, BomuBomuNoMi, GuraGuraNoMi,
 			KageKageNoMi, SunaSunaNoMi, MaguMaguNoMi, DoruDoruNoMi, DokuDokuNoMi, BariBariNoMi, GasuGasuNoMi,
 			YukiYukiNoMi, JuryoJuryoNoMi, YamiYamiNoMi, ItoItoNoMi, HoroHoroNoMi, SupaSupaNoMi, OriOriNoMi, 
@@ -96,7 +93,7 @@ public class ListDevilFruits
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, HakiAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, 
-				SniperAbilities.abilitiesArray, JuryoAbilities.abilitiesArray};
+				SniperAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, KiloAbilities.abilitiesArray};
 	
 	public static final Object[] ALL_ENTITIES = new Object[] 
 		{RokushikiProjectiles.abilitiesClassesArray, MeraProjectiles.abilitiesClassesArray, HieProjectiles.abilitiesClassesArray, BaneProjectiles.abilitiesClassesArray, PikaProjectiles.abilitiesClassesArray, 
@@ -123,8 +120,6 @@ public class ListDevilFruits
 		addITEM(HoruHoruNoMi, "Horu Horu no Mi");
 		MeroMeroNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, MERO);
 		addITEM(MeroMeroNoMi, "Mero Mero no Mi");
-		KiloKiloNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, KILO);
-		addITEM(KiloKiloNoMi, "Kilo Kilo no Mi");*/
 		GoeGoeNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, GoeAbilities.abilitiesArray);
 		addITEM(GoeGoeNoMi, "Goe Goe no Mi");
 		/*SupaSupaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SUPA);
@@ -175,6 +170,8 @@ public class ListDevilFruits
 		addITEM(HieHieNoMi, "Hie Hie no Mi");
 		MeraMeraNoMi = new AkumaNoMi(EnumFruitType.LOGIA, MeraAbilities.abilitiesArray);
 		addITEM(MeraMeraNoMi, "Mera Mera no Mi");
+		KiloKiloNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, KiloAbilities.abilitiesArray);
+		addITEM(KiloKiloNoMi, "Kilo Kilo no Mi");
 
 		for (int i = 0; i < EVERY_FRUIT.length; i++)
 		{		

@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
-import java.awt.Color;
-
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
@@ -24,6 +22,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelToku
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelTrident;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelX;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelYukiRabi;
+
+import java.awt.*;
 
 public class ListAttributes 
 {
@@ -155,6 +155,7 @@ public class ListAttributes
 	public static AbilityAttribute RAIGO = new AbilityAttribute("Raigo").setAbilityCooldown(30).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("5D8AA8").setProjectileSize(50, 50, 50).setProjectileDamage(120).setProjectileExplosion(30, false);
 	public static AbilityAttribute VOLTVARI = new AbilityAttribute("Volt Vari").setAbilityCooldown(3).setAbilityCharges(10 * 20);
 	public static AbilityAttribute ELTHOR = new AbilityAttribute("El Thor").setAbilityCooldown(8).setAbilityCharges(6 * 20);
+	public static AbilityAttribute SPARKSTEP = new AbilityAttribute("Spark Step").setAbilityCooldown(3);
 	
 	public static AbilityAttribute INJECTIONSHOT = new AbilityAttribute("Injection Shot").setAbilityCooldown(15);
 	public static AbilityAttribute SHAMBLES = new AbilityAttribute("Shambles").setAbilityCooldown(8);
@@ -209,7 +210,9 @@ public class ListAttributes
 	public static AbilityAttribute RANKYAKU = new AbilityAttribute("Rankyaku").setAbilityCooldown(9).setProjectileTicks(100).setProjectileModel(new ModelCube()).setProjectileSize(6, 0.4, 1.5).setProjectileColor("69E3FF").setProjectileDamage(20).setProjectileExplosion(5, false);
 	public static AbilityAttribute SHIGAN = new AbilityAttribute("Shigan").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute KAMIE = new AbilityAttribute("Kamie").setAbilityCooldown(10).addEffects(EffectType.USER, new PotionEffect(Potion.resistance.id, 20, 100)).setAbilityPassive();
-	
+
+	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive();
+
 	public static AbilityAttribute UCHIMIZU = new AbilityAttribute("Uchimizu").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileColor("00CED1").setProjectileSize(1, 1, 1.3).setProjectileDamage(5).setAbilityRepeater(4);
 	public static AbilityAttribute MURASAME = new AbilityAttribute("Murasame").setAbilityCooldown(8).setProjectileModel(new ModelShark()).setProjectileTexture("murasame").setProjectileSize(.8, .8, 1.2).setProjectileDamage(25);
 	public static AbilityAttribute KACHIAGEHAISOKU = new AbilityAttribute("Kachiage Haisoku").setAbilityCooldown(15).setAbilityPassive().setAbilityPunch();

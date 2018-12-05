@@ -1,13 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.play.server.S02PacketChat;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.WorldServer;
+import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -30,7 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class GoroAbilities
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new ElThor(), new VoltVari(), new Raigo(), new Kari(), new Sango()};
+	public static Ability[] abilitiesArray = new Ability[] {new ElThor(), new VoltVari(), new Raigo(), new Kari(), new Sango(), new SparkStep()};
 	
 	public static class ElThor extends Ability
 	{
@@ -267,4 +265,33 @@ public class GoroAbilities
 		} 
 	}
 
-}
+	public static class SparkStep extends Ability
+	{
+		public SparkStep() {
+			super(ListAttributes.SPARKSTEP);
+		}
+		public void use(EntityPlayer player) {
+			if (!this.isOnCooldown) {
+				if(WyHelper.rayTraceBlocks(player) != null)
+				{
+					MovingObjectPosition blockTracer = WyHelper.rayTraceBlocks(player);
+					int[] blockLocation = new int[]{blockTracer.blockX,blockTracer.blockY,blockTracer.blockZ};
+					while (!(player.getEntityWorld().getBlock(blockLocation[0],(blockLocation[1]),blockLocation[2]) == Blocks.air)) {
+						blockLocation[1] += 1;
+					}
+					EnderTeleportEvent event = new EnderTeleportEvent(player, blockLocation[0], blockLocation[1], blockLocation[2], 0);
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ELTHOR, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					player.setPositionAndUpdate(event.targetX, event.targetY + 1, event.targetZ);
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ELTHOR, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					player.fallDistance = 0.0F;
+
+
+				}
+				super.use(player);
+			}
+
+			}
+		}
+
+
+	}
