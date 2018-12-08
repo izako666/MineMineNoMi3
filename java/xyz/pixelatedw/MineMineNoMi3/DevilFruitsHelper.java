@@ -46,6 +46,8 @@ public class DevilFruitsHelper
 		"gasugasu", "sunasuna", "mokumoku"
 	};
 	
+	public static Block[] nonBreakableBlocks = new Block[] { Blocks.bedrock, ListMisc.OpeMid, ListMisc.Ope, ListMisc.StringMid, ListMisc.StringWall };
+	
 	public static Block[] replaceableBlocks = new Block[] { Blocks.air, Blocks.tallgrass, Blocks.snow_layer, Blocks.red_flower, Blocks.yellow_flower, Blocks.water, Blocks.flowing_water, Blocks.lava, 
 			Blocks.flowing_lava, Blocks.waterlily, Blocks.redstone_wire, Blocks.double_plant, Blocks.wheat, Blocks.carrots, Blocks.carpet, Blocks.cake, Blocks.sapling, Blocks.deadbush, Blocks.web,
 			Blocks.wooden_pressure_plate, Blocks.stone_pressure_plate, Blocks.light_weighted_pressure_plate, Blocks.heavy_weighted_pressure_plate, Blocks.carrots, Blocks.carpet, Blocks.vine,
@@ -198,6 +200,21 @@ public class DevilFruitsHelper
 		}
 		
 		return false;
+	}
+	
+	public static boolean canBreakBlock(World world, int posX, int posY, int posZ)
+	{
+		return canBreakBlock(world.getBlock(posX, posY, posZ));
+	}
+	
+	public static boolean canBreakBlock(Block b)
+	{
+		for(Block blk : nonBreakableBlocks)
+		{
+			if(b == blk)
+				return false;
+		}
+		return true;
 	}
 	
 	public static boolean canReplaceBlock(Block b)

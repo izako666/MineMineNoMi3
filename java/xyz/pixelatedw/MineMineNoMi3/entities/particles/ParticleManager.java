@@ -5,6 +5,7 @@ import java.util.HashMap;
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku.ParticleEffectBakuMunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectDokuGumo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.fishkarate.ParticleEffectSamehada;
@@ -55,6 +56,9 @@ public class ParticleManager
 	private HashMap<String, ParticleEffect> createMap()
 	{
 		HashMap<String, ParticleEffect> map = new HashMap<String, ParticleEffect>();
+		
+		// Baku
+		map.put(ID.PARTICLEFX_BAKUMUNCH, new ParticleEffectBakuMunch());
 		
 		// Mera
 		map.put(ID.PARTICLEFX_DAIENKAI1, new ParticleEffectDaiEnkai());

@@ -5,10 +5,13 @@ import java.util.List;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.WorldServer;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities.WhiteLauncher;
@@ -18,16 +21,50 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities.WhiteStrike;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GomuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.JuryoProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class JuryoAbilities
 {
-	public static Ability[] abilitiesArray = new Ability[] {new SagariNoRyusei(), new Juryoku()};
+	public static Ability[] abilitiesArray = new Ability[] {new SagariNoRyusei(), new Juryoku(), new Moko()};
 	
+	
+	public static class Moko extends Ability
+	{
+		public Moko() 
+		{
+			super(ListAttributes.MOKO); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			if(player.getHeldItem() != null && DevilFruitsHelper.isSword(player.getHeldItem()))
+			{	
+				for(int j = 0; j < 50; j++)
+				{
+					AbilityProjectile proj = new JuryoProjectiles.Moko(player.worldObj, player, ListAttributes.MOKO);
+
+					proj.setLocationAndAngles(
+							player.posX + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
+							(player.posY + 0.3) + WyMathHelper.randomWithRange(0, 5) + player.worldObj.rand.nextDouble(), 
+							player.posZ + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
+							0, 0);
+					player.worldObj.spawnEntityInWorld(proj);
+				}
+				if (player.worldObj instanceof WorldServer)
+					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+				super.use(player);
+			}
+			else
+				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+		}
+	}
 	
 	public static class Juryoku extends Ability
 	{
@@ -64,8 +101,11 @@ public class JuryoAbilities
 							int posY = (int)entity.posY - 1;
 							int posZ = (int)entity.posZ + z;
 							
-							player.worldObj.getBlock(posX, posY, posZ).dropBlockAsItem(player.worldObj, posX, posY, posZ, 0, 0);
-							player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+							if(DevilFruitsHelper.canBreakBlock(player.worldObj, posX, posY, posZ))
+							{
+								player.worldObj.getBlock(posX, posY, posZ).dropBlockAsItem(player.worldObj, posX, posY, posZ, 0, 0);
+								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+							}
 						}
 					}
 				}

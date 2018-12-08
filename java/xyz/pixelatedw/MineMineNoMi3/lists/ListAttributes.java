@@ -27,6 +27,10 @@ import java.awt.*;
 
 public class ListAttributes 
 {
+	public static AbilityAttribute BAKUTSUIHO = new AbilityAttribute("Baku Tsuiho").setAbilityCooldown(10).setAbilityCharges(15 * 20).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(6);
+	public static AbilityAttribute BEROCANNON = new AbilityAttribute("Bero Cannon").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(4);
+	public static AbilityAttribute BAKUMUNCH = new AbilityAttribute("Baku Munch").setAbilityCooldown(5);
+	
 	public static AbilityAttribute PHOENIXPOINT = new AbilityAttribute("Phoenix Point").setAbilityCooldown(1);
 	public static AbilityAttribute BLUEFLAMESOFRESURRECTION = new AbilityAttribute("Blue Flames of Resurrection").setAbilityCooldown(20).addEffects(EffectType.USER, new PotionEffect(Potion.regeneration.id, 3 * 20, 4));
 	public static AbilityAttribute FLAMEOFRESTORATION = new AbilityAttribute("Flame of Restoration").setAbilityCooldown(3).setAbilityPassive().setAbilityPunch();
@@ -41,7 +45,7 @@ public class ListAttributes
 	public static AbilityAttribute KOKUTEICROSS = new AbilityAttribute("Kokutei Cross").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	
 	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(20).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("51585B").setProjectileSize(50, 50, 50).setProjectileDamage(50).setProjectileExplosion(20, false);
-	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(10).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0});
+	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(10).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityPassive();
 	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityCooldown(10).setAbilityPassive();
 	
