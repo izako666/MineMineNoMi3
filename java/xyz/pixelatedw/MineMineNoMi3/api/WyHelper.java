@@ -157,6 +157,8 @@ public class WyHelper
 
 	public static void generateExtraTypScriptFiles()
 	{
+		getFancyAbilitiesList();
+		
 		Map<String, Ability> sorted = AbilityManager.instance().getHashMap();
 		Set set = sorted.entrySet();
 		Iterator i = set.iterator();
@@ -226,6 +228,32 @@ public class WyHelper
 		}
 	}
 
+	private static void getFancyAbilitiesList()
+	{
+		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/");
+		folder.mkdirs();
+
+		if (folder.exists())
+		{
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/fancylist.txt"), "UTF-8")))
+			{
+				for (AkumaNoMi devilFruit : Values.devilfruits)
+				{
+					writer.write(devilFruit.getItemStackDisplayName(new ItemStack(devilFruit)) + "\n");
+					for(Ability ability : devilFruit.abilities)
+					{
+						writer.write("> " + ability.getAttribute().getAttributeName() + "\n");
+					}
+					writer.write("\n");
+				}
+			}
+			catch (Exception e)
+			{
+				e.getStackTrace();
+			}
+		}
+	}
+	
 	private static String getAbilitiesFor(AkumaNoMi df)
 	{
 		StringBuilder builder = new StringBuilder();

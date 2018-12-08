@@ -9,14 +9,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 
 public class Values 
 {
-	public static List<Item> devilfruits = new ArrayList();
-	public static List<Item> logias = new ArrayList();
+	public static List<AkumaNoMi> devilfruits = new ArrayList();
+	public static List<AkumaNoMi> logias = new ArrayList();
 	public static List<Item> miscItems = new ArrayList();
 	public static List<Block> miscBlocks = new ArrayList();
 	public static List<Object[]> customDFs = new ArrayList();

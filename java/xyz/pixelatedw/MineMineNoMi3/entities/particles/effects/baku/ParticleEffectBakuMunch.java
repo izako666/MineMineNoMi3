@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera;
+package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku;
 
 import java.util.Random;
 import java.util.Timer;
@@ -15,18 +15,19 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskCharge;
 
-public class ParticleEffectDaiEnkai2 extends ParticleEffect
+public class ParticleEffectBakuMunch extends ParticleEffect
 {
 
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{
-		Timer timer = new Timer(true); 
-		EntityParticleFX particle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_MERA, 
-				posX, 
-				posY + 0.5, 
-				posZ, 
-				0, 0, 0);
-		timer.schedule(ParticleTaskCharge.Create(player, particle.posX, particle.posY, particle.posZ, particle, 1.0, 1, 0.45, 0.2), 0);
+		for (int i = 0; i < 30; i++)
+		{
+			double offsetX = player.worldObj.rand.nextDouble();
+			double offsetY = 1;
+			double offsetZ = player.worldObj.rand.nextDouble();
+
+			player.worldObj.spawnParticle(EnumParticleTypes.BLOCK_CRACK.getParticleName() + "_" + Block.getIdFromBlock(player.worldObj.getBlock((int)posX, (int)posY, (int)posZ))  + "_" + player.worldObj.getBlockMetadata((int)posX, (int)posY, (int)posZ), posX + offsetX, posY + offsetY, posZ + offsetZ, 0, 0, 0);
+		}
 	}
 
 }
