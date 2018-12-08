@@ -130,9 +130,7 @@ public class EventsPersistence
 			}
 			
 			if (heldItem != null)
-			{				
-				if(heldItem.getItem() == ListMisc.Umbrella && player.worldObj.getBlock((int)player.posX, (int)player.posY - 4, (int)player.posZ) == Blocks.air && !player.capabilities.isCreativeMode)
-					player.motionY = -0.05;
+			{
 				
 				/*if(props.getUsedFruit().equals("kilokilo") && heldItem.getItem() == ListAbilities.KILOPRESS)
 				{

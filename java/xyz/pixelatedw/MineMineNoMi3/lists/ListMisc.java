@@ -141,6 +141,7 @@ public class ListMisc
 	public static ItemCoreWeapon Biseto = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon Hook = new ItemCoreWeapon(6).setIsPoisonous();
 	public static ItemCoreWeapon Umbrella = new ItemCoreWeapon(3);
+	public static ItemCoreWeapon UmbrellaOpen = new ItemCoreWeapon(3);
 	public static ItemCoreWeapon Jitte = new ItemCoreWeapon(7).setMaxDamage(500);
 	public static ItemCoreWeapon BoStick = new ItemCoreWeapon(6);
 	public static ItemCoreWeapon Hammer5t = new ItemCoreWeapon(1);
@@ -215,7 +216,8 @@ public class ListMisc
  		addITEM(Yoru								, "Yoru"					, ListCreativeTabs.tabWeapons); 
  		addITEM(Biseto								, "Bisento"					, ListCreativeTabs.tabWeapons); 
  		addITEM(Hook								, "Hook"					, ListCreativeTabs.tabWeapons);	
- 		addITEM(Umbrella							, "Umbrella"				, ListCreativeTabs.tabWeapons);	
+ 		addITEM(Umbrella							, "Umbrella"				, ListCreativeTabs.tabWeapons);
+		addITEM(UmbrellaOpen						, "Umbrella Open"			, ListCreativeTabs.tabWeapons);
 		addITEM(Jitte								, "Jitte"					, ListCreativeTabs.tabWeapons);	
 		addITEM(BoStick								, "Bo Staff"				, ListCreativeTabs.tabWeapons);
 		addITEM(Hammer5t							, "5t Hammer"				, ListCreativeTabs.tabWeapons);
