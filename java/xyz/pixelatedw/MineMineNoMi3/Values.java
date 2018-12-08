@@ -1,18 +1,16 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Values 
 {
@@ -104,7 +102,7 @@ public class Values
 		abilityDesc.put("countershock", "Releases a strong electrical current, which shocks the opponent.");
 		abilityDesc.put("mes", "Removes the heart of the user\\'s target, which they can then damage to hurt the opponent.");
 		abilityDesc.put("gammaknife", "Creates a blade of gamma radiation, which massively damages the opponent\\'s organs");
-		abilityDesc.put("shambles", "The user randomly switches the positions of all entities inside ROOM.");
+		abilityDesc.put("shambles", "The user swaps place with the closest entity within the ROOM.");
 		abilityDesc.put("takt", "Lifts all entities inside ROOM, making them unable to move.");	
 		abilityDesc.put("injectionshot", "While holding a weapon, the user charges at the enemy, leaving them poisoned and confused.");	
 

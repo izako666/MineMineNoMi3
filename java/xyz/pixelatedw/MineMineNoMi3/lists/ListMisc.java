@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -55,6 +53,8 @@ import xyz.pixelatedw.MineMineNoMi3.items.weapons.Kabuto;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.KujaBow;
 import xyz.pixelatedw.MineMineNoMi3.world.WorldProviderScenarioArena;
 
+import java.util.Random;
+
 public class ListMisc 
 {	
 	public static Block Ope = new BlockOpe();
@@ -106,7 +106,7 @@ public class ListMisc
 	public static Item DialFlash = null;	
 	public static Item DialReject = new DialReject();	
 	
-	public static Item Bullets = new Item(); 
+	public static Item Bullets = new Item();
 	public static Item KairosekiBullets = new Item();
 	public static Item KujaArrow = new Item();
 	public static Item PopGreen = new Item();
