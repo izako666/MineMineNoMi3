@@ -163,12 +163,12 @@ public class WyHelper
 		Set set = sorted.entrySet();
 		Iterator i = set.iterator();
 
-		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/");
+		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
 		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/abilities.txt"), "UTF-8")))
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/abilities.txt"), "UTF-8")))
 			{
 				while (i.hasNext())
 				{
@@ -207,7 +207,7 @@ public class WyHelper
 			}
 
 			try (Writer writer = new
-					BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/fruits.txt"), "UTF-" +
+					BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fruits.txt"), "UTF-" +
 					"8")))
 			{
 				for (Item f : Values.devilfruits)
@@ -230,12 +230,12 @@ public class WyHelper
 
 	private static void getFancyAbilitiesList()
 	{
-		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/");
+		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
 		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FIELS/fancylist.txt"), "UTF-8")))
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fancylist.txt"), "UTF-8")))
 			{
 				for (AkumaNoMi devilFruit : Values.devilfruits)
 				{

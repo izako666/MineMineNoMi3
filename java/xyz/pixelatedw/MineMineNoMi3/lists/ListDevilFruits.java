@@ -120,12 +120,12 @@ public class ListDevilFruits
 		addITEM(JuryoJuryoNoMi, "Juryo Juryo no Mi");
 		YamiYamiNoMi = new AkumaNoMi(EnumFruitType.LOGIA, YamiAbilities.abilitiesArray);
 		addITEM(YamiYamiNoMi, "Yami Yami no Mi");
+		GoeGoeNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, GoeAbilities.abilitiesArray);
+		addITEM(GoeGoeNoMi, "Goe Goe no Mi");
 		/*HoruHoruNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, HORU);
 		addITEM(HoruHoruNoMi, "Horu Horu no Mi");
 		MeroMeroNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, MERO);
 		addITEM(MeroMeroNoMi, "Mero Mero no Mi");
-		GoeGoeNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, GoeAbilities.abilitiesArray);
-		addITEM(GoeGoeNoMi, "Goe Goe no Mi");
 		/*SupaSupaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SUPA);
 		addITEM(SupaSupaNoMi, "Supa Supa no Mi");*/
 		HoroHoroNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, HoroAbilities.abilitiesArray);
