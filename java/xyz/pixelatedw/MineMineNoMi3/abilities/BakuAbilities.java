@@ -83,7 +83,6 @@ public class BakuAbilities
 							projectiles.remove(s);
 						}
 						loadedProjectiles.add( ((ItemBlock)s.getItem()).field_150939_a );
-						System.out.println(s.getDisplayName());
 					}
 				}
 			}
@@ -172,19 +171,17 @@ public class BakuAbilities
 							int posY = (int)mop.blockY - y;
 							int posZ = (int)mop.blockZ + z;
 							
-							if(DevilFruitsHelper.canBreakBlock(player.worldObj, posX, posY, posZ))
+							Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
+							if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
 							{
-								if( !(player.worldObj.getBlock(posX, posY, posZ) instanceof BlockLiquid) )
-									player.inventory.addItemStackToInventory(new ItemStack(player.worldObj.getBlock(posX, posY, posZ)));
-								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
-								WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player.dimension, posX, posY, posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);	
+								player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
+								WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player.dimension, posX, posY, posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 							}
 						}
+						super.use(player);
 					}
-					super.use(player);
 				}
 			}
-		} 
-	}
-	
+		}
+	}	
 }

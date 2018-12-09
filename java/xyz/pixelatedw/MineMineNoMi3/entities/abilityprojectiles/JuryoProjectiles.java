@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
@@ -72,10 +73,10 @@ public class JuryoProjectiles
 					int posY = (int)hit.entityHit.posY - 1;
 					int posZ = (int)hit.entityHit.posZ + z;
 					
-					if(DevilFruitsHelper.canBreakBlock(this.worldObj, posX, posY, posZ))
+					Block tempBlock = this.worldObj.getBlock(posX, posY, posZ);
+					if(DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
 					{
-						this.worldObj.getBlock(posX, posY, posZ).dropBlockAsItem(this.worldObj, posX, posY, posZ, 0, 0);
-						this.worldObj.setBlock(posX, posY, posZ, Blocks.air);
+						tempBlock.dropBlockAsItem(this.worldObj, posX, posY, posZ, 0, 0);
 						hit.entityHit.motionX = 0;
 						hit.entityHit.motionZ = 0;
 						hit.entityHit.motionY -= 5;
@@ -85,10 +86,10 @@ public class JuryoProjectiles
 			}
 			else
 			{
-				if(DevilFruitsHelper.canBreakBlock(this.worldObj, hit.blockX, hit.blockY, hit.blockZ))
+				Block tempBlock = this.worldObj.getBlock(hit.blockX, hit.blockY, hit.blockZ);
+				if(DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.air, "all", "restricted", "ignore liquid"))
 				{
-					this.worldObj.getBlock(hit.blockX, hit.blockY, hit.blockZ).dropBlockAsItem(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, 0, 0);
-					this.worldObj.setBlock(hit.blockX, hit.blockY, hit.blockZ, Blocks.air);
+					tempBlock.dropBlockAsItem(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, 0, 0);
 				}
 			}
 		}

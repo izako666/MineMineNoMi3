@@ -36,16 +36,16 @@ public class BariProjectiles
 		
 		public void onUpdate()
 		{	
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60));		
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60));
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60));
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60));	
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60));	
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60));			
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60));		
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60));			
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60));				
-			DevilFruitsHelper.placeIfCanReplaceBlock(this.worldObj, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60));
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");		
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");	
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");	
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");			
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");		
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");			
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");				
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");
 
 			super.onUpdate();
 		}

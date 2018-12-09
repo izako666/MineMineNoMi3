@@ -88,7 +88,7 @@ public class HieProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			DevilFruitsHelper.setBlock(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, Blocks.packed_ice);
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)posX, (int)posY, (int)posZ, Blocks.packed_ice, "air");
 		}
 		
 		public void onUpdate()

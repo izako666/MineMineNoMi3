@@ -862,7 +862,7 @@ public class EventsPersistence
 				ExtendedEntityStats.get(e.original).saveNBTData(compound);
 				ExtendedEntityStats props = ExtendedEntityStats.get(e.entityPlayer);
 				props.loadNBTData(compound);
-				
+								
 				compound = new NBTTagCompound();
 				AbilityProperties.get(e.original).saveNBTData(compound);
 				AbilityProperties abilityProps = AbilityProperties.get(e.entityPlayer);

@@ -2,9 +2,11 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -101,11 +103,9 @@ public class JuryoAbilities
 							int posY = (int)entity.posY - 1;
 							int posZ = (int)entity.posZ + z;
 							
-							if(DevilFruitsHelper.canBreakBlock(player.worldObj, posX, posY, posZ))
-							{
-								player.worldObj.getBlock(posX, posY, posZ).dropBlockAsItem(player.worldObj, posX, posY, posZ, 0, 0);
-								player.worldObj.setBlock(posX, posY, posZ, Blocks.air);
-							}
+							Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
+							if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
+								tempBlock.dropBlockAsItem(player.worldObj, posX, posY, posZ, 0, 0);				
 						}
 					}
 				}

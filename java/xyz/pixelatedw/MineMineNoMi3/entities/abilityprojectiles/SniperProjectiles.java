@@ -49,10 +49,10 @@ public class SniperProjectiles
 				int a1 = worldObj.rand.nextInt(10) - 5;
 				int a2 = worldObj.rand.nextInt(10) - 5;
 				
-				DevilFruitsHelper.placeIfCanReplaceBlock(worldObj, (int)posX + a1, (int)posY , (int)posZ + a2, Blocks.cactus);		
-				DevilFruitsHelper.placeIfCanReplaceBlock(worldObj, (int)posX + a1, (int)posY + 1, (int)posZ + a2, Blocks.cactus);		
-				DevilFruitsHelper.placeIfCanReplaceBlock(worldObj, (int)posX + a1, (int)posY + 2, (int)posZ + a2, Blocks.cactus);	
-				DevilFruitsHelper.placeIfCanReplaceBlock(worldObj, (int)posX + a1, (int)posY + 3, (int)posZ + a2, Blocks.cactus);
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY , (int)posZ + a2, Blocks.cactus, "air");		
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 1, (int)posZ + a2, Blocks.cactus, "air");		
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 2, (int)posZ + a2, Blocks.cactus, "air");	
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 3, (int)posZ + a2, Blocks.cactus, "air");
 			}
 		}
 	}

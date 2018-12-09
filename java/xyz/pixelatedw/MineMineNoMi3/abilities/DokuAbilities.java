@@ -100,7 +100,7 @@ public class DokuAbilities
 				if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != Blocks.air
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.DemonPoison)
-					DevilFruitsHelper.placeIfCanReplaceBlock(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison);
+					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison, "core", "foliage");
 			}
 			
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_VENOMDEMON, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);

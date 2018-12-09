@@ -279,7 +279,7 @@ public class OpeAbilities
 				{
 					public void call(int x, int y, int z)
 					{
-						DevilFruitsHelper.placeIfCanReplaceBlock(world, x, y, z, ListMisc.Ope);
+						DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, ListMisc.Ope, "air", "liquid");
 					}
 				});
 				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.OpeMid);

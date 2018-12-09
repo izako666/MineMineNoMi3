@@ -45,7 +45,7 @@ public class ItoAbilities
 				{
 					public void call(int x, int y, int z)
 					{
-						DevilFruitsHelper.placeIfCanReplaceBlock(world, x, y , z, ListMisc.StringWall);
+						DevilFruitsHelper.placeBlockIfAllowed(world, x, y , z, ListMisc.StringWall, "air", "liquid");
 					}
 				});
 				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.StringMid);
