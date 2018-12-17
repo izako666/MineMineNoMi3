@@ -7,6 +7,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainKeys;
 import xyz.pixelatedw.MineMineNoMi3.events.EventExtendedProperties;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsKilo;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsPersistence;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsQuestsProgress;
@@ -22,6 +23,7 @@ public class ListForge
 		MinecraftForge.EVENT_BUS.register(new EventsEnchantments());
 		MinecraftForge.EVENT_BUS.register(new EventsPersistence());
 		MinecraftForge.EVENT_BUS.register(new EventsQuestsProgress());
+		MinecraftForge.EVENT_BUS.register(new EventsKilo());
 		
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{

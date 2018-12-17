@@ -30,7 +30,8 @@ public class ID
 	PARTICLE_ICON_ITO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_ito.png"),	
 	PARTICLE_ICON_GURA = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura.png"),	
 	PARTICLE_ICON_GURA2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura2.png"),	
-	PARTICLE_ICON_HIE = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_hie.png"),	
+	PARTICLE_ICON_HIE = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_hie.png"),
+	PARTICLE_ICON_KILO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_kilo.png"),
 			
 	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
 	
@@ -106,6 +107,7 @@ public class ID
 	PARTICLEFX_KARI = "kari",
 	PARTICLEFX_RAIGO = "raigo",
 	PARTICLEFX_BAKUMUNCH = "bakuMunch",
+	PARTICLEFX_KILO = "kilo",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

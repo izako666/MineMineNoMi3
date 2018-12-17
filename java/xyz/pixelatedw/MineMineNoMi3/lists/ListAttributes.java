@@ -217,7 +217,8 @@ public class ListAttributes
 
 	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive();
 	public static AbilityAttribute KICKOFFJUMP = new AbilityAttribute("Kick Off Jump").setAbilityPassive().setAbilityCooldown(4);
-	//public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive();
+	public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive();
+	public static AbilityAttribute BODYRAIN = new AbilityAttribute("Body Rain").setAbilityCooldown(10).setAbilityPassive();
 
 	public static AbilityAttribute UCHIMIZU = new AbilityAttribute("Uchimizu").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileColor("00CED1").setProjectileSize(1, 1, 1.3).setProjectileDamage(5).setAbilityRepeater(4);
 	public static AbilityAttribute MURASAME = new AbilityAttribute("Murasame").setAbilityCooldown(8).setProjectileModel(new ModelShark()).setProjectileTexture("murasame").setProjectileSize(.8, .8, 1.2).setProjectileDamage(25);

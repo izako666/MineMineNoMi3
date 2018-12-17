@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
@@ -16,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gura.ParticleEffectGekishin;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.hie.ParticleEffectIceAge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffectKumoNoSugaki;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectHeavyPunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai2;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.moku.ParticleEffectWhiteLauncher;
@@ -37,6 +36,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectBlackWorld;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectDarkMatter;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yuki.ParticleEffectFubuki;
+
+import java.util.HashMap;
 
 public class ParticleManager
 {
@@ -123,7 +124,10 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_GEPPO, new ParticleEffectGeppo());		
 
 		// Hie
-		map.put(ID.PARTICLEFX_ICEAGE, new ParticleEffectIceAge());	
+		map.put(ID.PARTICLEFX_ICEAGE, new ParticleEffectIceAge());
+
+		// Kilo
+		map.put(ID.PARTICLEFX_KILO, new ParticleEffectHeavyPunch());
 		
 		
 		return map;
