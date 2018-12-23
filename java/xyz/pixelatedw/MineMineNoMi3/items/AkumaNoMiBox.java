@@ -1,17 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
-import java.util.Random;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
-import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+
+import java.util.Random;
 
 public class AkumaNoMiBox extends Item
 {
@@ -19,7 +16,7 @@ public class AkumaNoMiBox extends Item
 	private int tier;
 	private AkumaNoMi[] tier1Fruits = new AkumaNoMi[] 
 			{ListDevilFruits.BaneBaneNoMi, ListDevilFruits.SukeSukeNoMi, ListDevilFruits.NoroNoroNoMi, ListDevilFruits.BomuBomuNoMi, ListDevilFruits.DoruDoruNoMi, ListDevilFruits.BariBariNoMi, 
-			 ListDevilFruits.HoroHoroNoMi, ListDevilFruits.GoeGoeNoMi};
+			 ListDevilFruits.HoroHoroNoMi, ListDevilFruits.GoeGoeNoMi, ListDevilFruits.KiloKiloNoMi};
 	private AkumaNoMi[] tier2Fruits = new AkumaNoMi[] 
 			{ListDevilFruits.GomuGomuNoMi, ListDevilFruits.OpeOpeNoMi, ListDevilFruits.NikyuNikyuNoMi, ListDevilFruits.KageKageNoMi,
 			 ListDevilFruits.DokuDokuNoMi, ListDevilFruits.ItoItoNoMi, ListDevilFruits.UshiUshiNoMiBison};

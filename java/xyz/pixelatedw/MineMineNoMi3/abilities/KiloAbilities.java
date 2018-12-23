@@ -1,17 +1,35 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class KiloAbilities {
 
-    public static Ability[] abilitiesArray = new Ability[]{new Weightless(), new KickOffJump(),};
+    public static Ability[] abilitiesArray = new Ability[]{new Weightless(), new KickOffJump(), new HeavyPunch(), new BodyRain()};
+
+
+    private static boolean hasStrength(EntityPlayer player) {
+        Object[] effects = player.getActivePotionEffects().toArray();
+        for (int i = 0; i < effects.length; i++) {
+            PotionEffect currentEffect = (PotionEffect) effects[i];
+            if (currentEffect.getPotionID() == 5 && currentEffect.getAmplifier() == 8) {
+                return true;
+            }
+        } return false;
+    }
+
 
     private static void movePlayer(String c, double x, double y, double z, EntityPlayer p) {
         WyNetworkHelper.sendTo(new PacketPlayer("motion" + c, x, y, z), (EntityPlayerMP) p);
@@ -24,7 +42,10 @@ public class KiloAbilities {
         }
 
         public void passive(EntityPlayer player) {
-            super.passive(player);
+            if (!this.isOnCooldown) {
+                super.passive(player);
+            }
+
 
         }
 
@@ -35,8 +56,19 @@ public class KiloAbilities {
                     this.setCooldownActive(true);
                     this.endPassive(player);
                 } else if (player.getHeldItem() != null && player.getHeldItem().getItem() == ListMisc.UmbrellaOpen) {
+                    double mZ = 0;
+                    double mX = 0;
+                   WyHelper.Direction dir = WyHelper.get8Directions(player);
+                    if(dir == WyHelper.Direction.NORTH) mZ -= 0.25;
+                    if(dir == WyHelper.Direction.NORTH_WEST) {mZ -= 0.25; mX -= 0.25;}
+                    if(dir == WyHelper.Direction.SOUTH) mZ += 0.25;
+                    if(dir == WyHelper.Direction.NORTH_EAST) {mZ -= 0.25; mX += 0.25;}
+                    if(dir == WyHelper.Direction.WEST) mX -= 0.25;
+                    if(dir == WyHelper.Direction.SOUTH_WEST) {mZ += 0.25; mX -= 0.25;}
+                    if(dir == WyHelper.Direction.EAST) mX += 0.25;
+                    if(dir == WyHelper.Direction.SOUTH_EAST) {mZ += 0.25; mX += 0.25;}
                     player.fallDistance = 0;
-                    movePlayer("=",player.motionX,-0.2,player.motionZ,player);
+                    movePlayer("=",mX,-0.2,mZ,player);
                 } else if (player.getHeldItem() != null && player.getHeldItem().getItem() == ListMisc.Umbrella) {
                     int slot = player.inventory.currentItem;
                     player.inventory.setInventorySlotContents(slot, new ItemStack(ListMisc.UmbrellaOpen));
@@ -76,8 +108,11 @@ public class KiloAbilities {
         }
 
         public void passive(EntityPlayer player) {
-            this.initialY = player.posY;
-            super.passive(player);
+            if (!this.isOnCooldown) {
+                this.initialY = player.posY;
+                super.passive(player);
+            }
+
 
         }
 
@@ -106,27 +141,86 @@ public class KiloAbilities {
 
     }
 
-//    public static class HeavyPunch extends Ability {
-//        public HeavyPunch() {
-//            super (ListAttributes.HEAVYPUNCH);
-//        }
-//
-//        public void passive(EntityPlayer player) {
-//            super.passive(player);
-//        }
-//
-//        public void duringPassive(EntityPlayer player, int countDown) {
-//            WyHelper.sendMsgToPlayer(player,"Hi");
-//
-//            if (!player.onGround) {
-//                this.endPassive(player);
-//            }
-//        }
-//
-//        public void endPassive(EntityPlayer player) {
-//            WyHelper.sendMsgToPlayer(player,"Done");
-//        }
-//
-//    }
+    public static class HeavyPunch extends Ability {
+        public HeavyPunch() {
+            super (ListAttributes.HEAVYPUNCH);
+        }
+
+        public void passive(EntityPlayer player) {
+            if (!this.isOnCooldown) {
+                super.passive(player);
+            }
+
+        }
+
+        public void duringPassive(EntityPlayer player, int timer) {
+            player.addPotionEffect(new PotionEffect(2, 4, 40));
+            movePlayer("=",0,-2,0,player);
+            if (timer == 130) {
+                player.addPotionEffect(new PotionEffect(5,40,8));
+                WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KILO, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+
+            } else if (timer > 130 && hasStrength(player)) {
+
+                player.addPotionEffect(new PotionEffect(5,40,8));
+            } else if (timer > 130 && !hasStrength(player)) {
+                this.setPassiveActive(false);
+                this.setCooldownActive(true);
+                this.endPassive(player);
+            }
+
+        }
+
+        public void endPassive(EntityPlayer player) {
+            this.startCooldown();
+            this.startExtUpdate(player);
+        }
+
+
+
+    }
+
+    public static class BodyRain extends Ability {
+
+        private double initialY;
+
+        public BodyRain() {
+            super(ListAttributes.BODYRAIN);
+        }
+
+        public void passive(EntityPlayer player) {
+            if (!this.isOnCooldown) {
+                this.initialY = player.posY;
+                super.passive(player);
+            }
+
+        }
+
+        public void duringPassive(EntityPlayer player, int timer) {
+            if(player.onGround) {
+                this.setPassiveActive(false);
+                this.setCooldownActive(true);
+                this.endPassive(player);
+            } else {
+                movePlayer("=", 0, -2, 0, player);
+            }
+        }
+
+        public void endPassive(EntityPlayer player) {
+            double damage = this.initialY - player.posY;
+            if (!(damage <= 0)) {
+                for(EntityLivingBase entity : WyHelper.getEntitiesNear(player, 5))
+                {
+                    entity.attackEntityFrom(DamageSource.causePlayerDamage(player),  (float) (damage * 0.75));
+                }
+            }
+
+
+            this.startCooldown();
+            this.startExtUpdate(player);
+        }
+    }
+
+
 }
 

@@ -294,8 +294,11 @@ public class EventsPersistence
 				}
 			}
 			
-			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia())
+			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia() || props.getUsedFruit().equals("kilokilo"))
+			{
 				player.fallDistance = 0;
+			}
+
 
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
