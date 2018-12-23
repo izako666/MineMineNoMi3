@@ -214,6 +214,7 @@ public class DevilFruitsHelper
 	 *  
 	 *  core - basic blocks that will always be replaceable either due to their low value or commonness
 	 *  air - specific filter for the air block
+	 *  ores - self explanatory, also includes the compressed blocks for those ores
 	 *  foliage - things like flowers, vines and leaves
 	 *  liquids - water and lava obviously
 	 *  all - all blocks
@@ -281,7 +282,26 @@ public class DevilFruitsHelper
 						Blocks.brown_mushroom_block, Blocks.red_mushroom, Blocks.red_mushroom_block, Blocks.tallgrass, Blocks.potatoes, Blocks.carrots, Blocks.cactus
 					}));
 				}
-			}		
+			}
+			else if(rule.equalsIgnoreCase("ores"))
+			{
+				if(formula.equalsIgnoreCase("add"))
+				{
+					bannedBlocks.addAll(Arrays.asList(new Block[] 
+					{
+						Blocks.coal_ore, Blocks.coal_block, Blocks.diamond_ore, Blocks.diamond_block, Blocks.iron_ore, Blocks.iron_block, Blocks.lapis_ore, Blocks.lapis_block,
+						Blocks.redstone_ore, Blocks.redstone_block, Blocks.gold_ore, Blocks.gold_block, ListMisc.KairosekiOre, ListMisc.KairosekiBlock
+					}));
+				}
+				else if(formula.equalsIgnoreCase("ignore"))
+				{
+					bannedBlocks.removeAll(Arrays.asList(new Block[] 
+					{
+						Blocks.coal_ore, Blocks.coal_block, Blocks.diamond_ore, Blocks.diamond_block, Blocks.iron_ore, Blocks.iron_block, Blocks.lapis_ore, Blocks.lapis_block,
+						Blocks.redstone_ore, Blocks.redstone_block, Blocks.gold_ore, Blocks.gold_block, ListMisc.KairosekiOre, ListMisc.KairosekiBlock
+					}));
+				}
+			}	
 			else if(rule.equalsIgnoreCase("liquid"))
 			{
 				if(formula.equalsIgnoreCase("add"))

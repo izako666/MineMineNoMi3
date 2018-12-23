@@ -158,7 +158,7 @@ public class BakuAbilities
 			if(!this.isOnCooldown)
 			{
 				MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
-				if(mop != null && mop.hitVec.distanceTo(player.getPosition(1)) < 7)
+				if(mop != null && player.getDistance(mop.blockX, mop.blockY, mop.blockZ) < 5)
 				{
 					if(MainConfig.enableGriefing)
 					{

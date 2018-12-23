@@ -106,6 +106,7 @@ public class ID
 	PARTICLEFX_KARI = "kari",
 	PARTICLEFX_RAIGO = "raigo",
 	PARTICLEFX_BAKUMUNCH = "bakuMunch",
+	PARTICLEFX_KOROUZU = "korouzu",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

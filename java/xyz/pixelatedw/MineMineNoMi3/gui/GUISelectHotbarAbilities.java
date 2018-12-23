@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIAbilitiesList;
@@ -219,6 +220,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 	public void onGuiClosed()
 	{
 		WyNetworkHelper.sendToServer(new PacketSync(props));
+		WyNetworkHelper.sendToServer(new PacketAbilityReset(true));
 	}
 	
 	public boolean doesGuiPauseGame()

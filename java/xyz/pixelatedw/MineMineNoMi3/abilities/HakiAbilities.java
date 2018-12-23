@@ -26,7 +26,7 @@ public class HakiAbilities
 			super(ListAttributes.KENBUNSHOKUHAKI); 
 		}
 		
-		public void duringPassive(EntityPlayer player, int passiveTimer)
+		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			
@@ -54,7 +54,7 @@ public class HakiAbilities
 			super(ListAttributes.BUSOSHOKUHAKI); 			
 		}
 		
-		public void duringPassive(EntityPlayer player, int passiveTimer)
+		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			

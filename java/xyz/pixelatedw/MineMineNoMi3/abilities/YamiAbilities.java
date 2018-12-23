@@ -1,25 +1,25 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.MathHelper;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
-import scala.reflect.api.Internals.ReificationSupportApi.SyntacitcSingletonTypeExtractor;
-import scala.tools.nsc.backend.icode.BasicBlocks.BasicBlock.SuccessorList;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
@@ -29,7 +29,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 public class YamiAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new DarkMatter(), new Liberation(), new BlackHole(), new BlackWorld()};	
+	public static Ability[] abilitiesArray = new Ability[] {new Kurouzu(), new DarkMatter(), new Liberation(), new BlackHole(), new BlackWorld()};	
 	
 	public static class BlackWorld extends Ability
 	{
@@ -172,15 +172,55 @@ public class YamiAbilities
 	
 	public static class Kurouzu extends Ability
 	{
+		private List<EntityLivingBase> entities = new ArrayList<EntityLivingBase>();
+		
 		public Kurouzu() 
 		{
 			super(ListAttributes.KUROUZU); 
 		}
 		
-		public void use(final EntityPlayer player)
-		{				
+		public void startCharging(EntityPlayer player)
+		{
+			super.startCharging(player);				
+		}
+		
+		public void duringCharging(EntityPlayer player, int currentCharge)
+		{
+			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
 			
-			//super.use(player);
+			this.entities.clear();
+			if(mop != null)
+			{
+				double i = mop.blockX;
+				double j = mop.blockY;
+				double k = mop.blockZ;
+
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KOROUZU, i, j, k), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+				
+				for(EntityLivingBase target : WyHelper.getEntitiesNear((int)i, (int)j, (int)k, player.worldObj, 5))
+				{
+					this.entities.add(target);
+				}
+			}
+		}
+		
+		public void endCharging(EntityPlayer player)
+		{
+			if(this.entities.contains(player))
+				this.entities.remove(player);
+			for(EntityLivingBase target : this.entities)
+			{
+				target.setPositionAndUpdate(player.posX, player.posY, player.posZ);
+				target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
+				target.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));
+				target.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 5));
+				if(target instanceof EntityPlayer)
+				{
+					EntityPlayer playerTarget = (EntityPlayer)target;
+					WyNetworkHelper.sendTo(new PacketAbilityReset(false), (EntityPlayerMP) playerTarget);
+				}
+			}
+			super.endCharging(player);
 		}
 	}
 	

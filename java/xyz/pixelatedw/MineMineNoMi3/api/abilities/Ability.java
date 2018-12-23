@@ -273,6 +273,14 @@ public class Ability
 		(new Update(player, attr)).start();
 	}
 	
+	public void startUpdate(EntityPlayer player)
+	{
+		this.setCooldownActive(true);
+		if(player instanceof EntityPlayerMP)
+			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
+		(new Update(player, attr)).start();
+	}
+	
 	protected void sendShounenScream(EntityPlayer player)
 	{
 		this.sendShounenScream(player, 0);
@@ -416,7 +424,8 @@ public class Ability
 						ticksForCooldown = this.attr.getAbilityCooldown();
 						currentSpawn = 0;
 						isOnCooldown = false;
-						WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
+						if(player instanceof EntityPlayerMP)
+							WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 						return;
 					}
 				}	

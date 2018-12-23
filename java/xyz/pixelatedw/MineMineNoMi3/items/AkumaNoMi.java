@@ -78,7 +78,6 @@ public class AkumaNoMi extends ItemFood
 				for(Ability a : abilities)
 					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 						abilityProps.addDevilFruitAbility(a);
-
 			}
 			else
 			{
@@ -96,10 +95,9 @@ public class AkumaNoMi extends ItemFood
 						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 							abilityProps.addDevilFruitAbility(a);
 				}
-
 			}
 		}	
-		
+				
     	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
     		WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
 	}

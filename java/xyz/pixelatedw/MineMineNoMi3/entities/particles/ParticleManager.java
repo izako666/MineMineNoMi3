@@ -36,6 +36,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ushibison.Particl
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectBlackHole;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectBlackWorld;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectDarkMatter;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectKorouzu;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yuki.ParticleEffectFubuki;
 
 public class ParticleManager
@@ -99,6 +100,7 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_BLACKHOLE, new ParticleEffectBlackHole());
 		map.put(ID.PARTICLEFX_BLACKWORLD, new ParticleEffectBlackWorld());
 		map.put(ID.PARTICLEFX_DARKMATTER, new ParticleEffectDarkMatter());	
+		map.put(ID.PARTICLEFX_KOROUZU, new ParticleEffectKorouzu());	
 		
 		// Pika 
 		map.put(ID.PARTICLEFX_YATANOKAGAMI, new ParticleEffectYataNoKagami());

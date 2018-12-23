@@ -166,6 +166,31 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 		compound.setTag(EXT_PROP_NAME, props);
 	}
 	
+	public void printFancyData(NBTTagCompound compound)
+	{
+		NBTTagCompound props = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
+		
+		System.out.println("=====EXTENDED DATA");
+		System.out.println(" > Used Fruit : " + props.getString("AkumaNoMi"));
+		System.out.println(" > Faction : " + props.getString("Faction"));
+		System.out.println(" > Race : " + props.getString("Race"));
+		System.out.println(" > Style : " + props.getString("FightStyle"));
+		System.out.println(" > Zoan Point : " + props.getString("ZoanPoint"));
+		System.out.println("");
+		System.out.println(" > Is Logia : " + props.getBoolean("isLogia"));
+		System.out.println(" > Has Shadow : " + props.getBoolean("hasShadow"));
+		System.out.println(" > Has Heart : " + props.getBoolean("hasHeart"));
+		System.out.println(" > Has Yami Power : " + props.getBoolean("hasYamiPower"));
+		System.out.println(" > Has Haki Active : " + props.getBoolean("hasHakiActive"));
+		System.out.println(" > Has Buso Haki Active : " + props.getBoolean("hasBusoHakiActive"));
+		System.out.println(" > Has Ken Haki Active : " + props.getBoolean("hasKenHakiActive"));
+		System.out.println("");
+		System.out.println(" > Doriki : " + props.getInteger("Doriki"));
+		System.out.println(" > Bounty : " + props.getInteger("Bounty"));
+		System.out.println(" > Belly : " + props.getInteger("Belly"));
+		System.out.println("");
+	}
+	
 	public void init(Entity entity, World world) {}
 	
 	public void setCombatMode(boolean value) { this.isInCombatMode = value; }

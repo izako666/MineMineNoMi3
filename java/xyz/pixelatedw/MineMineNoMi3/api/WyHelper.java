@@ -6,9 +6,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -176,28 +179,61 @@ public class WyHelper
 
 					Ability abl = ((Ability) entry.getValue());
 
-					String desc = Values.abilityDesc.entrySet().stream().filter(p -> WyHelper.getFancyName(abl.getAttribute().getAttributeName()).equals(p.getKey())).map(p -> p.getValue()).collect(Collectors.joining());
+					HashMap<String, Object> loadedParams = new HashMap<String, Object>();
+					
+					loadedParams.put("name", abl.getAttribute().getAttributeName());
+					
+					if(abl.getAttribute().getAbilityCooldown() > 0) loadedParams.put("cooldown", abl.getAttribute().getAbilityCooldown() / 20);
+					if(abl.getAttribute().getAbilityCharges() > 0) loadedParams.put("chargeTime", abl.getAttribute().getAbilityCharges() / 20);
+					if(abl.getAttribute().getProjectileDamage() > 1) loadedParams.put("projectileDamage", abl.getAttribute().getProjectileDamage());
+					if(abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) loadedParams.put("projectileNumber", (abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterTime()) / abl.getAttribute().getAbilityRepeaterTime());
+					if(abl.getAttribute().getProjectileExplosionPower() > 0) loadedParams.put("projectileExplosion", abl.getAttribute().getProjectileExplosionPower());
 
-					if (desc.isEmpty())
-						System.out.println(abl.getAttribute().getAttributeName() + " has no description! Blame FG!");
+					if(abl.getAttribute().getPotionEffectsForAoE() != null && abl.getAttribute().getPotionEffectsForAoE().length > 0) loadedParams.put("aoeEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForAoE()) + "]");
+					if(abl.getAttribute().getPotionEffectsForProjectile() != null && abl.getAttribute().getPotionEffectsForProjectile().length > 0) loadedParams.put("onHitEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForProjectile()) + "]");
+					if(abl.getAttribute().getPotionEffectsForUser() != null && abl.getAttribute().getPotionEffectsForUser().length > 0) loadedParams.put("selfEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForUser()) + "]");
 
-					writer.write("export var " 
-							+ WyHelper.getFancyNameNoLowerCase(abl.getAttribute().getAttributeName()) + ": Ability = {" 
-								+ "name: \'" + abl.getAttribute().getAttributeName() + "\', " 
-								+ "desc: \'" + desc + "\', " 
-								+ (abl.getAttribute().getAbilityCooldown() > 0 ? "cooldown: " + String.format("%.1f", ((double) abl.getAttribute().getAbilityCooldown() / 20)) + ", " : "") 
-								+ (abl.getAttribute().getAbilityCharges() > 0 ? "chargeTime: " + String.format("%.1f", ((double) abl.getAttribute().getAbilityCharges() / 20)) + ", " : "")
-								+ (abl.getAttribute().getProjectileDamage() > 1 ? "projectileDamage: " + abl.getAttribute().getProjectileDamage() + ", " : "") 
-								+ ((abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) ? "projectileNumber: " + ((abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterTime()) / abl.getAttribute().getAbilityRepeaterTime()) + ", " : "") 
-								+ (abl.getAttribute().getProjectileExplosionPower() > 0 ? "projectileExplosion: " + abl.getAttribute().getProjectileExplosionPower() + ", " : "")
+					for(String manualParamKey : Values.abilityManualParams.keySet())
+					{
+						if(WyHelper.getFancyName(abl.getAttribute().getAttributeName()).equalsIgnoreCase(manualParamKey))
+						{
+							String[] params = Values.abilityManualParams.get(manualParamKey);
+							
+							for(int j = 0; j < params.length; j++)
+							{
+								String parm = params[j];
+								Object paramValue = params[++j];
+
+								try
+								{
+									paramValue = Integer.parseInt((String) paramValue);
+								}
+								catch(Exception e) {}
 								
-								+ ((abl.getAttribute().getPotionEffectsForAoE() != null && abl.getAttribute().getPotionEffectsForAoE().length > 0) ? "aoeEffects: [" 
-									+ getPotionEffectsFor(abl.getAttribute().getPotionEffectsForAoE()) + "], " : "") 
-								+ ((abl.getAttribute().getPotionEffectsForProjectile() != null && abl.getAttribute().getPotionEffectsForProjectile().length > 0) ? "onHitEffects: [" 
-									+ getPotionEffectsFor(abl.getAttribute().getPotionEffectsForProjectile()) + "], " : "") 
-								+ ((abl.getAttribute().getPotionEffectsForUser() != null && abl.getAttribute().getPotionEffectsForUser().length > 0) ? "selfEffects: [" 
-									+ getPotionEffectsFor(abl.getAttribute().getPotionEffectsForUser()) + "], " : "") + "};\n");
+								if(loadedParams.containsKey(parm))
+									loadedParams.replace(parm, paramValue);
+								else
+									loadedParams.put(parm, paramValue);
+							}
+						}
+					}
+					
+					StringBuilder finalString = new StringBuilder();
+						
+					finalString.append("export var " + WyHelper.getFancyNameNoLowerCase(abl.getAttribute().getAttributeName()) + ": Ability = {" );
 
+					for(String loadedParamKey : loadedParams.keySet())
+					{
+						if((loadedParams.get(loadedParamKey) instanceof Integer || loadedParams.get(loadedParamKey) instanceof Double || loadedParams.get(loadedParamKey) instanceof Float)
+								|| (loadedParamKey.equalsIgnoreCase("aoeEffects") || loadedParamKey.equalsIgnoreCase("onHitEffects") || loadedParamKey.equalsIgnoreCase("selfEffects")))
+							finalString.append(loadedParamKey + ": " + loadedParams.get(loadedParamKey) + ",");
+						else if(loadedParams.get(loadedParamKey) instanceof String)
+							finalString.append(loadedParamKey + ": \'" + loadedParams.get(loadedParamKey) + "\',");
+					}
+					
+					finalString.append("};\n");
+					
+					writer.write(finalString.toString());					
 				}
 				writer.close();
 			}
@@ -216,7 +252,7 @@ public class WyHelper
 
 					ItemStack itemStack = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, fruit.getUnlocalizedName().substring(5)));
 
-					writer.write("export var " + WyHelper.getFancyNameNoLowerCase(itemStack.getDisplayName()) + ": DevilFruit = {" + "name: \'" + itemStack.getDisplayName() + "\', " + "type: \'" + fruit.getType().getName() + "\', " + "abilities: [" + getAbilitiesFor(fruit) + "] " + "};\n");
+					writer.write("export var " + WyHelper.getFancyNameNoLowerCase(itemStack.getDisplayName()) + ": Group = {" + "name: \'" + itemStack.getDisplayName() + "\', " + "type: \'" + fruit.getType().getName() + "\', " + "abilities: [" + getAbilitiesFor(fruit) + "] " + "};\n");
 
 				}
 				writer.close();
@@ -426,10 +462,12 @@ public class WyHelper
 		return getEntitiesNear(e, radius, EntityLivingBase.class);
 	}
 
-	public static List<EntityLivingBase> getEntitiesNear(Entity e, double radius, Class<? extends Entity> classEntity)
+	public static List<EntityLivingBase> getEntitiesNear(Entity e, double radius, Class<? extends Entity>... classEntities)
 	{
 		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(e.posX, e.posY, e.posZ, e.posX + 1, e.posY + 1, e.posZ + 1).expand(radius, radius, radius);
-		List list = e.worldObj.getEntitiesWithinAABB(classEntity, aabb);
+		List list = new ArrayList();
+		for(Class<? extends Entity> clz : classEntities)
+			list.addAll(e.worldObj.getEntitiesWithinAABB(clz, aabb));
 		list.remove(e);
 		return list;
 	}
@@ -509,11 +547,13 @@ public class WyHelper
 		return ray;
 	}
 
+	@Deprecated
 	public static void createCube(Entity e, int i, Block b, Block... bannedBlocks)
 	{
 		createCube(e, new int[] {i, i, i}, b, bannedBlocks);
 	}
 
+	@Deprecated
 	public static void createCube(Entity e, int[] s, Block b, Block... bannedBlocks)
 	{
 		for (int x = (s[0] * 0) - s[0]; x < s[0]; x++)
@@ -525,6 +565,7 @@ public class WyHelper
 		}
 	}
 	
+	@Deprecated
 	public static void createSphere(Object e, int size, final Block b, Block... bannedBlocks)
 	{
 		int x = 0, y = 0, z = 0;
@@ -544,6 +585,7 @@ public class WyHelper
 		createSphere(e, x, y, z, size, b, bannedBlocks);
 	}
 
+	@Deprecated
 	public static void createSphere(Object e, int x, int y, int z, int size, final Block b, Block... bannedBlocks)
 	{
 		final World world;

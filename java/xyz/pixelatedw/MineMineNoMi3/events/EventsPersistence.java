@@ -49,6 +49,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -261,7 +262,7 @@ public class EventsPersistence
 			{
 				if( !WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) && !DevilFruitsHelper.hasKairosekiItem(player) 
 						&& !player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) && !player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) 
-						&& !player.isInsideOfMaterial(Material.water) )
+						&& !player.isInsideOfMaterial(Material.water) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
 				{
 					final EntityLivingBase finalPlayer = player;
 					for (int x1 = -1; x1 < 2; x1++) 
@@ -442,9 +443,6 @@ public class EventsPersistence
 			EntityPlayer player = (EntityPlayer) event.entity;
 			ExtendedEntityStats props = ExtendedEntityStats.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
-
-
-			props.setYamiPower(false);
 
 			for(int i = 0; i < 8; i++)
 			{
@@ -811,7 +809,7 @@ public class EventsPersistence
 				
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
-				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);			
 				
 				if(MainConfig.enableUpdateMsg)
 				{
@@ -847,6 +845,7 @@ public class EventsPersistence
 					}
 				}
 				
+				WyNetworkHelper.sendTo(new PacketAbilityReset(true), (EntityPlayerMP) player);
 			}		
 		}
 	}
@@ -859,10 +858,17 @@ public class EventsPersistence
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
 			{
 				NBTTagCompound compound = new NBTTagCompound();
-				ExtendedEntityStats.get(e.original).saveNBTData(compound);
+				
+				ExtendedEntityStats oldProps = ExtendedEntityStats.get(e.original);
+				oldProps.saveNBTData(compound);
+				oldProps.triggerActiveHaki(false);
+				oldProps.triggerBusoHaki(false);
+				oldProps.triggerKenHaki(false);
+				oldProps.setGear(1);
+				oldProps.setZoanPoint("n/a");
 				ExtendedEntityStats props = ExtendedEntityStats.get(e.entityPlayer);
-				props.loadNBTData(compound);
-								
+				props.loadNBTData(compound);				
+				
 				compound = new NBTTagCompound();
 				AbilityProperties.get(e.original).saveNBTData(compound);
 				AbilityProperties abilityProps = AbilityProperties.get(e.entityPlayer);

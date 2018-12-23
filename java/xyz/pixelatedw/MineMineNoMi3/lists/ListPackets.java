@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
 import cpw.mods.fml.relauncher.Side;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -32,6 +33,9 @@ public class ListPackets
 		WyNetworkHelper.registerMessage(PacketQuestExtra.ServerHandler.class, PacketQuestExtra.class, 13, Side.SERVER);
 		WyNetworkHelper.registerMessage(PacketQuestExtra.ClientHandler.class, PacketQuestExtra.class, 14, Side.CLIENT);
 		WyNetworkHelper.registerMessage(PacketShounenScream.ClientHandler.class, PacketShounenScream.class, 15, Side.CLIENT);
+		WyNetworkHelper.registerMessage(PacketAbilityReset.ServerHandler.class, PacketAbilityReset.class, 16, Side.SERVER);
+		WyNetworkHelper.registerMessage(PacketAbilityReset.ClientHandler.class, PacketAbilityReset.class, 17, Side.CLIENT);
+
 	} 
 	
 }

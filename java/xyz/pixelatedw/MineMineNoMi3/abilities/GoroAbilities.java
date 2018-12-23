@@ -43,7 +43,7 @@ public class GoroAbilities
 		}
 		
 		public void duringCharging(EntityPlayer player, int currentCharge)
-		{		
+		{
 			MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
 			
 			if(mop != null)

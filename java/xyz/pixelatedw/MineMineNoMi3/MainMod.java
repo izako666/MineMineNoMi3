@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3;
 
 import org.apache.logging.log4j.LogManager;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -74,8 +75,8 @@ public class MainMod
 		ListQuests.init();
 
 		proxy.init();
-
-		if(WyDebug.isDebug())
+		
+		if(WyDebug.isDebug() && FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{
 			WyHelper.generateLangFiles();
 			WyHelper.generateExtraTypScriptFiles();
