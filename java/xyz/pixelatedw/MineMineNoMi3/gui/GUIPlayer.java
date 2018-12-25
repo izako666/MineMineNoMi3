@@ -99,6 +99,7 @@ public class GUIPlayer extends GuiScreen
 		 
 		WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, 0, 0, this.player);
     
+		/*
 		if(props.getFaction().equals(ID.FACTION_PIRATE) && props.getBounty() > 0)
 		{
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -107,7 +108,8 @@ public class GUIPlayer extends GuiScreen
 			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "" + props.getBounty(), posX + 220, posY + 208, -1);
 			this.mc.renderEngine.bindTexture(ID.TEXTURE_CURRENCIES);
 			this.drawTexturedModalRect(posX + 200, posY + 195, 0, 32, 32, 64);
-		}		
+		}
+		*/		
 
 		super.drawScreen(x, y, f);
 	}

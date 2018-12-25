@@ -5,7 +5,9 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
+import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -19,6 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBazooka;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBrickBat;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityFist;
@@ -45,7 +48,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
+import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
 
 public class CommandFG extends CommandBase
@@ -99,7 +104,6 @@ public class CommandFG extends CommandBase
 			else if(str[0].equalsIgnoreCase("blueno"))
 				toSpawn = new EntityBlueno(player.worldObj); //COMPLETED
 			
-			
 			else if(str[0].equalsIgnoreCase("brickbat"))
 				toSpawn = new TempEntityBrickBat(player.worldObj);
 			else if(str[0].equalsIgnoreCase("fist"))
@@ -129,6 +133,26 @@ public class CommandFG extends CommandBase
 			else if(str[0].equalsIgnoreCase("phoenixhybrid"))
 				toSpawn = new TempEntityPhoenixHybrid(player.worldObj);
 			
+			else if(str[0].equalsIgnoreCase("package"))
+				toSpawn = new EntityWantedPostersPackage(player.worldObj);
+			
+			else if(str[0].equalsIgnoreCase("wantedPoster"))
+			{
+				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
+				
+				ItemStack posterStack = new ItemStack(ListMisc.WantedPoster);
+				posterStack.setTagCompound(DevilFruitsHelper.setWantedData(player.getCommandSenderName(), worldData.getBounty(player.getCommandSenderName())));
+				player.inventory.addItemStackToInventory(posterStack);				
+			}
+			else if(str[0].equalsIgnoreCase("randBounties"))
+			{
+				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
+				
+				for(int i = 1; i < 10; i++)
+				{
+					worldData.issueBounty("Test Name #"+i, i*100 + player.worldObj.rand.nextInt(1000));
+				}
+			}
 			
 			else if(str[0].equalsIgnoreCase("scenario"))
 			{
@@ -164,8 +188,7 @@ public class CommandFG extends CommandBase
 				questProps.clearCompletedQuests();
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
 			}
-											
-	
+
 			if(toSpawn != null)
 			{
 				toSpawn.setLocationAndAngles(player.posX, player.posY, player.posZ, 0, 0);

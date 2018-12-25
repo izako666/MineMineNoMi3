@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -23,6 +25,8 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockStringWall;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSunaSand;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockWantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialAxe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialEisen;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockDialFire;
@@ -33,6 +37,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityString;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
@@ -40,6 +45,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.Cola;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
+import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialAxe;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialEisen;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialFire;
@@ -52,8 +58,6 @@ import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.Kabuto;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.KujaBow;
 import xyz.pixelatedw.MineMineNoMi3.world.WorldProviderScenarioArena;
-
-import java.util.Random;
 
 public class ListMisc 
 {	
@@ -77,6 +81,8 @@ public class ListMisc
 	public static Block StringWall = new BlockStringWall();
 	public static Block StringMid = new BlockStringMid();
 	public static Block SunaSand = new BlockSunaSand();
+	public static Block WantedPostersPackage = new BlockWantedPostersPackage();
+	public static Block WantedPosterBlock = new BlockWantedPoster();
 	
 	public static Block DialEisenBlock = new BlockDialEisen();
 	public static Block DialFireBlock = new BlockDialFire();
@@ -97,6 +103,7 @@ public class ListMisc
 	public static Item Box1;
 	public static Item Box2;
 	public static Item Box3;
+	public static WantedPoster WantedPoster = (WantedPoster) new WantedPoster().setMaxStackSize(1);
 	
 	public static Item DialEisen = new DialEisen();
 	public static Item DialFire = new DialFire();
@@ -183,6 +190,7 @@ public class ListMisc
 		addITEM(Box1								, "Wooden Box"				, ListCreativeTabs.tabMisc);
 		addITEM(Box2								, "Iron Box"				, ListCreativeTabs.tabMisc);
 		addITEM(Box3								, "Golden Box"				, ListCreativeTabs.tabMisc);
+		addITEM(WantedPoster						, "Wanted Poster"			, null);
 		
  		addITEM(KujaArrow							, "Kuja Arrow"				, ListCreativeTabs.tabWeapons);
  		addITEM(PopGreen							, "Pop Green"				, ListCreativeTabs.tabWeapons);
@@ -263,6 +271,8 @@ public class ListMisc
  		addBLOCK(StringWall			, "String Wall"			, Float.POSITIVE_INFINITY		, null							, null);
  		addBLOCK(StringMid			, "String Mid"			, Float.POSITIVE_INFINITY		, TileEntityString.class		, null);
  		addBLOCK(SunaSand			, "Suna Sand"			, 1.0F							, null							, null);
+ 		addBLOCK(WantedPostersPackage,"Posters Package"		, 1.0F							, null							, null);
+ 		addBLOCK(WantedPosterBlock	,"Wanted Poster Block"	, 1.0F							, TileEntityWantedPoster.class	, ListCreativeTabs.tabMisc);
 
  		addBLOCK(DialEisenBlock		, "Eisen Dial Block"	, .3F							, null							, null);
  		addBLOCK(DialFireBlock		, "Flame Dial Block"	, .3F							, null							, null);

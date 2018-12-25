@@ -28,7 +28,7 @@ public class DialAxe extends Item
 	{		
 		if(!world.isRemote)
 		{
-	    	if(!player.isSneaking()) //GuiScreen.isShiftKeyDown()
+	    	if(!player.isSneaking())
 	    	{
 	    		AxeDialProjectile proj = new AxeDialProjectile(player.worldObj, player, ListExtraAttributes.DIALAXE);
 				

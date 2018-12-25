@@ -59,6 +59,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.BountyEvent;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
@@ -69,6 +70,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 import xyz.pixelatedw.MineMineNoMi3.quests.QuestLogicHelper;
+import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
 
 import java.io.IOException;
 import java.net.URL;
@@ -541,8 +543,13 @@ public class EventsPersistence
 				if (props.getFaction().equals(ID.FACTION_PIRATE) || props.getFaction().equals(ID.FACTION_REVOLUTIONARY))
 					if (plusBounty > 0)
 						if (props.getBounty() + plusBounty < Values.MAX_GENERAL)
+						{
 							props.alterBounty(plusBounty);
-				
+							BountyEvent e = new BountyEvent(player, plusBounty);
+							if (MinecraftForge.EVENT_BUS.post(e))
+								return;
+						}
+							
 				if(props.getBelly() + plusBelly < Values.MAX_GENERAL)
 					props.alterBelly(plusBelly);
 						
@@ -920,6 +927,21 @@ public class EventsPersistence
 		}
 	}
 
+	@SubscribeEvent
+	public void onBountyGained(BountyEvent event)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(event.player.worldObj);
+
+		if(event.props.getBounty() >= 20000 && event.props.getBounty() < 50000)		
+			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
+		else if(event.props.getBounty() >= 50000 && event.props.getBounty() < 100000)		
+			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
+		else if(event.props.getBounty() >= 100000 && event.props.getBounty() < 500000)	
+			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
+		else if(event.props.getBounty() >= 500000 && event.props.getBounty() < 1000000)	
+			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
+	}
+	
 	@SubscribeEvent
 	public void onDorikiGained(DorikiEvent event)
 	{
