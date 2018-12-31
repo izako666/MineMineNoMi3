@@ -1,24 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
-import xyz.pixelatedw.MineMineNoMi3.gui.GUIWantedPoster;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class WantedPoster extends Item
 {
@@ -26,7 +17,7 @@ public class WantedPoster extends Item
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		if (!world.isRemote && !player.isSneaking() && itemStack.getTagCompound() != null)
-			Minecraft.getMinecraft().displayGuiScreen(new GUIWantedPoster(itemStack.getTagCompound()));
+			WyNetworkHelper.sendTo(new PacketPlayer("guiWantedPoster", itemStack), (EntityPlayerMP) player);
 
 		return itemStack;
 	}

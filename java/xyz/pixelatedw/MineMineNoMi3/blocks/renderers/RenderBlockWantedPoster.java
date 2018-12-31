@@ -36,6 +36,9 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 	{
 		ExtendedWorldData worldData = ExtendedWorldData.get(te.getWorldObj());
 
+		if(te == null)
+			return;
+		
 		TileEntityWantedPoster te2 = (TileEntityWantedPoster) te;
 
 		int rawRot = te2.getBlockMetadata();
@@ -108,12 +111,22 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 				DecimalFormat decimalFormat = new DecimalFormat("#,##0");
 				if (te2.getPosterBounty() == null)
 					te2.setPosterBounty("0");
-				String bounty = decimalFormat.format(Integer.parseInt(te2.getPosterBounty()));
+				String bounty = "0";
+				try
+				{
+					bounty = decimalFormat.format(Integer.parseInt(te2.getPosterBounty()));
+				}
+				catch(Exception e)
+				{
+					bounty = "0";
+				}
 				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + bounty, -20, 13, WyHelper.hexToRGB("513413").getRGB());
 				GL11.glScalef(0.7F, 0.9F, 0.8F);
 				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + te2.getIssuedDate(), -40, 30, WyHelper.hexToRGB("513413").getRGB());
 			}
 			GL11.glPopMatrix();
+			
+			GL11.glDepthMask(true);
 		}
 		GL11.glPopMatrix();
 

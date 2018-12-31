@@ -197,7 +197,7 @@ public class EventsPersistence
 					if(!player.capabilities.allowFlying)
 						player.capabilities.isFlying = false;
 					
-					if(player.capabilities.isFlying && !player.worldObj.isRemote)
+					if(player.capabilities.isFlying && player.worldObj.isRemote)
 					{
 						ResourceLocation particleToUse = null;
 						if(props.getUsedFruit().equalsIgnoreCase("mokumoku") )
@@ -218,7 +218,7 @@ public class EventsPersistence
 								MainMod.proxy.spawnCustomParticles(player, 
 										new EntityParticleFX(player.worldObj, particleToUse, 
 												player.posX + offsetX, 
-												player.posY + 0.5 + offsetY, 
+												player.posY - 1 + offsetY, 
 												player.posZ + offsetZ, 
 												0, 0, 0)
 										.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(5));
@@ -765,15 +765,14 @@ public class EventsPersistence
 						while(scanner.hasNextLine())
 						{
 							String uuid = scanner.nextLine();
-							System.out.println(uuid);
 							if(uuid.startsWith("$"))
 								continue;
-							
-							if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equals(uuid.substring(0, 2))))
+													
+							if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equalsIgnoreCase(uuid.replace("& ", ""))))
 							{
 								flag = true;
 								break;
-							}													
+							}
 						}
 						
 						if(!flag)

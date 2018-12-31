@@ -74,8 +74,8 @@ public class GUIWantedPoster extends GuiScreen
 	{
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
-
-
+		
+		
 	}
 	
 	public void actionPerformed(GuiButton button)

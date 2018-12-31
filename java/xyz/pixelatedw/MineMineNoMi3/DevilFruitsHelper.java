@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import com.google.common.collect.Multimap;
 
@@ -14,6 +17,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -61,6 +65,37 @@ public class DevilFruitsHelper
 	// public static Block[] nonBreakableBlocks = new Block[] { Blocks.bedrock,
 	// ListMisc.OpeMid, ListMisc.Ope, ListMisc.StringMid, ListMisc.StringWall };
 
+	public static void dropWantedPosters(World world, int posX, int posY, int posZ)
+	{
+    	ExtendedWorldData worldData = ExtendedWorldData.get(world);
+    	
+    	// Populating the list with wanted posters
+    	List<Entry<String, Integer>> bountiesInPackage = new ArrayList<Entry<String, Integer>>();
+    	    	
+    	if(!WyHelper.getEntitiesNear(posX, posY, posZ, world, 10).isEmpty())
+    	{
+    		WyHelper.getEntitiesNear(posX, posY, posZ, world, 10).stream().filter(x -> 
+    		{
+    			return x instanceof EntityPlayer && ExtendedEntityStats.get(x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && worldData.getBounty(x.getCommandSenderName()) != 0;
+    		}).forEach(x -> 
+    		{
+    			SimpleEntry<String, Integer> se = new SimpleEntry<String, Integer>( x.getCommandSenderName().toLowerCase(), worldData.getBounty(x.getCommandSenderName()) );
+    			bountiesInPackage.add( se );
+    		});
+    	}
+    	
+    	if((5 + world.rand.nextInt(2)) - bountiesInPackage.size() > 0)
+    		bountiesInPackage.addAll( worldData.getAllBounties().entrySet().stream().filter(x -> !bountiesInPackage.contains(x) ).limit((5 + world.rand.nextInt(2)) - bountiesInPackage.size()).collect(Collectors.toList()) );
+    	    	
+    	// Spawning the wanted posters
+    	bountiesInPackage.stream().forEach(x -> 
+    	{
+    		ItemStack stack = new ItemStack(ListMisc.WantedPoster);
+	    	stack.setTagCompound(DevilFruitsHelper.setWantedData(x.getKey(), x.getValue()));
+	    	world.spawnEntityInWorld(new EntityItem(world, posX, posY + 1, posZ, stack));
+    	});
+	}
+	
 	public static NBTTagCompound setWantedData(String entityName, int bounty)
 	{
 		NBTTagCompound data = null;

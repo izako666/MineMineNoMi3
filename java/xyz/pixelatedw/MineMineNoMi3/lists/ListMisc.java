@@ -272,7 +272,7 @@ public class ListMisc
  		addBLOCK(StringMid			, "String Mid"			, Float.POSITIVE_INFINITY		, TileEntityString.class		, null);
  		addBLOCK(SunaSand			, "Suna Sand"			, 1.0F							, null							, null);
  		addBLOCK(WantedPostersPackage,"Posters Package"		, 1.0F							, null							, null);
- 		addBLOCK(WantedPosterBlock	,"Wanted Poster Block"	, 1.0F							, TileEntityWantedPoster.class	, ListCreativeTabs.tabMisc);
+ 		addBLOCK(WantedPosterBlock	,"Wanted Poster Block"	, 1.0F							, TileEntityWantedPoster.class	, null);
 
  		addBLOCK(DialEisenBlock		, "Eisen Dial Block"	, .3F							, null							, null);
  		addBLOCK(DialFireBlock		, "Flame Dial Block"	, .3F							, null							, null);

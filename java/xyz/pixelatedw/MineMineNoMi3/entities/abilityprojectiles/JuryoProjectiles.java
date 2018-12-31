@@ -44,20 +44,23 @@ public class JuryoProjectiles
 		
 		public void onUpdate()
 		{
-			for(int i = 0; i < 2; i++)
+			if(this.worldObj.isRemote)
 			{
-				double posXOffset = this.worldObj.rand.nextGaussian() * 0.52D;
-				double posYOffset = this.worldObj.rand.nextGaussian() * 0.52D;
-				double posZOffset = this.worldObj.rand.nextGaussian() * 0.52D;		
-	
-				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
-						posX + posXOffset, 
-						posY + posYOffset, 
-						posZ + posZOffset, 
-						0, 0, 0)
-						.setParticleAge(20).setParticleScale(0.7F);
-				
-				MainMod.proxy.spawnCustomParticles(this, particle);	
+				for(int i = 0; i < 2; i++)
+				{
+					double posXOffset = this.worldObj.rand.nextGaussian() * 0.52D;
+					double posYOffset = this.worldObj.rand.nextGaussian() * 0.52D;
+					double posZOffset = this.worldObj.rand.nextGaussian() * 0.52D;		
+		
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
+							posX + posXOffset, 
+							posY + posYOffset, 
+							posZ + posZOffset, 
+							0, 0, 0)
+							.setParticleAge(20).setParticleScale(0.7F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);	
+				}
 			}
 			super.onUpdate();
 		}

@@ -1,11 +1,16 @@
 package xyz.pixelatedw.MineMineNoMi3.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
 
@@ -15,11 +20,40 @@ public class CommandIssueBounty extends CommandBase
 	{
 		if(str.length >= 0)
 		{
-			EntityPlayer player = this.getCommandSenderAsPlayer(sender);
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-			ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
-			
-			worldData.issueBounty(player.getCommandSenderName(), props.getBounty());			
+			if(str.length == 0)
+			{
+				EntityPlayer player = this.getCommandSenderAsPlayer(sender);
+				ExtendedEntityStats props = ExtendedEntityStats.get(player);
+				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
+				
+				worldData.issueBounty(player.getCommandSenderName(), props.getBounty());
+			}
+			else
+			{
+				if(str[1].equalsIgnoreCase("all"))
+				{
+					EntityPlayer player = this.getCommandSenderAsPlayer(sender);
+					ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
+					
+					
+					player.worldObj.loadedEntityList.stream().filter(x -> 
+					{
+						return x instanceof EntityPlayer && ExtendedEntityStats.get((EntityLivingBase) x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && ExtendedEntityStats.get((EntityLivingBase) x).getBounty() > 0;
+					}).forEach(x ->
+					{
+						EntityPlayer pirate = (EntityPlayer) x;
+						worldData.issueBounty(pirate.getCommandSenderName(), ExtendedEntityStats.get(pirate).getBounty());
+					});
+				}
+				else if(str[1].equalsIgnoreCase("custom"))
+				{
+					
+				}
+				else
+				{
+					
+				}
+			}
 		}
 	}
 	

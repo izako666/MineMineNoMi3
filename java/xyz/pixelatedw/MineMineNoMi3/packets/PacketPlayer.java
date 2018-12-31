@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
@@ -22,6 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.gui.GUIWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 
@@ -29,6 +31,7 @@ public class PacketPlayer implements IMessage
 {
 	private String cmd;
 	private boolean ablState = false;
+	private NBTTagCompound nbt;
 	private double mX, mY, mZ;
 	
 	public PacketPlayer() {}
@@ -42,6 +45,12 @@ public class PacketPlayer implements IMessage
 	{
 		this.cmd = cmd;
 		this.ablState = bool;
+	}
+	
+	public PacketPlayer(String cmd, ItemStack stack) 
+	{
+		this.cmd = cmd;
+		this.nbt = stack.getTagCompound();
 	}
 	
 	public PacketPlayer(String cmd, double mX, double mY, double mZ) 
@@ -59,6 +68,7 @@ public class PacketPlayer implements IMessage
 		this.mX = buf.readDouble();
 		this.mY = buf.readDouble();
 		this.mZ = buf.readDouble();
+		this.nbt = ByteBufUtils.readTag(buf);
 	}
 
 	public void toBytes(ByteBuf buf) 
@@ -68,6 +78,7 @@ public class PacketPlayer implements IMessage
 		buf.writeDouble(this.mX);
 		buf.writeDouble(this.mY);
 		buf.writeDouble(this.mZ);
+		ByteBufUtils.writeTag(buf, nbt);
 	}
 
 	public static class ClientHandler implements IMessageHandler<PacketPlayer, IMessage>
@@ -81,6 +92,9 @@ public class PacketPlayer implements IMessage
 
 		    boolean canAnimate = true;
 			double frame = 0;
+			
+			if(message.cmd.equals("guiWantedPoster"))
+				Minecraft.getMinecraft().displayGuiScreen(new GUIWantedPoster(message.nbt));
 			
 			if(message.cmd.equals("ChangeRotation"))
 			{

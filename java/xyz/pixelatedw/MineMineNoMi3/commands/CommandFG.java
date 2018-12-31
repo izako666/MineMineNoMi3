@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
@@ -134,7 +135,12 @@ public class CommandFG extends CommandBase
 				toSpawn = new TempEntityPhoenixHybrid(player.worldObj);
 			
 			else if(str[0].equalsIgnoreCase("package"))
+			{			
 				toSpawn = new EntityWantedPostersPackage(player.worldObj);
+				toSpawn.setLocationAndAngles(player.posX + WyMathHelper.randomWithRange(-10, 10), player.posY + 30, player.posZ + WyMathHelper.randomWithRange(-10, 10), 0, 0);
+				player.worldObj.spawnEntityInWorld(toSpawn);
+				return;
+			}
 			
 			else if(str[0].equalsIgnoreCase("wantedPoster"))
 			{

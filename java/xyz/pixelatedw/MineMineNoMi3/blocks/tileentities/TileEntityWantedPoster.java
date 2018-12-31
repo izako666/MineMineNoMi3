@@ -9,9 +9,9 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityWantedPoster extends TileEntity
 {
 
-	private String entityName;
-	private String bounty;
-	private String date;
+	private String entityName = "";
+	private String bounty = "";
+	private String date = "";
 
 	public String getEntityName()
 	{
