@@ -23,8 +23,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIWantedPoster;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 
 public class PacketPlayer implements IMessage
@@ -87,7 +87,7 @@ public class PacketPlayer implements IMessage
 		public IMessage onMessage(PacketPlayer message, MessageContext ctx) 
 		{
 			final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 
 		    boolean canAnimate = true;
@@ -153,7 +153,7 @@ public class PacketPlayer implements IMessage
 		public IMessage onMessage(PacketPlayer message, MessageContext ctx) 
 		{
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 
 			if(message.cmd.equals("delete_book"))
@@ -161,7 +161,7 @@ public class PacketPlayer implements IMessage
 				abilityProps.clearHotbar();
 				abilityProps.clearRacialAbilities();
 				
-				if(props.getRace().equals(ID.RACE_CYBORG))
+				if(props.isCyborg())
 				{										
 					abilityProps.addRacialAbility(CyborgAbilities.FRESHFIRE);
 					abilityProps.addRacialAbility(CyborgAbilities.COLAOVERDRIVE);
@@ -173,7 +173,7 @@ public class PacketPlayer implements IMessage
 					props.setCola(props.getMaxCola());
 				}
 				
-				if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))
+				if(props.isSwordsman())
 				{
 					abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
 					if(!MainConfig.enableQuestProgression)
@@ -184,7 +184,7 @@ public class PacketPlayer implements IMessage
 					}
 				}
 	
-				if(props.getFightStyle().equals(ID.FSTYLE_SNIPER))		
+				if(props.isSniper())		
 				{
 					abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
 					if(!MainConfig.enableQuestProgression)

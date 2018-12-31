@@ -11,7 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class UltraCola extends ItemFood
@@ -34,9 +34,9 @@ public class UltraCola extends ItemFood
 	{
 		if(!world.isRemote)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			if(props.getRace().equals(ID.RACE_CYBORG))
+			if(props.isCyborg())
 			{
 				if(props.getUltraColaConsumed() <= Values.MAX_ULTRACOLA - 1)
 				{

@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
@@ -15,6 +14,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
@@ -48,10 +49,10 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKumadori
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
-import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.world.TeleporterScenarioArena;
 
 public class CommandFG extends CommandBase
@@ -64,7 +65,7 @@ public class CommandFG extends CommandBase
 		if(str.length >= 1)
 		{
 			EntityPlayer player = this.getCommandSenderAsPlayer(sender);
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
 			
@@ -147,7 +148,7 @@ public class CommandFG extends CommandBase
 				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
 				
 				ItemStack posterStack = new ItemStack(ListMisc.WantedPoster);
-				posterStack.setTagCompound(DevilFruitsHelper.setWantedData(player.getCommandSenderName(), worldData.getBounty(player.getCommandSenderName())));
+				posterStack.setTagCompound(ItemsHelper.setWantedData(player.getCommandSenderName(), worldData.getBounty(player.getCommandSenderName())));
 				player.inventory.addItemStackToInventory(posterStack);				
 			}
 			else if(str[0].equalsIgnoreCase("randBounties"))

@@ -18,7 +18,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -27,7 +26,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
@@ -81,7 +81,7 @@ public class Ability
 	    	if(!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode)
 	    		WyTelemetry.addStat("abilityUsed_" + this.getAttribute().getAttributeName(), 1);
 	    	
-	    	ExtendedEntityStats props = ExtendedEntityStats.get(player);
+	    	ExtendedEntityData props = ExtendedEntityData.get(player);
 	    	AbilityProperties abilityProps = AbilityProperties.get(player);
 	    	props.setTempPreviousAbility(WyHelper.getFancyName(this.attr.getAttributeName()));
 
@@ -307,13 +307,13 @@ public class Ability
 	class ResetDisable extends Thread
 	{
 		private EntityPlayer player;
-		private ExtendedEntityStats props;
+		private ExtendedEntityData props;
 		private AbilityAttribute attr;
 		
 		public ResetDisable(EntityPlayer user, AbilityAttribute attribute)
 		{
 			this.player = user;
-			this.props = ExtendedEntityStats.get(player);
+			this.props = ExtendedEntityData.get(player);
 			this.attr = attribute;
 			this.setName("ResetThread Thread for " + attr.getAttributeName());
 		}
@@ -322,10 +322,7 @@ public class Ability
 		{
 			while(isDisabled)
 			{
-				if( (!player.isInsideOfMaterial(Material.water) && !player.isWet() && player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) != Blocks.water 
-						&& player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) != Blocks.flowing_water 
-						&& !WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) && !DevilFruitsHelper.hasKairosekiItem(player) && !player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiBlock))
-						&& !player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)))  )
+				if( !DevilFruitsHelper.isNearbyKairoseki(player)  )
 				{
 			    	disable(player, false);
 					setCooldownActive(false);

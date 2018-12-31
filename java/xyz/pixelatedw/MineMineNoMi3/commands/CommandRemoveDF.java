@@ -12,7 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -39,7 +39,7 @@ public class CommandRemoveDF extends CommandBase
 			target = senderEntity;
 		}
 		
-		ExtendedEntityStats props = ExtendedEntityStats.get(target);
+		ExtendedEntityData props = ExtendedEntityData.get(target);
 		AbilityProperties abilityProps = AbilityProperties.get(target);
 
 		props.setUsedFruit("N/A");

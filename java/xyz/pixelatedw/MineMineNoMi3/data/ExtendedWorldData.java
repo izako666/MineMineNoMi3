@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.world;
+package xyz.pixelatedw.MineMineNoMi3.data;
 
 import java.util.HashMap;
 

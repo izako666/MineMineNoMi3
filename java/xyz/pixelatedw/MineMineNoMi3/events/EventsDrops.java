@@ -19,23 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EventsDrops
 {
- 
-	@SubscribeEvent	
-	public void onTossedItem(ItemTossEvent event)
-	{		
-		Item i = event.entityItem.getEntityItem().getItem();
-		
-		/*if(i instanceof AbilityItem && !(i == ListMisc.Biseto || i == ListMisc.MarineSword || i == ListMisc.Flintlock || i == ListMisc.PirateCutlass || i == ListMisc.Scissors || i == ListMisc.Pipe 
-				|| i == ListMisc.Jitte || i == ListMisc.GoldenBo || i == ListMisc.Kikoku || i == ListMisc.Kiribachi || i == ListMisc.Hook || i == ListMisc.Yoru || i == ListMisc.Umbrella 
-				|| i == ListAbilities.HAOSHOKUHAKI || i == ListAbilities.BUSOSHOKUHAKI  || i == ListAbilities.KENBUNSHOKUHAKI || i == ListAbilities.DIALAXE || i == ListAbilities.DIALBREATH
-				|| i == ListAbilities.DIALIMPACT || i == ListAbilities.DIALMILKY || i == ListAbilities.DIALREJECT || i == ListAbilities.DIALFIRE))
-		{
-			event.setCanceled(true);			
-			if(event.getPlayer() instanceof EntityPlayer)
-				event.getPlayer().inventory.addItemStackToInventory(new ItemStack(i));
-		}*/
-	}
-	 
+
 	@SubscribeEvent	
 	public void onBreak(BreakEvent event)
 	{
@@ -63,4 +47,5 @@ public class EventsDrops
 			WyHelper.removeStackFromInventory(player, new ItemStack(ListMisc.CharacterCreator));
 		}
 	}
+	
 }

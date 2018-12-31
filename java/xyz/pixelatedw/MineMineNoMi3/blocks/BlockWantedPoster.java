@@ -1,29 +1,17 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
 
 public class BlockWantedPoster extends BlockContainer
 {
@@ -97,7 +85,7 @@ public class BlockWantedPoster extends BlockContainer
 		
 		if(poster.getEntityName().isEmpty() || poster.getPosterBounty().isEmpty() || poster.getIssuedDate().isEmpty()) return;
 		
-    	stack.setTagCompound(DevilFruitsHelper.setWantedData( poster.getEntityName(), Integer.parseInt(poster.getPosterBounty()) ));
+    	stack.setTagCompound(ItemsHelper.setWantedData( poster.getEntityName(), Integer.parseInt(poster.getPosterBounty()) ));
     	world.spawnEntityInWorld(new EntityItem(world, posX, posY + 1, posZ, stack));
     }
 	

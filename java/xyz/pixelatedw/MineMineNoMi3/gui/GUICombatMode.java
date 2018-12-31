@@ -28,7 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 @SideOnly(Side.CLIENT)
 public class GUICombatMode extends Gui
@@ -47,7 +47,7 @@ public class GUICombatMode extends Gui
 	public void onRenderUI(RenderGameOverlayEvent event)
 	{
 		EntityPlayer player = mc.thePlayer;
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		
 		int posX = event.resolution.getScaledWidth();
@@ -107,7 +107,7 @@ public class GUICombatMode extends Gui
 					this.drawTexturedModalRect((posX - 200 + (i * 50)) / 2, posY - 23, 0, 0, 23, 23);
 			}
 
-			if (props.getRace().equals(ID.RACE_CYBORG))
+			if (props.isCyborg())
 			{
 				this.drawTexturedModalRect((posX - 260) / 2, posY - 42, 0, 52, 23, 40);
 				int barHeight = (int) (((float) props.getCola() / props.getMaxCola()) * 30) + 23;

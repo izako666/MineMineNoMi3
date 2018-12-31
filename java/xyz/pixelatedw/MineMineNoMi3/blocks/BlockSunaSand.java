@@ -17,7 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 
@@ -32,7 +32,7 @@ public class BlockSunaSand extends BlockFalling
     { 
     	if(entity instanceof EntityLivingBase)
     	{
-	    	ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);	    	
+	    	ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);	    	
 
 	    	if(!props.getUsedFruit().equals("sunasuna"))
 	    		entity.setInWeb(); 
@@ -45,7 +45,7 @@ public class BlockSunaSand extends BlockFalling
     {
     	if(entity instanceof EntityLivingBase)
     	{
-	    	ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);	    	
+	    	ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);	    	
 
 	    	if(props.getUsedFruit().equals("sunasuna"))
 	    	{

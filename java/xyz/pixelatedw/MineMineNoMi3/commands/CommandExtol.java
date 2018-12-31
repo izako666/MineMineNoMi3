@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class CommandExtol extends CommandBase
@@ -43,7 +43,7 @@ public class CommandExtol extends CommandBase
 				}			
 			}
 			
-			ExtendedEntityStats props = ExtendedEntityStats.get(target);
+			ExtendedEntityData props = ExtendedEntityData.get(target);
 
 			if(str[0].equals("+"))
 			{

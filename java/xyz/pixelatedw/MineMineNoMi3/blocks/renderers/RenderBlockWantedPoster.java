@@ -19,7 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.blocks.models.ModelWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
-import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 
 @SideOnly(Side.CLIENT)
 public class RenderBlockWantedPoster extends TileEntitySpecialRenderer

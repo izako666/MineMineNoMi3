@@ -16,7 +16,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 public class BlockPoison extends Block
@@ -52,7 +52,7 @@ public class BlockPoison extends Block
     {
     	if(entity instanceof EntityLivingBase)
     	{
-    		ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);
+    		ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);
     		
     		if(!props.getUsedFruit().equals("dokudoku"))
     		{

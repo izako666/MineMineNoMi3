@@ -5,7 +5,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -14,9 +13,10 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GomuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -35,7 +35,7 @@ public class GomuAbilities
 		
 		public void passive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(DevilFruitsHelper.hasBusoHakiAquired(player))
 				super.passive(player);
@@ -45,7 +45,7 @@ public class GomuAbilities
 		
 		public void startPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.setGear(4);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -53,7 +53,7 @@ public class GomuAbilities
 			
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			player.addPotionEffect(new PotionEffect(Potion.jump.id, 25, 2, false));
 			
@@ -68,7 +68,7 @@ public class GomuAbilities
 		
 		public void endPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			props.setGear(1);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -85,7 +85,7 @@ public class GomuAbilities
 		
 		public void startPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.setGear(3);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -93,7 +93,7 @@ public class GomuAbilities
 			
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(passiveTimer >= 1200)
 			{
@@ -106,7 +106,7 @@ public class GomuAbilities
 		
 		public void endPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			props.setGear(1);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -124,7 +124,7 @@ public class GomuAbilities
 		
 		public void startPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.setGear(2);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -132,7 +132,7 @@ public class GomuAbilities
 			
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 25, 1, false));
 			if(!player.worldObj.isRemote)
@@ -149,7 +149,7 @@ public class GomuAbilities
 		
 		public void endPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			props.setGear(1);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
@@ -168,7 +168,7 @@ public class GomuAbilities
 		{		
 			if(!this.isOnCooldown)
 			{
-				ExtendedEntityStats props = ExtendedEntityStats.get(player);
+				ExtendedEntityData props = ExtendedEntityData.get(player);
 				
 				int type = 0;
 				int projectileSpace = 3;
@@ -247,7 +247,7 @@ public class GomuAbilities
 
 		public void endCharging(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			switch(props.getGear())
 			{
@@ -290,7 +290,7 @@ public class GomuAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);		
+			ExtendedEntityData props = ExtendedEntityData.get(player);		
 			switch(props.getGear())
 			{
 				case 1:

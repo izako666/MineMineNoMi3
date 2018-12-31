@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
@@ -22,16 +21,17 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIAbilitiesList;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 @SideOnly(Side.CLIENT)
 public class GUISelectHotbarAbilities extends GuiScreen
 {
 	protected EntityPlayer player;
-	protected ExtendedEntityStats props;
+	protected ExtendedEntityData props;
 	protected AbilityProperties abilityProps;
 	
 	private GUIAbilitiesList devilFruitsAbilitiesList, racialAbilitiesList, hakiAbilitiesList;
@@ -44,7 +44,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 	public GUISelectHotbarAbilities(EntityPlayer player)
 	{
 		this.player = player;
-		this.props = ExtendedEntityStats.get(player);	
+		this.props = ExtendedEntityData.get(player);	
 		this.abilityProps = AbilityProperties.get(player);
 	}
 	

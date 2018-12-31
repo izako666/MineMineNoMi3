@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -38,9 +38,9 @@ public class Cola extends ItemFood
 	{
 		if(!world.isRemote)
 		{						
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
-			if(props.getRace().equals(ID.RACE_CYBORG))
+			if(props.isCyborg())
 			{
 				if(props.getCola() <= props.getMaxCola() - 15) 
 					props.alterCola(15);

@@ -18,9 +18,9 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.ParticleManager;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class PacketParticles implements IMessage
 {
@@ -74,7 +74,7 @@ public class PacketParticles implements IMessage
 		public IMessage onMessage(PacketParticles message, MessageContext ctx) 
 		{
 			final EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 				
 			String fx = message.fx;
 			

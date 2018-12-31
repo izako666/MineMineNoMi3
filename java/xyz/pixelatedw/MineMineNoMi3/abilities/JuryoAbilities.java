@@ -1,36 +1,24 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities.WhiteLauncher;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities.WhiteOut;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities.WhiteSnake;
-import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities.WhiteStrike;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GomuProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GoroProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.JuryoProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class JuryoAbilities
 {
@@ -46,7 +34,7 @@ public class JuryoAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && DevilFruitsHelper.isSword(player.getHeldItem()))
+			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
 			{	
 				for(int j = 0; j < 50; j++)
 				{

@@ -12,10 +12,10 @@ import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.BanditData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class PirateData extends EntityNewMob
 {
@@ -52,7 +52,7 @@ public class PirateData extends EntityNewMob
 				if(target instanceof EntityPlayer)
 				{
 					EntityPlayer targetP = (EntityPlayer) target;
-					ExtendedEntityStats props = ExtendedEntityStats.get(targetP);
+					ExtendedEntityData props = ExtendedEntityData.get(targetP);
 									
 					if(props.getCrew().equals(this.getCrew()))
 						break;

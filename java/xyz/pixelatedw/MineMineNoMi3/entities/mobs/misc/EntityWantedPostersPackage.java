@@ -1,12 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityWantedPostersPackage extends EntityMob
@@ -36,7 +34,7 @@ public class EntityWantedPostersPackage extends EntityMob
     public void setDead()
     {
     	if(!this.onGround)
-    		DevilFruitsHelper.dropWantedPosters(this.worldObj, (int)posX, (int)posY, (int)posZ);
+    		ItemsHelper.dropWantedPosters(this.worldObj, (int)posX, (int)posY, (int)posZ);
     	super.setDead();
     }
     

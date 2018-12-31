@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3;
+package xyz.pixelatedw.MineMineNoMi3.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
@@ -27,6 +28,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
@@ -38,11 +42,11 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
-import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
 
 public class DevilFruitsHelper
 {
@@ -62,80 +66,30 @@ public class DevilFruitsHelper
 			"gasugasu", "sunasuna", "mokumoku"
 	};
 
-	// public static Block[] nonBreakableBlocks = new Block[] { Blocks.bedrock,
-	// ListMisc.OpeMid, ListMisc.Ope, ListMisc.StringMid, ListMisc.StringWall };
-
-	public static void dropWantedPosters(World world, int posX, int posY, int posZ)
-	{
-    	ExtendedWorldData worldData = ExtendedWorldData.get(world);
-    	
-    	// Populating the list with wanted posters
-    	List<Entry<String, Integer>> bountiesInPackage = new ArrayList<Entry<String, Integer>>();
-    	    	
-    	if(!WyHelper.getEntitiesNear(posX, posY, posZ, world, 10).isEmpty())
-    	{
-    		WyHelper.getEntitiesNear(posX, posY, posZ, world, 10).stream().filter(x -> 
-    		{
-    			return x instanceof EntityPlayer && ExtendedEntityStats.get(x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && worldData.getBounty(x.getCommandSenderName()) != 0;
-    		}).forEach(x -> 
-    		{
-    			SimpleEntry<String, Integer> se = new SimpleEntry<String, Integer>( x.getCommandSenderName().toLowerCase(), worldData.getBounty(x.getCommandSenderName()) );
-    			bountiesInPackage.add( se );
-    		});
-    	}
-    	
-    	if((5 + world.rand.nextInt(2)) - bountiesInPackage.size() > 0)
-    		bountiesInPackage.addAll( worldData.getAllBounties().entrySet().stream().filter(x -> !bountiesInPackage.contains(x) ).limit((5 + world.rand.nextInt(2)) - bountiesInPackage.size()).collect(Collectors.toList()) );
-    	    	
-    	// Spawning the wanted posters
-    	bountiesInPackage.stream().forEach(x -> 
-    	{
-    		ItemStack stack = new ItemStack(ListMisc.WantedPoster);
-	    	stack.setTagCompound(DevilFruitsHelper.setWantedData(x.getKey(), x.getValue()));
-	    	world.spawnEntityInWorld(new EntityItem(world, posX, posY + 1, posZ, stack));
-    	});
-	}
 	
-	public static NBTTagCompound setWantedData(String entityName, int bounty)
+	public static boolean isNearbyKairoseki(EntityPlayer player)
 	{
-		NBTTagCompound data = null;
-
-		data = new NBTTagCompound();
-
-		data.setString("Name", entityName);
-		data.setInteger("Bounty", bounty);
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String dateString = format.format(new Date());
-
-		data.setString("Date", dateString);
-
-		return data;
-	}
-
-	public static boolean hasBusoHakiAquired(EntityPlayer player)
-	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-
-		if (props.getRace().equalsIgnoreCase(ID.RACE_HUMAN) && props.getDoriki() >= 9000)
+		if( WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock))
+				|| player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) || (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water 
+				|| player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding()  )) )
+		{
 			return true;
-
-		if (props.getRace().equalsIgnoreCase(ID.RACE_FISHMAN) && props.getDoriki() >= 9000)
-			return true;
-
-		if (props.getRace().equalsIgnoreCase(ID.RACE_CYBORG) && props.getDoriki() >= 8500)
-			return true;
-
+		}
+		
 		return false;
 	}
-
-	public static boolean isSword(ItemStack itemStack)
+	
+	public static boolean hasBusoHakiAquired(EntityPlayer player)
 	{
-		if (itemStack.getItem() instanceof ItemSword)
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+
+		if (props.isHuman() && props.getDoriki() >= 9000)
 			return true;
 
-		Multimap multimap = itemStack.getAttributeModifiers();
-		if (multimap.containsKey(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName()))
+		if (props.isFishman() && props.getDoriki() >= 9000)
+			return true;
+
+		if (props.isCyborg() && props.getDoriki() >= 8500)
 			return true;
 
 		return false;
@@ -154,7 +108,7 @@ public class DevilFruitsHelper
 
 	public static void validateRacialMoves(EntityPlayer player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 
 		DorikiEvent e = new DorikiEvent(player);
@@ -163,17 +117,17 @@ public class DevilFruitsHelper
 
 		List<Ability> tempAblList = new ArrayList<Ability>();
 
-		if (props.getRace().equals(ID.RACE_HUMAN))
+		if (props.isHuman())
 			for (Ability a : RokushikiAbilities.abilitiesArray)
 				if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
 
-		if (props.getRace().equals(ID.RACE_FISHMAN))
+		if (props.isFishman())
 			for (Ability a : FishKarateAbilities.abilitiesArray)
 				if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
 
-		if (props.getRace().equals(ID.RACE_CYBORG))
+		if (props.isCyborg())
 			for (Ability a : CyborgAbilities.abilitiesArray)
 				if (abilityProps.hasRacialAbility(a) && !verifyIfAbilityIsBanned(a))
 					tempAblList.add(a);
@@ -197,11 +151,11 @@ public class DevilFruitsHelper
 
 	public static void validateStyleMoves(EntityPlayer player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 
-		if (props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))
+		if (props.isSwordsman())
 		{
 			if (!verifyIfAbilityIsBanned(SwordsmanAbilities.SHISHISHISONSON))
 				abilityProps.addRacialAbility(SwordsmanAbilities.SHISHISHISONSON);
@@ -221,7 +175,7 @@ public class DevilFruitsHelper
 					abilityProps.addRacialAbility(SwordsmanAbilities.OTATSUMAKI);
 			}
 		}
-		else if (props.getFightStyle().equals(ID.FSTYLE_SNIPER))
+		else if (props.isSniper())
 		{
 			if (!verifyIfAbilityIsBanned(SniperAbilities.KAENBOSHI))
 				abilityProps.addRacialAbility(SniperAbilities.KAENBOSHI);
@@ -252,13 +206,6 @@ public class DevilFruitsHelper
 
 		return false;
 	}
-	/*
-	 * public static boolean canBreakBlock(World world, int posX, int posY, int
-	 * posZ) { return canBreakBlock(world.getBlock(posX, posY, posZ)); }
-	 * 
-	 * public static boolean canBreakBlock(Block b) { for(Block blk :
-	 * nonBreakableBlocks) { if(b == blk) return false; } return true; }
-	 */
 
 	/**
 	 * Will place a given block in the given positions IF the block it tries to
@@ -448,16 +395,4 @@ public class DevilFruitsHelper
 		return entity.getActivePotionEffect(Potion.poison).getAmplifier() / 5;
 	}
 
-	public static boolean hasKairosekiItem(EntityPlayer player)
-	{
-		for (Item itm : Values.KAIROSEKI_ITEMS)
-		{
-			if (player.inventory.hasItem(itm))
-			{
-				return true;
-			}
-		}
-
-		return false;
-	}
 }

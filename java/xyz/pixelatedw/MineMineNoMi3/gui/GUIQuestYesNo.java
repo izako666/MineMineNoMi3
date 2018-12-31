@@ -19,25 +19,25 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.helpers.QuestLogicHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
-import xyz.pixelatedw.MineMineNoMi3.quests.QuestLogicHelper;
 
 public class GUIQuestYesNo extends GuiScreen
 {
 	private EntityPlayer player;
 	private RenderItem renderItem;
-	private ExtendedEntityStats props;
+	private ExtendedEntityData props;
 	private QuestProperties questProps;
 	private Quest currentQuestToDisplay;
 	
 	public GUIQuestYesNo(EntityPlayer player, int x, int y, int z)
 	{
 		this.player = player;
-		this.props = ExtendedEntityStats.get(player);
+		this.props = ExtendedEntityData.get(player);
 		this.questProps = QuestProperties.get(player);
 		this.currentQuestToDisplay = QuestLogicHelper.getQuestlineCurrentQuest(QuestLogicHelper.getQuestlineFromSelectedEntity(player, x, y, z).getQuests(), questProps);
 	}

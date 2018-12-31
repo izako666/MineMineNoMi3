@@ -19,8 +19,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class PacketSyncInfo implements IMessage
 {
@@ -30,21 +30,21 @@ public class PacketSyncInfo implements IMessage
 
 	public PacketSyncInfo() {}
 	
-	public PacketSyncInfo(int id, ExtendedEntityStats props) 
+	public PacketSyncInfo(int id, ExtendedEntityData props) 
 	{
 		data = new NBTTagCompound();
 		this.entityId = id;
 		props.saveNBTData(data);
 	}
 	
-	public PacketSyncInfo(String user, ExtendedEntityStats props) 
+	public PacketSyncInfo(String user, ExtendedEntityData props) 
 	{
 		data = new NBTTagCompound();
 		this.user = user;
 		props.saveNBTData(data);
 	}
 	
-	public PacketSyncInfo(ExtendedEntityStats props) 
+	public PacketSyncInfo(ExtendedEntityData props) 
 	{
 		data = new NBTTagCompound();
 		props.saveNBTData(data);
@@ -70,7 +70,7 @@ public class PacketSyncInfo implements IMessage
 		public IMessage onMessage(PacketSyncInfo message, MessageContext ctx) 
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);	 
+			ExtendedEntityData props = ExtendedEntityData.get(player);	 
 			int entityID = message.entityId;
 			
 			if(message.user != null && !message.user.isEmpty())
@@ -89,7 +89,7 @@ public class PacketSyncInfo implements IMessage
 				
 				if(target != null && !target.equals(player))
 				{
-					ExtendedEntityStats propz = ExtendedEntityStats.get(target);	 
+					ExtendedEntityData propz = ExtendedEntityData.get(target);	 
 	
 					propz.loadNBTData(message.data);
 				}
@@ -112,7 +112,7 @@ public class PacketSyncInfo implements IMessage
 				
 				if(target != null && target instanceof EntityLivingBase && !target.equals(player))
 				{
-					ExtendedEntityStats propz = ExtendedEntityStats.get((EntityLivingBase) target);
+					ExtendedEntityData propz = ExtendedEntityData.get((EntityLivingBase) target);
 					propz.loadNBTData(message.data);
 				}
 			}

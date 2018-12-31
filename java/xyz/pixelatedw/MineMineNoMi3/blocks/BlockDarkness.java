@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 
@@ -29,7 +29,7 @@ public class BlockDarkness extends Block
     { 
     	if(entity instanceof EntityLivingBase)
     	{
-	    	ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);	    	
+	    	ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);	    	
 
 	    	if(!props.getUsedFruit().equals("yamiyami") || !props.hasYamiPower())
 	    		entity.setInWeb(); 
@@ -42,7 +42,7 @@ public class BlockDarkness extends Block
     {
     	if(entity instanceof EntityLivingBase)
     	{
-	    	ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);	    	
+	    	ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);	    	
 
 	    	if(props.getUsedFruit().equals("yamiyami") || props.hasYamiPower())
 	    	{
