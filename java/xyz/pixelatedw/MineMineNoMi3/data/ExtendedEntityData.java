@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.ieep;
+package xyz.pixelatedw.MineMineNoMi3.data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 
-public class ExtendedEntityStats implements IExtendedEntityProperties 
+public class ExtendedEntityData implements IExtendedEntityProperties 
 {
 
 	public final static String EXT_PROP_NAME = "IEEPShared";
@@ -21,25 +21,25 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	private boolean isInCombatMode = false;
 	
 	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
-	private String akumaNoMiUsed = "N/A", faction = "N/A", race = "N/A", fightStyle = "N/A", crew = "N/A", zoanPoint = "N/A";
+	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
 			isCandleLocked = false, isTaktBlocked = false;
 
-	private String tempPreviousAbility = "N/A";
+	private String tempPreviousAbility = "";
 	
-	public ExtendedEntityStats(EntityLivingBase entity) 
+	public ExtendedEntityData(EntityLivingBase entity) 
 	{
 		this.entity = entity;	
 	}
 	
 	public static final void register(EntityLivingBase entity) 
 	{
-		entity.registerExtendedProperties(ExtendedEntityStats.EXT_PROP_NAME, new ExtendedEntityStats(entity));
+		entity.registerExtendedProperties(ExtendedEntityData.EXT_PROP_NAME, new ExtendedEntityData(entity));
 	}
 
-	public static final ExtendedEntityStats get(EntityLivingBase entity) 
+	public static final ExtendedEntityData get(EntityLivingBase entity) 
 	{
-		return (ExtendedEntityStats) entity.getExtendedProperties(EXT_PROP_NAME);
+		return (ExtendedEntityData) entity.getExtendedProperties(EXT_PROP_NAME);
 	}
 
 	public void saveNBTData(NBTTagCompound compound) 
@@ -280,6 +280,7 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	public void setIsLogia(boolean i) {this.isLogia = i;}
 	
 	public String getUsedFruit() {return this.akumaNoMiUsed;}
+	public boolean hasDevilFruit() { return !this.akumaNoMiUsed.isEmpty(); }
 	public void setUsedFruit(String name) {this.akumaNoMiUsed = name;}
 	
 	public boolean hasHeart() {return this.hasHeart;}
@@ -292,12 +293,24 @@ public class ExtendedEntityStats implements IExtendedEntityProperties
 	public int getGear() {return this.gear;}
 	
 	public String getFightStyle() {return this.fightStyle;}
+	public boolean isSwordsman() { return this.fightStyle.equalsIgnoreCase("swordsman"); }
+	public boolean isSniper() { return this.fightStyle.equalsIgnoreCase("sniper"); }
+	public boolean isMedic() { return this.fightStyle.equalsIgnoreCase("medic"); }
+	public boolean hasFightingStyle() { return !this.fightStyle.equalsIgnoreCase("n/a"); }
 	public void setFightStyle(String i) {this.fightStyle = i;}
 	
 	public String getRace() {return this.race;}
+	public boolean isHuman() { return this.race.equalsIgnoreCase("human"); }
+	public boolean isFishman() { return this.race.equalsIgnoreCase("fishman"); }
+	public boolean isCyborg() { return this.race.equalsIgnoreCase("cyborg"); }
+	public boolean hasRace() { return !this.race.equalsIgnoreCase("n/a"); }
 	public void setRace(String i) {this.race = i;}
-	
+
 	public String getFaction() {return this.faction;}
+	public boolean isPirate() { return this.faction.equalsIgnoreCase("pirate"); }
+	public boolean isMarine() { return this.faction.equalsIgnoreCase("marine"); }
+	public boolean isBountyHunter() { return this.faction.equalsIgnoreCase("bountyhunter"); }
+	public boolean hasFaction() { return !this.faction.equalsIgnoreCase("n/a"); }
 	public void setFaction(String i) {this.faction = i;}
 	
 	public String getCrew() {return this.crew;}

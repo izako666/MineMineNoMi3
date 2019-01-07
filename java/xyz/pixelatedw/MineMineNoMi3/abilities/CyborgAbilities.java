@@ -10,8 +10,8 @@ import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.CyborgProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -35,7 +35,7 @@ public class CyborgAbilities
 		
 		public void startCharging(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(!isOnCooldown && props.getCola() >= 25)
 				super.startCharging(player);
@@ -51,7 +51,7 @@ public class CyborgAbilities
 		
 		public void endCharging(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			props.alterCola(-25);
 			isCharging = false;
@@ -83,7 +83,7 @@ public class CyborgAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if(!player.worldObj.isRemote)
 			{				
@@ -111,7 +111,7 @@ public class CyborgAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if(!player.worldObj.isRemote)
 			{
@@ -139,7 +139,7 @@ public class CyborgAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(!this.isOnCooldown && props.getCola() >= 5)
 			{
@@ -172,7 +172,7 @@ public class CyborgAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if(!isOnCooldown && props.getCola() > 0)
 			{

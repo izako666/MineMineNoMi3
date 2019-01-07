@@ -20,14 +20,14 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class GUIQuests extends GuiScreen
 {
 	private EntityPlayer player;
 	private RenderItem renderItem;
-	private ExtendedEntityStats props;
+	private ExtendedEntityData props;
 	private QuestProperties questProps;
 	
 	private int questIndex = 0;
@@ -35,7 +35,7 @@ public class GUIQuests extends GuiScreen
 	public GUIQuests(EntityPlayer player)
 	{
 		this.player = player;
-		this.props = ExtendedEntityStats.get(player);
+		this.props = ExtendedEntityData.get(player);
 		this.questProps = QuestProperties.get(player);
 	}
 

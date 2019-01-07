@@ -13,8 +13,8 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -34,7 +34,7 @@ public class GUICC extends GuiScreen
 		drawDefaultBackground();
     
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
     
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
@@ -159,7 +159,7 @@ public class GUICC extends GuiScreen
 	
 	public void actionPerformed(GuiButton button)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		
 		if(button.id >= 0 && button.id < 10)
 			props.setFaction(button.displayString);	

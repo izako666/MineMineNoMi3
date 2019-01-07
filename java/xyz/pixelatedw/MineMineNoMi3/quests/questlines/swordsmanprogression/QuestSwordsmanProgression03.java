@@ -13,7 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
@@ -63,10 +63,10 @@ public class QuestSwordsmanProgression03 extends Quest implements IKillQuest, IP
 
 	public boolean canStart(EntityPlayer player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		
-		boolean flag1 = !props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN) || !questProps.hasQuestCompleted(ListQuests.swordsmanProgression02);
+		boolean flag1 = !props.isSwordsman() || !questProps.hasQuestCompleted(ListQuests.swordsmanProgression02);
 		
 		if(flag1)
 			return false;

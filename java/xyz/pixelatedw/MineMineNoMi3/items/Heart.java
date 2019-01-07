@@ -14,7 +14,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class Heart extends Item
@@ -26,7 +26,7 @@ public class Heart extends Item
 			EntityLivingBase owner = (EntityLivingBase) world.getEntityByID(itemStack.getTagCompound().getInteger("owner"));
 			if(owner == player)
 			{
-				ExtendedEntityStats props = new ExtendedEntityStats(player);
+				ExtendedEntityData props = new ExtendedEntityData(player);
 				props.setHasHeart(true);
 				/** TODO This throws an error server-side, just make sure it doesn't break anything or find a fix ;) */
 				WyNetworkHelper.sendToServer(new PacketSync(props));

@@ -13,7 +13,7 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class MainKeys 
@@ -62,7 +62,7 @@ public class MainKeys
     	Minecraft minecraft = Minecraft.getMinecraft();
     	EntityPlayer player = minecraft.thePlayer; 
     	WorldClient world = minecraft.theWorld;  
-    	ExtendedEntityStats props = ExtendedEntityStats.get(player);
+    	ExtendedEntityData props = ExtendedEntityData.get(player);
     	
 		if(guiPlayer.isPressed())
 		{

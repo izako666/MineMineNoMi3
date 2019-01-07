@@ -10,14 +10,14 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -76,7 +76,7 @@ public class DokuAbilities
 		
 		public void startPassive(EntityPlayer player) 
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if (props.getZoanPoint().isEmpty())
 				props.setZoanPoint("n/a");
@@ -116,7 +116,7 @@ public class DokuAbilities
 		
 		public void endPassive(EntityPlayer player) 
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if(props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
 			{

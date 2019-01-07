@@ -13,7 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class PacketSync implements IMessage
 {
@@ -21,7 +21,7 @@ public class PacketSync implements IMessage
 
 	public PacketSync() {}
 	
-	public PacketSync(ExtendedEntityStats props) 
+	public PacketSync(ExtendedEntityData props) 
 	{
 		data = new NBTTagCompound();
 		props.saveNBTData(data);
@@ -43,7 +43,7 @@ public class PacketSync implements IMessage
 		public IMessage onMessage(PacketSync message, MessageContext ctx) 
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			WyDebug.debug("[CLIENT] Sync for Entity : " + player);
 			
@@ -58,7 +58,7 @@ public class PacketSync implements IMessage
 		public IMessage onMessage(PacketSync message, MessageContext ctx) 
 		{
 			EntityPlayer player = MainMod.proxy.getPlayerEntity(ctx);
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);	 
+			ExtendedEntityData props = ExtendedEntityData.get(player);	 
 
 			WyDebug.debug("[SERVER] Sync for Entity : " + player);
 			

@@ -20,7 +20,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class ItemCoreWeapon extends Item
 {
@@ -58,14 +58,14 @@ public class ItemCoreWeapon extends Item
 		
 		if(!world.isRemote)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get((EntityLivingBase) entity);
+			ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) entity);
 			
 			double multiplier = 1;
 			
 			if(props.hasBusoHakiActive())
 				multiplier += 0.5;
 			
-			if(props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN))
+			if(props.isSwordsman())
 				multiplier += 0.25;
 			
 			itemStack.getTagCompound().setDouble("multiplier", multiplier);
@@ -90,7 +90,7 @@ public class ItemCoreWeapon extends Item
 
 	public boolean hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(attacker);
+		ExtendedEntityData props = ExtendedEntityData.get(attacker);
 
 		if(!props.hasBusoHakiActive())
 			itemStack.damageItem(1, attacker);
@@ -201,7 +201,7 @@ public class ItemCoreWeapon extends Item
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
 	{	
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 
 		if(stack.getTagCompound() != null)
     	{

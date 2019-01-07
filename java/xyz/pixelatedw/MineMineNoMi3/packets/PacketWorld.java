@@ -7,7 +7,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class PacketWorld implements IMessage
 {
@@ -44,7 +44,7 @@ public class PacketWorld implements IMessage
 		public IMessage onMessage(final PacketWorld message, final MessageContext ctx) 
 		{
 			EntityPlayer player = ctx.getServerHandler().playerEntity;
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(message.blockId != -1)
 				player.worldObj.setBlock(message.posX, message.posY, message.posZ, Block.getBlockById(message.blockId));

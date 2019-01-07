@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles;
 
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
@@ -37,8 +39,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectDarkMatter;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectKorouzu;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yuki.ParticleEffectFubuki;
-
-import java.util.HashMap;
 
 public class ParticleManager
 {

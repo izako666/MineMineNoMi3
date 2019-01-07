@@ -10,13 +10,13 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class JuryoProjectiles
@@ -44,20 +44,23 @@ public class JuryoProjectiles
 		
 		public void onUpdate()
 		{
-			for(int i = 0; i < 2; i++)
+			if(this.worldObj.isRemote)
 			{
-				double posXOffset = this.worldObj.rand.nextGaussian() * 0.52D;
-				double posYOffset = this.worldObj.rand.nextGaussian() * 0.52D;
-				double posZOffset = this.worldObj.rand.nextGaussian() * 0.52D;		
-	
-				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
-						posX + posXOffset, 
-						posY + posYOffset, 
-						posZ + posZOffset, 
-						0, 0, 0)
-						.setParticleAge(20).setParticleScale(0.7F);
-				
-				MainMod.proxy.spawnCustomParticles(this, particle);	
+				for(int i = 0; i < 2; i++)
+				{
+					double posXOffset = this.worldObj.rand.nextGaussian() * 0.52D;
+					double posYOffset = this.worldObj.rand.nextGaussian() * 0.52D;
+					double posZOffset = this.worldObj.rand.nextGaussian() * 0.52D;		
+		
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
+							posX + posXOffset, 
+							posY + posYOffset, 
+							posZ + posZOffset, 
+							0, 0, 0)
+							.setParticleAge(20).setParticleScale(0.7F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);	
+				}
 			}
 			super.onUpdate();
 		}

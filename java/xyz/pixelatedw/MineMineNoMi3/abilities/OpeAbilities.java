@@ -12,7 +12,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -20,8 +19,9 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OpeProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -229,7 +229,7 @@ public class OpeAbilities
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
 		{
-			ExtendedEntityStats targetprops = ExtendedEntityStats.get(target);
+			ExtendedEntityData targetprops = ExtendedEntityData.get(target);
 
 			if (targetprops.hasHeart())
 			{

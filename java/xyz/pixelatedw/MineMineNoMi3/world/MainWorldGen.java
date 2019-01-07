@@ -21,6 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WySchematicHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraStructures;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorldData;

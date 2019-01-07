@@ -53,6 +53,7 @@ public class ID
 	
 	TEXTURE_STRINGS1 = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_strings.png"),
 	TEXTURE_BOUNTYPOSTER = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_bounty.png"),
+	TEXTURE_BOUNTYPOSTER_LARGE = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_bounty_large.png"),
 	TEXTURE_WIDGETS = new ResourceLocation(ID.PROJECT_ID, "textures/gui/widgets.png"),
 	TEXTURE_CURRENCIES = new ResourceLocation(ID.PROJECT_ID, "textures/gui/currencies.png"),
 	TEXTURE_BLANK = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_blank.png"),

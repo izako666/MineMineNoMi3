@@ -27,18 +27,6 @@ public class Values
 	public static final int MAX_ACTIVITIES = 4;
 	
 	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
-	public static final List<Block> BANNED_BLOCKS = createBannedBlocksList();
-			
-	private static List<Block> createBannedBlocksList()
-	{
-		List<Block> blocks = new ArrayList<Block>();
-		
-		blocks.add(Blocks.bedrock);
-		blocks.add(ListMisc.Ope);
-		blocks.add(ListMisc.OpeMid);
-		
-		return blocks;
-	}
 	
 	public static HashMap<Class, EnumQuestlines> questGivers = createQuestGiversMap();
 

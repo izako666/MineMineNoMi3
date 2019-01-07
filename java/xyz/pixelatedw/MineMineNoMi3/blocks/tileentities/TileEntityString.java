@@ -13,7 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
@@ -31,7 +31,7 @@ public class TileEntityString extends TileEntity
     	{
 			List<EntityLivingBase> nearbyPlayers = WyHelper.getEntitiesNear(this, 28).stream().filter(x ->
 				{
-					if (x instanceof EntityPlayer && ExtendedEntityStats.get(x).getUsedFruit().equalsIgnoreCase("itoito"))
+					if (x instanceof EntityPlayer && ExtendedEntityData.get(x).getUsedFruit().equalsIgnoreCase("itoito"))
 						return true;
 			
 					return false;

@@ -14,8 +14,8 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IInteractQuest;
@@ -64,8 +64,8 @@ public class QuestSwordsmanProgression01 extends Quest implements IInteractQuest
 
 	public boolean canStart(EntityPlayer player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-		return props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		return props.isSwordsman();
 	}
 
 	public double getMaxProgress()

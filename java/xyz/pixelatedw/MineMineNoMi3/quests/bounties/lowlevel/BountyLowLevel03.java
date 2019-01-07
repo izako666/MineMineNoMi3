@@ -6,8 +6,8 @@ import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.quests.IKillQuest;
 
 public class BountyLowLevel03 extends Quest implements IKillQuest
@@ -43,7 +43,7 @@ public class BountyLowLevel03 extends Quest implements IKillQuest
 
 	public void finishQuest(EntityPlayer player)
 	{		
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);	
+		ExtendedEntityData props = ExtendedEntityData.get(player);	
 		props.alterBelly(150);
 		WyHelper.sendMsgToPlayer(player, EnumChatFormatting.GOLD + "Reward : 150 Belly");		
 		super.finishQuest(player);
@@ -51,8 +51,8 @@ public class BountyLowLevel03 extends Quest implements IKillQuest
 
 	public boolean canStart(EntityPlayer player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
-		return props.getFaction().equals(ID.FACTION_BOUNTYHUNTER);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		return props.isBountyHunter();
 	}
 
 	public double getMaxProgress()

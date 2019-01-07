@@ -15,8 +15,8 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -63,7 +63,7 @@ public class DoruProjectiles
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
 			{
 				EntityLivingBase target = ((EntityLivingBase)hit.entityHit);
-				ExtendedEntityStats propz = ExtendedEntityStats.get(target);
+				ExtendedEntityData propz = ExtendedEntityData.get(target);
 				
 				propz.setIsCandleLocked(true);
 				WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getEntityId(), propz));

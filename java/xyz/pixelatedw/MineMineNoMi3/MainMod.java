@@ -1,7 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3;
 
-import org.apache.logging.log4j.LogManager;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -16,12 +14,12 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
-import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBelly;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandDoriki;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandExtol;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandFG;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandIssueBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandRemoveDF;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIHandler;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListBiomes;
@@ -118,6 +116,7 @@ public class MainMod
 		event.registerServerCommand(new CommandBounty());
 		event.registerServerCommand(new CommandExtol());
 		event.registerServerCommand(new CommandRemoveDF());
+		event.registerServerCommand(new CommandIssueBounty());
 	}
 
 	public static MainMod getMineMineNoMi()

@@ -8,7 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import xyz.pixelatedw.MineMineNoMi3.world.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 
 public class PacketWorldData implements IMessage
 {

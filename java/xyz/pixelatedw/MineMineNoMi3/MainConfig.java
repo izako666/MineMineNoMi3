@@ -40,6 +40,7 @@ public class MainConfig
 	public static int commandPermissionBelly = 2;
 	public static int commandPermissionBounty = 2;
 	public static int commandPermissionExtol = 2;
+	public static int commandPermissionIssueBounty = 2;
 	public static String[] abilityRestrictions;
 	
 	
@@ -81,6 +82,7 @@ public class MainConfig
 		commandPermissionBelly = config.get("permissions", "Permission : /belly", 2).getInt();
 		commandPermissionBounty = config.get("permissions", "Permission : /bounty", 2).getInt();
 		commandPermissionExtol = config.get("permissions", "Permission : /extol", 2).getInt();
+		commandPermissionIssueBounty = config.get("permissions", "Permission : /issueBounty", 2).getInt();
 		abilityRestrictions = config.get("permissions", "Ability Restrictions", new String[] {"example1", "example2"}).getStringList();		
 		
 		

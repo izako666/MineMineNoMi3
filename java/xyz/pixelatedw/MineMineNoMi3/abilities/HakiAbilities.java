@@ -8,7 +8,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
@@ -28,7 +28,7 @@ public class HakiAbilities
 		
 		public void startPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(true);
 			props.triggerKenHaki(true);
@@ -38,7 +38,7 @@ public class HakiAbilities
 		
 		public void endPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(false);
 			props.triggerKenHaki(false);
@@ -56,7 +56,7 @@ public class HakiAbilities
 		
 		public void startPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(true);
 			props.triggerBusoHaki(true);
@@ -66,7 +66,7 @@ public class HakiAbilities
 		
 		public void endPassive(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			props.triggerActiveHaki(false);
 			props.triggerBusoHaki(false);
@@ -76,8 +76,8 @@ public class HakiAbilities
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
-			ExtendedEntityStats propz = ExtendedEntityStats.get(target);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			ExtendedEntityData propz = ExtendedEntityData.get(target);
 			int powerDifference = props.getDoriki() - propz.getDoriki();
 			float damageFromDoriki = 2;
 			if(powerDifference > 0)

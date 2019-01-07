@@ -9,7 +9,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class ItemAbilityWeapon extends ItemCoreWeapon
@@ -30,7 +30,7 @@ public class ItemAbilityWeapon extends ItemCoreWeapon
 		if(entity instanceof EntityPlayer)
 		{
 			EntityPlayer owner = (EntityPlayer) entity;		
-			ExtendedEntityStats props = ExtendedEntityStats.get(owner);
+			ExtendedEntityData props = ExtendedEntityData.get(owner);
 			AbilityProperties abilityProps = AbilityProperties.get(owner);
 
 			if(props.getUsedFruit().equals("hiehie") || props.getUsedFruit().equals("pikapika") || props.getUsedFruit().equals("noronoro") || props.getUsedFruit().equals("dorudoru")

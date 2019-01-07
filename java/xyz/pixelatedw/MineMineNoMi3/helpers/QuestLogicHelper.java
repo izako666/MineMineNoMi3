@@ -1,6 +1,7 @@
-package xyz.pixelatedw.MineMineNoMi3.quests;
+package xyz.pixelatedw.MineMineNoMi3.helpers;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +9,8 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
+import xyz.pixelatedw.MineMineNoMi3.quests.ITimedQuest;
 
 public class QuestLogicHelper
 {
@@ -60,18 +62,20 @@ public class QuestLogicHelper
 		return questline[0];		
 	}
 	
-	public static boolean checkForITimedQuests(QuestProperties questProps)
-	{			
+	public static List<ITimedQuest> checkForITimedQuests(QuestProperties questProps)
+	{		
+		List<ITimedQuest> timedQuests = new ArrayList<ITimedQuest>();
+		
 		if(questProps.questsInProgress() <= 0)
-			return false;
+			return timedQuests;
 		
 		for(int i = 0; i < questProps.questsInProgress(); i++)
 		{
 			if(questProps.getQuestIndexFromTracker(i) instanceof ITimedQuest)
-				return true;
+				timedQuests.add((ITimedQuest) questProps.getQuestIndexFromTracker(i));
 		}
 		
-		return false;		
+		return timedQuests;		
 	}
 	
 	public static boolean isQuestPartofQuestline(Quest quest, Quest[] questline)

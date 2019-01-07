@@ -30,6 +30,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
@@ -40,7 +41,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPowerBison;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelSpeedBison;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -72,7 +72,7 @@ public class EventsMorphs
 	@SubscribeEvent
 	public void onEntityRendered(RenderLivingEvent.Pre event)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(event.entity);
+		ExtendedEntityData props = ExtendedEntityData.get(event.entity);
 
 		if (!props.getZoanPoint().toLowerCase().equals("n/a"))
 		{
@@ -165,7 +165,7 @@ public class EventsMorphs
 		if (event.entity instanceof EntityPlayer)
 		{
 			EntityPlayer owner = (EntityPlayer) event.entity;
-			ExtendedEntityStats props = ExtendedEntityStats.get(owner);
+			ExtendedEntityData props = ExtendedEntityData.get(owner);
 
 			if (!props.getZoanPoint().toLowerCase().equals("n/a"))
 			{
@@ -181,7 +181,7 @@ public class EventsMorphs
 	public void morphHandRendering(RenderHandEvent event)
 	{
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 
 		if ((props.getUsedFruit().equals("dokudoku") && props.getZoanPoint().equals(ID.ZOANMORPH_DOKU)) 
 			|| (props.getUsedFruit().equals("ushiushibison") && (props.getZoanPoint().equals(ID.ZOANMORPH_SPEED) || props.getZoanPoint().equals(ID.ZOANMORPH_POWER)))
@@ -244,7 +244,7 @@ public class EventsMorphs
 
 	private void renderCustomHand(EntityClientPlayerMP player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 
 		float f5;
 		float f6;
@@ -318,7 +318,7 @@ public class EventsMorphs
 
 	private ResourceLocation getTextureFromMorph(EntityClientPlayerMP player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		RenderZoanMorph render = null;
 		
 		if (props.getUsedFruit().equals("ushiushibison"))

@@ -21,9 +21,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 
 public class EntityDoppelman extends EntityMob
 {	
@@ -88,7 +88,7 @@ public class EntityDoppelman extends EntityMob
 				this.setPositionAndUpdate(this.owner.posX, this.owner.posY, this.owner.posZ);
 			}
 			
-			ExtendedEntityStats ownerProps = ExtendedEntityStats.get(this.owner);
+			ExtendedEntityData ownerProps = ExtendedEntityData.get(this.owner);
 			
 			List<EntityLivingBase> doppelmanAttackList = WyHelper.getEntitiesNear(this, 10, EntityPlayer.class, MarineData.class, PirateData.class);
 			
@@ -97,7 +97,7 @@ public class EntityDoppelman extends EntityMob
 				if(doppelmanAttackList.contains(owner))
 					doppelmanAttackList.remove(owner);
 				
-				if(ownerProps.getFaction().equalsIgnoreCase(ID.FACTION_MARINE))
+				if(ownerProps.isMarine())
 					doppelmanAttackList = doppelmanAttackList.stream().filter(x -> !(x instanceof MarineData)).collect(Collectors.toList());
 				
 				EntityLivingBase target = doppelmanAttackList.stream().findFirst().orElse(null);

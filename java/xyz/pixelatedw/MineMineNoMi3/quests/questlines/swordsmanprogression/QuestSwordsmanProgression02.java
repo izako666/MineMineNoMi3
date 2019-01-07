@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 import xyz.pixelatedw.MineMineNoMi3.quests.EnumQuestlines;
 import xyz.pixelatedw.MineMineNoMi3.quests.IProgressionQuest;
@@ -74,10 +74,10 @@ public class QuestSwordsmanProgression02 extends Quest implements ITimedQuest, I
 
 	public boolean canStart(EntityPlayer player)
 	{
-		ExtendedEntityStats props = ExtendedEntityStats.get(player);
+		ExtendedEntityData props = ExtendedEntityData.get(player);
 		QuestProperties questProps = QuestProperties.get(player);
 		
-		boolean flag1 = !props.getFightStyle().equals(ID.FSTYLE_SWORDSMAN) || !questProps.hasQuestCompleted(ListQuests.swordsmanProgression01);
+		boolean flag1 = !props.isSwordsman() || !questProps.hasQuestCompleted(ListQuests.swordsmanProgression01);
 		
 		if(flag1)
 			return false;

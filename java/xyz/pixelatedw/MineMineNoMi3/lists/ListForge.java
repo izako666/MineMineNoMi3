@@ -4,13 +4,17 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.MainKeys;
-import xyz.pixelatedw.MineMineNoMi3.events.EventExtendedProperties;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsCore;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
-import xyz.pixelatedw.MineMineNoMi3.events.EventsKilo;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
-import xyz.pixelatedw.MineMineNoMi3.events.EventsPersistence;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsOnGain;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsQuestsProgress;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsDFWeaknesses;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsLogiaInvulnerability;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsPassives;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsSpecialFlying;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsZoanPassives;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUICombatMode;
 
 public class ListForge 
@@ -18,12 +22,27 @@ public class ListForge
 
 	public static void init()
 	{
-		MinecraftForge.EVENT_BUS.register(new EventExtendedProperties());
+		// Handles some core features of the mod, like IEEP registrations, update notifications or Early Access protection 		
+		MinecraftForge.EVENT_BUS.register(new EventsCore());
+		
+		// Handles the drop events from different sources
 		MinecraftForge.EVENT_BUS.register(new EventsDrops());
+		
+		// Handles the custom enchantment effects added by this mod
 		MinecraftForge.EVENT_BUS.register(new EventsEnchantments());
-		MinecraftForge.EVENT_BUS.register(new EventsPersistence());
+		
+		// Handles all the custom onGain events added by this mod
+		MinecraftForge.EVENT_BUS.register(new EventsOnGain());
+
+		// Handles the quest related stuff, accepting quests or progressing them throught different means
 		MinecraftForge.EVENT_BUS.register(new EventsQuestsProgress());
-		MinecraftForge.EVENT_BUS.register(new EventsKilo());
+		
+		// Core devil fruits events
+		MinecraftForge.EVENT_BUS.register(new EventsDFWeaknesses());
+		MinecraftForge.EVENT_BUS.register(new EventsSpecialFlying());
+		MinecraftForge.EVENT_BUS.register(new EventsLogiaInvulnerability());
+		MinecraftForge.EVENT_BUS.register(new EventsZoanPassives());
+		MinecraftForge.EVENT_BUS.register(new EventsPassives());
 		
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{

@@ -12,25 +12,25 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 
 public class GUIPlayer extends GuiScreen
 {
 	private EntityPlayer player;
 	private RenderItem renderItem;
-	private ExtendedEntityStats props;
+	private ExtendedEntityData props;
 
 	public GUIPlayer(EntityPlayer player)
 	{
 		this.player = player;
-		this.props = ExtendedEntityStats.get(player);
+		this.props = ExtendedEntityData.get(player);
 	}
 
 	public void drawScreen(int x, int y, float f)
@@ -51,7 +51,7 @@ public class GUIPlayer extends GuiScreen
 		String styleActual = I18n.format("style." + props.getFightStyle().toLowerCase() + ".name");
 		
 		//TODO DORIKI and COLA I18n strings
-		if(props.getRace().equals(ID.RACE_CYBORG))
+		if(props.isCyborg())
 			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "COLA: " + EnumChatFormatting.RESET + props.getCola() + " / " + props.getMaxCola(), posX - 30, posY + 50, -1) ;
 		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "DORIKI: " + EnumChatFormatting.RESET + props.getDoriki(), posX - 30, posY + 70, -1);
 		mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + factionGUI + ": " + EnumChatFormatting.RESET + factionActual, posX - 30, posY + 90, -1);
@@ -99,7 +99,8 @@ public class GUIPlayer extends GuiScreen
 		 
 		WyRenderHelper.drawEntityOnScreen(posX + 140, posY + 180 , 68, 0, 0, this.player);
     
-		if(props.getFaction().equals(ID.FACTION_PIRATE) && props.getBounty() > 0)
+		/*
+		if(props.isPirate() && props.getBounty() > 0)
 		{
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			this.mc.renderEngine.bindTexture(ID.TEXTURE_BOUNTYPOSTER);
@@ -107,7 +108,8 @@ public class GUIPlayer extends GuiScreen
 			mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + "" + props.getBounty(), posX + 220, posY + 208, -1);
 			this.mc.renderEngine.bindTexture(ID.TEXTURE_CURRENCIES);
 			this.drawTexturedModalRect(posX + 200, posY + 195, 0, 32, 32, 64);
-		}		
+		}
+		*/		
 
 		super.drawScreen(x, y, f);
 	}

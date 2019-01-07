@@ -8,8 +8,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
+import xyz.pixelatedw.MineMineNoMi3.blocks.models.ModelWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockWantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
@@ -35,6 +40,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
@@ -127,9 +133,12 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
-
+		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
+		
 		//Special Renderers
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPostersPackage.class, new RenderBlockWantedPostersPackage());
 		
 		/* 
 		//Temp

@@ -14,8 +14,8 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.HybridPoint;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ToriPhoenixProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -39,7 +39,7 @@ public class ToriPhoenixAbilities
 		
 		public void startCharging(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			particlesSpawned = 0;
 			
 			if((props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX)) && !this.isOnCooldown)
@@ -90,7 +90,7 @@ public class ToriPhoenixAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if((props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX) || props.getZoanPoint().equals(ID.ZOANMORPH_HYBRID)) && !this.isOnCooldown)
 			{
@@ -159,7 +159,7 @@ public class ToriPhoenixAbilities
 
 		public void use(EntityPlayer player)
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if (!this.isOnCooldown)
 			{				

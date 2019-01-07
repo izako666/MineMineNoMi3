@@ -11,7 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.SpeedPoint;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.ieep.ExtendedEntityStats;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -30,7 +30,7 @@ public class UshiBisonAbilities
 		
 		public void use(EntityPlayer player)
 		{	
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if((props.getZoanPoint().equals(ID.ZOANMORPH_POWER) || props.getZoanPoint().equals(ID.ZOANMORPH_SPEED) ) && !this.isOnCooldown)
 			{
@@ -73,7 +73,7 @@ public class UshiBisonAbilities
 		
 		public void startPassive(EntityPlayer player) 
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
 			if(!props.getZoanPoint().equals(ID.ZOANMORPH_POWER))
 			{
@@ -84,7 +84,7 @@ public class UshiBisonAbilities
 		
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			ExtendedEntityStats props = ExtendedEntityStats.get(player);
+			ExtendedEntityData props = ExtendedEntityData.get(player);
 
 			if(props.getZoanPoint().equals(ID.ZOANMORPH_POWER))
 			{

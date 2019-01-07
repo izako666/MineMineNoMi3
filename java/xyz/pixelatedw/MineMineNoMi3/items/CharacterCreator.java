@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.items;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

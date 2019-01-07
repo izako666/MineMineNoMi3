@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
@@ -22,6 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Hiken;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Jujika;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class HieProjectiles 
