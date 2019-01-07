@@ -28,6 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.NikyuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.NoroAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.OpeAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.OriAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.PikaAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
@@ -96,7 +97,7 @@ public class ListDevilFruits
 				KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
-				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, 
+				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray,
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
@@ -163,6 +164,8 @@ public class ListDevilFruits
 		addITEM(NikyuNikyuNoMi, "Nikyu Nikyu no Mi");
 		MokuMokuNoMi = new AkumaNoMi(EnumFruitType.LOGIA, MokuAbilities.abilitiesArray);
 		addITEM(MokuMokuNoMi, "Moku Moku no Mi");
+		OriOriNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, OriAbilities.abilitiesArray);
+		addITEM(OriOriNoMi, "Ori Ori no Mi");
 		GoroGoroNoMi = new AkumaNoMi(EnumFruitType.LOGIA, GoroAbilities.abilitiesArray);
 		addITEM(GoroGoroNoMi, "Goro Goro no Mi");
 		OpeOpeNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, OpeAbilities.abilitiesArray);

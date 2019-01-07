@@ -208,7 +208,11 @@ public class ListAttributes
 	public static AbilityAttribute DAIENKAIENTEI = new AbilityAttribute("Dai Enkai : Entei").setAbilityCooldown(25).setProjectileModel(new ModelSphere()).setProjectileDamage(45).setProjectileColor("FF0000").setProjectileSize(9, 9, 9).setProjectileExplosion(7).setAbilityCharges(72);
 	public static AbilityAttribute HIGAN = new AbilityAttribute("Higan").setAbilityCooldown(4).setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileColor("FF0000").setProjectileSize(.3, .3, .3).setAbilityRepeater(4);
 	public static AbilityAttribute HIKEN = new AbilityAttribute("Hiken").setAbilityCooldown(8).setProjectileModel(new ModelFist()).setProjectileTexture("hiken").setModelOffsets(0, 0.5, 0).setProjectileDamage(20).setProjectileSize(1.5, 1.5, 1.5).setProjectileExplosion(2);
- 
+
+	public static AbilityAttribute GREATCAGE = new AbilityAttribute("Great Cage").setAbilityCooldown(30);
+	public static AbilityAttribute PRISONBREAK = new AbilityAttribute("Prison Break").setAbilityCooldown(3).setAbilityPassive();
+	public static AbilityAttribute AWASEBAORI = new AbilityAttribute("Awase Baori").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
+
 	public static AbilityAttribute SORU = new AbilityAttribute("Soru").addEffects(EffectType.USER, new PotionEffect(Potion.moveSpeed.id, 30, 5)).setAbilityPassive();
 	public static AbilityAttribute TEKKAI = new AbilityAttribute("Tekkai").addEffects(EffectType.USER,new PotionEffect(Potion.resistance.id, 30, 100), new PotionEffect(Potion.moveSlowdown.id, 30, 100), new PotionEffect(Potion.digSlowdown.id, 30, 5), new PotionEffect(Potion.jump.id, 30, -100)).setAbilityPassive();
 	public static AbilityAttribute GEPPO = new AbilityAttribute("Geppo").setAbilityCooldown(0.9);
@@ -219,7 +223,7 @@ public class ListAttributes
 	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive();
 	public static AbilityAttribute KICKOFFJUMP = new AbilityAttribute("Kick Off Jump").setAbilityPassive().setAbilityCooldown(4);
 	public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive();
-	public static AbilityAttribute BODYRAIN = new AbilityAttribute("Body Rain").setAbilityCooldown(10).setAbilityPassive();
+	public static AbilityAttribute KILOPRESS = new AbilityAttribute("Kilo Press").setAbilityCooldown(10).setAbilityPassive();
 
 	public static AbilityAttribute UCHIMIZU = new AbilityAttribute("Uchimizu").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileColor("00CED1").setProjectileSize(1, 1, 1.3).setProjectileDamage(5).setAbilityRepeater(4);
 	public static AbilityAttribute MURASAME = new AbilityAttribute("Murasame").setAbilityCooldown(8).setProjectileModel(new ModelShark()).setProjectileTexture("murasame").setProjectileSize(.8, .8, 1.2).setProjectileDamage(25);

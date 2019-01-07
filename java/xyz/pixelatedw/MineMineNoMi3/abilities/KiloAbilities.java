@@ -17,7 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class KiloAbilities {
 
-    public static Ability[] abilitiesArray = new Ability[]{new Weightless(), new KickOffJump(), new HeavyPunch(), new BodyRain()};
+    public static Ability[] abilitiesArray = new Ability[]{new Weightless(), new KickOffJump(), new HeavyPunch(), new KiloPress()};
 
 
     private static boolean hasStrength(EntityPlayer player) {
@@ -180,12 +180,12 @@ public class KiloAbilities {
 
     }
 
-    public static class BodyRain extends Ability {
+    public static class KiloPress extends Ability {
 
         private double initialY;
 
-        public BodyRain() {
-            super(ListAttributes.BODYRAIN);
+        public KiloPress() {
+            super(ListAttributes.KILOPRESS);
         }
 
         public void passive(EntityPlayer player) {
