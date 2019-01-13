@@ -26,6 +26,8 @@ public class Values
 	public static final int MAX_CREW = 50;
 	public static final int MAX_ACTIVITIES = 4;
 	
+	public static String RESOURCES_FOLDER;
+	
 	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
 	
 	public static HashMap<Class, EnumQuestlines> questGivers = createQuestGiversMap();

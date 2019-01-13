@@ -1,8 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,25 +13,30 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.PirateData;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class EntityDoppelman extends EntityMob
 {	
 	private EntityPlayer owner;
-
+	public boolean isAggressive = true;
+	public List<EntityLivingBase> forcedTargets = new ArrayList<EntityLivingBase>();
+	
 	public EntityDoppelman(World worldIn, EntityPlayer owner) 
 	{ 
 		this(worldIn);
@@ -64,7 +72,7 @@ public class EntityDoppelman extends EntityMob
     {
     	if(damageSource.getEntity() != null && damageSource.getEntity() instanceof EntityPlayer && damageSource.getEntity() == this.owner)
     		return false;
-
+    	
     	return super.attackEntityFrom(damageSource, damageValue);
     }
     
@@ -73,11 +81,11 @@ public class EntityDoppelman extends EntityMob
     
 	public void onEntityUpdate()
 	{
-		if(!this.worldObj.isRemote && (this.owner == null || !this.owner.isEntityAlive()))
+		if(!this.worldObj.isRemote && this.owner == null)
 			this.setDead();
-		
-		if(!this.worldObj.isRemote)
-		{
+
+		if(!this.worldObj.isRemote && this.owner != null)
+		{					
 			if(this.getDistanceToEntity(owner) > 10)
 			{
 				this.getNavigator().tryMoveToEntityLiving(owner, 1.5);
@@ -90,8 +98,8 @@ public class EntityDoppelman extends EntityMob
 			
 			ExtendedEntityData ownerProps = ExtendedEntityData.get(this.owner);
 			
-			List<EntityLivingBase> doppelmanAttackList = WyHelper.getEntitiesNear(this, 10, EntityPlayer.class, MarineData.class, PirateData.class);
-			
+			List<EntityLivingBase> doppelmanAttackList = isAggressive ? WyHelper.getEntitiesNear(this, 10, EntityPlayer.class, MarineData.class, PirateData.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<EntityLivingBase>();
+
 			if(!doppelmanAttackList.isEmpty())
 			{
 				if(doppelmanAttackList.contains(owner))
@@ -105,12 +113,67 @@ public class EntityDoppelman extends EntityMob
 				if(target != null)
 					this.setAttackTarget(target);
 			}
+			
+			if(!forcedTargets.isEmpty())
+			{
+				Iterator it = forcedTargets.iterator();
+				while(it.hasNext())
+				{
+					EntityLivingBase forcedTarget = (EntityLivingBase) it.next();
+					if(forcedTarget == null || !forcedTarget.isEntityAlive())
+						it.remove();
+				}
+			}
 		}	
 		
 		super.onEntityUpdate();
 	}
+	
+    public boolean attackEntityAsMob(Entity target)
+    {
+        float f = (float)this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue() + (ExtendedEntityData.get(this).getDoriki() * 4);
+        int i = 0;
+
+        if (target instanceof EntityLivingBase)
+        {
+            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)target);
+            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)target);
+        }
+
+        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), f);
+
+        if (flag)
+        {
+            if (i > 0)
+            {
+                target.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)i * 0.5F));
+                this.motionX *= 0.6D;
+                this.motionZ *= 0.6D;
+            }
+        }
+
+        return flag;
+    }
+	
+    public boolean interact(EntityPlayer player)
+    {
+    	if(player == this.owner)
+    	{
+			ExtendedEntityData props = ExtendedEntityData.get(this);
+    		ItemStack heldItem = player.getHeldItem();
+    		
+    		if(heldItem != null && heldItem.getItem() == ListMisc.Shadow && heldItem.stackSize >= 10 && props.getDoriki() < 6)
+    		{
+    			heldItem.stackSize -= 10;
+    			props.alterDoriki(1);
+    			WyNetworkHelper.sendToAllAround(new PacketSyncInfo(this.getEntityId(), props), this.dimension, this.posX, this.posY, this.posZ, 128);
+    		}
+    	}
+    	
+    	return false;
+    }
     
 	private void setOwner(EntityPlayer player) {this.owner = player;}
 	public EntityPlayer getOwner() {return this.owner;}
-	
+
 }

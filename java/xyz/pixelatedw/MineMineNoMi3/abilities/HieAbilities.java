@@ -145,7 +145,7 @@ public class HieAbilities
 				{
 					for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 25))
 					{
-						WyHelper.createCube(l, new int[] {2, 4, 2}, Blocks.packed_ice);
+						WyHelper.createFilledCube(l, new int[] {2, 4, 2}, Blocks.packed_ice, "air");
 					}	
 				}
 			

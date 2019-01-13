@@ -9,9 +9,11 @@ import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class OriAbilities {
 
@@ -57,24 +59,7 @@ public class OriAbilities {
         public void use(EntityPlayer player) {
             if (!isOnCooldown) {
                 if (MainConfig.enableGriefing) {
-                    for (int y = 0; y <= 3; y++) {
-                        for (int x = 0; x < 1; x++)
-                            for (int z = -5; z < 6; z++)
-                                player.worldObj.setBlock(((int) player.posX + 5) - x, (int) player.posY + y, (int) player.posZ - z, Blocks.iron_bars);
-                        for (int x = 0; x < 1; x++)
-                            for (int z = -5; z < 6; z++)
-                                player.worldObj.setBlock(((int) player.posX - 5) - x, (int) player.posY + y, (int) player.posZ - z, Blocks.iron_bars);
-                        for (int x = -5; x < 6; x++)
-                            for (int z = 0; z < 1; z++)
-                                player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 5) - z, Blocks.iron_bars);
-                        for (int x = -5; x < 6; x++)
-                            for (int z = 0; z < 1; z++)
-                                player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 5) - z, Blocks.iron_bars);
-                    }
-                    for (int x = -5; x < 6; x++)
-                        for (int y = 0; y < 1; y++)
-                            for (int z = -5; z < 6; z++)
-                                player.worldObj.setBlock((int) player.posX - x, ((int) player.posY + 4) + y, (int) player.posZ - z, Blocks.iron_bars);
+                	WyHelper.createEmptyCube(player, new int[] {5, 3, 5}, Blocks.iron_bars, "air");
                 }
 
                 super.use(player);
@@ -122,35 +107,8 @@ public class OriAbilities {
 
         public void hitEntity(EntityPlayer player, EntityLivingBase target) {
 
-            super.hitEntity(player,target);
-            int[] inits = new int[]{(int)target.posX,(int)target.posY,(int)target.posZ};
-            for(int x = 0; x <= 3; x++) {
-                for(int y = 0; y <= 3; y++) {
-                    player.worldObj.setBlock((inits[0] - 1) + x, inits[1] + y, inits[2] + 2, Blocks.iron_bars);
-                }
-            }
-            for(int x = 0; x >= -3; x--) {
-                for(int y = 0; y <= 3; y++) {
-                    player.worldObj.setBlock((inits[0] + 2) + x, inits[1] + y, inits[2] - 1, Blocks.iron_bars);
-                }
-            }
-            for(int z = 0; z <= 3; z++) {
-                for(int y = 0; y <= 3; y++) {
-                    player.worldObj.setBlock(inits[0] + 2, inits[1] + y, (inits[2] -1) + z, Blocks.iron_bars);
-                }
-            }
-
-            for(int z = 0; z >= -3; z--) {
-                for(int y = 0; y <= 3; y++) {
-                    player.worldObj.setBlock(inits[0] - 1, inits[1] + y, (inits[2]  +2 ) + z, Blocks.iron_bars);
-                }
-            }
-
-            for (int z = 0; z <= 3; z++) {
-                for(int x = 0; x <= 3; x++) {
-                    player.worldObj.setBlock((inits[0] - 1) + x, inits[1] + 3, (inits[2] -1) + z, Blocks.iron_bars);
-                }
-            }
+        	super.hitEntity(player,target);
+        	WyHelper.createEmptyCube(target, new int[] {2, 3, 2}, Blocks.iron_bars, "air");
 
             target.addPotionEffect(new PotionEffect(2,  20 * 7, 15));
         }

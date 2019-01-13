@@ -21,6 +21,7 @@ public class BlockDenDenMushi extends BlockContainer
 	public BlockDenDenMushi()
 	{
 		super(Material.rock);
+		this.setBlockBounds(0.15F, 0.0F, 0.15F, 0.85F, 0.625F, 0.85F);
 	}
 
 	public void onBlockPlacedBy(World world, int posX, int posY, int posZ, EntityLivingBase entity, ItemStack stack)

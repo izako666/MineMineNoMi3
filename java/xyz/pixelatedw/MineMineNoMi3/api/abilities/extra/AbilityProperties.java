@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.api.abilities.extra;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProperties implements IExtendedEntityProperties 
 {
@@ -268,15 +270,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 	
 	public boolean hasHakiAbility(Ability ablTemplate)
 	{
-		for(int i = 0; i < hakiAbilities.length; i++)
-		{
-			if(this.hakiAbilities[i] != null && this.hakiAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
-			{
-				return true;
-			}
-		}
-		
-		return false;
+		return Arrays.stream(this.hakiAbilities).filter(x -> x != null && x.getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName())).findFirst().orElse(null) != null;
 	}
 	
 	public Ability[] getHakiAbilities()
@@ -293,6 +287,21 @@ public class AbilityProperties implements IExtendedEntityProperties
 	
 	
 	//Hotbar
+	public Ability[] getAbilitiesInHotbar()
+	{
+		return this.hotbarAbilities;
+	}
+	
+	public boolean hasAbilityInHotbar(Ability ability)
+	{
+		return this.hasAbilityInHotbar(ability.getAttribute().getAttributeName());
+	}
+	
+	public boolean hasAbilityInHotbar(String abilityName)
+	{
+		return Arrays.stream(this.hotbarAbilities).filter(x -> x != null && x.getAttribute().getAttributeName().equalsIgnoreCase(abilityName)).findFirst().orElse(null) != null;
+	}
+	
 	public void setAbilityInSlot(int slot, Ability abl)
 	{
 		this.hotbarAbilities[slot] = abl;
@@ -301,6 +310,14 @@ public class AbilityProperties implements IExtendedEntityProperties
 	public Ability getAbilityFromSlot(int slot)
 	{
 		return this.hotbarAbilities[slot];
+	}
+	
+	public Ability getAbilityFromName(String name)
+	{
+		return Arrays.stream(this.getAbilitiesInHotbar()).filter(x -> 
+		{
+			return x.getAttribute() != null && x.getAttribute().getAttributeName().equalsIgnoreCase(name);
+		}).findFirst().orElse(null);     
 	}
 	
 	public int countAbilitiesInHotbar()

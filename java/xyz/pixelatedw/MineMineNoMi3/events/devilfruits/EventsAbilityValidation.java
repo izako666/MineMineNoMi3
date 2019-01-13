@@ -35,7 +35,7 @@ public class EventsAbilityValidation
 				if (!props.hasRace() && !props.hasFaction() && !props.hasFightingStyle() && !player.inventory.hasItemStack(new ItemStack(ListMisc.CharacterCreator)))
 					player.inventory.addItemStackToInventory(new ItemStack(ListMisc.CharacterCreator, 1));
 				
-				if(props.getUsedFruit() != null && !props.getUsedFruit().equals("N/A"))
+				if(props.getUsedFruit() != null && !props.getUsedFruit().equalsIgnoreCase("n/a"))
 				{					
 					ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 					

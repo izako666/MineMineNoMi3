@@ -72,14 +72,14 @@ public class GUIPlayer extends GuiScreen
 			this.drawTexturedModalRect(posX + 190, posY + 90, 34, 32, 64, 86);
 		}
 
-		if(!props.getUsedFruit().equals("N/A") && !props.getUsedFruit().equals("null"))
+		if(!props.getUsedFruit().equalsIgnoreCase("n/a") && !props.getUsedFruit().equals("null"))
 		{			
 			ItemStack yamiFruit = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, "yamiyaminomi"));
 			ItemStack df;
 			if(!props.getUsedFruit().equals("yamidummy"))
 			{
 				df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
-				
+								
 				if(props.hasYamiPower())
 					mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + yamiFruit.getDisplayName() + " + " + df.getDisplayName(), posX - 28, posY + 194, -1);
 				else

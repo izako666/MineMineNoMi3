@@ -1,10 +1,12 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
-import net.minecraft.client.Minecraft;
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -13,9 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BariProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -26,16 +26,37 @@ public class BariAbilities
 	
 	public static class BarrierbilityStairs extends Ability
 	{
+		private List<int[]> blockList = new ArrayList<int[]>();
+		
 		public BarrierbilityStairs() 
 		{
 			super(ListAttributes.BARRIERBILITYSTAIRS); 
 		}	
 		
-		public void use(EntityPlayer player)
+		public void fillBlocksList(List<int[]> entityList)
 		{
-			this.projectile = new BariProjectiles.BarrierbilityStairs(player.worldObj, player, attr);
-			super.use(player);
+			this.blockList.addAll(entityList);
+		}
+		
+		public void passive(EntityPlayer player)
+		{
+			if(!this.isOnCooldown)
+			{
+				if(this.blockList.isEmpty())
+					player.worldObj.spawnEntityInWorld(new BariProjectiles.BarrierbilityStairs(player.worldObj, player, attr));
+				super.passive(player);
+			}
 		} 
+		
+		public void endPassive(EntityPlayer player)
+		{
+			for(int[] blockPos : this.blockList)
+			{
+				if(player.worldObj.getBlock(blockPos[0], blockPos[1], blockPos[2]) == ListMisc.Barrier)
+					player.worldObj.setBlock(blockPos[0], blockPos[1], blockPos[2], Blocks.air);
+			}
+            this.blockList = new ArrayList<int[]>();
+		}
 	}
 	
 	public static class BariBariNoPistol extends Ability
@@ -100,50 +121,59 @@ public class BariAbilities
 	
 	public static class Barrier extends Ability
 	{
+		private List<int[]> blockList = new ArrayList<int[]>();
+		
 		public Barrier() 
 		{
 			super(ListAttributes.BARRIER); 
 		}
 		
-		public void use(EntityPlayer player)
+		public void passive(EntityPlayer player) 
+		{		
+			if(!this.isOnCooldown)
+			{
+				if(this.blockList.isEmpty())
+				{
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ - 4, new int[] {3, 4, 1}, ListMisc.Barrier, "air", "foliage");
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ + 4, new int[] {3, 4, 1}, ListMisc.Barrier, "air", "foliage");
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX + 4, player.posY, player.posZ, new int[] {1, 4, 3}, ListMisc.Barrier, "air", "foliage");
+					if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX - 4, player.posY, player.posZ, new int[] {1, 4, 3}, ListMisc.Barrier, "air", "foliage");
+				}
+				super.passive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player) 
+		{
+			for(int[] blockPos : this.blockList)
+			{
+				if(player.worldObj.getBlock(blockPos[0], blockPos[1], blockPos[2]) == ListMisc.Barrier)
+					player.worldObj.setBlock(blockPos[0], blockPos[1], blockPos[2], Blocks.air);
+			}
+            this.blockList = new ArrayList<int[]>();
+            this.startCooldown();
+            this.startExtUpdate(player);
+		}
+		
+		/*public void use(EntityPlayer player)
 		{
 			if(!this.isOnCooldown)
 			{
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
-				{
-					for(int x = -3; x < 3; x++)
-					for(int y = 0; y <= 3; y++)
-					for(int z = -1; z <= 1; z++)
-						if(player.worldObj.getBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 3) - z) == Blocks.air)
-							player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ - 3) - z, ((BlockBarrier)ListMisc.Barrier).setTimer(2));
-				}
+					WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ - 4, new int[] {3, 4, 1}, ((BlockBarrier)ListMisc.Barrier).setTimer(2), "air", "foliage");
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
-				{
-					for(int x = -3; x < 3; x++)
-					for(int y = 0; y <= 3; y++)
-					for(int z = -1; z <= 1; z++)
-						if(player.worldObj.getBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 2) - z) == Blocks.air)
-							player.worldObj.setBlock((int) player.posX - x, (int) player.posY + y, ((int) player.posZ + 2) - z, ((BlockBarrier)ListMisc.Barrier).setTimer(2));
-				}
+					WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ + 4, new int[] {3, 4, 1}, ((BlockBarrier)ListMisc.Barrier).setTimer(2), "air", "foliage");
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
-				{
-					for(int x = -1; x < 1; x++)
-					for(int y = 0; y <= 3; y++)
-					for(int z = -3; z <= 3; z++)
-						if(player.worldObj.getBlock(((int) player.posX + 2) - x, (int) player.posY + y, (int) player.posZ - z) == Blocks.air)
-							player.worldObj.setBlock(((int) player.posX + 2) - x, (int) player.posY + y, (int) player.posZ - z, ((BlockBarrier)ListMisc.Barrier).setTimer(2));
-				}
+					WyHelper.createFilledCube(player.worldObj, player.posX + 4, player.posY, player.posZ, new int[] {1, 4, 3}, ((BlockBarrier)ListMisc.Barrier).setTimer(2), "air", "foliage");
 				if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
-				{
-					for(int x = -1; x < 1; x++)
-					for(int y = 0; y <= 3; y++)
-					for(int z = -3; z <= 3; z++)
-						if(player.worldObj.getBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z) == Blocks.air)
-							player.worldObj.setBlock(((int) player.posX - 3) - x, (int) player.posY + y, (int) player.posZ - z, ((BlockBarrier)ListMisc.Barrier).setTimer(2));
-				}
+					WyHelper.createFilledCube(player.worldObj, player.posX - 4, player.posY, player.posZ, new int[] {1, 4, 3}, ((BlockBarrier)ListMisc.Barrier).setTimer(2), "air", "foliage");
 				
 				super.use(player);
 			}
-		} 
+		} */
 	}
 }

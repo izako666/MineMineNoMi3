@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -36,8 +37,9 @@ public class GomuAbilities
 		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
-
-			if(DevilFruitsHelper.hasBusoHakiAquired(player))
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+			
+			if(abilityProps.hasHakiAbility(HakiAbilities.BUSOSHOKUHAKI))
 				super.passive(player);
 			else
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be activated while Busoshoku Haki is active !");

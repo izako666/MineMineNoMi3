@@ -27,6 +27,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -38,12 +39,14 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
 public class WyHelper
@@ -126,12 +129,12 @@ public class WyHelper
 
 		Map.Entry prevEntry = null;
 
-		File langFolder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/lang/");
+		File langFolder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/lang/");
 		langFolder.mkdirs();
 
 		if (langFolder.exists())
 		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/lang/en_US.lang"), "UTF-8")))
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/lang/en_US.lang"), "UTF-8")))
 			{
 				while (i.hasNext())
 				{
@@ -166,12 +169,12 @@ public class WyHelper
 		Set set = sorted.entrySet();
 		Iterator i = set.iterator();
 
-		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
+		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
 		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/abilities.txt"), "UTF-8")))
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/abilities.txt"), "UTF-8")))
 			{
 				while (i.hasNext())
 				{
@@ -240,10 +243,10 @@ public class WyHelper
 			catch (Exception e)
 			{
 				e.getStackTrace();
-			}
+			}			
 
 			try (Writer writer = new
-					BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fruits.txt"), "UTF-" +
+					BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fruits.txt"), "UTF-" +
 					"8")))
 			{
 				for (Item f : Values.devilfruits)
@@ -266,12 +269,12 @@ public class WyHelper
 
 	private static void getFancyAbilitiesList()
 	{
-		File folder = new File(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
+		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
 
 		if (folder.exists())
 		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(ID.PROJECT_SOURCEFOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fancylist.txt"), "UTF-8")))
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fancylist.txt"), "UTF-8")))
 			{
 				for (AkumaNoMi devilFruit : Values.devilfruits)
 				{
@@ -547,22 +550,39 @@ public class WyHelper
 		return ray;
 	}
 
-	@Deprecated
-	public static void createCube(Entity e, int i, Block b, Block... bannedBlocks)
+	public static void createEmptyCube(Entity entity, int[] sizes, Block blockToPlace, String... blockRules)
 	{
-		createCube(e, new int[] {i, i, i}, b, bannedBlocks);
+		createEmptyCube(entity.worldObj, (int)entity.posX, (int)entity.posY, (int)entity.posZ, sizes, blockToPlace, blockRules);
 	}
-
-	@Deprecated
-	public static void createCube(Entity e, int[] s, Block b, Block... bannedBlocks)
+	
+	public static void createEmptyCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
 	{
-		for (int x = (s[0] * 0) - s[0]; x < s[0]; x++)
-		for (int y = (s[1] * 0) - s[1]; y < s[1]; y++)
-		for (int z = (s[2] * 0) - s[2]; z < s[2]; z++)
+		for (int x = (sizes[0] * 0) - sizes[0]; x <= sizes[0]; x++)
+		for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
+		for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
 		{
-			if(!Arrays.stream(bannedBlocks).anyMatch(p -> p == b))
-				e.worldObj.setBlock((int) e.posX + x, (int) e.posY + y, (int) e.posZ + z, b);
+			if(x == -sizes[0] || x == sizes[0] || y == -sizes[1] || y == sizes[1] || z == -sizes[2] || z == sizes[2])
+				DevilFruitsHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
 		}
+	}
+		
+	public static List<int[]> createFilledCube(Entity entity, int[] sizes, Block blockToPlace, String... blockRules)
+	{
+		return createFilledCube(entity.worldObj, (int)entity.posX, (int)entity.posY, (int)entity.posZ, sizes, blockToPlace, blockRules);
+	}
+	
+	public static List<int[]> createFilledCube(World world, double posX, double posY, double posZ, int[] sizes, Block blockToPlace, String... blockRules)
+	{
+		List<int[]> blocks = new ArrayList<int[]>();
+		for (int x = (sizes[0] * 0) - sizes[0]; x <= sizes[0]; x++)
+		for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
+		for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
+		{
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
+			blocks.add(new int[] {(int)posX + x, (int)posY + y, (int)posZ + z} );
+		}
+		
+		return blocks;
 	}
 	
 	@Deprecated

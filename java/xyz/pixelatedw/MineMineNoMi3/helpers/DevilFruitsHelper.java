@@ -78,22 +78,6 @@ public class DevilFruitsHelper
 		
 		return false;
 	}
-	
-	public static boolean hasBusoHakiAquired(EntityPlayer player)
-	{
-		ExtendedEntityData props = ExtendedEntityData.get(player);
-
-		if (props.isHuman() && props.getDoriki() >= 9000)
-			return true;
-
-		if (props.isFishman() && props.getDoriki() >= 9000)
-			return true;
-
-		if (props.isCyborg() && props.getDoriki() >= 8500)
-			return true;
-
-		return false;
-	}
 
 	public static boolean verifyIfAbilityIsBanned(Ability a)
 	{

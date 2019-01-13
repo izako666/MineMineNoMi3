@@ -93,13 +93,13 @@ public class GUISelectHotbarAbilities extends GuiScreen
 			}
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}
-		if(abilityProps.getRacialAbilities()[0] != null && !abilityProps.getRacialAbilities()[0].equals("n/a"))
+		if(abilityProps.getRacialAbilities()[0] != null)
 		{
 			this.drawTexturedModalRect((posX - 280) / 2, (posY - 140) / 2, 0, 23, 27, 26);
 			WyRenderHelper.drawAbilityIcon(abilityProps.getRacialAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 127) / 2, 16, 16);	
 			this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);	
 		}
-		if(abilityProps.getHakiAbilities()[0] != null && !abilityProps.getHakiAbilities()[0].equals("n/a"))
+		if(abilityProps.getHakiAbilities()[0] != null)
 		{
 			this.drawTexturedModalRect((posX - 280) / 2, (posY - 80) / 2, 0, 23, 27, 26);
 			WyRenderHelper.drawAbilityIcon(abilityProps.getHakiAbilities()[0].getAttribute().getAttributeName(), (posX - 268) / 2, (posY - 67) / 2, 16, 16);	

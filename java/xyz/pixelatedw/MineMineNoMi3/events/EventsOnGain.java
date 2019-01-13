@@ -253,4 +253,5 @@ public class EventsOnGain
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 		}
 	}
+
 }

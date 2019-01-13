@@ -2,7 +2,6 @@ package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,16 +9,18 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -28,8 +29,6 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class EventsPassives
 {
-
-	// Contains : LivingUpdateEvent, ArrowLooseEvent
 
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
@@ -47,6 +46,9 @@ public class EventsPassives
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(event.entityLiving.getEntityId(), propz));
 				}
 			}
+				
+			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F && !entity.canRenderOnFire())
+				entity.setFire(3);
 		}
 
 		if (event.entityLiving instanceof EntityPlayer)
@@ -216,6 +218,16 @@ public class EventsPassives
 				{
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KILO, attacked.posX, attacked.posY, attacked.posZ), attacker.dimension, attacker.posX, attacker.posY, attacker.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 					attacker.removePotionEffect(Potion.damageBoost.id);
+				}
+			}
+			
+			if(props.getUsedFruit().equalsIgnoreCase("kagekage"))
+			{
+				EntityDoppelman doppelman = (EntityDoppelman) WyHelper.getEntitiesNear(attacker, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
+				
+				if(doppelman != null)
+				{
+					doppelman.forcedTargets.add(attacked);
 				}
 			}
 		}

@@ -1,11 +1,17 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -36,17 +42,17 @@ public class BariProjectiles
 		
 		public void onUpdate()
 		{	
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");		
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");	
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");	
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");			
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");		
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");			
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");				
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ((BlockBarrier)ListMisc.Barrier).setTimer(60), "air");
+			if(!this.worldObj.isRemote)
+			{
+				AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) this.getThrower());			
+				Ability ability = abilityProps.getAbilityFromName(ListAttributes.BARRIERBILITYSTAIRS.getAttributeName());            
 
+				if(ability != null)
+				{
+					((BariAbilities.BarrierbilityStairs)ability).fillBlocksList(WyHelper.createFilledCube(this.worldObj, this.posX, this.posY - 2, this.posZ, new int[] {1, 1, 1}, ListMisc.Barrier, "air"));
+				}
+			}
+			
 			super.onUpdate();
 		}
 	}	

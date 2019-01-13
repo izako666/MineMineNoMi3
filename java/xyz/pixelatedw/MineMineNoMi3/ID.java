@@ -74,7 +74,6 @@ public class ID
 	PROJECT_NAME = "Mine Mine no Mi",
 	PROJECT_VERSION = "0.4.1",
 	PROJECT_MCVERSION = "1.7.10",
-	PROJECT_SOURCEFOLDER = "D:/Programming/Minecraft Modding/Mine Mine no Mi/src/main/resources/",
 
 	PARTICLEFX_DOKUGOMU = "dokuGumo",
 	PARTICLEFX_DAIENKAI1 = "daiEnkai1",

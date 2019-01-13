@@ -76,6 +76,9 @@ public class MainMod
 		
 		if(WyDebug.isDebug() && FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{
+			String basicPath = MainMod.class.getResource("MainMod.class").toString();	
+			Values.RESOURCES_FOLDER = basicPath.substring(0, basicPath.indexOf("/bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
+			
 			WyHelper.generateLangFiles();
 			WyHelper.generateExtraTypScriptFiles();
 		}

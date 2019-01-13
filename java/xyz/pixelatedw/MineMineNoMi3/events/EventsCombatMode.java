@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.gui;
+package xyz.pixelatedw.MineMineNoMi3.events;
 
 import java.awt.Color;
 import java.util.List;
@@ -31,14 +31,14 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 @SideOnly(Side.CLIENT)
-public class GUICombatMode extends Gui
+public class EventsCombatMode extends Gui
 {
 	private Minecraft mc;
 	protected static final RenderItem itemRenderer = new RenderItem();
 	private int trackDistance = 15;
 	private EntityLivingBase trackMob = null;
 
-	public GUICombatMode(Minecraft mc)
+	public EventsCombatMode(Minecraft mc)
 	{
 		this.mc = mc;
 	}

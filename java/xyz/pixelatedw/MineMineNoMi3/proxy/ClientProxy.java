@@ -8,8 +8,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelEisenDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelFlameDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelImpactDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelMilkyDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelRejectDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityAxeDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityEisenDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlameDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityImpactDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityMilkyDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.models.ModelWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockDenDenMushi;
+import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.blocks.renderers.RenderBlockWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
@@ -43,11 +55,10 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.renderers.RenderDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -71,9 +82,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLu
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucciLeopard;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelSpandam;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 
 public class ClientProxy extends CommonProxy
@@ -130,7 +138,7 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityPearl.class, new MobRenderer(new ModelPearl(), "pearl"));
 
 		//Others
-		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new MobRenderer(new ModelMarine(), "doppelman"));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new RenderDoppelman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));
@@ -139,6 +147,13 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenDenMushi.class, new RenderBlockDenDenMushi());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPoster.class, new RenderBlockWantedPoster());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWantedPostersPackage.class, new RenderBlockWantedPostersPackage());
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAxeDial.class, new RenderBlockDial(new ModelImpactDial(), "axedial"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEisenDial.class, new RenderBlockDial(new ModelMilkyDial(), "eisendial"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlameDial.class, new RenderBlockDial(new ModelFlameDial(), "flamedial"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImpactDial.class, new RenderBlockDial(new ModelImpactDial(), "impactdial"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMilkyDial.class, new RenderBlockDial(new ModelMilkyDial(), "milkydial"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRejectDial.class, new RenderBlockDial(new ModelRejectDial(), "rejectdial"));
 		
 		/* 
 		//Temp
@@ -153,10 +168,10 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityShark.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.MURASAME).setModelOffsets(0, 2, 0)));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntitySpear.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.DORUDORUARTSMORI).setModelOffsets(0, 2, 0)));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityTrident.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.ICEBLOCKPARTISAN).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityYukiRabi.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.YUKIRABI).setModelOffsets(0, 2, 0)));
-		*/
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityYukiRabi.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.YUKIRABI).setModelOffsets(0, 2, 0)));	
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixFull.class, new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixHybrid.class, new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid"));
+		*/
 	}
 	
 	public void spawnCustomParticles(Entity theEntity, EntityParticleFX particle)

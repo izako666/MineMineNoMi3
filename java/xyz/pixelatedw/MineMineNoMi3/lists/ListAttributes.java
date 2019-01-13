@@ -84,17 +84,17 @@ public class ListAttributes
 	public static AbilityAttribute SORANOMICHI = new AbilityAttribute("Sora no Michi").setAbilityCooldown(1);
 	public static AbilityAttribute PARASITE = new AbilityAttribute("Parasite").setAbilityCooldown(5);
 	
-	public static AbilityAttribute BARRIERBILITYSTAIRS = new AbilityAttribute("Barrierbility Stairs").setProjectileTicks(30).setAbilityCooldown(30).setProjectileModel(new ModelCube()).setProjectileSize(.01, .01, .01).setProjectileMoveThroughBlocks(true);
+	public static AbilityAttribute BARRIERBILITYSTAIRS = new AbilityAttribute("Barrierbility Stairs").setProjectileTicks(30).setProjectileModel(new ModelCube()).setProjectileSize(.01, .01, .01).setProjectileMoveThroughBlocks(true).setAbilityPassive();
 	public static AbilityAttribute BARIBARINOPISTOL = new AbilityAttribute("Bari Bari no Pistol").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute BARRIERBALL = new AbilityAttribute("Barrier Ball").setAbilityCooldown(0.5);
 	public static AbilityAttribute BARRIERCRASH = new AbilityAttribute("Barrier Crash").setAbilityCooldown(3).setProjectileTicks(60).setProjectileModel(new ModelCube()).setProjectileColor("#87CEFA").setProjectileSize(9, 9, .3).setProjectileDamage(15);
-	public static AbilityAttribute BARRIER = new AbilityAttribute("Barrier").setAbilityCooldown(0.5);
+	public static AbilityAttribute BARRIER = new AbilityAttribute("Barrier").setAbilityPassive();
 	
 	public static AbilityAttribute YUKIGAKI = new AbilityAttribute("Yuki Gaki").setAbilityCooldown(8);
 	public static AbilityAttribute FUBUKI = new AbilityAttribute("Fubuki").setAbilityCooldown(12);
 	public static AbilityAttribute TABIRAYUKI = new AbilityAttribute("Tabira Yuki").setAbilityPassive();
 //	public static AbilityAttribute MANNENYUKI = new AbilityAttribute("Mannen Yuki");
-	public static AbilityAttribute KAMAKURAJUSSOSHI = new AbilityAttribute("Kamakura Jussoshi").setAbilityCooldown(18);//.addTasks(Tasks.kamakurajusshoshi);
+	public static AbilityAttribute KAMAKURAJUSSOSHI = new AbilityAttribute("Kamakura Jussoshi").setAbilityCooldown(18);
 	public static AbilityAttribute YUKIRABI = new AbilityAttribute("Yuki Rabi").setAbilityCooldown(2).setProjectileColor(Color.WHITE).setProjectileDamage(5).setProjectileModel(new ModelYukiRabi()).setProjectileTexture("yukirabi").setProjectileSize(1, 1, 1).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 50, 1)).setAbilityRepeater(2, 3);
 	public static AbilityAttribute KAMAKURA = new AbilityAttribute("Kamakura").setAbilityCooldown(6);
 	

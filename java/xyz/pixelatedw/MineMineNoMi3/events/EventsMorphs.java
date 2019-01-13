@@ -1,40 +1,38 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
+import java.util.Arrays;
+import java.util.Random;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.Project;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelSheep1;
-import net.minecraft.client.model.ModelSheep2;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
-import net.minecraft.client.renderer.entity.RenderSheep;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
-import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
@@ -44,6 +42,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
+@SideOnly(Side.CLIENT)
 public class EventsMorphs
 {
 
@@ -182,7 +181,7 @@ public class EventsMorphs
 	{
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		ExtendedEntityData props = ExtendedEntityData.get(player);
-
+		
 		if ((props.getUsedFruit().equals("dokudoku") && props.getZoanPoint().equals(ID.ZOANMORPH_DOKU)) 
 			|| (props.getUsedFruit().equals("ushiushibison") && (props.getZoanPoint().equals(ID.ZOANMORPH_SPEED) || props.getZoanPoint().equals(ID.ZOANMORPH_POWER)))
 			|| (props.getUsedFruit().equals("toritoriphoenix") && (props.getZoanPoint().equals(ID.ZOANMORPH_HYBRID) || props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX)))

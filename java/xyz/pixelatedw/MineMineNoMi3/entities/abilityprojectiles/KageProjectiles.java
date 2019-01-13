@@ -63,7 +63,7 @@ public class KageProjectiles
 		{
 			if(hit.entityHit != null)
 			{
-				WyHelper.createCube(hit.entityHit, new int[] {2, 2, 2}, ListMisc.KageBlock);
+				WyHelper.createFilledCube(hit.entityHit, new int[] {2, 2, 2}, ListMisc.KageBlock, "air");
 			}
 		}
 	}	

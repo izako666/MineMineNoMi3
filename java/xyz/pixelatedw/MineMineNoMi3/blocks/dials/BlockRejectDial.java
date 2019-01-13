@@ -5,6 +5,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -14,33 +15,27 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
-public class BlockDialFire extends Block
+public class BlockRejectDial extends BlockContainer
 {
-	protected static final AxisAlignedBB CARPET_AABB = AxisAlignedBB.getBoundingBox(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
-    @SideOnly(Side.CLIENT)
-    private IIcon topIcon;
-	
-	public BlockDialFire()
+	public BlockRejectDial()
 	{
 		super(Material.iron);
-		this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.125F, 0.75F);
+		this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.425F, 0.75F);
 	}  
 
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) { return CARPET_AABB; }
-	
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) { return CARPET_AABB; } 
-	
 	public boolean isOpaqueCube() {return false;}
 
     @SideOnly(Side.CLIENT)
@@ -53,18 +48,9 @@ public class BlockDialFire extends Block
     	return true;
     }
     
-    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
-    {
-    	if(entity instanceof EntityLivingBase)
-    	{
-    		entity.setFire(240);
-    		world.setBlock(x, y, z, Blocks.air);
-    	}
-    }
-    
     public Item getItemDropped(int i1, Random rand, int fortune)
     {
-        return ListMisc.DialFire;
+        return ListMisc.DialReject;
     }
     
     public boolean canHarvestBlock(EntityPlayer player, int meta)
@@ -72,17 +58,18 @@ public class BlockDialFire extends Block
         return true;
     }
     
-	@SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1)
+    public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-		this.blockIcon = par1.registerIcon("mineminenomi:dialblock");
-		this.topIcon = par1.registerIcon("mineminenomi:flamedialblock_top");
-	}
-	
-    @SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2)
+    	if(entity instanceof EntityLivingBase)
+    	{
+    		
+    	}
+    }
+    
+    public int getRenderType() { return -1; }
+    
+	public TileEntity createNewTileEntity(World wolrd, int i)
 	{
-		return par1 == 1 ? this.topIcon : par1 == 0 ? this.topIcon : this.blockIcon;
+		return new TileEntityRejectDial();
 	}
-
 }

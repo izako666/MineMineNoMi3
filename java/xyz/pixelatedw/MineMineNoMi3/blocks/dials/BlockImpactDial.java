@@ -4,43 +4,28 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import xyz.pixelatedw.MineMineNoMi3.Values;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
-public class BlockDialImpact extends Block
+public class BlockImpactDial extends BlockContainer
 {
-	protected static final AxisAlignedBB CARPET_AABB = AxisAlignedBB.getBoundingBox(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 
-    @SideOnly(Side.CLIENT)
-    private IIcon topIcon;
-	
-	public BlockDialImpact()
+	public BlockImpactDial()
 	{
 		super(Material.iron);
-		this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.125F, 0.75F);
+		this.setBlockBounds(0.25F, 0.0F, 0.25F, 0.75F, 0.425F, 0.75F);
 	}  
 
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) { return CARPET_AABB; }
-	
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) { return CARPET_AABB; } 
-	
 	public boolean isOpaqueCube() {return false;}
 
     @SideOnly(Side.CLIENT)
@@ -72,17 +57,11 @@ public class BlockDialImpact extends Block
         return true;
     }
     
-	@SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1)
-    {
-		this.blockIcon = par1.registerIcon("mineminenomi:dialblock");
-		this.topIcon = par1.registerIcon("mineminenomi:impactdialblock_top");
-	}
-	
-    @SideOnly(Side.CLIENT)
-	public IIcon getIcon(int par1, int par2)
+	public int getRenderType() { return -1; }
+    
+	public TileEntity createNewTileEntity(World wolrd, int i)
 	{
-		return par1 == 1 ? this.topIcon : par1 == 0 ? this.topIcon : this.blockIcon;
+		return new TileEntityImpactDial();
 	}
 
 }
