@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityRenderer;
-import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelEisenDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelFlameDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelMilkyDial;
@@ -59,6 +58,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.renderers.RenderDoppelman
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMokuPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouFull;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -82,6 +84,10 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLu
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelLucciLeopard;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.models.ModelSpandam;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelMoguPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouFull;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouHybrid;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 
 public class ClientProxy extends CommonProxy
@@ -172,6 +178,10 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixFull.class, new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixHybrid.class, new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid"));
 		*/
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityZouHybrid.class, new RenderZoanMorph(new ModelZouHybrid(), "zouhybrid"));
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityZouFull.class, new RenderZoanMorph(new ModelZouFull(), "zoufull"));
+		RenderingRegistry.registerEntityRenderingHandler(TempEntityMokuPower.class, new RenderZoanMorph(new ModelMoguPower(), "mokupower"));
+
 	}
 	
 	public void spawnCustomParticles(Entity theEntity, EntityParticleFX particle)

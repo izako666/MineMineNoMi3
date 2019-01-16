@@ -3,6 +3,8 @@ package xyz.pixelatedw.MineMineNoMi3.gui.extra;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.GuiScrollingList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -10,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
@@ -84,17 +87,28 @@ public class GUIAbilitiesList extends GuiScrollingList
 	protected void drawSlot(int slotIndex, int entryRight, int slotTop, int slotBuffer, Tessellator tess) 
 	{
     	boolean flag = false;
+		AbilityAttribute attr = availableAbilities.get(slotIndex).getAttribute();
+
 		for(int i = 0; i < props.countAbilitiesInHotbar(); i++)
 		{	
 			if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAttributeName().equalsIgnoreCase(availableAbilities.get(slotIndex).getAttribute().getAttributeName()))
 			{
 				flag = true;
 			}
-
+		
 			Minecraft.getMinecraft().fontRenderer.drawStringWithShadow( I18n.format("ability." + WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()) + ".name"), this.left + 40, slotTop + 7, flag ? 0xFF0000 : 0xFFFFFF);
 		}
-		
-    	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(availableAbilities.get(slotIndex).getAttribute().getAttributeName()), this.left + 10, slotTop + 2, 16, 16);
+				
+		GL11.glPushMatrix();
+		{
+			if(attr.getTextureHue() != null)
+				GL11.glColor3d(attr.getTextureHue().getRed()/255, attr.getTextureHue().getGreen()/255, attr.getTextureHue().getBlue()/255);
+			if(attr.getAbilityTexture() != null && !attr.getAbilityTexture().equalsIgnoreCase("n/a"))
+	    		WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAbilityTexture()), this.left + 10, slotTop + 2, 16, 16);
+			else
+	    		WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAttributeName()), this.left + 10, slotTop + 2, 16, 16);
+		}
+		GL11.glPopMatrix();
 	}
 	
 }

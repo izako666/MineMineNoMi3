@@ -1,25 +1,23 @@
  package xyz.pixelatedw.MineMineNoMi3.api.abilities;
 
 import java.awt.Color;
+import java.lang.reflect.Field;
 
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 
 public class AbilityAttribute 
 {	
-	private String attributeName = "N/A";
+	private String attributeName = "N/A", abilityTexture = "n/a", customDisplayName = "n/a";
 	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false, entityMoveThroughBlocks = false;
 	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, entityNewExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterTime = 6, itemRepeaterFreq = 1;
 	private float projectileAlpha = 255, entityDamage = 1, punchDamage = 1;
 	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
-	private Color entityColor = Color.decode("#FFFFFF");
+	private Color entityColor = Color.decode("#FFFFFF"), textureHue = Color.decode("#FFFFFF");
 	private double[] entityScale = new double[] {1, 1, 1}, entityPos = new double[] {0, 0, 0}, entityMotion = new double[] {0, 0, 0}, entityCollisionSize = new double[] {1, 1}, modelOffset = new double[] {0, 0, 0};
 	private ModelBase entityModel = null;
 	private PotionEffect[] potionEffectsForProjectile = null, potionEffectsForUser = null, potionEffectsForAoE = null, potionEffectsForHit = null;
@@ -27,7 +25,7 @@ public class AbilityAttribute
 	
 	public AbilityAttribute() {}	
 	public AbilityAttribute(String name) {this.attributeName = name;}
-	
+		
 	public AbilityAttribute(AbilityAttribute attr) 
 	{
 		this.attributeName = attr.attributeName;
@@ -62,6 +60,7 @@ public class AbilityAttribute
 		this.punchDamage = attr.punchDamage;
 		
 		this.entityColor = attr.entityColor;
+		this.textureHue = attr.textureHue;
 		
 		this.entityScale = attr.entityScale;
 		this.entityPos = attr.entityPos;
@@ -75,12 +74,14 @@ public class AbilityAttribute
 		this.potionEffectsForAoE = attr.potionEffectsForAoE;
 		this.potionEffectsForHit = attr.potionEffectsForHit;
 		
-		this.entityTexture = attr.entityTexture;		
+		this.entityTexture = attr.entityTexture;
+		this.abilityTexture = attr.abilityTexture;
+		this.customDisplayName = attr.customDisplayName;
 	}
 	
 	
 	public AbilityAttribute setAttributeName(String name) { this.attributeName = name; return this; }
-		//Item
+		//Ability
 	public AbilityAttribute setAbilityCooldown(double seconds) { this.itemTicks = MathHelper.ceiling_double_int(seconds * 20); return this; }	
 	public AbilityAttribute setAbilityCharges(int ticks) { this.canBeCharged = true; this.itemMaxCharge = ticks; return this; }
 	public AbilityAttribute setAbilityExplosion(int i, boolean fire, boolean explosion) { this.itemExplosion = i; this.itemExplosionHasFire = fire; this.itemExplosionHasSmoke = explosion; return this; }
@@ -92,6 +93,11 @@ public class AbilityAttribute
 	public AbilityAttribute setAbilityRepeater() { this.isRepeater = true; this.itemRepeaterTime = 6; this.itemRepeaterFreq = 1; return this; }
 	public AbilityAttribute setAbilityRepeater(int time) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = 1; return this; }
 	public AbilityAttribute setAbilityRepeater(int time, int frequency) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = frequency; return this; }
+	public AbilityAttribute setAbilityTextureHue(Color color) {this.textureHue = color;return this;}
+	public AbilityAttribute setAbilityTextureHue(int color) {this.textureHue = new Color(color);return this;}
+	public AbilityAttribute setAbilityTextureHue(String color) {if(color.contains("#")){this.textureHue = Color.decode(color);}else{this.textureHue = Color.decode("#" + color);}return this;}
+	public AbilityAttribute setAbilityTexture(String textureName) {this.abilityTexture = textureName; return this;}
+	public AbilityAttribute setAbilityDisplayName(String displayName) {this.customDisplayName = displayName; return this;}	
 		//Projectile
 	public AbilityAttribute setProjectileTicks(int i) {this.entityTicks = i;return this;}
 	public AbilityAttribute setProjectileDamage(float i) {this.entityDamage = i;return this;}
@@ -127,7 +133,7 @@ public class AbilityAttribute
 	public AbilityAttribute setEffectRadius(int i) { this.potionEffectAoeRadius = i;return this;}
 
 
-		//Item
+		//Ability
 	public int getAbilityCooldown() { return itemTicks; }
 	public boolean isRepeater() { return this.isRepeater; }
 	public boolean canAbilityBeCharged() { return this.canBeCharged;}
@@ -140,6 +146,9 @@ public class AbilityAttribute
 	public int getAbilityRepeaterFrequency() { return this.itemRepeaterFreq; }
 	public boolean isPunch() { return this.isPunch; }
 	public float getPunchDamage() { return this.punchDamage; }
+	public Color getTextureHue() { return this.textureHue; }
+	public String getAbilityTexture() { return this.abilityTexture; }
+	public String getAbilityDisplayName() { return this.customDisplayName; }
 		//Projectile
 	public boolean hasProjectile() { return this.entityTicks > 0 && this.entityModel != null; }
 	public int getProjectileTicks() { return entityTicks; }

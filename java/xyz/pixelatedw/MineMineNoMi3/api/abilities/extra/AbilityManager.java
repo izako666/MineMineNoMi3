@@ -27,7 +27,10 @@ public class AbilityManager
 		else
 		{
 			registeredAbilities.put(WyHelper.getFancyName(ab.getAttribute().getAttributeName()), ab);
-			WyRegistry.registerName("ability." + WyHelper.getFancyName(ab.getAttribute().getAttributeName()) + ".name", ab.getAttribute().getAttributeName());
+			if(!ab.getAttribute().getAbilityDisplayName().equalsIgnoreCase("n/a"))
+				WyRegistry.registerName("ability." + WyHelper.getFancyName(ab.getAttribute().getAttributeName()) + ".name", ab.getAttribute().getAbilityDisplayName());
+			else
+				WyRegistry.registerName("ability." + WyHelper.getFancyName(ab.getAttribute().getAttributeName()) + ".name", ab.getAttribute().getAttributeName());
 		}
 	}
 	

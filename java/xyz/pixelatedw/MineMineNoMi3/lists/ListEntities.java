@@ -25,6 +25,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackag
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMokuPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouFull;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -116,6 +119,9 @@ public class ListEntities
 		WyRegistry.registerMob("TEMP_YukiRabi", TempEntityYukiRabi.class);
 		WyRegistry.registerMob("TEMP_PhoenixFull", TempEntityPhoenixFull.class);
 		WyRegistry.registerMob("TEMP_PhoenixHybrid", TempEntityPhoenixHybrid.class);*/
+		WyRegistry.registerMob("TEMP_ZouHybrid", TempEntityZouHybrid.class);
+		WyRegistry.registerMob("TEMP_ZouFull", TempEntityZouFull.class);
+		WyRegistry.registerMob("TEMP_MokuPower", TempEntityMokuPower.class);
 	}
 	
 }

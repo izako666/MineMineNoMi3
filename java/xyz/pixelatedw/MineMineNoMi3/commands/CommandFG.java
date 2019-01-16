@@ -16,40 +16,10 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBazooka;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityBrickBat;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityFist;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityHydra;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMeigo;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityNoroBeam;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPaw;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPheasant;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityShark;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntitySpear;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityTrident;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityYukiRabi;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabraL;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKaku;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKakuL;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKalifa;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityKumadori;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucci;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityLucciL;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntitySpandam;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMokuPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouFull;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouHybrid;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
@@ -68,72 +38,13 @@ public class CommandFG extends CommandBase
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
-			
-			if(str[0].equalsIgnoreCase("arlong"))
-				toSpawn = new EntityArlong(player.worldObj);
-			else if(str[0].equalsIgnoreCase("chew"))
-				toSpawn = new EntityChew(player.worldObj);
-			else if(str[0].equalsIgnoreCase("kuroobi"))
-				toSpawn = new EntityKuroobi(player.worldObj);
-			else if(str[0].equalsIgnoreCase("krieg"))
-				toSpawn = new EntityDonKrieg(player.worldObj);
-			else if(str[0].equalsIgnoreCase("gin"))
-				toSpawn = new EntityGin(player.worldObj);
-			else if(str[0].equalsIgnoreCase("pearl"))
-				toSpawn = new EntityPearl(player.worldObj);
-			else if(str[0].equalsIgnoreCase("lucci"))
-				toSpawn = new EntityLucci(player.worldObj);
-			else if(str[0].equalsIgnoreCase("luccil"))
-				toSpawn = new EntityLucciL(player.worldObj);
-			else if(str[0].equalsIgnoreCase("jabra"))
-				toSpawn = new EntityJabra(player.worldObj);
-			else if(str[0].equalsIgnoreCase("jabral"))
-				toSpawn = new EntityJabraL(player.worldObj);
-			else if(str[0].equalsIgnoreCase("kalifa"))
-				toSpawn = new EntityKalifa(player.worldObj);
-			else if(str[0].equalsIgnoreCase("kaku"))
-				toSpawn = new EntityKaku(player.worldObj);
-			else if(str[0].equalsIgnoreCase("kakul"))
-				toSpawn = new EntityKakuL(player.worldObj);
-			else if(str[0].equalsIgnoreCase("spandam"))
-				toSpawn = new EntitySpandam(player.worldObj);
-			else if(str[0].equalsIgnoreCase("morgan"))
-				toSpawn = new EntityMorgan(player.worldObj);	
-			else if(str[0].equalsIgnoreCase("fukuro"))
-				toSpawn = new EntityFukuro(player.worldObj); //COMPLETED
-			else if(str[0].equalsIgnoreCase("kumadori"))
-				toSpawn = new EntityKumadori(player.worldObj); //COMPLETED
-			else if(str[0].equalsIgnoreCase("blueno"))
-				toSpawn = new EntityBlueno(player.worldObj); //COMPLETED
-			
-			else if(str[0].equalsIgnoreCase("brickbat"))
-				toSpawn = new TempEntityBrickBat(player.worldObj);
-			else if(str[0].equalsIgnoreCase("fist"))
-				toSpawn = new TempEntityFist(player.worldObj);
-			else if(str[0].equalsIgnoreCase("bazooka"))
-				toSpawn = new TempEntityBazooka(player.worldObj);			
-			else if(str[0].equalsIgnoreCase("hydra"))
-				toSpawn = new TempEntityHydra(player.worldObj);
-			else if(str[0].equalsIgnoreCase("meigo"))
-				toSpawn = new TempEntityMeigo(player.worldObj);	
-			else if(str[0].equalsIgnoreCase("noro"))
-				toSpawn = new TempEntityNoroBeam(player.worldObj);
-			else if(str[0].equalsIgnoreCase("paw"))
-				toSpawn = new TempEntityPaw(player.worldObj);			
-			else if(str[0].equalsIgnoreCase("pheasant"))
-				toSpawn = new TempEntityPheasant(player.worldObj);
-			else if(str[0].equalsIgnoreCase("shark"))
-				toSpawn = new TempEntityShark(player.worldObj);				
-			else if(str[0].equalsIgnoreCase("spear"))
-				toSpawn = new TempEntitySpear(player.worldObj);			
-			else if(str[0].equalsIgnoreCase("trident"))
-				toSpawn = new TempEntityTrident(player.worldObj);
-			else if(str[0].equalsIgnoreCase("yukirabi"))
-				toSpawn = new TempEntityYukiRabi(player.worldObj);		
-			else if(str[0].equalsIgnoreCase("phoenixfull"))
-				toSpawn = new TempEntityPhoenixFull(player.worldObj);
-			else if(str[0].equalsIgnoreCase("phoenixhybrid"))
-				toSpawn = new TempEntityPhoenixHybrid(player.worldObj);
+
+			if(str[0].equalsIgnoreCase("zouhybrid"))
+				toSpawn = new TempEntityZouHybrid(player.worldObj);		
+			else if(str[0].equalsIgnoreCase("zoufull"))
+				toSpawn = new TempEntityZouFull(player.worldObj);
+			else if(str[0].equalsIgnoreCase("mogupower"))
+				toSpawn = new TempEntityMokuPower(player.worldObj);
 			
 			else if(str[0].equalsIgnoreCase("package"))
 			{			

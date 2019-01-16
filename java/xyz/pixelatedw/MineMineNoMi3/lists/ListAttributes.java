@@ -31,27 +31,27 @@ public class ListAttributes
 	public static AbilityAttribute BEROCANNON = new AbilityAttribute("Bero Cannon").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(4);
 	public static AbilityAttribute BAKUMUNCH = new AbilityAttribute("Baku Munch").setAbilityCooldown(5);
 	
+	public static AbilityAttribute PHOENIX_HYBRIDPOINT = new AbilityAttribute("Phoenix Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("hybridpoint").setAbilityTextureHue(new Color(74, 224, 226));
 	public static AbilityAttribute PHOENIXPOINT = new AbilityAttribute("Phoenix Point").setAbilityCooldown(1);
 	public static AbilityAttribute BLUEFLAMESOFRESURRECTION = new AbilityAttribute("Blue Flames of Resurrection").setAbilityCooldown(20).addEffects(EffectType.USER, new PotionEffect(Potion.regeneration.id, 3 * 20, 4));
 	public static AbilityAttribute FLAMEOFRESTORATION = new AbilityAttribute("Flame of Restoration").setAbilityCooldown(3).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute PHOENIXGOEN = new AbilityAttribute("Phoenix Goen").setAbilityCooldown(10).setProjectileDamage(12);
 	public static AbilityAttribute TENSEINOSOEN = new AbilityAttribute("Tensei no Soen").setAbilityCooldown(30).setAbilityCharges(5 * 20);
 	
-	public static AbilityAttribute HYBRIDPOINT = new AbilityAttribute("Hybrid Point").setAbilityCooldown(1);
-	public static AbilityAttribute POWERPOINT = new AbilityAttribute("Power Point").setAbilityCooldown(1);
-	public static AbilityAttribute SPEEDPOINT = new AbilityAttribute("Speed Point").setAbilityCooldown(1);
+	public static AbilityAttribute BISON_POWERPOINT = new AbilityAttribute("Bison Power Point").setAbilityCooldown(1).setAbilityDisplayName("Power Point").setAbilityTexture("powerpoint").setAbilityTextureHue(new Color(132, 88, 59));
+	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Speed Point").setAbilityTexture("speedpoint").setAbilityTextureHue(new Color(132, 88, 59));
 	
 	public static AbilityAttribute FIDDLEBANFF = new AbilityAttribute("Fiddle Banff").setAbilityCooldown(7);
 	public static AbilityAttribute KOKUTEICROSS = new AbilityAttribute("Kokutei Cross").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	
 	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(20).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("51585B").setProjectileSize(50, 50, 50).setProjectileDamage(50).setProjectileExplosion(20, false);
-	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(10).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
+	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(12).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityPassive();
-	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityCooldown(10).setAbilityPassive();
+	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityCooldown(12).setAbilityPassive();
 	
 	public static AbilityAttribute BLACKWORLD = new AbilityAttribute("Black World").setAbilityCooldown(25).addEffects(EffectType.AOE, new PotionEffect(Potion.moveSlowdown.id, 200, 100), new PotionEffect(Potion.digSlowdown.id, 200, 100), new PotionEffect(Potion.blindness.id, 200, 2)).setEffectRadius(20);
 	public static AbilityAttribute DARKMATTER = new AbilityAttribute("Dark Matter").setAbilityCooldown(12).setProjectileModel(new ModelSphere()).setProjectileColor("000000").setProjectileSize(7, 7, 7);
-	public static AbilityAttribute KUROUZU = new AbilityAttribute("Kurouzu").setAbilityCooldown(10).setAbilityCharges(5 * 20);;
+	public static AbilityAttribute KUROUZU = new AbilityAttribute("Kurouzu").setAbilityCooldown(10).setAbilityCharges(3 * 20);;
 	public static AbilityAttribute LIBERATION = new AbilityAttribute("Liberation").setAbilityCooldown(5);
 	public static AbilityAttribute BLACKHOLE = new AbilityAttribute("Black Hole").setAbilityCooldown(7);
 	

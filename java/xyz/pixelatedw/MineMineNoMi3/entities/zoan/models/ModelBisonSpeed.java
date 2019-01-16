@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
-public class ModelSpeedBison extends ModelZoanMorph
+public class ModelBisonSpeed extends ModelZoanMorph
 {
 	public ModelRenderer head1;
 	public ModelRenderer head2;
@@ -32,7 +32,7 @@ public class ModelSpeedBison extends ModelZoanMorph
 	public ModelRenderer rearrighthull1;
 	public ModelRenderer rearrighthull2;
 
-	public ModelSpeedBison()
+	public ModelBisonSpeed()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 64;

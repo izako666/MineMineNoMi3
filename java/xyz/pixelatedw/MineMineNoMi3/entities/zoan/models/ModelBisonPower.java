@@ -10,7 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 
-public class ModelPowerBison extends ModelZoanMorph
+public class ModelBisonPower extends ModelZoanMorph
 {
 	public ModelRenderer rightarm1;
 	public ModelRenderer leftarm1;
@@ -38,7 +38,7 @@ public class ModelPowerBison extends ModelZoanMorph
 	public ModelRenderer lefthorn1;
 	public ModelRenderer lefthorn2;
 
-	public ModelPowerBison()
+	public ModelBisonPower()
 	{
 		this.textureWidth = 128;
 		this.textureHeight = 64;

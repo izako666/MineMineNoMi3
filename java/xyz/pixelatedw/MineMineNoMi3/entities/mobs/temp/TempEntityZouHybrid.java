@@ -3,9 +3,10 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 
-public class TempEntityPhoenixFull extends EntityLiving
+public class TempEntityZouHybrid extends EntityLiving
 {
-	public TempEntityPhoenixFull(World world)
+
+	public TempEntityZouHybrid(World world)
 	{
 		super(world);
 	}

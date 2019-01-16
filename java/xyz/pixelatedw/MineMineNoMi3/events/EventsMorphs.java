@@ -36,8 +36,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPowerBison;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelSpeedBison;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
@@ -52,8 +52,8 @@ public class EventsMorphs
 	private RenderZoanMorph morphVenomDemon = new RenderZoanMorph(new ModelVenomDemon(), "venomdemon");
 
 	// Ushi Ushi no Mi : Model Bison
-	private RenderZoanMorph zoanBisonPower = new RenderZoanMorph(new ModelPowerBison(), "bisonpower", 1.4, new float[] { 0, 0.8f, 0 });
-	private RenderZoanMorph zoanBisonSpeed = new RenderZoanMorph(new ModelSpeedBison(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 });
+	private RenderZoanMorph zoanBisonPower = new RenderZoanMorph(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.8f, 0 });
+	private RenderZoanMorph zoanBisonSpeed = new RenderZoanMorph(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 });
 
 	// Tori Tori no Mi : Model Phoenix
 	private RenderZoanMorph zoanPhoenixHybrid = new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid", 1, new float[] { 0, 0.3f, 0 });

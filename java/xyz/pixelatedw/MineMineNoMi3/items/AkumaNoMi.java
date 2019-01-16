@@ -70,7 +70,7 @@ public class AkumaNoMi extends ItemFood
 			if(this.getUnlocalizedName().substring(5).replace("nomi", "").equals("yamiyami"))
 			{
 				props.setYamiPower(true);
-				if(props.getUsedFruit().equals("N/A"))
+				if(props.getUsedFruit().equalsIgnoreCase("n/a"))
 					props.setUsedFruit("yamidummy");			
 				
 				props.setIsLogia(false);
@@ -81,10 +81,10 @@ public class AkumaNoMi extends ItemFood
 			}
 			else
 			{
-				if(!props.getUsedFruit().equals("N/A") && !props.hasYamiPower())
+				if(!props.getUsedFruit().equalsIgnoreCase("n/a") && !props.hasYamiPower())
 					player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);			
 
-				if(props.getUsedFruit().equals("N/A"))	
+				if(props.getUsedFruit().equalsIgnoreCase("n/a"))	
 				{
 					props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
 

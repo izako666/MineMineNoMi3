@@ -3,10 +3,10 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 
-public class TempEntityFist extends EntityLiving
+public class TempEntityZouFull extends EntityLiving
 {
 
-	public TempEntityFist(World world)
+	public TempEntityZouFull(World world)
 	{
 		super(world);
 	}
@@ -14,5 +14,4 @@ public class TempEntityFist extends EntityLiving
 	public void onLivingUpdate() {}
 	
 	public void onUpdate() {}
-	
 }

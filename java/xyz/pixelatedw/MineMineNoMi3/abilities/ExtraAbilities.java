@@ -19,7 +19,7 @@ public class ExtraAbilities
 	{
 		public HybridPoint()
 		{
-			super(ListAttributes.HYBRIDPOINT);
+			super(ListAttributes.PHOENIX_HYBRIDPOINT);
 		}
 
 		public void use(EntityPlayer player)
@@ -53,7 +53,7 @@ public class ExtraAbilities
 	{
 		public PowerPoint()
 		{
-			super(ListAttributes.POWERPOINT);
+			super(ListAttributes.BISON_POWERPOINT);
 		}
 
 		public void use(EntityPlayer player)
@@ -87,7 +87,7 @@ public class ExtraAbilities
 	{
 		public SpeedPoint()
 		{
-			super(ListAttributes.SPEEDPOINT);
+			super(ListAttributes.BISON_SPEEDPOINT);
 		}
 
 		public void use(EntityPlayer player)

@@ -27,6 +27,7 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
@@ -125,7 +126,20 @@ public class EventsCombatMode extends Gui
 			{
 				OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 				if (abilityProps.getAbilityFromSlot(i) != null)
-					WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+				{
+					GL11.glPushMatrix();
+					{
+						AbilityAttribute attr = abilityProps.getAbilityFromSlot(i).getAttribute();
+						if(attr.getTextureHue() != null)
+							GL11.glColor3d(attr.getTextureHue().getRed()/255, attr.getTextureHue().getGreen()/255, attr.getTextureHue().getBlue()/255);
+						if(attr.getAbilityTexture() != null && !attr.getAbilityTexture().equalsIgnoreCase("n/a"))
+				    		WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+						else
+				    		WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAttributeName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
+					}
+					GL11.glPopMatrix();
+				}
+					//WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName()), (posX - 192 + (i * 50)) / 2, posY - 19, 16, 16);
 			}
 
 			int trackDistance = 15;

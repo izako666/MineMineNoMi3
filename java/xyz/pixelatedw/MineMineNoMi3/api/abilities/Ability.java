@@ -1,35 +1,20 @@
 package xyz.pixelatedw.MineMineNoMi3.api.abilities;
 
-import java.util.Arrays;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.network.play.client.C01PacketChatMessage;
-import net.minecraft.network.play.server.S02PacketChat;
-import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
 public class Ability 

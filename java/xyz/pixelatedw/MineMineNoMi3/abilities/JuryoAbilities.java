@@ -34,25 +34,28 @@ public class JuryoAbilities
 		
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
-			{	
-				for(int j = 0; j < 50; j++)
-				{
-					AbilityProjectile proj = new JuryoProjectiles.Moko(player.worldObj, player, ListAttributes.MOKO);
-
-					proj.setLocationAndAngles(
-							player.posX + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
-							(player.posY + 0.3) + WyMathHelper.randomWithRange(0, 5) + player.worldObj.rand.nextDouble(), 
-							player.posZ + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
-							0, 0);
-					player.worldObj.spawnEntityInWorld(proj);
+			if(!this.isOnCooldown())
+			{
+				if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
+				{	
+					for(int j = 0; j < 50; j++)
+					{
+						AbilityProjectile proj = new JuryoProjectiles.Moko(player.worldObj, player, ListAttributes.MOKO);
+	
+						proj.setLocationAndAngles(
+								player.posX + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
+								(player.posY + 0.3) + WyMathHelper.randomWithRange(0, 5) + player.worldObj.rand.nextDouble(), 
+								player.posZ + WyMathHelper.randomWithRange(-5, 5) + player.worldObj.rand.nextDouble(), 
+								0, 0);
+						player.worldObj.spawnEntityInWorld(proj);
+					}
+					if (player.worldObj instanceof WorldServer)
+						((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
+					super.use(player);
 				}
-				if (player.worldObj instanceof WorldServer)
-					((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
-				super.use(player);
+				else
+					WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 			}
-			else
-				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 		}
 	}
 	
