@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities.ElThor;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities.Kari;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities.Raigo;
@@ -22,6 +23,13 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class MokuAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("whiteout", new String[] {"desc", "Shoots clouds of smoke to engulf the opponent and trap them."});
+		Values.abilityWebAppExtraParams.put("whitesnake", new String[] {"desc", "Launches a long dense smoke cloud in the shape of a snake to grab the opponent and damage them."});
+		Values.abilityWebAppExtraParams.put("whitelauncher", new String[] {"desc", "Transforms the user into smoke and launches them forward."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new WhiteOut(), new WhiteSnake(), new WhiteLauncher(), new WhiteStrike()};
 	
 	public static class WhiteStrike extends Ability

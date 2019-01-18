@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.AbstractMap.SimpleEntry;
@@ -66,16 +67,47 @@ public class DevilFruitsHelper
 			"gasugasu", "sunasuna", "mokumoku"
 	};
 
+	private static HashMap<String, List<Block>> blockRules = createBlockRulesMap();
+	
+	private static HashMap<String, List<Block>> createBlockRulesMap()
+	{
+		HashMap<String, List<Block>> map = new HashMap<String, List<Block>>();
+		
+		map.put("core", Arrays.asList(new Block[]
+				{
+						Blocks.ice, Blocks.packed_ice, Blocks.stone, Blocks.grass, Blocks.dirt, Blocks.snow, Blocks.snow_layer, Blocks.sand, Blocks.sandstone, Blocks.sandstone_stairs, Blocks.wooden_door, Blocks.wooden_slab, Blocks.log, Blocks.log2, Blocks.carpet, Blocks.cake, ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch, Blocks.redstone_wire, Blocks.cobblestone, Blocks.fence, Blocks.farmland, Blocks.fence_gate, Blocks.flower_pot, Blocks.clay, Blocks.gravel
+				}));
+		
+		map.put("air", Arrays.asList(new Block[]
+				{
+						Blocks.air
+				}));
+
+		map.put("foliage", Arrays.asList(new Block[]
+				{
+						Blocks.leaves, Blocks.leaves2, Blocks.waterlily, Blocks.double_plant, Blocks.yellow_flower, Blocks.red_flower, Blocks.vine, Blocks.brown_mushroom, Blocks.brown_mushroom_block, Blocks.red_mushroom, Blocks.red_mushroom_block, Blocks.tallgrass, Blocks.potatoes, Blocks.carrots, Blocks.cactus
+				}));
+		
+		map.put("ores", Arrays.asList(new Block[]
+				{
+						Blocks.coal_ore, Blocks.coal_block, Blocks.diamond_ore, Blocks.diamond_block, Blocks.iron_ore, Blocks.iron_block, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.redstone_block, Blocks.gold_ore, Blocks.gold_block, ListMisc.KairosekiOre, ListMisc.KairosekiBlock
+				}));
+
+		map.put("liquids", Arrays.asList(new Block[]
+				{
+						Blocks.water, Blocks.flowing_water, Blocks.lava, Blocks.flowing_lava
+				}));
+		
+		return map;
+	}
 	
 	public static boolean isNearbyKairoseki(EntityPlayer player)
 	{
-		if( WyHelper.isBlockNearby(player, 3, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock))
-				|| player.inventory.hasItem( Item.getItemFromBlock(ListMisc.KairosekiOre)) || (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water 
-				|| player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding()  )) )
+		if (WyHelper.isBlockNearby(player, 4, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiOre)) || (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding())))
 		{
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -202,9 +234,10 @@ public class DevilFruitsHelper
 	 * low value or commonness air - specific filter for the air block ores -
 	 * self explanatory, also includes the compressed blocks for those ores
 	 * foliage - things like flowers, vines and leaves liquids - water and lava
-	 * obviously all - all blocks restricted - removes some blocks that should
-	 * never be replaced, has no use for add/ignore param
+	 * all - all blocks restricted - removes some blocks that should never be
+	 * replaced, has no use for add/ignore param
 	 */
+	
 	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
 	{
 		Block b = world.getBlock((int) posX, (int) posY, (int) posZ);
@@ -220,83 +253,16 @@ public class DevilFruitsHelper
 			}
 			else
 				formula = "add";
-
-			if (rule.equalsIgnoreCase("core"))
+			
+			if(blockRules.containsKey(rule))
 			{
 				if (formula.equalsIgnoreCase("add"))
-				{
-					bannedBlocks.addAll(Arrays.asList(new Block[]
-					{
-							Blocks.stone, Blocks.grass, Blocks.dirt, Blocks.snow, Blocks.snow_layer, Blocks.sand, Blocks.sandstone, Blocks.sandstone_stairs, Blocks.wooden_door, Blocks.wooden_slab, Blocks.log, Blocks.log2, Blocks.carpet, Blocks.cake, ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch, Blocks.redstone_wire, Blocks.cobblestone, Blocks.fence, Blocks.farmland, Blocks.fence_gate, Blocks.flower_pot, Blocks.clay, Blocks.gravel
-					}));
-				}
+					bannedBlocks.addAll(blockRules.get(rule));
 				else if (formula.equalsIgnoreCase("ignore"))
-				{
-					bannedBlocks.removeAll(Arrays.asList(new Block[]
-					{
-							Blocks.stone, Blocks.grass, Blocks.dirt, Blocks.snow, Blocks.snow_layer, Blocks.sand, Blocks.sandstone, Blocks.sandstone_stairs, Blocks.wooden_door, Blocks.wooden_slab, Blocks.log, Blocks.log2, Blocks.carpet, Blocks.cake, ListMisc.Poison, ListMisc.DemonPoison, Blocks.torch, Blocks.redstone_torch, Blocks.redstone_wire, Blocks.cobblestone, Blocks.fence, Blocks.farmland, Blocks.fence_gate, Blocks.flower_pot, Blocks.clay
-					}));
-				}
+					bannedBlocks.removeAll(blockRules.get(rule));
 			}
-			else if (rule.equalsIgnoreCase("air"))
-			{
-				if (formula.equalsIgnoreCase("add"))
-					bannedBlocks.add(Blocks.air);
-				else if (formula.equalsIgnoreCase("ignore"))
-					bannedBlocks.remove(Blocks.air);
-			}
-			else if (rule.equalsIgnoreCase("foliage"))
-			{
-				if (formula.equalsIgnoreCase("add"))
-				{
-					bannedBlocks.addAll(Arrays.asList(new Block[]
-					{
-							Blocks.leaves, Blocks.leaves2, Blocks.waterlily, Blocks.double_plant, Blocks.yellow_flower, Blocks.red_flower, Blocks.vine, Blocks.brown_mushroom, Blocks.brown_mushroom_block, Blocks.red_mushroom, Blocks.red_mushroom_block, Blocks.tallgrass, Blocks.potatoes, Blocks.carrots, Blocks.cactus
-					}));
-				}
-				else if (formula.equalsIgnoreCase("ignore"))
-				{
-					bannedBlocks.removeAll(Arrays.asList(new Block[]
-					{
-							Blocks.leaves, Blocks.leaves2, Blocks.waterlily, Blocks.double_plant, Blocks.yellow_flower, Blocks.red_flower, Blocks.vine, Blocks.brown_mushroom, Blocks.brown_mushroom_block, Blocks.red_mushroom, Blocks.red_mushroom_block, Blocks.tallgrass, Blocks.potatoes, Blocks.carrots, Blocks.cactus
-					}));
-				}
-			}
-			else if (rule.equalsIgnoreCase("ores"))
-			{
-				if (formula.equalsIgnoreCase("add"))
-				{
-					bannedBlocks.addAll(Arrays.asList(new Block[]
-					{
-							Blocks.coal_ore, Blocks.coal_block, Blocks.diamond_ore, Blocks.diamond_block, Blocks.iron_ore, Blocks.iron_block, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.redstone_block, Blocks.gold_ore, Blocks.gold_block, ListMisc.KairosekiOre, ListMisc.KairosekiBlock
-					}));
-				}
-				else if (formula.equalsIgnoreCase("ignore"))
-				{
-					bannedBlocks.removeAll(Arrays.asList(new Block[]
-					{
-							Blocks.coal_ore, Blocks.coal_block, Blocks.diamond_ore, Blocks.diamond_block, Blocks.iron_ore, Blocks.iron_block, Blocks.lapis_ore, Blocks.lapis_block, Blocks.redstone_ore, Blocks.redstone_block, Blocks.gold_ore, Blocks.gold_block, ListMisc.KairosekiOre, ListMisc.KairosekiBlock
-					}));
-				}
-			}
-			else if (rule.equalsIgnoreCase("liquid"))
-			{
-				if (formula.equalsIgnoreCase("add"))
-				{
-					bannedBlocks.addAll(Arrays.asList(new Block[]
-					{
-							Blocks.water, Blocks.flowing_water, Blocks.lava, Blocks.flowing_lava
-					}));
-				}
-				else if (formula.equalsIgnoreCase("ignore"))
-				{
-					bannedBlocks.removeAll(Arrays.asList(new Block[]
-					{
-							Blocks.water, Blocks.flowing_water, Blocks.lava, Blocks.flowing_lava
-					}));
-				}
-			}
-			else if (rule.equalsIgnoreCase("all"))
+			
+			if (rule.equalsIgnoreCase("all"))
 			{
 				if (formula.equalsIgnoreCase("add"))
 				{
@@ -321,10 +287,6 @@ public class DevilFruitsHelper
 				bannedBlocks.remove(ListMisc.StringMid);
 				bannedBlocks.remove(ListMisc.StringWall);
 				bannedBlocks.remove(ListMisc.Darkness);
-			}
-			else
-			{
-				WyDebug.error("Block placement rule is not valid! : " + rule);
 			}
 		});
 

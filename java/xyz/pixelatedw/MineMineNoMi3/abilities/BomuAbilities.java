@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.BomuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -8,6 +9,12 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 public class BomuAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("kickbomb", new String[] {"desc", "The user kicks their opponent, detonating their leg on impact."});
+		Values.abilityWebAppExtraParams.put("nosefancycannon", new String[] {"desc", "Shoots dried mucus at the opponent, which explodes on impact."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new KickBomb(), new NoseFancyCannon()};
 
 	public static class KickBomb extends Ability

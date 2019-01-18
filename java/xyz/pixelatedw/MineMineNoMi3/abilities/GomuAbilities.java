@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -25,6 +26,16 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class GomuAbilities 
 {
+	
+	static
+	{
+		Values.abilityWebAppExtraParams.put("gomugomunopistol", new String[] {"desc", "The user stretches their arm to hit the opponent."});
+		Values.abilityWebAppExtraParams.put("gomugomunobazooka", new String[] {"desc", "The user stretches their arms to send the opponent flying by hitting them with both palms"});
+		Values.abilityWebAppExtraParams.put("gearsecond", new String[] {"desc", "By speding up their blood flow, the user gains strength, speed and mobility."});
+		Values.abilityWebAppExtraParams.put("gearthird", new String[] {"desc", "By blowing air and inflating their body, the user\\'s attacks get bigger and gain incredible strength."});
+		Values.abilityWebAppExtraParams.put("gearforth", new String[] {"desc", "The user inflates their muscle structure to tremendously increase the power of their attacks."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new GomuGomuNoPistol(), new GomuGomuNoBazooka(), new GomuGomuNoRocket(), new GomuGomuNoGatling(), new GearSecond(), new GearThird(), new GearForth()};
 
 	public static class GearForth extends Ability

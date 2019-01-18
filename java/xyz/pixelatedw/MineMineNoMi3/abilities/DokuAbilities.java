@@ -12,6 +12,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -26,9 +27,17 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class DokuAbilities 
 {
-
-	public static Ability[] abilitiesArray = new Ability[] {new Hydra(), new ChloroBall(), new DokuFugu(), new VenomRoad(), new DokuGumo(), new VenomDemon()};	
-		
+	static
+	{
+		Values.abilityWebAppExtraParams.put("hydra", new String[] {"desc", "Launches a dragon made out of liqiud poison at the opponent."});
+		Values.abilityWebAppExtraParams.put("chloroball", new String[] {"desc", "The user spits a bubble made of poison towards the enemy, which leaves poison on the ground."});
+		Values.abilityWebAppExtraParams.put("dokufugu", new String[] {"desc", "Shoots multiple poisonous bullets at the opponent."});
+		Values.abilityWebAppExtraParams.put("dokugumo", new String[] {"desc", "Creates a dense cloud of poisonous smoke, which moves along with the user and poisons and blinds everyone inside."});
+		Values.abilityWebAppExtraParams.put("venomroad", new String[] {"desc", "The user fires a Hydra at the target location and transports there through its path."});
+		Values.abilityWebAppExtraParams.put("venomdemon", new String[] {"desc", "The user coats himself in layers of strong corrosive venom, becoming a Venom Demon and leaving a highly poisonou trail."});
+	}
+	
+	public static Ability[] abilitiesArray = new Ability[] {new Hydra(), new ChloroBall(), new DokuFugu(), new VenomRoad(), new DokuGumo(), new VenomDemon()};		
 	
 	public static class DokuGumo extends Ability
 	{
@@ -81,7 +90,7 @@ public class DokuAbilities
 			if (props.getZoanPoint().isEmpty())
 				props.setZoanPoint("n/a");
 
-			props.setZoanPoint(ID.ZOANMORPH_DOKU);
+			props.setZoanPoint("venomDemon");
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
@@ -100,30 +109,19 @@ public class DokuAbilities
 				if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != Blocks.air
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.DemonPoison)
-					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison, "core", "foliage");
+					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison, "core", "foliage", "air");
 			}
 			
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_VENOMDEMON, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}		
-		
-		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
-		{
-			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock))
-			{
-				target.addPotionEffect(new PotionEffect(Potion.poison.id, 400, 2));
-			}
-		}
-		
+
 		public void endPassive(EntityPlayer player) 
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
-			if(props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
-			{
-				props.setZoanPoint("n/a");	
-				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-				WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-			}
+			props.setZoanPoint("n/a");	
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 			
 			this.startCooldown();
 			this.startExtUpdate(player);

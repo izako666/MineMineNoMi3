@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities.Barrier;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities.BarrierBall;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities.BarrierCrash;
@@ -10,8 +11,12 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class GoeAbilities 
 {
-	public static Ability[] abilitiesArray = new Ability[] {new Todoroki()};
+	static
+	{
+		Values.abilityWebAppExtraParams.put("todoroki", new String[] {"desc", "The user shouts and creates a powerful sound blast."});
+	}
 	
+	public static Ability[] abilitiesArray = new Ability[] {new Todoroki()};	
 	
 	public static class Todoroki extends Ability
 	{

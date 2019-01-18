@@ -214,34 +214,6 @@ public class PacketPlayer implements IMessage
 				props.setCombatMode(!props.isInCombatMode());
 				//WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			}
-			for(int i = 0; i < 8; i++)
-			{
-				if(message.cmd.equals("useAbility" + i))
-				{
-					if(abilityProps.getAbilityFromSlot(i) != null) 
-					{
-						for(int j = 0; j < 8; j++)
-						{
-							if(abilityProps.getAbilityFromSlot(j) != null) 
-							{
-								if(abilityProps.getAbilityFromSlot(j).isCharging() && abilityProps.getAbilityFromSlot(j) == abilityProps.getAbilityFromSlot(i) && abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName().equalsIgnoreCase(GoroAbilities.abilitiesArray[1].getAttribute().getAttributeName()))
-									abilityProps.getAbilityFromSlot(i).endCharging(player);
-								if(abilityProps.getAbilityFromSlot(j).isCharging())
-									return null;
-								if(abilityProps.getAbilityFromSlot(i) != abilityProps.getAbilityFromSlot(j) && abilityProps.getAbilityFromSlot(j).isPassiveActive() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive())
-									return null;
-							}							
-						}
-						
-						if(abilityProps.getAbilityFromSlot(i).getAttribute().isPassive())
-							abilityProps.getAbilityFromSlot(i).passive(player);
-						else if(abilityProps.getAbilityFromSlot(i).getAttribute().getAbilityCharges() > 0)
-							abilityProps.getAbilityFromSlot(i).startCharging(player);
-						else
-							abilityProps.getAbilityFromSlot(i).use(player);
-					}
-				}
-			}
 
 			return null;
 		}

@@ -9,6 +9,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
@@ -22,6 +23,16 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class RokushikiAbilities 
 {
+	
+	static
+	{
+		Values.abilityWebAppExtraParams.put("soru", new String[] {"desc", "Allows the user to move at an extremely high speed.", "dorikiRequiredForHumans", "500"});
+		Values.abilityWebAppExtraParams.put("tekkai", new String[] {"desc", "Hardens the user\\'s body to protect themselves, but they\\'re unable to move.", "dorikiRequiredForHumans", "1500"});
+		Values.abilityWebAppExtraParams.put("geppo", new String[] {"desc", "The user kicks the air beneath them to launch themselves into the air.", "dorikiRequiredForHumans", "4500"});
+		Values.abilityWebAppExtraParams.put("rankyaku", new String[] {"desc", "By kicking at a very high speed, the user launches an air blade at the opponent.", "dorikiRequiredForHumans", "8500"});
+		Values.abilityWebAppExtraParams.put("shigan", new String[] {"desc", "The user thrusts their finger at the opponent, to pierce them.", "dorikiRequiredForHumans", "3000"});
+		Values.abilityWebAppExtraParams.put("kamie", new String[] {"desc", "Maked the user\\'s body flexible in order to avoid attacks.", "dorikiRequiredForHumans", "6000"});
+	}
 	
 	public static Ability SORU = new Soru();
 	public static Ability TEKKAI = new Tekkai();

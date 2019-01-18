@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -17,6 +18,15 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class CyborgAbilities 
 {
+	static
+	{
+		Values.abilityWebAppExtraParams.put("freshfire", new String[] {"desc", "The user heats up and breathes fire like a flamethrower at the opponent.", "dorikiRequiredForCyborgs", "0"});
+		Values.abilityWebAppExtraParams.put("colaoverdrive", new String[] {"desc", "The user absorbs all of their cola at once to boost their physical abilities.", "dorikiRequiredForCyborgs", "0"});
+		Values.abilityWebAppExtraParams.put("radicalbeam", new String[] {"desc", "After charging, the user launches a powerful beam of energy at the opponent.", "dorikiRequiredForCyborgs", "0"});
+		Values.abilityWebAppExtraParams.put("strongright", new String[] {"desc", "The user punches the opponent with a metal fist.", "dorikiRequiredForCyborgs", "0"});
+		Values.abilityWebAppExtraParams.put("coupdevent", new String[] {"desc", "Launches a powerful blast of compressed air that blows the opponent away.", "dorikiRequiredForCyborgs", "0"});
+	}
+	
 	public static Ability FRESHFIRE = new FreshFire();
 	public static Ability COLAOVERDRIVE = new ColaOverdrive();
 	public static Ability RADICALBEAM = new RadicalBeam();
@@ -24,7 +34,6 @@ public class CyborgAbilities
 	public static Ability COUPDEVENT = new CoupDeVent();
 	
 	public static Ability[] abilitiesArray = new Ability[] {FRESHFIRE, COLAOVERDRIVE, RADICALBEAM, STRONGRIGHT, COUPDEVENT};
-
 	
 	public static class CoupDeVent extends Ability
 	{

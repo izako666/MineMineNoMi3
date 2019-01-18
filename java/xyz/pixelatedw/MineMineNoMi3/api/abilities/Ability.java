@@ -42,7 +42,6 @@ public class Ability
 	{
 		if(!isOnCooldown)
 		{
-			
 			if(projectile != null)
 			{
 				if(this.attr.isRepeater())
@@ -273,7 +272,7 @@ public class Ability
 	
 	protected void sendShounenScream(EntityPlayer player, int part)
 	{
-		if(MainConfig.enableAnimeScreaming)
+		if(MainConfig.enableAnimeScreaming && ExtendedEntityData.get(player).getZoanPoint().equalsIgnoreCase("n/a"))
 		{
     		WyNetworkHelper.sendToAllAround(new PacketShounenScream(player.getCommandSenderName(), WyHelper.getFancyName(this.attr.getAttributeName()), part), player.dimension, player.posX, player.posY, player.posZ, 15);
 			if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAttributeName().equalsIgnoreCase(this.originalDisplayName))

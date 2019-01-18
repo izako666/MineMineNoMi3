@@ -38,21 +38,6 @@ public class TileEntityString extends TileEntity
 				})
 				.collect(Collectors.toList());
 	
-			for (EntityLivingBase elb : nearbyPlayers)
-			{
-				EntityPlayer user = (EntityPlayer) elb;
-	
-				if (!WyHelper.isBlockNearby(user, 28, ListMisc.StringMid))
-				{
-					for (int i = 0; i < AbilityProperties.get(user).countAbilitiesInHotbar() - 1; i++)
-					{
-						Ability abl = AbilityProperties.get(user).getAbilityFromSlot(i);
-						if (abl != null && abl.getAttribute().getAttributeName().equalsIgnoreCase("torikago"))
-							((Torikago) abl).alterSpawnFlag(true);
-					}
-				}
-			}
-	
 			if (nearbyPlayers.isEmpty())
 				clearRoom();
     	}

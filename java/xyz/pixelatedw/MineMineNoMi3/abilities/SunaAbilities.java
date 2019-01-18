@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -19,7 +20,14 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class SunaAbilities 
 {
-
+	static
+	{
+		Values.abilityWebAppExtraParams.put("barjan", new String[] {"desc", "Launches a crescent-shaped wave of sand at the opponent, that dehydrates them."});
+		Values.abilityWebAppExtraParams.put("grounddeath", new String[] {"desc", "Dries out the surroundings and suffucates all nearby opponents in sand."});
+		Values.abilityWebAppExtraParams.put("sables", new String[] {"desc", "The user launches a compressed sandstorm at the opponent, which sends them flying."});		
+		Values.abilityWebAppExtraParams.put("desertspada", new String[] {"desc", "The user extends their sand along the ground, splitting it and suffocating everything it its path. "});		
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new Barjan(), new Sables(), new GroundDeath(), new DesertSpada(), new DesertEncierro(), new DesertGirasole()};
 
 	public static class DesertGirasole extends Ability

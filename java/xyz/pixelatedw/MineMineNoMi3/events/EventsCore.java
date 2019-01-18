@@ -48,7 +48,7 @@ public class EventsCore
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone e) 
 	{
-		if(e.wasDeath) 
+		if(e.wasDeath && ( !ExtendedEntityData.get(e.original).getUsedFruit().equalsIgnoreCase("yomiyomi") && ExtendedEntityData.get(e.original).hasYomiActive() )) 
 		{
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
 			{
@@ -59,6 +59,7 @@ public class EventsCore
 				oldProps.triggerActiveHaki(false);
 				oldProps.triggerBusoHaki(false);
 				oldProps.triggerKenHaki(false);
+				oldProps.setYomiActive(false);
 				oldProps.setGear(1);
 				oldProps.setZoanPoint("n/a");
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);

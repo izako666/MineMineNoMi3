@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities.Barrier;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities.BarrierBall;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BariAbilities.BarrierCrash;
@@ -11,6 +12,13 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 public class HoroAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("negativehollow", new String[] {"desc", "The user launches a ghost that drains the target\\'s will."});
+		Values.abilityWebAppExtraParams.put("minihollow", new String[] {"desc", "Launches small ghosts at the opponent, exploding upon impact."});
+		Values.abilityWebAppExtraParams.put("tokuhollow", new String[] {"desc", "Creates a huge ghost that causes a massive explosion upon impact."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new NegativeHollow(), new MiniHollow(), new TokuHollow()};
 	
 	public static class TokuHollow extends Ability

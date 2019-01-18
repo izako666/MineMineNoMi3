@@ -13,6 +13,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -29,6 +30,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +39,17 @@ import java.util.Map;
 public class OpeAbilities
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("room", new String[] {"desc", "Creates a spherical space around the user, in which they can manipulate anything with other skills."});
+		Values.abilityWebAppExtraParams.put("countershock", new String[] {"desc", "Releases a strong electrical current, which shocks the opponent."});
+		Values.abilityWebAppExtraParams.put("mes", new String[] {"desc", "Removes the heart of the user\\'s target, which they can then damage to hurt the opponent."});
+		Values.abilityWebAppExtraParams.put("gammaknife", new String[] {"desc", "Creates a blade of gamma radiation, which massively damages the opponent\\'s organs"});
+		Values.abilityWebAppExtraParams.put("shambles", new String[] {"desc", "The user swaps place with the closest entity within the ROOM."});
+		Values.abilityWebAppExtraParams.put("takt", new String[] {"desc", "Lifts all entities inside ROOM, making them unable to move."});	
+		Values.abilityWebAppExtraParams.put("injectionshot", new String[] {"desc", "While holding a weapon, the user charges at the enemy, leaving them poisoned and confused."});	
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[]
 	{
 			new Room(), new Mes(), new CounterShock(), new GammaKnife(), new Takt(), new Shambles(), new InjectionShot()
@@ -263,51 +276,38 @@ public class OpeAbilities
 
 	public static class Room extends Ability
 	{
-		private boolean canSpawnRoom = true;
+		private List<int[]> blockList = new ArrayList<int[]>();
 
 		public Room()
 		{
 			super(ListAttributes.ROOM);
 		}
 
-		public void use(EntityPlayer player)
+		public void passive(EntityPlayer player)
 		{
-			if (!this.isOnCooldown && canSpawnRoom)
+			if(!this.isOnCooldown)
 			{
-				final World world = player.worldObj;
-				Sphere.generate((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
+				if(this.blockList.isEmpty())
 				{
-					public void call(int x, int y, int z)
-					{
-						DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, ListMisc.Ope, "air", "liquid");
-					}
-				});
-				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.OpeMid);
-
-				canSpawnRoom = false;
-				super.use(player);
-			}
-			else if (!canSpawnRoom)
-			{
-				if (!WyHelper.isBlockNearby(player, 30, ListMisc.OpeMid))
-					canSpawnRoom = true;
-				else
-				{
-					for(int x = -50; x < 50; x++)
-					for(int y = -50; y < 50; y++)
-					for(int z = -50; z < 50; z++)
-					{
-						if(player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.Ope || player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.OpeMid)
-							player.worldObj.setBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z, Blocks.air);
-					}	
-					canSpawnRoom = true;
+					this.blockList.addAll(WyHelper.createEmptySphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 20, ListMisc.Ope, "air", "foliage", "liquids"));
+					player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.OpeMid);
+					this.blockList.add(new int[] {(int) player.posX, (int) player.posY, (int) player.posZ});
 				}
+				
+				super.passive(player);
 			}
 		}
-
-		public void alterSpawnFlag(boolean flag)
+		
+		public void endPassive(EntityPlayer player) 
 		{
-			canSpawnRoom = flag;
+			for(int[] blockPos : this.blockList)
+			{
+				if(player.worldObj.getBlock(blockPos[0], blockPos[1], blockPos[2]) == ListMisc.Ope || player.worldObj.getBlock(blockPos[0], blockPos[1], blockPos[2]) == ListMisc.OpeMid)
+					player.worldObj.setBlock(blockPos[0], blockPos[1], blockPos[2], Blocks.air);
+			}
+            this.blockList = new ArrayList<int[]>();
+            this.startCooldown();
+            this.startExtUpdate(player);
 		}
 	}
 

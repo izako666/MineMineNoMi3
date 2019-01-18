@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -18,6 +19,13 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class NoroAbilities
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("noronorobeam", new String[] {"desc", "Shoots a beam of photons at the opponent, completely slowing them down."});
+		Values.abilityWebAppExtraParams.put("noronorobeamsword", new String[] {"desc", "Focuses photons inside a hilt to create a sword."});
+		Values.abilityWebAppExtraParams.put("kyubirush", new String[] {"desc", "While the opponent is slowed, the user delivers a series of punches, which hits the opponent all at once."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new NoroNoroBeam(), new NoroNoroBeamSword(), new KyubiRush()};
 	
 	public static class NoroNoroBeamSword extends Ability

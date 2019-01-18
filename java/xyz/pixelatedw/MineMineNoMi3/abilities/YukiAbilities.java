@@ -9,8 +9,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -25,8 +27,17 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class YukiAbilities 
 {
 
-	public static Ability[] abilitiesArray = new Ability[] {new Kamakura(), new TabiraYuki(), new YukiRabi(), new KamakuraJussoshi(), new Fubuki(), new YukiGaki()};	
-		
+	static
+	{
+		Values.abilityWebAppExtraParams.put("fubuki", new String[] {"desc", "The user releases an extremely cold stream of snow that spreads into the air around them."});
+		Values.abilityWebAppExtraParams.put("kamakura", new String[] {"desc", "Creates an igloo-like snow barrier around the user."});
+		Values.abilityWebAppExtraParams.put("kamakurajussoshi", new String[] {"desc", "Like \"Kamakura\", but creates a multi-layered snow barrier."});		
+		Values.abilityWebAppExtraParams.put("yukirabi", new String[] {"desc", "Launches numerous hardened snowballs, that have the shape of a rabbit\\'s head."});
+		Values.abilityWebAppExtraParams.put("tabirayuki", new String[] {"desc", "The user creates a sword made of solid hardened snow."});
+		Values.abilityWebAppExtraParams.put("yukigaki", new String[] {"desc", "The user creates a huge wall of snow."});
+	}
+	
+	public static Ability[] abilitiesArray = new Ability[] {new Kamakura(), new TabiraYuki(), new YukiRabi(), new KamakuraJussoshi(), new Fubuki(), new YukiGaki()};		
 
 	public static class YukiGaki extends Ability
 	{
@@ -111,23 +122,23 @@ public class YukiAbilities
 		{				
 			if(!isOnCooldown)
 			{
+				if(MainConfig.enableGriefing)
+				{
+					Sphere.generate((int)(int) player.posX, (int)(int) player.posY, (int)(int) player.posZ, 25, new ISphere()
+				    { 
+						public void call(int x, int y, int z)
+						{
+			    			for(int i = -4; i <= 4; i++)
+					    		if(player.worldObj.isAirBlock(x, y, z) && player.worldObj.getBlock(x, y - 1, z) != Blocks.air && player.worldObj.getBlock(x, y - 1, z) != Blocks.snow_layer)
+					    			player.worldObj.setBlock(x, y, z, Blocks.snow_layer);
+						}
+				    });
+				}
+				
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 25))
 				{
 					e.attackEntityFrom(DamageSource.causePlayerDamage(player), 8);
 					e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 2));
-					
-					if(MainConfig.enableGriefing)
-					{
-						Sphere.generate((int)(int) player.posX, (int)(int) player.posY, (int)(int) player.posZ, 25, new ISphere()
-					    { 
-							public void call(int x, int y, int z)
-							{
-				    			for(int i = -4; i <= 4; i++)
-						    		if(player.worldObj.isAirBlock(x, y, z) && player.worldObj.getBlock(x, y - 1, z) != Blocks.air && player.worldObj.getBlock(x, y - 1, z) != Blocks.snow_layer)
-						    			player.worldObj.setBlock(x, y, z, Blocks.snow_layer);
-							}
-					    });
-					}
 				}
 				
 				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_FUBUKI, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
@@ -149,19 +160,23 @@ public class YukiAbilities
 			{			
 				if(MainConfig.enableGriefing)
 				{
-					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
+					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);				
+					World world = player.worldObj;
 					
-					if(mop != null)
-					{
-						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
-						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 6, Blocks.snow);
-						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 8, Blocks.snow);
+					if(player.isSneaking())
+					{		
+						WyHelper.createEmptySphere(world, (int)player.posX, (int)player.posY, (int)player.posZ, 4, Blocks.snow, "air", "foliage", "liquids");
+						WyHelper.createEmptySphere(world, (int)player.posX, (int)player.posY, (int)player.posZ, 6, Blocks.snow, "air", "foliage", "liquids");
+						WyHelper.createEmptySphere(world, (int)player.posX, (int)player.posY, (int)player.posZ, 8, Blocks.snow, "air", "foliage", "liquids");
 					}
 					else
 					{
-						WyHelper.createSphere(player, 4, Blocks.snow);
-						WyHelper.createSphere(player, 6, Blocks.snow);
-						WyHelper.createSphere(player, 8, Blocks.snow);				
+						if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) != Blocks.air)
+						{
+							WyHelper.createEmptySphere(world, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow, "air", "foliage", "liquids");
+							WyHelper.createEmptySphere(world, mop.blockX, mop.blockY, mop.blockZ, 6, Blocks.snow, "air", "foliage", "liquids");
+							WyHelper.createEmptySphere(world, mop.blockX, mop.blockY, mop.blockZ, 8, Blocks.snow, "air", "foliage", "liquids");
+						}
 					}
 				}
 				
@@ -197,12 +212,20 @@ public class YukiAbilities
 			{
 				if(MainConfig.enableGriefing)
 				{
-					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);
+					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);				
+					World world = player.worldObj;
 					
-					if(mop != null)
-						WyHelper.createSphere(player, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow);
+					if(player.isSneaking())
+					{		
+						WyHelper.createEmptySphere(world, (int)player.posX, (int)player.posY, (int)player.posZ, 4, Blocks.snow, "air", "foliage", "liquids");
+					}
 					else
-						WyHelper.createSphere(player, 4, Blocks.snow);	
+					{
+						if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) != Blocks.air)
+						{
+							WyHelper.createEmptySphere(world, mop.blockX, mop.blockY, mop.blockZ, 4, Blocks.snow, "air", "foliage", "liquids");
+						}
+					}
 				}
 
 				super.use(player);

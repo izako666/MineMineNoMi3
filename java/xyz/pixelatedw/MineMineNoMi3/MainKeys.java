@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketUseAbility;
 
 public class MainKeys 
 {
@@ -118,7 +119,7 @@ public class MainKeys
 			if(keyBindsCombatbar[i].isPressed())
 			{
 	        	if(props.isInCombatMode())
-	        		WyNetworkHelper.sendToServer(new PacketPlayer("useAbility" + i));
+	        		WyNetworkHelper.sendToServer(new PacketUseAbility(i));
 	        	else
 	        		player.inventory.currentItem = i;
 			}

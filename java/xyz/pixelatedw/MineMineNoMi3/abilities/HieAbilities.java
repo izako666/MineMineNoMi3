@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Circle;
@@ -27,6 +28,15 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class HieAbilities
 {
+	static
+	{
+		Values.abilityWebAppExtraParams.put("iceblockpartisan", new String[] {"desc", "Creates several spears of ice that the user hurls at the enemy."});
+		Values.abilityWebAppExtraParams.put("iceball", new String[] {"desc", "Creates a sphere of ice that surrounds the opponent."});
+		Values.abilityWebAppExtraParams.put("iceage", new String[] {"desc", "Freezes a large area around the user and everyone inside of it."});
+		Values.abilityWebAppExtraParams.put("icetimecapsule", new String[] {"desc", "A wave of ice is sent along the ground and freezes every enemy it hits."});
+		Values.abilityWebAppExtraParams.put("iceblockpheasant", new String[] {"desc", "Releases a massive wave of ice in the shape of a pheasant."});
+		Values.abilityWebAppExtraParams.put("icesaber", new String[] {"desc", "Creates a sharp blade made of solid ice."});
+	}
 
 	public static Ability[] abilitiesArray = new Ability[] {new IceBlockPartisan(), new IceSaber(), new IceAge(), new IceBall(), new IceTimeCapsule(), new IceBlockPheasant()};
 	
@@ -96,18 +106,6 @@ public class HieAbilities
 							player.worldObj.setBlock(posX, posY, posZ, Blocks.packed_ice);				
 					}
 					
-					/*Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 20, new ISphere()
-					{
-						public void call(int x, int y, int z)
-						{	
-							int posX = x;
-							int posY = y;
-							int posZ = z;
-							
-							if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
-								player.worldObj.setBlock(posX, posY, posZ, Blocks.packed_ice);
-						}
-					});*/
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_ICEAGE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
 				

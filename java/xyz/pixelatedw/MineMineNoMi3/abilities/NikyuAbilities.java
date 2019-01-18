@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -15,6 +16,14 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class NikyuAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("ursusshock", new String[] {"desc", "The user compresses air and sends it towards the opponent to create a massive explosion."});
+		Values.abilityWebAppExtraParams.put("padho", new String[] {"desc", "Launches a paw-shaped shockwave at the opponent."});
+		Values.abilityWebAppExtraParams.put("tsupparipadho", new String[] {"desc", "Similar to \"Pad Ho\", but fires a barrage of shockwaves."});
+		Values.abilityWebAppExtraParams.put("hanpatsu", new String[] {"desc", "Anyone the user punches gets sent flying far into the air."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new PadHo(), new TsuppariPadHo(), new Hanpatsu(), new UrsusShock()};
 	
 	public static class Hanpatsu extends Ability

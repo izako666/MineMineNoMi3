@@ -132,12 +132,6 @@ public class ID
 	FSTYLE_ARTOFWEATHER = "Art of Weather",
 	FSTYLE_OKAMA = "Okama",
 	
-	ZOANMORPH_POWER = "power",
-	ZOANMORPH_SPEED = "speed",
-	ZOANMORPH_DOKU = "doku",
-	ZOANMORPH_PHOENIX = "phoenix",
-	ZOANMORPH_HYBRID = "hybrid",
-	
 	LANG_KEYS_CATEGORY = "category.mmnmkeys", //Mine Mine no Mi Keys
 	LANG_KEY_PLAYER = "key.playerui", //Player UI
 	LANG_KEY_COMBATMODE = "key.combatmode", //Combat Mode

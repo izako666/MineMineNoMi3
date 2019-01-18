@@ -31,7 +31,7 @@ public class EventsZoanPassives
 			
 			if(props.getUsedFruit().equals("ushiushibison"))
 			{
-				if(props.getZoanPoint().equals(ID.ZOANMORPH_SPEED))
+				if(props.getZoanPoint().equals("speed"))
 				{
 					player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 2 * 20, 1, true));
 					
@@ -60,31 +60,4 @@ public class EventsZoanPassives
 			}
 		}
 	}
-	
-	@SubscribeEvent
-	public void onEntityHurtEvent(LivingHurtEvent event)
-	{
-		EntityLivingBase entity = event.entityLiving;
-		Entity sourceOfDamage = event.source.getSourceOfDamage();
-		
-		if (sourceOfDamage instanceof EntityPlayer)
-		{	
-			ExtendedEntityData props = ExtendedEntityData.get((EntityLivingBase) sourceOfDamage);
-			if(props.getUsedFruit() != null && !props.getUsedFruit().equalsIgnoreCase("n/a"))
-			{
-				if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase(ID.ZOANMORPH_POWER))
-					event.ammount += 3;
-				
-				if(props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase(ID.ZOANMORPH_DOKU))
-					entity.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
-			}
-			
-			if(props.hasBusoHakiActive())
-			{
-				double power = props.getDoriki() / 500;
-				event.ammount += power;
-			}
-		}
-	}
-	
 }

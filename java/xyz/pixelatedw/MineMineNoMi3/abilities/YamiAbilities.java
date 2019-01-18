@@ -12,6 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -29,6 +30,15 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 public class YamiAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("darkmatter", new String[] {"desc", "Launches a ball of darkness that engulfs the opponent."});
+		Values.abilityWebAppExtraParams.put("kurouzu", new String[] {"desc", "Creates a strong gravitational force, that pulls the opponent towards the user."});
+		Values.abilityWebAppExtraParams.put("blackhole", new String[] {"desc", "The user spreads darkness over the target area, which engulfs anyone and anything inside of it."});
+		Values.abilityWebAppExtraParams.put("liberation", new String[] {"desc", "The user expells everything sucked up by the \"Black Hole\" at the target location."});
+		Values.abilityWebAppExtraParams.put("blackworld", new String[] {"desc", "The user spreads darkness to the surroundings, blinding enemies and creating pillars made of Darkness."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new Kurouzu(), new DarkMatter(), new Liberation(), new BlackHole(), new BlackWorld()};	
 	
 	public static class BlackWorld extends Ability
@@ -96,13 +106,7 @@ public class YamiAbilities
 			{
 				if(MainConfig.enableGriefing)
 				{
-					for(int i = -10; i < 10; i++)
-					for(int j = -3; j < 3; j++)
-					for(int k = -10; k < 10; k++)
-					{
-						if(player.worldObj.getBlock((int) player.posX + i, (int) player.posY + j, (int) player.posZ + k) != Blocks.air)
-							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int) player.posX + i, (int) player.posY + j, (int) player.posZ + k, ListMisc.Darkness, "core", "foliage", "liquid");
-					}
+					WyHelper.createFilledSphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 10, ListMisc.Darkness, "core", "foliage", "liquids");
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKHOLE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
 				

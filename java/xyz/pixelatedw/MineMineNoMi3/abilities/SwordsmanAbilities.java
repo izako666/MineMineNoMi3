@@ -10,6 +10,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -22,6 +23,14 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class SwordsmanAbilities 
 {
+	static
+	{
+		Values.abilityWebAppExtraParams.put("shishishisonson", new String[] {"desc", "The user dashes forward and rapidly slashes the opponent."});
+		Values.abilityWebAppExtraParams.put("yakkodori", new String[] {"desc", "Launches a crescent moon-shaped slash, which destroys everything in its path."});
+		Values.abilityWebAppExtraParams.put("sanbyakurokujupoundho", new String[] {"desc", "The user launches a powerful slash, causing great destruction."});
+		Values.abilityWebAppExtraParams.put("otatsumaki", new String[] {"desc", "By spinning, the user creates a small tornado, which slashes and weakens nearby opponents."});
+	}
+	
 	public static Ability SHISHISHISONSON = new ShiShishiSonson();
 	public static Ability SANBYAKUROKUJUPOUNDHO = new SanbyakurokujuPoundHo();
 	public static Ability YAKKODORI = new Yakkodori();

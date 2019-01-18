@@ -1,5 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,6 +11,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -24,56 +28,52 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class ItoAbilities 
 {
 	
-	public static Ability[] abilitiesArray = new Ability[] {new Parasite(), new SoraNoMichi(), new Overheat(), new Tamaito(), new KumoNoSugaki(), new Torikago()};
+	static
+	{
+		Values.abilityWebAppExtraParams.put("parasite", new String[] {"desc", "The user binds the opponent with a string that renders them immobile."});
+		Values.abilityWebAppExtraParams.put("soranomichi", new String[] {"desc", "The user creates strings under their feet to launch themselves into the air."});
+		Values.abilityWebAppExtraParams.put("overheat", new String[] {"desc", "The user shoots a rope made of heated strings at the opponent, exploding upon impact."});
+		Values.abilityWebAppExtraParams.put("tamaito", new String[] {"desc", "The user shoots a small bundle of strings, acting like a bullet."});
+		Values.abilityWebAppExtraParams.put("kumonosugaki", new String[] {"desc", "Creates a huge web that protects the user from any attack."});
+		Values.abilityWebAppExtraParams.put("torikago", new String[] {"desc", "Creates an indestructible dome made of strings, that damage anyone who toches then"});
+	}
 	
+	public static Ability[] abilitiesArray = new Ability[] {new Parasite(), new SoraNoMichi(), new Overheat(), new Tamaito(), new KumoNoSugaki(), new Torikago()};	
 	
 	public static class Torikago extends Ability
 	{
-		private boolean canSpawnTorikago = true;
+		private List<int[]> blockList = new ArrayList<int[]>();
 		
 		public Torikago() 
 		{
 			super(ListAttributes.TORIKAGO); 
 		}
 		
-		public void use(EntityPlayer player)
+		public void passive(EntityPlayer player)
 		{
-			if(!this.isOnCooldown && canSpawnTorikago)
+			if(!this.isOnCooldown)
 			{
-				final World world = player.worldObj;
-				Sphere.generate((int)player.posX, (int)player.posY, (int)player.posZ, 20, new ISphere()
+				if(this.blockList.isEmpty())
 				{
-					public void call(int x, int y, int z)
-					{
-						DevilFruitsHelper.placeBlockIfAllowed(world, x, y , z, ListMisc.StringWall, "air", "liquid");
-					}
-				});
-				player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.StringMid);
-				
-				canSpawnTorikago = false;
-				super.use(player);
-			}
-			else if(!canSpawnTorikago)
-			{
-				if(!WyHelper.isBlockNearby(player, 30, ListMisc.StringMid))
-					canSpawnTorikago = true;
-				else
-				{
-					for(int x = -50; x < 50; x++)
-					for(int y = -50; y < 50; y++)
-					for(int z = -50; z < 50; z++)
-					{
-						if(player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.StringWall || player.worldObj.getBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z) == ListMisc.StringMid)
-							player.worldObj.setBlock((int) player.posX + x, (int) player.posY + y, (int) player.posZ + z, Blocks.air);
-					}					
-					canSpawnTorikago = true;
+					this.blockList.addAll(WyHelper.createEmptySphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 20, ListMisc.StringWall, "air", "foliage", "liquids"));
+					player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.StringMid);
+					this.blockList.add(new int[] {(int) player.posX, (int) player.posY, (int) player.posZ});
 				}
+				
+				super.passive(player);
 			}
-		} 
+		}
 		
-		public void alterSpawnFlag(boolean flag)
+		public void endPassive(EntityPlayer player) 
 		{
-			canSpawnTorikago = flag;
+			for(int[] blockPos : this.blockList)
+			{
+				if(player.worldObj.getBlock(blockPos[0], blockPos[1], blockPos[2]) == ListMisc.StringWall || player.worldObj.getBlock(blockPos[0], blockPos[1], blockPos[2]) == ListMisc.StringMid)
+					player.worldObj.setBlock(blockPos[0], blockPos[1], blockPos[2], Blocks.air);
+			}
+            this.blockList = new ArrayList<int[]>();
+            this.startCooldown();
+            this.startExtUpdate(player);
 		}
 	}
 	

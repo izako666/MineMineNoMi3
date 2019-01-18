@@ -6,21 +6,109 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.PowerPoint;
-import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.SpeedPoint;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 public class UshiBisonAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("bisonpowerpoint", new String[] {"desc", "The user transforms into a half-bison hybrid, which focuses on strength, Allows the user to use \\'Kokutei Cross\\' and \\'Fiddle Banff\\'"});
+		Values.abilityWebAppExtraParams.put("bisonspeedpoint", new String[] {"desc", ""});
+		Values.abilityWebAppExtraParams.put("kokuteicross", new String[] {"desc", "The transformed user crosses their hooves to hit the opponent."});
+		Values.abilityWebAppExtraParams.put("fiddlebanff", new String[] {"desc", "The transformed user dashes towards the opponent to crash against them with great power."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new PowerPoint(), new SpeedPoint(), new FiddleBanff(), new KokuteiCross()};
 
+	public static class PowerPoint extends Ability
+	{
+		public PowerPoint()
+		{
+			super(ListAttributes.BISON_POWERPOINT);
+		}
+		
+		public void passive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if (!this.isOnCooldown && (props.getZoanPoint().equalsIgnoreCase("n/a") || props.getZoanPoint().equalsIgnoreCase("power")))
+			{
+				super.passive(player);
+			}
+		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if (props.getZoanPoint().isEmpty())
+				props.setZoanPoint("n/a");
+
+			props.setZoanPoint("power");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			props.setZoanPoint("n/a");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+	}
+
+	public static class SpeedPoint extends Ability
+	{		
+		public SpeedPoint()
+		{
+			super(ListAttributes.BISON_SPEEDPOINT);
+		}
+
+		public void passive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if (!this.isOnCooldown && (props.getZoanPoint().equalsIgnoreCase("n/a") || props.getZoanPoint().equalsIgnoreCase("speed")))
+			{
+				super.passive(player);
+			}
+		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			if (props.getZoanPoint().isEmpty())
+				props.setZoanPoint("n/a");
+				
+			props.setZoanPoint("speed");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			props.setZoanPoint("n/a");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+	}
+	
 	public static class FiddleBanff extends Ability
 	{
 		public FiddleBanff() 
@@ -32,7 +120,7 @@ public class UshiBisonAbilities
 		{	
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			if((props.getZoanPoint().equals(ID.ZOANMORPH_POWER) || props.getZoanPoint().equals(ID.ZOANMORPH_SPEED) ) && !this.isOnCooldown)
+			if((props.getZoanPoint().equals("power") || props.getZoanPoint().equals("speed") ) && !this.isOnCooldown)
 			{
 
 				double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
@@ -50,7 +138,7 @@ public class UshiBisonAbilities
 				
 				super.use(player);
 			}
-			else if(!props.getZoanPoint().equals(ID.ZOANMORPH_POWER) && !props.getZoanPoint().equals(ID.ZOANMORPH_SPEED))
+			else if(!props.getZoanPoint().equals("power") && !props.getZoanPoint().equals("speed"))
 			{
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Power Point or Speed Point is active !");
 			}
@@ -75,7 +163,7 @@ public class UshiBisonAbilities
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			
-			if(!props.getZoanPoint().equals(ID.ZOANMORPH_POWER))
+			if(!props.getZoanPoint().equals("power"))
 			{
 				this.setPassiveActive(false);
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Power Point is active !");
@@ -86,7 +174,7 @@ public class UshiBisonAbilities
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			if(props.getZoanPoint().equals(ID.ZOANMORPH_POWER))
+			if(props.getZoanPoint().equals("power"))
 			{
 				super.hitEntity(player, target);
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 20);

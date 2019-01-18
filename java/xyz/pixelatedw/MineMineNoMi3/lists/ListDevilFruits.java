@@ -38,6 +38,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ToriPhoenixAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.UshiBisonAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YamiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.YomiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YukiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -87,7 +88,7 @@ public class ListDevilFruits
 			KageKageNoMi, SunaSunaNoMi, MaguMaguNoMi, DoruDoruNoMi, DokuDokuNoMi, BariBariNoMi, GasuGasuNoMi,
 			YukiYukiNoMi, JuryoJuryoNoMi, YamiYamiNoMi, ItoItoNoMi, HoroHoroNoMi, SupaSupaNoMi, OriOriNoMi, 
 			MeroMeroNoMi, GoeGoeNoMi, KiloKiloNoMi, HanaHanaNoMi, HoruHoruNoMi, BetaBetaNoMi, IshiIshiNoMi, 
-			PamuPamuNoMi, UshiUshiNoMiBison, ToriToriNoMiPhoenix, BakuBakuNoMi;
+			PamuPamuNoMi, UshiUshiNoMiBison, ToriToriNoMiPhoenix, BakuBakuNoMi, YomiYomiNoMi;
 
 	private static final Ability[][] EVERY_FRUIT = 
 		{
@@ -97,7 +98,7 @@ public class ListDevilFruits
 				KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
-				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray,
+				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray,
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
@@ -116,6 +117,8 @@ public class ListDevilFruits
 	{
 		int totalFruits = 0, totalAbilities = 0;
 		
+		YomiYomiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, YomiAbilities.abilitiesArray);
+		addITEM(YomiYomiNoMi, "Yomi Yomi no Mi");
 		BakuBakuNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, BakuAbilities.abilitiesArray);
 		addITEM(BakuBakuNoMi, "Baku Baku no Mi");
 		KiloKiloNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, KiloAbilities.abilitiesArray);

@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -16,6 +17,14 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class MaguAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("daifunka", new String[] {"desc", "The user covers their fist in lava and fires it at the opponent."});
+		Values.abilityWebAppExtraParams.put("meigo", new String[] {"desc", "The user transforms their arm into magma and thrusts it at the opponent."});
+		Values.abilityWebAppExtraParams.put("ryuseikazan", new String[] {"desc", "Functions like \"Dai Funka\", but multiple fists are launched at the opponent."});
+		Values.abilityWebAppExtraParams.put("bakuretsukazan", new String[] {"desc", "By spreading magma to the surroundings, the user turns everything into lava."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new BakuretsuKazan(), new RyuseiKazan(), new Meigo(), new DaiFunka()};
 
 	public static class BakuretsuKazan extends Ability
@@ -31,21 +40,8 @@ public class MaguAbilities
 			{				
 				final World world = player.worldObj;
 				if(MainConfig.enableGriefing)
-				{
-					Sphere.generateFilled((int) player.posX, (int) player.posY, (int) player.posZ, 10, new ISphere()
-					{
-						public void call(int x, int y, int z)
-						{	
-							int posX = x;
-							int posY = y;
-							int posZ = z;
-							
-							if(!player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.Ope && player.worldObj.getBlock(posX, posY, posZ) != ListMisc.OpeMid && player.worldObj.getBlock(posX, posY, posZ) != Blocks.bedrock)
-								player.worldObj.setBlock(posX, posY, posZ, Blocks.lava);
-						}
-					});
-				}
-
+					WyHelper.createFilledSphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 10, Blocks.flowing_lava, "core");				
+				
 				super.use(player);
 			}
 		} 

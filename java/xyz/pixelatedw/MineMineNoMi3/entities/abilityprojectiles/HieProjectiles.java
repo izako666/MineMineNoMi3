@@ -131,10 +131,7 @@ public class HieProjectiles
 			{	
 				if(MainConfig.enableGriefing)
 				{
-					WyHelper.createSphere(this, 6, Blocks.packed_ice);
-					WyHelper.createSphere(this, 6, Blocks.packed_ice);
-					WyHelper.createSphere(this, 7, Blocks.packed_ice);
-					WyHelper.createSphere(this, 7, Blocks.packed_ice);
+					WyHelper.createEmptySphere(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, 6, Blocks.packed_ice);
 				}
 			}
 		}

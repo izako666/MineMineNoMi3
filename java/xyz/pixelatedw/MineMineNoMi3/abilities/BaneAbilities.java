@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -17,6 +18,14 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class BaneAbilities
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("springhopper", new String[] {"desc", "Turning the userps legs into springs, which launches them into the air."});
+		Values.abilityWebAppExtraParams.put("springdeathknock", new String[] {"desc", "By turning the user\\'s arm into a spring and compressing it, they can launch a powerful punch."});
+		Values.abilityWebAppExtraParams.put("springsnipe", new String[] {"desc", "Turning the user\\'s forelegs into springs, they can launch themselves directly at the opponent."});
+		
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new SpringDeathKnock(), new SpringSnipe(), new SpringHopper()};
 	 
 	public static class SpringDeathKnock extends Ability

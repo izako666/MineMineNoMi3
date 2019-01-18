@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -15,6 +16,16 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class MeraAbilities
 {
+	static
+	{
+		Values.abilityWebAppExtraParams.put("hiken", new String[] {"desc", "Turns the user\\'s fist into flames and launches it towards the target."});
+		Values.abilityWebAppExtraParams.put("higan", new String[] {"desc", "Turns the user\\'s fingertips into flames and shoots bullets made of fire from them."});
+		Values.abilityWebAppExtraParams.put("hidaruma", new String[] {"desc", "Creates small green fireballs that set the target on fire."});
+		Values.abilityWebAppExtraParams.put("jujika", new String[] {"desc", "Launches a cross-shaped column of fire at the opponent, leaving a cross of fire."});
+		Values.abilityWebAppExtraParams.put("enjomo", new String[] {"desc", "Creates a circle of fire around the user, burning everyone inside of it."});
+		Values.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user\\'s flames into a gigantic fireball that the user hurls at the opponent."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new Hiken(), new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};
 	
 	public static class Hiken extends Ability
@@ -111,15 +122,7 @@ public class MeraAbilities
 		{
 			if(!isOnCooldown)
 			{
-				Sphere.generate((int)(int) player.posX, (int)(int) player.posY, (int)(int) player.posZ, 12, new ISphere()
-				{
-					public void call(int x, int y, int z)
-					{
-						for(int i = -3; i <= 3; i++)
-							if(player.worldObj.isAirBlock(x, y + i, z))
-								player.worldObj.setBlock(x, y + i, z, Blocks.fire);
-					}
-				});
+				WyHelper.createEmptySphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 13, Blocks.fire, "air", "foliage");
 					
 				for(EntityLivingBase l : WyHelper.getEntitiesNear(player, 12))
 				{l.setFire(20);}

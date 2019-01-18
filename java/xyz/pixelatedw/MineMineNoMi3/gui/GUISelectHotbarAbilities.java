@@ -76,7 +76,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 		{
             OpenGlHelper.glBlendFunc(770, 771, 1, 0);
             if(abilityProps.getAbilityFromSlot(i) != null)
-            	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(abilityProps.getAbilityFromSlot(i).getAttribute().getAttributeName()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
+            	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(abilityProps.getAbilityFromSlot(i).getAttribute().getAbilityTexture()), (posX - 192 + (i * 50)) / 2, posY - 29, 16, 16);
         }
 		
 		this.mc.getTextureManager().bindTexture(ID.TEXTURE_COMBATMODE);		

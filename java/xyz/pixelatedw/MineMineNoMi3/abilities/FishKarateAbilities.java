@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -22,6 +23,15 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class FishKarateAbilities 
 {
+	static
+	{
+		Values.abilityWebAppExtraParams.put("uchimizu", new String[] {"desc", "The user hurls big and fast water droplets at the opponent.", "dorikiRequiredForFishman", "800"});
+		Values.abilityWebAppExtraParams.put("murasame", new String[] {"desc", "The user fires densely compressed shark-shaped waterbullet at the opponent.", "dorikiRequiredForFishman", "2000"});
+		Values.abilityWebAppExtraParams.put("samehadashotei", new String[] {"desc", "The user concentrates their power to their palms, protecting themselves from attacks.", "dorikiRequiredForFishman", "3000"});
+		Values.abilityWebAppExtraParams.put("karakusagawaraseiken", new String[] {"desc", "The user punches the air, which sends a shockwave through water vapor in the air.", "dorikiRequiredForFishman", "7500"});
+		Values.abilityWebAppExtraParams.put("kachiagehaisoku", new String[] {"desc", "The user delivers a powerful kick to the opponent\\'s chin.", "dorikiRequiredForFishman", "2500"});
+	}
+	
 	public static Ability UCHIMIZU = new Uchimizu();
 	public static Ability MURASAME = new Murasame();
 	public static Ability KACHIAGEHAISOKU = new KachiageHaisoku();

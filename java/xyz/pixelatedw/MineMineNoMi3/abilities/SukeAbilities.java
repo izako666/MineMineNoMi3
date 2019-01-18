@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -20,6 +21,12 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class SukeAbilities
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("shishanote", new String[] {"desc", "Shoots invisible projectiles that explode upon impact."});
+		Values.abilityWebAppExtraParams.put("skatting", new String[] {"desc", "Turns the user\\'s entire body invisible."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new ShishaNoTe(), new Skatting()};
 	
 	public static class ShishaNoTe extends Ability

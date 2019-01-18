@@ -5,12 +5,9 @@ import java.util.Random;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
-import xyz.pixelatedw.MineMineNoMi3.abilities.ExtraAbilities.HybridPoint;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -25,8 +22,56 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 public class ToriPhoenixAbilities
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("hybridpoint", new String[] {"desc", "The user transforms into a phoenix-human hybrid, which allows them to fly. Allows the user to use \\'Phoenix Goen\\' "});
+		Values.abilityWebAppExtraParams.put("phoenixpoint", new String[] {"desc", "The user fully transforms into a phoenix, allowing them to fly at great speed. Allows the user to use both \\'Phoenix Goen\\' and \\'Tensei no Soen\\'"});
+		Values.abilityWebAppExtraParams.put("phoenixgoen", new String[] {"desc", "Launches a powerful fiery shockwave made of blue flames at the target."});
+		Values.abilityWebAppExtraParams.put("tenseinosoen", new String[] {"desc", "While in the air, the user amasses spiraling flames, then slams into the ground, releasing a massive shockwave."});		
+		Values.abilityWebAppExtraParams.put("blueflamesofresurrection", new String[] {"desc", "Blue phoenix flames grant the user regeneration."});
+		Values.abilityWebAppExtraParams.put("flameofrestoration", new String[] {"desc", "Uses the blue flames to heal the target."});	
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new PhoenixPoint(), new HybridPoint(), new BlueFlamesOfResurrection(), new FlameOfRestoration(), new PhoenixGoen(), new TenseiNoSoen()};
+	
+	public static class HybridPoint extends Ability
+	{
+		public HybridPoint()
+		{
+			super(ListAttributes.PHOENIX_HYBRIDPOINT);
+		}
 
+		public void passive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if (!this.isOnCooldown && (props.getZoanPoint().equalsIgnoreCase("n/a") || props.getZoanPoint().equalsIgnoreCase("hybrid")))
+			{
+				super.passive(player);
+			}
+		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if (props.getZoanPoint().isEmpty())
+				props.setZoanPoint("n/a");
+
+			props.setZoanPoint("hybrid");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			props.setZoanPoint("n/a");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+	}
 	
 	public static class TenseiNoSoen extends Ability
 	{
@@ -42,7 +87,7 @@ public class ToriPhoenixAbilities
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			particlesSpawned = 0;
 			
-			if((props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX)) && !this.isOnCooldown)
+			if((props.getZoanPoint().equals("full")) && !this.isOnCooldown)
 			{
 				if(!player.onGround)
 				{
@@ -52,7 +97,7 @@ public class ToriPhoenixAbilities
 				else
 					WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while airborne !");
 			}
-			else if(!props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX))
+			else if(!props.getZoanPoint().equals("full"))
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Phoenix Point is active !");
 		}
 		
@@ -92,7 +137,7 @@ public class ToriPhoenixAbilities
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			if((props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX) || props.getZoanPoint().equals(ID.ZOANMORPH_HYBRID)) && !this.isOnCooldown)
+			if((props.getZoanPoint().equals("full") || props.getZoanPoint().equals("hybrid")) && !this.isOnCooldown)
 			{
 				for (int i = 0; i < 100; i++)
 				{
@@ -108,7 +153,7 @@ public class ToriPhoenixAbilities
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				super.use(player);
 			}
-			else if(!props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX) && !props.getZoanPoint().equals(ID.ZOANMORPH_HYBRID))
+			else if(!props.getZoanPoint().equals("full") && !props.getZoanPoint().equals("hybrid"))
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Phoenix Point or Hybrid Point is active !");
 		}	
 	}
@@ -157,37 +202,35 @@ public class ToriPhoenixAbilities
 			super(ListAttributes.PHOENIXPOINT);
 		}
 
-		public void use(EntityPlayer player)
+		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			if (!this.isOnCooldown)
-			{				
-				if (props.getZoanPoint().isEmpty())
-					props.setZoanPoint("n/a");
-
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_PHOENIX))
-				{
-					props.setZoanPoint("n/a");
-					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-				} 
-				else
-				{
-					if(player.onGround)
-					{
-						WyHelper.sendMsgToPlayer(player, "You cannot use this form while on ground !");
-						return;
-					}
-					
-					props.setZoanPoint(ID.ZOANMORPH_PHOENIX);
-					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLUEFLAMES, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-				}
-
-				super.use(player);
+			if (!this.isOnCooldown && (props.getZoanPoint().equalsIgnoreCase("n/a") || props.getZoanPoint().equalsIgnoreCase("full")))
+			{
+				super.passive(player);
 			}
+		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if (props.getZoanPoint().isEmpty())
+				props.setZoanPoint("n/a");
+
+			props.setZoanPoint("full");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			props.setZoanPoint("n/a");
+			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
 	}
 	

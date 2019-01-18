@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.Render;
@@ -28,6 +29,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -39,6 +41,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -84,24 +88,13 @@ public class EventsMorphs
 			
 			event.setCanceled(true);
 			
-			if (props.getUsedFruit().equals("dokudoku"))
+			if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 			{
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_DOKU))
-					this.doRenderZoanMorph(morphVenomDemon, event.x, event.y, event.z, event.entity);
-			}
-			else if (props.getUsedFruit().equals("ushiushibison"))
-			{
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_POWER))
-					this.doRenderZoanMorph(zoanBisonPower, event.x, event.y, event.z, event.entity);
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_SPEED))
-					this.doRenderZoanMorph(zoanBisonSpeed, event.x, event.y, event.z, event.entity);
-			}
-			else if (props.getUsedFruit().equals("toritoriphoenix"))
-			{
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_HYBRID))
-					this.doRenderZoanMorph(zoanPhoenixHybrid, event.x, event.y, event.z, event.entity);
-				if (props.getZoanPoint().toLowerCase().equals(ID.ZOANMORPH_PHOENIX))
-					this.doRenderZoanMorph(zoanPhoenixFull, event.x, event.y, event.z, event.entity);
+				Arrays.stream(MorphsHelper.getMorphsMap().get(props.getUsedFruit())).forEach(x -> 
+				{
+					if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
+						this.doRenderZoanMorph((RenderZoanMorph)x[1], event.x, event.y, event.z, event.entity);
+				});
 			}
 		}
 		
@@ -181,15 +174,38 @@ public class EventsMorphs
 	{
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		ExtendedEntityData props = ExtendedEntityData.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+
+		boolean flag = false;
 		
-		if ((props.getUsedFruit().equals("dokudoku") && props.getZoanPoint().equals(ID.ZOANMORPH_DOKU)) 
-			|| (props.getUsedFruit().equals("ushiushibison") && (props.getZoanPoint().equals(ID.ZOANMORPH_SPEED) || props.getZoanPoint().equals(ID.ZOANMORPH_POWER)))
-			|| (props.getUsedFruit().equals("toritoriphoenix") && (props.getZoanPoint().equals(ID.ZOANMORPH_HYBRID) || props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX)))
-			|| (props.hasBusoHakiActive() && player.getHeldItem() == null))
+		if(props.hasBusoHakiActive() && player.getHeldItem() == null)
 		{
 			event.setCanceled(true);
 
 			this.renderHand((EntityClientPlayerMP) player, 0, 0);
+		}
+	
+		if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
+		{
+			Arrays.stream(MorphsHelper.getMorphsMap().get(props.getUsedFruit())).forEach(x -> 
+			{
+				if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
+				{
+					event.setCanceled(true);
+
+					this.renderHand((EntityClientPlayerMP) player, 0, 0);
+				}
+			});
+		}
+
+		if(props.getUsedFruit().equalsIgnoreCase("baribari"))
+		{
+			Ability bariPistol = abilityProps.getAbilityFromName(ListAttributes.BARIBARINOPISTOL.getAttributeName());
+			
+			if(bariPistol != null && bariPistol.isPassiveActive())
+			{
+				WyRenderHelper.drawAbilityIcon("baribarinopistol", 0, 0, 16, 16);
+			}
 		}
 	}
 
@@ -285,23 +301,15 @@ public class EventsMorphs
 		} 
 		else
 		{
-			if (props.getUsedFruit().equals("ushiushibison"))
+			if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 			{
-				if (props.getZoanPoint().equals(ID.ZOANMORPH_POWER))
-					render = zoanBisonPower;
-				if (props.getZoanPoint().equals(ID.ZOANMORPH_SPEED))
-					render = zoanBisonSpeed;
+				for(Object[] x : MorphsHelper.getMorphsMap().get(props.getUsedFruit()))
+				{
+					if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
+						render = (RenderZoanMorph) x[1];
+				}
 			}
-			else if (props.getUsedFruit().equals("toritoriphoenix"))
-			{
-				if (props.getZoanPoint().equals(ID.ZOANMORPH_HYBRID))
-					render = zoanPhoenixHybrid;
-				if (props.getZoanPoint().equals(ID.ZOANMORPH_PHOENIX))
-					render = zoanPhoenixFull;
-			}
-			else if (props.getUsedFruit().equals("dokudoku") && props.getZoanPoint().equals(ID.ZOANMORPH_DOKU))
-				render = this.morphVenomDemon;
-
+			
 			RenderZoanMorph renderZoan = (RenderZoanMorph) render;
 			float i = 1.0F;
 			GL11.glScalef(i, i, i);
@@ -320,16 +328,18 @@ public class EventsMorphs
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		RenderZoanMorph render = null;
 		
-		if (props.getUsedFruit().equals("ushiushibison"))
+		if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 		{
-			if (props.getZoanPoint().equals(ID.ZOANMORPH_POWER))
-				render = zoanBisonPower;
-			if (props.getZoanPoint().equals(ID.ZOANMORPH_SPEED))
-				render = zoanBisonSpeed;
+			for(Object[] x : MorphsHelper.getMorphsMap().get(props.getUsedFruit()))
+			{
+				if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
+				{
+					render = (RenderZoanMorph)x[1];
+					break;
+				}
+			}
 		}
-		if (props.getUsedFruit().equals("dokudoku") && props.getZoanPoint().equals(ID.ZOANMORPH_DOKU))
-			render = this.morphVenomDemon;
-		
+
 		if(render != null)
 			return render.getEntityTexture(null);
 		

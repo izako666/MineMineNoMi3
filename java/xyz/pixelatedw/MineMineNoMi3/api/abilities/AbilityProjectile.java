@@ -87,8 +87,8 @@ public class AbilityProjectile extends EntityThrowable
 				
 					if(this.attr.getProjectileExplosionPower() > 0)
 						this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower(), this.attr.canExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canExplosionDestroyBlocks() : false);
-					else if(this.attr.getProjectileNewExplosionPower() > 0)
-						WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
+					//else if(this.attr.getProjectileNewExplosionPower() > 0)
+					//	WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
 					
 					if(this.attr.getProjectileDamage() > 0)
 						hit.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage());
@@ -101,8 +101,8 @@ public class AbilityProjectile extends EntityThrowable
 				{				
 					if(this.attr.getProjectileExplosionPower() > 0)
 						this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower(), this.attr.canExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canExplosionDestroyBlocks() : false);
-					else if(this.attr.getProjectileNewExplosionPower() > 0)
-						WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
+					//else if(this.attr.getProjectileNewExplosionPower() > 0)
+					//	WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
 
 					tasksImapct(hit);
 

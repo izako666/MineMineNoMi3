@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -19,6 +20,14 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 public class GuraAbilities 
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("kaishin", new String[] {"desc", "The user cracks the air, which launches a small but powerful explosion towards the opponent."});
+		Values.abilityWebAppExtraParams.put("kabutowari", new String[] {"desc", "The user punches the air and creates a massive explosion around themselves."});
+		Values.abilityWebAppExtraParams.put("shimayurashi", new String[] {"desc", "Launches a powerful explosion which spreads towards the opponent."});
+		Values.abilityWebAppExtraParams.put("gekishin", new String[] {"desc", "The user creates a tremor while punching the enemy, inflicting massive damage."});
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new Kaishin(), new Kabutowari(), new ShimaYurashi(), new Gekishin()};
 
 	public static class Gekishin extends Ability

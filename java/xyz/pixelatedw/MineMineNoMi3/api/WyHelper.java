@@ -6,9 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -19,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -27,7 +24,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -39,7 +35,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
@@ -161,7 +156,7 @@ public class WyHelper
 		}
 	}
 
-	public static void generateExtraTypScriptFiles()
+	public static void generateExtraWebAppFiles()
 	{
 		getFancyAbilitiesList();
 		
@@ -196,11 +191,11 @@ public class WyHelper
 					if(abl.getAttribute().getPotionEffectsForProjectile() != null && abl.getAttribute().getPotionEffectsForProjectile().length > 0) loadedParams.put("onHitEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForProjectile()) + "]");
 					if(abl.getAttribute().getPotionEffectsForUser() != null && abl.getAttribute().getPotionEffectsForUser().length > 0) loadedParams.put("selfEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForUser()) + "]");
 
-					for(String manualParamKey : Values.abilityManualParams.keySet())
+					for(String manualParamKey : Values.abilityWebAppExtraParams.keySet())
 					{
 						if(WyHelper.getFancyName(abl.getAttribute().getAttributeName()).equalsIgnoreCase(manualParamKey))
 						{
-							String[] params = Values.abilityManualParams.get(manualParamKey);
+							String[] params = Values.abilityWebAppExtraParams.get(manualParamKey);
 							
 							for(int j = 0; j < params.length; j++)
 							{
@@ -590,51 +585,69 @@ public class WyHelper
 		
 		return blocks;
 	}
-	
-	@Deprecated
-	public static void createSphere(Object e, int size, final Block b, Block... bannedBlocks)
-	{
-		int x = 0, y = 0, z = 0;
-		if (e instanceof Entity)
-		{
-			x = (int) ((Entity) e).posX;
-			y = (int) ((Entity) e).posY;
-			z = (int) ((Entity) e).posZ;
-		}
-		else if (e instanceof TileEntity)
-		{
-			x = (int) ((TileEntity) e).xCoord;
-			y = (int) ((TileEntity) e).yCoord;
-			z = (int) ((TileEntity) e).zCoord;
-		}
 
-		createSphere(e, x, y, z, size, b, bannedBlocks);
+	public static List<int[]> createEmptySphere(World world, int posX, int posY, int posZ, int size, final Block block, String... blockRules)
+	{
+		List<int[]> blocks = new ArrayList<int[]>();
+
+	    try
+		{
+			Thread sphereGenerator = new Thread("Sphere Generator")
+			{
+		        @Override
+		        public void run()
+		        {
+					Sphere.generate(posX, posY, posZ, size, new ISphere()
+					{
+						public void call(int x, int y, int z)
+						{
+							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
+							blocks.add(new int[] {x, y, z});
+						}
+					});
+		        }
+		    };
+		    sphereGenerator.start();
+			sphereGenerator.join();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	    
+		return blocks;
 	}
 
-	@Deprecated
-	public static void createSphere(Object e, int x, int y, int z, int size, final Block b, Block... bannedBlocks)
+	public static List<int[]> createFilledSphere(World world, int posX, int posY, int posZ, int size, final Block block, String... blockRules)
 	{
-		final World world;
-		if (e instanceof Entity)
-			world = ((Entity) e).worldObj;
-		else if (e instanceof TileEntity)
-			world = ((TileEntity) e).getWorldObj();
-		else
-			world = null;
-		
-		Sphere.generate(x, y, z, size, new ISphere()
+		List<int[]> blocks = new ArrayList<int[]>();
+
+	    try
 		{
-			public void call(int x, int y, int z)
+			Thread sphereGenerator = new Thread("Sphere Generator")
 			{
-				//for(Block bannedBlock : bannedBlocks)
-				//{
-					//if(world.getBlock(x, y, z) == bannedBlock)
-					//	continue;
-					
-					world.setBlock(x, y, z, b);
-				//}
-			}
-		});
+		        @Override
+		        public void run()
+		        {
+					Sphere.generateFilled(posX, posY, posZ, size, new ISphere()
+					{
+						public void call(int x, int y, int z)
+						{
+							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
+							blocks.add(new int[] {x, y, z});
+						}
+					});
+		        }
+		    };
+		    sphereGenerator.start();
+			sphereGenerator.join();
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+	    
+		return blocks;
 	}
 	
 	public static void removeStackFromInventory(EntityPlayer player, ItemStack stack)

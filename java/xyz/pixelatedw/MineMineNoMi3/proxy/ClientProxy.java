@@ -161,23 +161,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMilkyDial.class, new RenderBlockDial(new ModelMilkyDial(), "milkydial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRejectDial.class, new RenderBlockDial(new ModelRejectDial(), "rejectdial"));
 		
-		/* 
-		//Temp
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityFist.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.SPRINGDEATHKNOCK).setModelOffsets(0, 2, 0)));		
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityBazooka.class, new AbilityRenderer(new AbilityAttribute(ListExtraAttributes.GOMUGOMUNOBAZOOKA).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityBrickBat.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.BRICKBAT).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityHydra.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.HYDRA).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityMeigo.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.MEIGO).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityNoroBeam.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.NORONOROBEAM).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityPaw.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.PADHO).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityPheasant.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.ICEBLOCKPHEASANT).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityShark.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.MURASAME).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntitySpear.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.DORUDORUARTSMORI).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityTrident.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.ICEBLOCKPARTISAN).setModelOffsets(0, 2, 0)));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityYukiRabi.class, new AbilityRenderer(new AbilityAttribute(ListAttributes.YUKIRABI).setModelOffsets(0, 2, 0)));	
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixFull.class, new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull"));
-		RenderingRegistry.registerEntityRenderingHandler(TempEntityPhoenixHybrid.class, new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid"));
-		*/
+		//Temp Shit
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityZouHybrid.class, new RenderZoanMorph(new ModelZouHybrid(), "zouhybrid"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityZouFull.class, new RenderZoanMorph(new ModelZouFull(), "zoufull"));
 		RenderingRegistry.registerEntityRenderingHandler(TempEntityMokuPower.class, new RenderZoanMorph(new ModelMoguPower(), "mokupower"));

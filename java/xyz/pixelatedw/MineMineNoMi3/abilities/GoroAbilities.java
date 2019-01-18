@@ -8,6 +8,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -27,6 +28,15 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class GoroAbilities
 {
+	
+	static
+	{
+		Values.abilityWebAppExtraParams.put("elthor", new String[] {"desc", "Focuses the user\\'s electricity to strike the opponent with lightning from above."});
+		Values.abilityWebAppExtraParams.put("voltvari", new String[] {"desc", "Creates a concentrated ball of lightning, which varies in power."});
+		Values.abilityWebAppExtraParams.put("raigo", new String[] {"desc", "Creates a huge cloud filled with electricity, which causes massive damage."});
+		Values.abilityWebAppExtraParams.put("kari", new String[] {"desc", "Creates an electrical current around the user, which then explodes."});
+		Values.abilityWebAppExtraParams.put("sango", new String[] {"desc", "Launches a huge concentrated chunk of electricity at the opponent."});
+	}
 
 	public static Ability[] abilitiesArray = new Ability[] {new ElThor(), new VoltVari(), new Raigo(), new Kari(), new Sango(), new SparkStep()};
 	
@@ -289,9 +299,7 @@ public class GoroAbilities
 				}
 				super.use(player);
 			}
-
-			}
 		}
-
-
 	}
+	
+}

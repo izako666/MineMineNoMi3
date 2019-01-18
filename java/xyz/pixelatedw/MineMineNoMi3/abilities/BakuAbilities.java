@@ -36,6 +36,20 @@ public class BakuAbilities
 					Blocks.gravel, Blocks.packed_ice
 			};
 	
+	public static class BakuBakuFactory extends Ability
+	{
+		public BakuBakuFactory() 
+		{
+			super(ListAttributes.BAKUBAKUFACTORY); 
+		}
+		
+		public void use(EntityPlayer player)
+		{
+			//Something something open a crafting GUI :)
+			super.use(player);
+		}
+	}
+	
 	public static class BakuTsuiho extends Ability
 	{
 		private List<ItemStack> projectiles = new ArrayList<ItemStack>();
@@ -95,7 +109,7 @@ public class BakuAbilities
 			for(int j = 0; j < this.loadedProjectiles.size(); j++)
 			{
 				AbilityProjectile proj = new BakuProjectiles.BeroCannon(player.worldObj, player, ListAttributes.BEROCANNON);
-				int distanceBetweenProjectiles = this.loadedProjectiles.size() / 3;
+				int distanceBetweenProjectiles = this.loadedProjectiles.size() / 6;
 				
 				proj.setLocationAndAngles(
 						player.posX + WyMathHelper.randomWithRange(-distanceBetweenProjectiles, distanceBetweenProjectiles) + player.worldObj.rand.nextDouble(), 

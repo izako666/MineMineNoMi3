@@ -12,115 +12,123 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 
 public class AbilityAttribute 
 {	
-	private String attributeName = "N/A", abilityTexture = "n/a", customDisplayName = "n/a";
-	private boolean projectileExplosionHasFire = true, projectileExplosionHasSmoke = true, canBeCharged = false, isRepeater = false, itemExplosionHasFire = true, itemExplosionHasSmoke = true, isPassive = false, isPunch = false, entityMoveThroughBlocks = false;
-	private int itemTicks = 0, entityTicks = 60, entitySpeed = 1, entityExplosion = 0, entityNewExplosion = 0, potionEffectAoeRadius = 0, itemMaxCharge = 0, itemExplosion = 0, itemRepeaterTime = 6, itemRepeaterFreq = 1;
-	private float projectileAlpha = 255, entityDamage = 1, punchDamage = 1;
-	private double entityXRotation = 0, entityYRotation = 0, entityZRotation = 0;
-	private Color entityColor = Color.decode("#FFFFFF"), textureHue = Color.decode("#FFFFFF");
-	private double[] entityScale = new double[] {1, 1, 1}, entityPos = new double[] {0, 0, 0}, entityMotion = new double[] {0, 0, 0}, entityCollisionSize = new double[] {1, 1}, modelOffset = new double[] {0, 0, 0};
-	private ModelBase entityModel = null;
-	private PotionEffect[] potionEffectsForProjectile = null, potionEffectsForUser = null, potionEffectsForAoE = null, potionEffectsForHit = null;
-	private ResourceLocation entityTexture = null;
+	// Attribute Key
+	private String attributeName;
+	
+	// Ability related fields
+	private String abilityDisplayName = "n/a", abilityTexture = "n/a";
+	private boolean abilityExplosionHasFire = true, abilityExplosionCanBreakBlocks = true, abilityIsChargeable, abilityIsRepeater, abilityIsPassive, abilityIsPunch, abilityIsFreePassive, abilityStopCharging;
+	private int abilityCooldown, abilityMaxCharge, abilityRepeaterTime = 6, abilityRepeaterFreq = 1, abilityExplosionPower;
+	private float abilityPunchDamage = 1;
+	
+	// Projectile related fields
+	private boolean projectileMoveThroughBlocks, projectileExplosionHasFire = true, projectileExplosionCanBreakBlocks = true;
+	private int projectileTicks = 60, projectileSpeed = 1;
+	private float projectileAlpha = 255, projectileDamage = 1;
+	private double projectileXRotation, projectileYRotation, projectileZRotation;
+	private Color projectileColor = Color.decode("#FFFFFF");
+	private double[] projectileScale = new double[] {1, 1, 1}, projectileCollisionSize = new double[] {1, 1}, projectileModelOffset = new double[] {0, 0, 0};
+	private ResourceLocation projectileTexture;
+	private ModelBase projectileModel;
+	
+	// Effects
+	private int potionEffectAoeRadius;
+	private PotionEffect[] potionEffectsForProjectile, potionEffectsForUser, potionEffectsForAoE, potionEffectsForHit;
+	
 	
 	public AbilityAttribute() {}	
-	public AbilityAttribute(String name) {this.attributeName = name;}
+	public AbilityAttribute(String name) 
+	{ 
+		this.attributeName = name; 
+		this.abilityDisplayName = this.attributeName;
+		this.abilityTexture = this.attributeName;
+	}
 		
 	public AbilityAttribute(AbilityAttribute attr) 
 	{
 		this.attributeName = attr.attributeName;
+
+		this.abilityIsChargeable = attr.abilityIsChargeable;
+		this.abilityIsRepeater = attr.abilityIsRepeater;
+		this.abilityIsPassive = attr.abilityIsPassive;
+		this.abilityIsPunch = attr.abilityIsPunch;
+		this.abilityStopCharging = attr.abilityStopCharging;
+		this.abilityIsFreePassive = attr.abilityIsFreePassive;
 		
-		this.projectileExplosionHasFire = attr.projectileExplosionHasFire;
-		this.projectileExplosionHasSmoke = attr.projectileExplosionHasSmoke;
-		this.canBeCharged = attr.canBeCharged;
-		this.isRepeater = attr.isRepeater;
-		this.itemExplosionHasFire = attr.itemExplosionHasFire;
-		this.itemExplosionHasSmoke = attr.itemExplosionHasSmoke;
-		this.isPassive = attr.isPassive;
-		this.isPunch = attr.isPunch;
-		
-		this.itemTicks = attr.itemTicks;
-		this.entityTicks = attr.entityTicks;
-		this.entitySpeed = attr.entitySpeed;
-		this.entityExplosion = attr.entityExplosion;
-		this.entityNewExplosion = attr.entityNewExplosion;
+		this.abilityCooldown = attr.abilityCooldown;
+		this.projectileTicks = attr.projectileTicks;
+		this.projectileSpeed = attr.projectileSpeed;
+		this.abilityExplosionPower = attr.abilityExplosionPower;
 		this.potionEffectAoeRadius = attr.potionEffectAoeRadius;
-		this.itemMaxCharge = attr.itemMaxCharge;
-		this.itemExplosion = attr.itemExplosion;
-		this.itemRepeaterTime = attr.itemRepeaterTime;
-		this.itemRepeaterFreq = attr.itemRepeaterFreq;
-		this.entityMoveThroughBlocks = attr.entityMoveThroughBlocks;
+		this.abilityMaxCharge = attr.abilityMaxCharge;
+		this.abilityRepeaterTime = attr.abilityRepeaterTime;
+		this.abilityRepeaterFreq = attr.abilityRepeaterFreq;
+		this.projectileMoveThroughBlocks = attr.projectileMoveThroughBlocks;
 		
 		this.projectileAlpha = attr.projectileAlpha;
-		this.entityDamage = attr.entityDamage;
+		this.projectileDamage = attr.projectileDamage;
 		
-		this.entityXRotation = attr.entityXRotation;
-		this.entityYRotation = attr.entityYRotation;
-		this.entityZRotation = attr.entityZRotation;
-		this.punchDamage = attr.punchDamage;
+		this.projectileXRotation = attr.projectileXRotation;
+		this.projectileYRotation = attr.projectileYRotation;
+		this.projectileZRotation = attr.projectileZRotation;
+		this.abilityPunchDamage = attr.abilityPunchDamage;
 		
-		this.entityColor = attr.entityColor;
-		this.textureHue = attr.textureHue;
+		this.projectileColor = attr.projectileColor;
 		
-		this.entityScale = attr.entityScale;
-		this.entityPos = attr.entityPos;
-		this.entityMotion = attr.entityMotion;
-		this.entityCollisionSize = attr.entityCollisionSize;
-		this.modelOffset = attr.modelOffset;
+		this.projectileScale = attr.projectileScale;
+		this.projectileCollisionSize = attr.projectileCollisionSize;
+		this.projectileModelOffset = attr.projectileModelOffset;
 		
-		this.entityModel = attr.entityModel;
+		this.projectileModel = attr.projectileModel;
 		this.potionEffectsForProjectile = attr.potionEffectsForProjectile;
 		this.potionEffectsForUser = attr.potionEffectsForUser;
 		this.potionEffectsForAoE = attr.potionEffectsForAoE;
 		this.potionEffectsForHit = attr.potionEffectsForHit;
 		
-		this.entityTexture = attr.entityTexture;
+		this.projectileTexture = attr.projectileTexture;
 		this.abilityTexture = attr.abilityTexture;
-		this.customDisplayName = attr.customDisplayName;
+		this.abilityDisplayName = attr.abilityDisplayName;
 	}
 	
 	
 	public AbilityAttribute setAttributeName(String name) { this.attributeName = name; return this; }
 		//Ability
-	public AbilityAttribute setAbilityCooldown(double seconds) { this.itemTicks = MathHelper.ceiling_double_int(seconds * 20); return this; }	
-	public AbilityAttribute setAbilityCharges(int ticks) { this.canBeCharged = true; this.itemMaxCharge = ticks; return this; }
-	public AbilityAttribute setAbilityExplosion(int i, boolean fire, boolean explosion) { this.itemExplosion = i; this.itemExplosionHasFire = fire; this.itemExplosionHasSmoke = explosion; return this; }
-	public AbilityAttribute setAbilityExplosion(int i, boolean fire) { this.itemExplosion = i; this.itemExplosionHasFire = fire; return this; }
-	public AbilityAttribute setAbilityExplosion(int i) { this.itemExplosion = i; return this; }
-	public AbilityAttribute setAbilityPassive() { this.isPassive = true; return this;}
-	public AbilityAttribute setAbilityPunch() { this.isPassive = true; this.isPunch = true; return this; }
-	public AbilityAttribute setAbilityPunch(float damage) { this.isPunch = true; this.punchDamage = damage; return this; }
-	public AbilityAttribute setAbilityRepeater() { this.isRepeater = true; this.itemRepeaterTime = 6; this.itemRepeaterFreq = 1; return this; }
-	public AbilityAttribute setAbilityRepeater(int time) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = 1; return this; }
-	public AbilityAttribute setAbilityRepeater(int time, int frequency) { this.isRepeater = true; this.itemRepeaterTime = time; this.itemRepeaterFreq = frequency; return this; }
-	public AbilityAttribute setAbilityTextureHue(Color color) {this.textureHue = color;return this;}
-	public AbilityAttribute setAbilityTextureHue(int color) {this.textureHue = new Color(color);return this;}
-	public AbilityAttribute setAbilityTextureHue(String color) {if(color.contains("#")){this.textureHue = Color.decode(color);}else{this.textureHue = Color.decode("#" + color);}return this;}
+	public AbilityAttribute setAbilityCooldown(double seconds) { this.abilityCooldown = MathHelper.ceiling_double_int(seconds * 20); return this; }	
+	public AbilityAttribute setAbilityCharges(int ticks) { this.abilityIsChargeable = true; this.abilityMaxCharge = ticks; return this; }
+	public AbilityAttribute setAbilityCharges(int ticks, boolean earlyStop) { this.abilityIsChargeable = true; this.abilityMaxCharge = ticks; this.abilityStopCharging = earlyStop; return this; }
+	public AbilityAttribute setAbilityExplosion(int i, boolean fire, boolean explosion) { this.abilityExplosionPower = i; this.abilityExplosionHasFire = fire; this.abilityExplosionCanBreakBlocks = explosion; return this; }
+	public AbilityAttribute setAbilityExplosion(int i, boolean fire) { this.abilityExplosionPower = i; this.abilityExplosionHasFire = fire; return this; }
+	public AbilityAttribute setAbilityExplosion(int i) { this.abilityExplosionPower = i; return this; }
+	public AbilityAttribute setAbilityPassive() { this.abilityIsPassive = true; return this;}
+	public AbilityAttribute setAbilityPassive(boolean freePassive) { this.abilityIsPassive = true; this.abilityIsFreePassive = freePassive; return this;}
+	public AbilityAttribute setAbilityPunch() { this.abilityIsPassive = true; this.abilityIsPunch = true; return this; }
+	public AbilityAttribute setAbilityPunch(float damage) { this.abilityIsPunch = true; this.abilityPunchDamage = damage; return this; }
+	public AbilityAttribute setAbilityRepeater() { this.abilityIsRepeater = true; this.abilityRepeaterTime = 6; this.abilityRepeaterFreq = 1; return this; }
+	public AbilityAttribute setAbilityRepeater(int time) { this.abilityIsRepeater = true; this.abilityRepeaterTime = time; this.abilityRepeaterFreq = 1; return this; }
+	public AbilityAttribute setAbilityRepeater(int time, int frequency) { this.abilityIsRepeater = true; this.abilityRepeaterTime = time; this.abilityRepeaterFreq = frequency; return this; }
 	public AbilityAttribute setAbilityTexture(String textureName) {this.abilityTexture = textureName; return this;}
-	public AbilityAttribute setAbilityDisplayName(String displayName) {this.customDisplayName = displayName; return this;}	
+	public AbilityAttribute setAbilityDisplayName(String displayName) {this.abilityDisplayName = displayName; return this;}	
 		//Projectile
-	public AbilityAttribute setProjectileTicks(int i) {this.entityTicks = i;return this;}
-	public AbilityAttribute setProjectileDamage(float i) {this.entityDamage = i;return this;}
-	public AbilityAttribute setProjectileModel(ModelBase i) {this.entityModel = i;return this;}
-	public AbilityAttribute setProjectileColor(Color i) {this.entityColor = i;return this;}
-	public AbilityAttribute setProjectileColor(int i) {this.entityColor = new Color(i);return this;}
-	public AbilityAttribute setProjectileColor(String color) {if(color.contains("#")){this.entityColor = Color.decode(color);}else{this.entityColor = Color.decode("#" + color);}return this;}
+	public AbilityAttribute setProjectileTicks(int i) {this.projectileTicks = i;return this;}
+	public AbilityAttribute setProjectileDamage(float i) {this.projectileDamage = i;return this;}
+	public AbilityAttribute setProjectileModel(ModelBase i) {this.projectileModel = i;return this;}
+	public AbilityAttribute setProjectileColor(Color i) {this.projectileColor = i;return this;}
+	public AbilityAttribute setProjectileColor(int i) {this.projectileColor = new Color(i);return this;}
+	public AbilityAttribute setProjectileColor(String color) {if(color.contains("#")){this.projectileColor = Color.decode(color);}else{this.projectileColor = Color.decode("#" + color);}return this;}
 	public AbilityAttribute setProjectileAlpha(float alpha) { this.projectileAlpha = alpha; return this; }
-	public AbilityAttribute setProjectileSize(double x, double y, double z) { this.entityScale = new double[] {x, y, z}; return this; }
-	public AbilityAttribute setProjectileSize(double i[]) { this.entityScale = i; return this; }
-	public AbilityAttribute setProjectilePosition(double i[]) { this.entityPos = i; return this; }
-	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.entityExplosion = i;this.projectileExplosionHasFire = fire;this.itemExplosionHasSmoke = explosion;return this;}
-	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.entityExplosion = i;this.projectileExplosionHasFire = fire;return this;}
-	public AbilityAttribute setProjectileExplosion(int i) {this.entityExplosion = i;return this;}
-	public AbilityAttribute setProjectileNewExplosion(int i) {this.entityNewExplosion = i; return this;}
-	public AbilityAttribute setProjectileSpeed(int i) {this.entitySpeed = i;return this;}
-	public AbilityAttribute setProjectileTexture(String textureName) {this.entityTexture = new ResourceLocation(ID.PROJECT_ID + ":textures/models/projectiles/" + textureName +".png"); return this;}
-	public AbilityAttribute setProjectileXRotation(double angle) { entityXRotation = angle; return this;}
-	public AbilityAttribute setProjectileYRotation(double angle) { entityYRotation = angle; return this;}
-	public AbilityAttribute setProjectileZRotation(double angle) { entityZRotation = angle; return this;}
-	public AbilityAttribute setProjectileMoveThroughBlocks(boolean flag) { entityMoveThroughBlocks = flag; return this; }
-	public AbilityAttribute setProjectileCollisionSizes(double i, double j) { this.entityCollisionSize = new double[] {i, j}; return this; }
-	public AbilityAttribute setModelOffsets(double i, double j, double k) { this.modelOffset = new double[] {i, j, k}; return this; }
+	public AbilityAttribute setProjectileSize(double x, double y, double z) { this.projectileScale = new double[] {x, y, z}; return this; }
+	public AbilityAttribute setProjectileSize(double i[]) { this.projectileScale = i; return this; }
+	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.abilityExplosionPower = i;this.projectileExplosionHasFire = fire;this.abilityExplosionCanBreakBlocks = explosion;return this;}
+	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.abilityExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
+	public AbilityAttribute setProjectileExplosion(int i) {this.abilityExplosionPower = i;return this;}
+	public AbilityAttribute setProjectileSpeed(int i) {this.projectileSpeed = i;return this;}
+	public AbilityAttribute setProjectileTexture(String textureName) {this.projectileTexture = new ResourceLocation(ID.PROJECT_ID + ":textures/models/projectiles/" + textureName +".png"); return this;}
+	public AbilityAttribute setProjectileXRotation(double angle) { projectileXRotation = angle; return this;}
+	public AbilityAttribute setProjectileYRotation(double angle) { projectileYRotation = angle; return this;}
+	public AbilityAttribute setProjectileZRotation(double angle) { projectileZRotation = angle; return this;}
+	public AbilityAttribute setProjectileMoveThroughBlocks(boolean flag) { projectileMoveThroughBlocks = flag; return this; }
+	public AbilityAttribute setProjectileCollisionSizes(double i, double j) { this.projectileCollisionSize = new double[] {i, j}; return this; }
+	public AbilityAttribute setModelOffsets(double i, double j, double k) { this.projectileModelOffset = new double[] {i, j, k}; return this; }
 		//Potion Effects
 	public AbilityAttribute addEffects(EffectType type, PotionEffect... e) 
 	{
@@ -134,42 +142,41 @@ public class AbilityAttribute
 
 
 		//Ability
-	public int getAbilityCooldown() { return itemTicks; }
-	public boolean isRepeater() { return this.isRepeater; }
-	public boolean canAbilityBeCharged() { return this.canBeCharged;}
-	public int getAbilityExplosionPower() { return this.itemExplosion; }
-	public int getAbilityCharges() {return this.itemMaxCharge;}	
-	public boolean canAbilityExplosionSetFire() { return this.itemExplosionHasFire; }
-	public boolean canAbilityExplosionDestroyBlocks() { return this.itemExplosionHasSmoke; }
-	public boolean isPassive() { return this.isPassive; }
-	public int getAbilityRepeaterTime() { return this.itemRepeaterTime; }
-	public int getAbilityRepeaterFrequency() { return this.itemRepeaterFreq; }
-	public boolean isPunch() { return this.isPunch; }
-	public float getPunchDamage() { return this.punchDamage; }
-	public Color getTextureHue() { return this.textureHue; }
+	public int getAbilityCooldown() { return abilityCooldown; }
+	public boolean isRepeater() { return this.abilityIsRepeater; }
+	public boolean canStopChargeEarly() { return this.abilityStopCharging; }
+	public boolean canAbilityBeCharged() { return this.abilityIsChargeable;}
+	public int getAbilityExplosionPower() { return this.abilityExplosionPower; }
+	public int getAbilityCharges() {return this.abilityMaxCharge;}	
+	public boolean canAbilityExplosionSetFire() { return this.abilityExplosionHasFire; }
+	public boolean canAbilityExplosionDestroyBlocks() { return this.abilityExplosionCanBreakBlocks; }
+	public boolean isPassive() { return this.abilityIsPassive; }
+	public int getAbilityRepeaterTime() { return this.abilityRepeaterTime; }
+	public int getAbilityRepeaterFrequency() { return this.abilityRepeaterFreq; }
+	public boolean isPunch() { return this.abilityIsPunch; }
+	public float getPunchDamage() { return this.abilityPunchDamage; }
 	public String getAbilityTexture() { return this.abilityTexture; }
-	public String getAbilityDisplayName() { return this.customDisplayName; }
+	public String getAbilityDisplayName() { return this.abilityDisplayName; }
+	public boolean isAbilityFreePassive() { return this.abilityIsFreePassive; }
 		//Projectile
-	public boolean hasProjectile() { return this.entityTicks > 0 && this.entityModel != null; }
-	public int getProjectileTicks() { return entityTicks; }
-	public float getProjectileDamage() { return entityDamage; }
-	public Color getProjectileColor() { return entityColor; }
-	public ModelBase getProjectileModel() { return entityModel; }
-	public double[] getProjectileSize() { return entityScale; }
-	public double[] getProjectilePosition() { return entityPos; }
-	public int getProjectileSpeed() { return entitySpeed; }
-	public int getProjectileExplosionPower() { return entityExplosion; }		
-	public int getProjectileNewExplosionPower() { return entityNewExplosion; }
+	public boolean hasProjectile() { return this.projectileTicks > 0 && this.projectileModel != null; }
+	public int getProjectileTicks() { return projectileTicks; }
+	public float getProjectileDamage() { return projectileDamage; }
+	public Color getProjectileColor() { return projectileColor; }
+	public ModelBase getProjectileModel() { return projectileModel; }
+	public double[] getProjectileSize() { return projectileScale; }
+	public int getProjectileSpeed() { return projectileSpeed; }
+	public int getProjectileExplosionPower() { return abilityExplosionPower; }		
 	public boolean canExplosionSetFire() { return projectileExplosionHasFire; }
-	public boolean canExplosionDestroyBlocks() { return itemExplosionHasSmoke; }	
+	public boolean canExplosionDestroyBlocks() { return abilityExplosionCanBreakBlocks; }	
 	public float getProjectileAlpha() { return this.projectileAlpha; }
-	public ResourceLocation getProjectileTexture() { return this.entityTexture; }
-	public double getProjectileXRotation() { return this.entityXRotation; }
-	public double getProjectileYRotation() { return this.entityYRotation; }
-	public double getProjectileZRotation() { return this.entityZRotation; }
-	public boolean canProjectileMoveThroughBlocks() { return this.entityMoveThroughBlocks; }
-	public double[] getProjectileCollisionSizes() { return this.entityCollisionSize; }
-	public double[] getModelOffsets() { return this.modelOffset; }
+	public ResourceLocation getProjectileTexture() { return this.projectileTexture; }
+	public double getProjectileXRotation() { return this.projectileXRotation; }
+	public double getProjectileYRotation() { return this.projectileYRotation; }
+	public double getProjectileZRotation() { return this.projectileZRotation; }
+	public boolean canProjectileMoveThroughBlocks() { return this.projectileMoveThroughBlocks; }
+	public double[] getProjectileCollisionSizes() { return this.projectileCollisionSize; }
+	public double[] getModelOffsets() { return this.projectileModelOffset; }
 		//Potion Effects
 	public PotionEffect[] getPotionEffectsForHit() {return this.potionEffectsForHit;}
 	public PotionEffect[] getPotionEffectsForProjectile() {return this.potionEffectsForProjectile;}

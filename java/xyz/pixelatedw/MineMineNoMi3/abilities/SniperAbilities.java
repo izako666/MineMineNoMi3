@@ -1,12 +1,20 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SniperProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class SniperAbilities
 {
+	static
+	{
+		Values.abilityWebAppExtraParams.put("kaenboshi", new String[] {"desc", "Fires a flaming pellet, that sets the target on fire."});
+		Values.abilityWebAppExtraParams.put("kemuriboshi", new String[] {"desc", "On impact releases smoke that poisons and confuses targets."});
+		Values.abilityWebAppExtraParams.put("renpatsunamariboshi", new String[] {"desc", "Lets the user fire a barrage of exploding shots."});
+		Values.abilityWebAppExtraParams.put("sakuretsusabotenboshi", new String[] {"desc", "The fired projectile explodes on impact and creates cacti arond the target, to trap them."});
+	}
 
 	public static Ability KAENBOSHI = new KaenBoshi();
 	public static Ability KEMURIBOSHI = new KemuriBoshi();

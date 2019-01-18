@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
+import java.util.Arrays;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -7,13 +9,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
@@ -47,7 +52,7 @@ public class EventsPassives
 				}
 			}
 				
-			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F && !entity.canRenderOnFire())
+			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F)
 				entity.setFire(3);
 		}
 
@@ -60,22 +65,9 @@ public class EventsPassives
 
 			if (props.getUsedFruit().equals("hiehie"))
 			{
-				if (DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
+				if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
 				{
-					final EntityLivingBase finalPlayer = player;
-					for (int x1 = -1; x1 < 2; x1++)
-						for (int y1 = -1; y1 < 0; y1++)
-							for (int z1 = -1; z1 < 2; z1++)
-							{
-								Sphere.generate((int) player.posX - 1 + x1, (int) player.posY + y1, (int) player.posZ + z1, 1, new ISphere()
-								{
-									public void call(int x, int y, int z)
-									{
-										if (finalPlayer.worldObj.getBlock(x, y, z) == Blocks.water)
-											finalPlayer.worldObj.setBlock(x, y, z, Blocks.ice);
-									}
-								});
-							}
+					WyHelper.createFilledSphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 2, Blocks.ice, "liquids");
 				}
 			}
 
@@ -210,6 +202,7 @@ public class EventsPassives
 		{
 			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
 			ExtendedEntityData props = ExtendedEntityData.get(attacker);
+			AbilityProperties abilityProps = AbilityProperties.get(attacker);
 			EntityLivingBase attacked = event.entityLiving;
 			
 			if(props.getUsedFruit().equalsIgnoreCase("kilokilo"))
@@ -226,10 +219,22 @@ public class EventsPassives
 				EntityDoppelman doppelman = (EntityDoppelman) WyHelper.getEntitiesNear(attacker, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
 				
 				if(doppelman != null)
-				{
 					doppelman.forcedTargets.add(attacked);
-				}
 			}
+			
+			if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase("power"))
+				event.ammount += 3;
+				
+			if(props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
+				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
+
+			if(props.hasBusoHakiActive())
+			{
+				double power = props.getDoriki() / 500;
+				event.ammount += power;
+			}
+			
+			System.out.println(event.ammount);
 		}
 	}
 
@@ -249,6 +254,29 @@ public class EventsPassives
 					event.setCanceled(true);
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onClonePlayer(PlayerEvent.Clone e) 
+	{
+		if(e.wasDeath) 
+		{
+/*			NBTTagCompound compound = new NBTTagCompound();
+
+			ExtendedEntityData oldProps = ExtendedEntityData.get(e.original);
+			oldProps.saveNBTData(compound);
+			ExtendedEntityData newProps = ExtendedEntityData.get(e.entityPlayer);
+			
+			if(oldProps.getUsedFruit().equalsIgnoreCase("yomiyomi") && !oldProps.hasYomiActive())
+			{
+				AbilityProperties newAbilityProps = AbilityProperties.get(e.entityPlayer);
+				
+				for(Ability a : abilities)
+					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+						abilityProps.addDevilFruitAbility(a);
+				newProps.setYomiActive(true);
+			}*/
 		}
 	}
 

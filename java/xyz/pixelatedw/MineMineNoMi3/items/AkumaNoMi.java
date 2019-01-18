@@ -61,9 +61,10 @@ public class AkumaNoMi extends ItemFood
 			if(this.type == EnumFruitType.LOGIA)
 				props.setIsLogia(true);
 			 
-			for(Ability a : abilities)
-				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
-					abilityProps.addDevilFruitAbility(a);
+			if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
+				for(Ability a : abilities)
+					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+						abilityProps.addDevilFruitAbility(a);
 		}
 		else
 		{	
@@ -91,9 +92,10 @@ public class AkumaNoMi extends ItemFood
 					if(this.type == EnumFruitType.LOGIA)
 						props.setIsLogia(true);
 					 
-					for(Ability a : abilities)
-						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
-							abilityProps.addDevilFruitAbility(a);
+					if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
+						for(Ability a : abilities)
+							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+								abilityProps.addDevilFruitAbility(a);
 				}
 			}
 		}	

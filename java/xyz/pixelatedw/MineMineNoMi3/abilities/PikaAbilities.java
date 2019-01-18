@@ -9,6 +9,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -21,6 +22,16 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 public class PikaAbilities
 {
 
+	static
+	{
+		Values.abilityWebAppExtraParams.put("yasakaninomagatama", new String[] {"desc", "Fires a torrent of deadly light particles, causing huge destruction."});
+		Values.abilityWebAppExtraParams.put("yatanokagami", new String[] {"desc", "Uses light to instantly teleport the user to their desired location."});
+		Values.abilityWebAppExtraParams.put("amaterasu", new String[] {"desc", "Creates an immense beam of light, which causes massive damage."});
+		Values.abilityWebAppExtraParams.put("flash", new String[] {"desc", "The user creates a bright flash of light, blinding their opponents."});
+		Values.abilityWebAppExtraParams.put("amanomurakumo", new String[] {"desc", "Focuses light in the user\\'s hand to create a sword."});
+
+	}
+	
 	public static Ability[] abilitiesArray = new Ability[] {new YataNoKagami(), new AmaNoMurakumo(), new YasakaniNoMagatama(), new Amaterasu(), new Flash()};
 	
 	

@@ -69,17 +69,13 @@ public class YamiProjectiles
 			{
 				if(hit.entityHit != null)
 				{
-					WyHelper.createSphere(hit.entityHit, 3, ListMisc.Darkness);
-					WyHelper.createSphere(hit.entityHit, 2, ListMisc.Darkness);
-					WyHelper.createSphere(hit.entityHit, 1, ListMisc.Darkness);
+					WyHelper.createFilledSphere(hit.entityHit.worldObj, hit.blockX, hit.blockY, hit.blockZ, 3, ListMisc.Darkness, "air");
 					
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
 				else
 				{
-					WyHelper.createSphere(this, 3, ListMisc.Darkness);
-					WyHelper.createSphere(this, 2, ListMisc.Darkness);
-					WyHelper.createSphere(this, 1, ListMisc.Darkness);
+					WyHelper.createFilledSphere(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, 3, ListMisc.Darkness, "air");
 					
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DARKMATTER, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}

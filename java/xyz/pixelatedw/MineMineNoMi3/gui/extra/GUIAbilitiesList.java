@@ -101,12 +101,7 @@ public class GUIAbilitiesList extends GuiScrollingList
 				
 		GL11.glPushMatrix();
 		{
-			if(attr.getTextureHue() != null)
-				GL11.glColor3d(attr.getTextureHue().getRed()/255, attr.getTextureHue().getGreen()/255, attr.getTextureHue().getBlue()/255);
-			if(attr.getAbilityTexture() != null && !attr.getAbilityTexture().equalsIgnoreCase("n/a"))
-	    		WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAbilityTexture()), this.left + 10, slotTop + 2, 16, 16);
-			else
-	    		WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAttributeName()), this.left + 10, slotTop + 2, 16, 16);
+	    	WyRenderHelper.drawAbilityIcon(WyHelper.getFancyName(attr.getAbilityTexture()), this.left + 10, slotTop + 2, 16, 16);
 		}
 		GL11.glPopMatrix();
 	}

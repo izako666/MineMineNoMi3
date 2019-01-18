@@ -38,6 +38,11 @@ public class EntityMarine extends MarineData
 	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
 	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 5; }
 	
+	public boolean isLogia() 
+	{ 
+		return false; 
+	}	
+	
     protected void dropRareDrop(int i)
     {
         switch (this.rand.nextInt(4))
