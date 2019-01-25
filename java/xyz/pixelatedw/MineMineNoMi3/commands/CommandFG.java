@@ -14,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.Quest;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestManager;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
@@ -70,6 +71,14 @@ public class CommandFG extends CommandBase
 				{
 					worldData.issueBounty("Test Name #"+i, i*100 + player.worldObj.rand.nextInt(1000));
 				}
+			}
+			else if(str[0].equalsIgnoreCase("monsterspawner"))
+			{
+				String toSpawn1 = ID.PROJECT_ID + ".Marine with Sword";
+				
+				TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+				player.worldObj.setBlock((int)player.posX, (int)player.posY + 1, (int)player.posZ, ListMisc.CustomSpawner );
+				player.worldObj.setTileEntity((int)player.posX, (int)player.posY + 1, (int)player.posZ, spw1);
 			}
 			
 			else if(str[0].equalsIgnoreCase("scenario"))

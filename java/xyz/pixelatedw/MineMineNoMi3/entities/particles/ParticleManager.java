@@ -39,6 +39,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectDarkMatter;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectKorouzu;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yuki.ParticleEffectFubuki;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.zou.ParticleEffectGreatStomp;
 
 public class ParticleManager
 {
@@ -58,6 +59,9 @@ public class ParticleManager
 	private HashMap<String, ParticleEffect> createMap()
 	{
 		HashMap<String, ParticleEffect> map = new HashMap<String, ParticleEffect>();
+		
+		// Zou
+		map.put(ID.PARTICLEFX_GREATSTOMP, new ParticleEffectGreatStomp());
 		
 		// Baku
 		map.put(ID.PARTICLEFX_BAKUMUNCH, new ParticleEffectBakuMunch());

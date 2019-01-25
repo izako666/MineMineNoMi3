@@ -53,11 +53,11 @@ public class ParticleTaskWave extends TimerTask
 				{
 					if(this.particle instanceof EntityParticleFX)
 					{
-						EntityParticleFX clone = ((EntityParticleFX)particle).clone(this.posX + WyMathHelper.randomWithRange(-3, 3) + x, this.posY + 1 + y, this.posZ  + WyMathHelper.randomWithRange(-3, 3) + z);
+						EntityParticleFX clone = ((EntityParticleFX)particle).clone(this.posX + WyMathHelper.randomWithRange(-3, 3) + x, this.posY + 1 + y, this.posZ + WyMathHelper.randomWithRange(-3, 3) + z);
 						Minecraft.getMinecraft().effectRenderer.addEffect(clone);
 					}
 					else							
-						player.worldObj.spawnParticle((String) particle, this.posX + x, this.posY + y, this.posZ + z, 0.0D, 0.0D, 0.0D);
+						player.worldObj.spawnParticle((String) particle, this.posX + WyMathHelper.randomWithRange(-3, 3) + x, this.posY + y, this.posZ + WyMathHelper.randomWithRange(-3, 3) + z, 0.0D, 0.0D, 0.0D);
 					Thread.sleep(1);
 				} 
 				catch (InterruptedException e) 

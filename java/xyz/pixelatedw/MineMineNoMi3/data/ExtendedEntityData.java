@@ -342,10 +342,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public boolean getKilo() { return kilo; } 
 	
 	public void setIsCandleLocked(boolean value) { this.isCandleLocked = value; }
-	public boolean isCandleLocked() { return isCandleLocked; } 
-	
-	public void setIsTaktBlocked(boolean value) { this.isTaktBlocked = value; }
-	public boolean isTaktBlocked() { return isTaktBlocked; } 
+	public boolean isCandleLocked() { return isCandleLocked; } 	
 	
 	public void setYamiPower(boolean bool) { this.hasYamiPower = bool; }
 	public boolean hasYamiPower() { return hasYamiPower; } 

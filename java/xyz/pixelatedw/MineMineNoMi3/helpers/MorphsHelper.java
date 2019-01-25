@@ -1,16 +1,15 @@
 package xyz.pixelatedw.MineMineNoMi3.helpers;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouFull;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouHybrid;
 
 public class MorphsHelper
 {
@@ -33,6 +32,11 @@ public class MorphsHelper
 				{
 						{ "full", new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull", 1.3, new float[] { 0, 0.3f, 0 }) },
 						{ "hybrid", new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid", 1, new float[] { 0, 0.3f, 0 }) }		
+				});
+		morphsMap.put("zouzou", new Object[][]
+				{
+						{ "full", new RenderZoanMorph(new ModelZouFull(), "zoufull", 1.3, new float[] { 0, 0.7f, 0 }) },
+						{ "hybrid", new RenderZoanMorph(new ModelZouHybrid(), "zouhybrid", 1.0, new float[] { 0, 0.2f, 0 }) }		
 				});
 		morphsMap.put("dokudoku", new Object[][]
 				{

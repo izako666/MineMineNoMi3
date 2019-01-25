@@ -23,7 +23,7 @@ public class AbilityAttribute
 	
 	// Projectile related fields
 	private boolean projectileMoveThroughBlocks, projectileExplosionHasFire = true, projectileExplosionCanBreakBlocks = true;
-	private int projectileTicks = 60, projectileSpeed = 1;
+	private int projectileTicks = 60, projectileSpeed = 1, projectileExplosionPower;
 	private float projectileAlpha = 255, projectileDamage = 1;
 	private double projectileXRotation, projectileYRotation, projectileZRotation;
 	private Color projectileColor = Color.decode("#FFFFFF");
@@ -59,6 +59,7 @@ public class AbilityAttribute
 		this.projectileTicks = attr.projectileTicks;
 		this.projectileSpeed = attr.projectileSpeed;
 		this.abilityExplosionPower = attr.abilityExplosionPower;
+		this.projectileExplosionPower = attr.projectileExplosionPower;
 		this.potionEffectAoeRadius = attr.potionEffectAoeRadius;
 		this.abilityMaxCharge = attr.abilityMaxCharge;
 		this.abilityRepeaterTime = attr.abilityRepeaterTime;
@@ -118,9 +119,9 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileAlpha(float alpha) { this.projectileAlpha = alpha; return this; }
 	public AbilityAttribute setProjectileSize(double x, double y, double z) { this.projectileScale = new double[] {x, y, z}; return this; }
 	public AbilityAttribute setProjectileSize(double i[]) { this.projectileScale = i; return this; }
-	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.abilityExplosionPower = i;this.projectileExplosionHasFire = fire;this.abilityExplosionCanBreakBlocks = explosion;return this;}
-	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.abilityExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
-	public AbilityAttribute setProjectileExplosion(int i) {this.abilityExplosionPower = i;return this;}
+	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;this.abilityExplosionCanBreakBlocks = explosion;return this;}
+	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
+	public AbilityAttribute setProjectileExplosion(int i) {this.projectileExplosionPower = i;return this;}
 	public AbilityAttribute setProjectileSpeed(int i) {this.projectileSpeed = i;return this;}
 	public AbilityAttribute setProjectileTexture(String textureName) {this.projectileTexture = new ResourceLocation(ID.PROJECT_ID + ":textures/models/projectiles/" + textureName +".png"); return this;}
 	public AbilityAttribute setProjectileXRotation(double angle) { projectileXRotation = angle; return this;}
@@ -166,7 +167,7 @@ public class AbilityAttribute
 	public ModelBase getProjectileModel() { return projectileModel; }
 	public double[] getProjectileSize() { return projectileScale; }
 	public int getProjectileSpeed() { return projectileSpeed; }
-	public int getProjectileExplosionPower() { return abilityExplosionPower; }		
+	public int getProjectileExplosionPower() { return projectileExplosionPower; }		
 	public boolean canExplosionSetFire() { return projectileExplosionHasFire; }
 	public boolean canExplosionDestroyBlocks() { return abilityExplosionCanBreakBlocks; }	
 	public float getProjectileAlpha() { return this.projectileAlpha; }

@@ -199,7 +199,7 @@ public class ToriPhoenixAbilities
 	{
 		public PhoenixPoint()
 		{
-			super(ListAttributes.PHOENIXPOINT);
+			super(ListAttributes.PHOENIX_FULLPOINT);
 		}
 
 		public void passive(EntityPlayer player)

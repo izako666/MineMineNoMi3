@@ -109,6 +109,7 @@ public class ID
 	PARTICLEFX_BAKUMUNCH = "bakuMunch",
 	PARTICLEFX_KOROUZU = "korouzu",
 	PARTICLEFX_KILO = "kilo",
+	PARTICLEFX_GREATSTOMP = "greatStomp",
 
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

@@ -10,11 +10,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -101,7 +104,27 @@ public class DokuProjectiles
 						this.worldObj.setBlock((int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison);
 				}
 			}
-		};
+		}
+		
+		public void onUpdate()
+		{	
+			if(this.worldObj.isRemote)
+			{
+				double posXOffset = this.worldObj.rand.nextGaussian() * 0.42D;
+				double posYOffset = this.worldObj.rand.nextGaussian() * 0.22D;
+				double posZOffset = this.worldObj.rand.nextGaussian() * 0.42D;		
+	
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_DOKU, 
+						posX + posXOffset, 
+						posY + posYOffset, 
+						posZ + posZOffset, 
+						0, 0, 0)
+						.setParticleAge(6).setParticleScale(1.7F);
+				
+				MainMod.proxy.spawnCustomParticles(this, particle);		
+			}
+			super.onUpdate();
+		}
 	}
 	
 	public static class Hydra extends AbilityProjectile

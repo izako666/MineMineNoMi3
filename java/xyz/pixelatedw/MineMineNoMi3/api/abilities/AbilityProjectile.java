@@ -36,6 +36,7 @@ public class AbilityProjectile extends EntityThrowable
 		this.ticks = attr.getProjectileTicks();
 		this.maxticks = ticks;
 		this.user = player;
+		
 		/*this.motionX *= attr.getProjectileSpeed();
 		this.motionY *= attr.getProjectileSpeed();
 		this.motionZ *= attr.getProjectileSpeed();*/

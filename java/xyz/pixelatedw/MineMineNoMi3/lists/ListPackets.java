@@ -5,6 +5,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilityReset;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketQuestExtra;
@@ -38,6 +39,8 @@ public class ListPackets
 		WyNetworkHelper.registerMessage(PacketAbilityReset.ClientHandler.class, PacketAbilityReset.class, 17, Side.CLIENT);
 		WyNetworkHelper.registerMessage(PacketUseAbility.ServerHandler.class, PacketUseAbility.class, 18, Side.SERVER);
 		WyNetworkHelper.registerMessage(PacketUseAbility.ClientHandler.class, PacketUseAbility.class, 19, Side.CLIENT);
+		WyNetworkHelper.registerMessage(PacketNewAABB.ServerHandler.class, PacketNewAABB.class, 20, Side.SERVER);
+		WyNetworkHelper.registerMessage(PacketNewAABB.ClientHandler.class, PacketNewAABB.class, 21, Side.CLIENT);
 	} 
 	
 }

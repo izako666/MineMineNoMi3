@@ -28,6 +28,13 @@ import java.awt.*;
 public class ListAttributes 
 {
 	
+	public static AbilityAttribute ZOU_HYBRIDPOINT = new AbilityAttribute("Zou Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("hybridpoint").setAbilityPassive(true);
+	public static AbilityAttribute ZOU_FULLPOINT = new AbilityAttribute("Zou Point").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute IVORYDART = new AbilityAttribute("Ivory Dart").setAbilityCooldown(10);
+	public static AbilityAttribute GREATSTOMP = new AbilityAttribute("Great Stomp").setAbilityCooldown(15);
+	public static AbilityAttribute IVORYSTOMP = new AbilityAttribute("Ivory Stomp").setAbilityCooldown(7).setAbilityPunch();
+	public static AbilityAttribute TRUNKSHOT = new AbilityAttribute("Trunk Shot").setAbilityCooldown(7).setProjectileModel(new ModelCube()).setProjectileSize(1, 1, 3).setProjectileColor("838993").setProjectileDamage(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.weakness.id, 5 * 20));
+	
 	public static AbilityAttribute KASURIUTAFUBUKIGIRI = new AbilityAttribute("Kasuriuta: Fubuki Giri").setAbilityCooldown(10);
 	
 	public static AbilityAttribute BAKUBAKUFACTORY = new AbilityAttribute("Baku Baku Factory");
@@ -36,15 +43,14 @@ public class ListAttributes
 	public static AbilityAttribute BAKUMUNCH = new AbilityAttribute("Baku Munch").setAbilityCooldown(5);
 	
 	public static AbilityAttribute PHOENIX_HYBRIDPOINT = new AbilityAttribute("Phoenix Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("hybridpoint").setAbilityPassive(true);
-	public static AbilityAttribute PHOENIXPOINT = new AbilityAttribute("Phoenix Point").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute PHOENIX_FULLPOINT = new AbilityAttribute("Phoenix Point").setAbilityCooldown(1).setAbilityPassive(true);
 	public static AbilityAttribute BLUEFLAMESOFRESURRECTION = new AbilityAttribute("Blue Flames of Resurrection").setAbilityCooldown(20).addEffects(EffectType.USER, new PotionEffect(Potion.regeneration.id, 3 * 20, 4));
 	public static AbilityAttribute FLAMEOFRESTORATION = new AbilityAttribute("Flame of Restoration").setAbilityCooldown(3).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute PHOENIXGOEN = new AbilityAttribute("Phoenix Goen").setAbilityCooldown(10).setProjectileDamage(12);
 	public static AbilityAttribute TENSEINOSOEN = new AbilityAttribute("Tensei no Soen").setAbilityCooldown(30).setAbilityCharges(5 * 20);
 	
 	public static AbilityAttribute BISON_POWERPOINT = new AbilityAttribute("Bison Power Point").setAbilityCooldown(1).setAbilityDisplayName("Power Point").setAbilityTexture("powerpoint").setAbilityPassive(true);
-	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Speed Point").setAbilityTexture("speedpoint").setAbilityPassive(true);
-	
+	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Speed Point").setAbilityTexture("speedpoint").setAbilityPassive(true);	
 	public static AbilityAttribute FIDDLEBANFF = new AbilityAttribute("Fiddle Banff").setAbilityCooldown(7);
 	public static AbilityAttribute KOKUTEICROSS = new AbilityAttribute("Kokutei Cross").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	

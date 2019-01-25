@@ -52,7 +52,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 public class DevilFruitsHelper
 {
 
-	public static String[][] zoanModels = new String[][]
+	private static String[][] zoanModels = new String[][]
 	{
 			{
 					"ushiushibison", "bison"

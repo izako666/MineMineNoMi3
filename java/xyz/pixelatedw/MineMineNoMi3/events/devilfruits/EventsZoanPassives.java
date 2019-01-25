@@ -18,6 +18,26 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 
 public class EventsZoanPassives
 {
+	@SubscribeEvent
+	public void onEntityAttack(LivingHurtEvent event)
+	{
+		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+		{
+			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
+			ExtendedEntityData props = ExtendedEntityData.get(attacker);
+			AbilityProperties abilityProps = AbilityProperties.get(attacker);
+			EntityLivingBase attacked = event.entityLiving;
+			
+			
+			if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase("power"))
+				event.ammount += 3;
+			
+			if(props.getUsedFruit().equalsIgnoreCase("zouzou") && props.getZoanPoint().equalsIgnoreCase("hybrid"))
+				event.ammount += 3;
+				
+		}
+	}
+	
 	
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
@@ -28,6 +48,19 @@ public class EventsZoanPassives
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();
+			
+			if(props.getUsedFruit().equals("zouzou"))
+			{
+				if(props.getZoanPoint().equals("full"))
+				{
+					player.addPotionEffect(new PotionEffect(Potion.resistance.id, 2 * 20, 1, true));
+					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 2 * 20, 0, true));
+				}
+				if(props.getZoanPoint().equals("hybrid"))
+				{
+					player.addPotionEffect(new PotionEffect(Potion.resistance.id, 2 * 20, 0, true));
+				}
+			}
 			
 			if(props.getUsedFruit().equals("ushiushibison"))
 			{
