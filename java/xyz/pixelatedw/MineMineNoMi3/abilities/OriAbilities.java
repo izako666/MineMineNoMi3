@@ -9,15 +9,14 @@ import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.OriProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class OriAbilities {
 
-    public static Ability[] abilitiesArray = new Ability[]{new GreatCage(), new PrisonBreak(), new AwaseBaori()};
+    public static Ability[] abilitiesArray = new Ability[]{new GreatCage(), new PrisonBreak(), new AwaseBaori(), new Bind()};
 
     public static ArrayList<int[]> makeShapeSquare(EntityPlayer player, int blockX, int blockY, int blockZ, Block blockCheck, Block blockReplace) {
 
@@ -105,12 +104,20 @@ public class OriAbilities {
             super(ListAttributes.AWASEBAORI);
         }
 
+        public void use(final EntityPlayer player) {
+            this.projectile = new OriProjectiles.AwaseBaori(player.worldObj,player,attr);
+        	super.use(player);
+        }
+    }
+
+    public static class Bind extends Ability {
+        public Bind() {
+            super(ListAttributes.BIND);
+        }
+
         public void hitEntity(EntityPlayer player, EntityLivingBase target) {
-
-        	super.hitEntity(player,target);
-        	WyHelper.createEmptyCube(target, new int[] {2, 3, 2}, Blocks.iron_bars, "air");
-
-            target.addPotionEffect(new PotionEffect(2,  20 * 7, 15));
+            target.addPotionEffect(new PotionEffect(2, 20 * 8, 40));
+            super.hitEntity(player,target);
         }
     }
 }
