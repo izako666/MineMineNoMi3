@@ -19,18 +19,12 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 public class BlockCustomSpawner extends BlockContainer
 {
-	protected String entityToSpawn = "Pig";
-	protected int spawnLimit = 5;
-	
 	public BlockCustomSpawner()
 	{
 		super(Material.iron);
 		this.setTickRandomly(true);
 	} 
 
-	public BlockCustomSpawner setSpawnerMob(String toSpawn) { entityToSpawn = toSpawn; return this; }
-	public BlockCustomSpawner setSpawnerLimit(int limit) { spawnLimit = limit; return this; }
-	
 	public TileEntity createNewTileEntity(World world, int i) { return new TileEntityCustomSpawner();} //entityToSpawn, spawnLimit
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 

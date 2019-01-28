@@ -68,19 +68,19 @@ public class ListExtraStructures
 		TileEntityCustomSpawner spw5 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
 		TileEntityCustomSpawner spw6 = new TileEntityCustomSpawner().setSpawnerMob(toSpawnCpt).setSpawnerLimit(1);
 		
-		world.setBlock(posX + 10, posY + 2, posZ + 27, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setBlock(posX + 10, posY + 2, posZ + 27, ListMisc.CustomSpawner );
 		world.setTileEntity(posX + 10, posY + 2, posZ + 27, spw1);
-		world.setBlock(posX + 14, posY + 2, posZ + 32, ListMisc.CustomSpawner.setSpawnerMob(toSpawn2).setSpawnerLimit(5) );
+		world.setBlock(posX + 14, posY + 2, posZ + 32, ListMisc.CustomSpawner );
 		world.setTileEntity(posX + 14, posY + 2, posZ + 32, spw2);
 		
-		world.setBlock(posX + 12, posY + 8, posZ + 17, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setBlock(posX + 12, posY + 8, posZ + 17, ListMisc.CustomSpawner );
 		world.setTileEntity(posX + 12, posY + 8, posZ + 17, spw3);
-		world.setBlock(posX + 12, posY + 8, posZ + 11, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setBlock(posX + 12, posY + 8, posZ + 11, ListMisc.CustomSpawner );
 		world.setTileEntity(posX + 12, posY + 8, posZ + 11, spw4);
 		
-		world.setBlock(posX + 14, posY + 8, posZ + 42, ListMisc.CustomSpawner.setSpawnerMob(toSpawn1).setSpawnerLimit(5) );
+		world.setBlock(posX + 14, posY + 8, posZ + 42, ListMisc.CustomSpawner);
 		world.setTileEntity(posX + 14, posY + 8, posZ + 42, spw5);
-		world.setBlock(posX + 8, posY + 8, posZ + 42, ListMisc.CustomSpawner.setSpawnerMob(toSpawnCpt).setSpawnerLimit(1) );
+		world.setBlock(posX + 8, posY + 8, posZ + 42, ListMisc.CustomSpawner );
 		world.setTileEntity(posX + 8, posY + 8, posZ + 42, spw6);
 		
 		TileEntityChest chest1 = new TileEntityChest();

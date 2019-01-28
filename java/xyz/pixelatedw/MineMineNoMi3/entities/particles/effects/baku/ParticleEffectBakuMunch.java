@@ -20,7 +20,7 @@ public class ParticleEffectBakuMunch extends ParticleEffect
 
 	public void spawn(EntityPlayer player, double posX, double posY, double posZ)
 	{
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 15; i++)
 		{
 			double offsetX = player.worldObj.rand.nextDouble();
 			double offsetY = 1;

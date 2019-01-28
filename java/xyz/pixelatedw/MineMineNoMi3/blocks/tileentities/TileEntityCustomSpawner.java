@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,11 +41,12 @@ public class TileEntityCustomSpawner extends TileEntity
 					EntityPlayer player = (EntityPlayer) e;
 					
 					if((this.spawnedEntities.size() < this.spawnLimit))
-					{						
-						EntityLivingBase newSpawn = (EntityLivingBase) EntityList.createEntityByName(this.entityToSpawn, this.worldObj);//new EntityPig(this.worldObj);
+					{
+						EntityLivingBase newSpawn = (EntityLivingBase) EntityList.createEntityByName(this.entityToSpawn, this.worldObj);
 						if(newSpawn != null)
 						{
 							newSpawn.setLocationAndAngles(this.xCoord, this.yCoord, this.zCoord, 0, 0);	
+							((EntityLiving) newSpawn).onSpawnWithEgg((IEntityLivingData)null);
 							this.worldObj.spawnEntityInWorld(newSpawn);
 							this.spawnedEntities.add(newSpawn);							
 						}

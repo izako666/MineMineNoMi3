@@ -26,7 +26,7 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = 1;
-		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + texture + ".png");
+		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = new float[] {0, 0, 0};
 	}
 	
@@ -35,7 +35,7 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = scale;
-		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + texture + ".png");
+		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = new float[] {0, 0, 0};
 	}
 	
@@ -44,7 +44,7 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = scale;
-		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/" + texture + ".png");
+		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = offset;
 	}
 

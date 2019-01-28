@@ -316,7 +316,7 @@ public class AbilityProperties implements IExtendedEntityProperties
 	{
 		return Arrays.stream(this.getAbilitiesInHotbar()).filter(x -> 
 		{
-			return x.getAttribute() != null && x.getAttribute().getAttributeName().equalsIgnoreCase(name);
+			return x != null && x.getAttribute() != null && x.getAttribute().getAttributeName().equalsIgnoreCase(name);
 		}).findFirst().orElse(null);     
 	}
 	

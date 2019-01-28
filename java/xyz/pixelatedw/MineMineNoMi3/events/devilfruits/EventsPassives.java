@@ -221,10 +221,7 @@ public class EventsPassives
 				if(doppelman != null)
 					doppelman.forcedTargets.add(attacked);
 			}
-			
-			if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase("power"))
-				event.ammount += 3;
-				
+
 			if(props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 
@@ -233,8 +230,6 @@ public class EventsPassives
 				double power = props.getDoriki() / 500;
 				event.ammount += power;
 			}
-			
-			System.out.println(event.ammount);
 		}
 	}
 

@@ -160,7 +160,7 @@ public class Ability
 	public void startPassive(EntityPlayer player) {}
 		
 	public void duringPassive(EntityPlayer player, int passiveTimer) {}
-	
+		
 	public boolean isPassiveActive()
 	{
 		return this.passiveActive;

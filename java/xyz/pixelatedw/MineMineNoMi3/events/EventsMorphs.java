@@ -1,20 +1,21 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import org.lwjgl.util.glu.GLU;
 import org.lwjgl.util.glu.Project;
+import org.lwjgl.util.glu.Sphere;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -26,23 +27,16 @@ import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.helpers.HandRendererHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -52,21 +46,8 @@ public class EventsMorphs
 
 	private Minecraft mc;
 
-	// Doku Doku no Mi
-	private RenderZoanMorph morphVenomDemon = new RenderZoanMorph(new ModelVenomDemon(), "venomdemon");
-
-	// Ushi Ushi no Mi : Model Bison
-	private RenderZoanMorph zoanBisonPower = new RenderZoanMorph(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.8f, 0 });
-	private RenderZoanMorph zoanBisonSpeed = new RenderZoanMorph(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 });
-
-	// Tori Tori no Mi : Model Phoenix
-	private RenderZoanMorph zoanPhoenixHybrid = new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid", 1, new float[] { 0, 0.3f, 0 });
-	private RenderZoanMorph zoanPhoenixFull = new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull", 1.3, new float[] { 0, 0.3f, 0 });
-	
-	// Extra
 	private RenderCandleLock candleLock = new RenderCandleLock(new ModelCandleLock());
 
-	
 	public EventsMorphs(Minecraft mc)
 	{
 		this.mc = mc;
@@ -175,191 +156,84 @@ public class EventsMorphs
 		EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-
-		boolean flag = false;
 		
-		if(props.hasBusoHakiActive() && player.getHeldItem() == null)
+		boolean renderHandFlag = false;
+		boolean renderHandEffectFlag = false;
+		
+		if(player.getHeldItem() == null && props.hasBusoHakiActive())
 		{
-			event.setCanceled(true);
-
-			this.renderHand((EntityClientPlayerMP) player, 0, 0);
+			renderHandFlag = true;
 		}
 	
-		if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
-		{
-			Arrays.stream(MorphsHelper.getMorphsMap().get(props.getUsedFruit())).forEach(x -> 
-			{
-				if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
-				{
-					event.setCanceled(true);
-
-					this.renderHand((EntityClientPlayerMP) player, 0, 0);
-				}
-			});
-		}
-
-		if(props.getUsedFruit().equalsIgnoreCase("baribari"))
-		{
-			Ability bariPistol = abilityProps.getAbilityFromName(ListAttributes.BARIBARINOPISTOL.getAttributeName());
-			
-			if(bariPistol != null && bariPistol.isPassiveActive())
-			{
-				WyRenderHelper.drawAbilityIcon("baribarinopistol", 0, 0, 16, 16);
-			}
-		}
-	}
-
-	private void renderHand(EntityClientPlayerMP player, float f, int i)
-	{
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-
-		float f1 = 0.07F;
-
-		if (this.mc.gameSettings.anaglyph)
-			GL11.glTranslatef((float) (-(i * 2 - 1)) * f1, 0.0F, 0.0F);
-
-		Project.gluPerspective(this.mc.gameSettings.fovSetting, (float) this.mc.displayWidth / (float) this.mc.displayHeight, 0.20F, (float) (this.mc.gameSettings.renderDistanceChunks * 16) * 2.0F);
-
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		GL11.glLoadIdentity();
-
-		if (this.mc.gameSettings.anaglyph)
-			GL11.glTranslatef((float) (i * 2 - 1) * 0.1F, 0.0F, 0.0F);
-
-		GL11.glPushMatrix();
-
-		if (this.mc.gameSettings.viewBobbing)
-			this.setupViewBobbing(f);
-
-		if (this.mc.gameSettings.thirdPersonView == 0 && !this.mc.renderViewEntity.isPlayerSleeping() && !this.mc.gameSettings.hideGUI)
-		{
-			RenderHelper.enableStandardItemLighting();
-			Minecraft.getMinecraft().entityRenderer.enableLightmap((double)f);
-			if (player.inventory.getCurrentItem() != null)
-				Minecraft.getMinecraft().entityRenderer.itemRenderer.renderItemInFirstPerson(f);
-			else
-			{
-		        int i2 = this.mc.theWorld.getLightBrightnessForSkyBlocks(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), 0);
-		        int j = i2 % 65536;
-		        int k = i2 / 65536;
-		        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
-		        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-				renderCustomHand(player);
-			}
-			Minecraft.getMinecraft().entityRenderer.disableLightmap((double)f);
-			RenderHelper.disableStandardItemLighting();
-		}
-
-		GL11.glPopMatrix();
-
-		if (this.mc.gameSettings.viewBobbing)
-			this.setupViewBobbing(f);
-	}
-
-	private void renderCustomHand(EntityClientPlayerMP player)
-	{
-		ExtendedEntityData props = ExtendedEntityData.get(player);
-
-		float f5;
-		float f6;
-		float f7;
-
-		GL11.glPushMatrix();
-		float f13 = 0.8F;
-		f5 = player.getSwingProgress(0);
-		f6 = MathHelper.sin(f5 * (float) Math.PI);
-		f7 = MathHelper.sin(MathHelper.sqrt_float(f5) * (float) Math.PI);
-		GL11.glTranslatef(-f7 * 0.3F, MathHelper.sin(MathHelper.sqrt_float(f5) * (float) Math.PI * 2.0F) * 0.4F, -f6 * 0.4F);
-		GL11.glTranslatef(0.8F * f13, -0.75F * f13 - (1.0F - 1) * 0.6F, -0.9F * f13);
-		GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		f5 = player.getSwingProgress(0);
-		f6 = MathHelper.sin(f5 * f5 * (float) Math.PI);
-		f7 = MathHelper.sin(MathHelper.sqrt_float(f5) * (float) Math.PI);
-		GL11.glRotatef(f7 * 70.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glRotatef(-f6 * 20.0F, 0.0F, 0.0F, 1.0F);
-		if (props.hasBusoHakiActive())
-			this.mc.getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
-		else
-			this.mc.getTextureManager().bindTexture(getTextureFromMorph(player));
-		GL11.glTranslatef(-1.0F, 3.6F, 3.5F);
-		GL11.glRotatef(120.0F, 0.0F, 0.0F, 1.0F);
-		GL11.glRotatef(200.0F, 1.0F, 0.0F, 0.0F);
-		GL11.glRotatef(-135.0F, 0.0F, 1.0F, 0.0F);
-		GL11.glScalef(1.0F, 1.0F, 1.0F);
-		GL11.glTranslatef(5.6F, 0.0F, 0.0F);
-		Render render = null;
-
-		if (props.getZoanPoint().toLowerCase().equals("n/a"))
-		{
-			render = RenderManager.instance.getEntityRenderObject(this.mc.thePlayer);
-			RenderPlayer renderplayer = (RenderPlayer) render;
-			float i = 1.0F;
-			GL11.glScalef(i, i, i);
-			renderplayer.renderFirstPersonArm(this.mc.thePlayer);
-		} 
-		else
-		{
-			if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
-			{
-				for(Object[] x : MorphsHelper.getMorphsMap().get(props.getUsedFruit()))
-				{
-					if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
-						render = (RenderZoanMorph) x[1];
-				}
-			}
-			
-			RenderZoanMorph renderZoan = (RenderZoanMorph) render;
-			float i = 1.0F;
-			GL11.glScalef(i, i, i);
-			GL11.glRotatef(60.0F, 0.0F, 1.0F, 0.0F);
-			GL11.glTranslatef(0.2f, 0.0f, -0.5f);
-			renderZoan.renderFirstPersonArm(this.mc.thePlayer);
-		}
-
-		GL11.glPopMatrix();
-
-		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-	}
-
-	private ResourceLocation getTextureFromMorph(EntityClientPlayerMP player)
-	{
-		ExtendedEntityData props = ExtendedEntityData.get(player);
-		RenderZoanMorph render = null;
-		
 		if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 		{
 			for(Object[] x : MorphsHelper.getMorphsMap().get(props.getUsedFruit()))
 			{
 				if(props.getZoanPoint().equalsIgnoreCase((String) x[0]))
 				{
-					render = (RenderZoanMorph)x[1];
+					renderHandFlag = true;
 					break;
 				}
 			}
 		}
-
-		if(render != null)
-			return render.getEntityTexture(null);
 		
-		return player.getLocationSkin();
-	}
+		GL11.glPushMatrix();
+		{			
+			int x = 0, y = 0, u = 16, v = 16;
 
-	private void setupViewBobbing(float p_78475_1_)
-	{
-		if (this.mc.renderViewEntity instanceof EntityPlayer)
-		{
-			EntityPlayer entityplayer = (EntityPlayer) this.mc.renderViewEntity;
-			float f1 = entityplayer.distanceWalkedModified - entityplayer.prevDistanceWalkedModified;
-			float f2 = -(entityplayer.distanceWalkedModified + f1 * p_78475_1_);
-			float f3 = entityplayer.prevCameraYaw + (entityplayer.cameraYaw - entityplayer.prevCameraYaw) * p_78475_1_;
-			float f4 = entityplayer.prevCameraPitch + (entityplayer.cameraPitch - entityplayer.prevCameraPitch) * p_78475_1_;
-			GL11.glTranslatef(MathHelper.sin(f2 * (float) Math.PI) * f3 * 0.5F, -Math.abs(MathHelper.cos(f2 * (float) Math.PI) * f3), 0.0F);
-			GL11.glRotatef(MathHelper.sin(f2 * (float) Math.PI) * f3 * 3.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(Math.abs(MathHelper.cos(f2 * (float) Math.PI - 0.2F) * f3) * 5.0F, 1.0F, 0.0F, 0.0F);
-			GL11.glRotatef(f4, 1.0F, 0.0F, 0.0F);
+/*			GL11.glMatrixMode(GL11.GL_PROJECTION);
+			GL11.glLoadIdentity();
+			
+			Project.gluPerspective(mc.gameSettings.fovSetting, (float) mc.displayWidth / (float) mc.displayHeight, 0.20F, (float) (mc.gameSettings.renderDistanceChunks * 16) * 2.0F);
+			
+			GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glLoadIdentity();
+			
+			RenderHelper.enableStandardItemLighting();
+			Minecraft.getMinecraft().entityRenderer.enableLightmap(0);
+			
+	        int i2 = mc.theWorld.getLightBrightnessForSkyBlocks(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), 0);
+	        int j = i2 % 65536;
+	        int k = i2 / 65536;
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)j / 1.0F, (float)k / 1.0F);
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);*/		
+			
+			/*if (mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping() && !mc.gameSettings.hideGUI)
+			{
+				GL11.glRotated(180, 0, 0, 1);
+				GL11.glScaled(0.05, 0.05, 0.05);
+				GL11.glTranslated(0, 0, 4);
+				
+				Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(ID.PROJECT_ID, "textures/abilities/" + WyHelper.getFancyName("baribarinopistol") + ".png"));        
+				Tessellator tessellator = Tessellator.instance;
+					
+				tessellator.startDrawingQuads();
+				tessellator.addVertexWithUV(x			, y + v			, 0, 0.0, 1.0);
+				tessellator.addVertexWithUV(x + u		, y + v			, 0, 1.0, 1.0);
+				tessellator.addVertexWithUV(x + u		, y        		, 0, 1.0, 0.0);
+				tessellator.addVertexWithUV(x			, y         	, 0, 0.0, 0.0);			    
+				tessellator.draw();
+				    
+				tessellator.startDrawingQuads();
+				tessellator.addVertexWithUV(x + u		, y				, 0, 1.0, 0.0);
+				tessellator.addVertexWithUV(x + u		, y + v			, 0, 1.0, 1.0);
+				tessellator.addVertexWithUV(x			, y + v       	, 0, 0.0, 1.0);
+				tessellator.addVertexWithUV(x			, y         	, 0, 0.0, 0.0);			    
+				tessellator.draw();
+			}*/
 		}
+		GL11.glPopMatrix();
+		
+		if(renderHandFlag)
+		{
+			event.setCanceled(true);
+			HandRendererHelper.renderHand((EntityClientPlayerMP) player);
+		}
+		
+		/*for(Object[] x : HandEffectsHelper.getMap().get(props.getUsedFruit()))
+		{
+			
+		}*/
 	}
 
 }
