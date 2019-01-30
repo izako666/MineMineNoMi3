@@ -56,6 +56,9 @@ public class EventsCombatMode extends Gui
 
 		GuiIngameForge.left_height += 1;
 
+		if (event.type == ElementType.FOOD && props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
+			event.setCanceled(true);
+		
 		if (event.type == ElementType.HEALTH)
 		{
 			event.setCanceled(true);

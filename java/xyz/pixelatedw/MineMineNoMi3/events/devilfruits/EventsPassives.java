@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
 import java.util.Arrays;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,6 +27,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -51,7 +53,7 @@ public class EventsPassives
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(event.entityLiving.getEntityId(), propz));
 				}
 			}
-				
+
 			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F)
 				entity.setFire(3);
 		}
@@ -67,7 +69,7 @@ public class EventsPassives
 			{
 				if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
 				{
-					WyHelper.createFilledSphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 2, Blocks.ice, "liquids");
+					WyHelper.createFilledSphere(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ, 2, Blocks.ice, "liquids");
 				}
 			}
 
@@ -80,6 +82,23 @@ public class EventsPassives
 			{
 				if (player.isPotionActive(Potion.poison.id))
 					player.removePotionEffect(Potion.poison.id);
+			}
+
+			if (props.getUsedFruit().equals("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
+			{
+				player.getFoodStats().setFoodSaturationLevel(Float.MAX_VALUE);
+				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 0, true));
+
+				if (player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY, (int) player.posZ) == Blocks.water && player.isSprinting())
+				{
+					player.onGround = true;
+					if (player.motionY < 0.0D)
+					{
+						player.motionY = 0.0D;
+						player.fallDistance = 0.0F;
+					}
+					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, player.posX, player.posY - 0.5, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+				}
 			}
 
 			if ((player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding())))
@@ -204,28 +223,28 @@ public class EventsPassives
 			ExtendedEntityData props = ExtendedEntityData.get(attacker);
 			AbilityProperties abilityProps = AbilityProperties.get(attacker);
 			EntityLivingBase attacked = event.entityLiving;
-			
-			if(props.getUsedFruit().equalsIgnoreCase("kilokilo"))
+
+			if (props.getUsedFruit().equalsIgnoreCase("kilokilo"))
 			{
-				if(attacker.isPotionActive(Potion.damageBoost))
+				if (attacker.isPotionActive(Potion.damageBoost))
 				{
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KILO, attacked.posX, attacked.posY, attacked.posZ), attacker.dimension, attacker.posX, attacker.posY, attacker.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 					attacker.removePotionEffect(Potion.damageBoost.id);
 				}
 			}
-			
-			if(props.getUsedFruit().equalsIgnoreCase("kagekage"))
+
+			if (props.getUsedFruit().equalsIgnoreCase("kagekage"))
 			{
 				EntityDoppelman doppelman = (EntityDoppelman) WyHelper.getEntitiesNear(attacker, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
-				
-				if(doppelman != null)
+
+				if (doppelman != null)
 					doppelman.forcedTargets.add(attacked);
 			}
 
-			if(props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
+			if (props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 
-			if(props.hasBusoHakiActive())
+			if (props.hasBusoHakiActive())
 			{
 				double power = props.getDoriki() / 500;
 				event.ammount += power;
@@ -251,27 +270,14 @@ public class EventsPassives
 			}
 		}
 	}
-	
-	@SubscribeEvent
-	public void onClonePlayer(PlayerEvent.Clone e) 
-	{
-		if(e.wasDeath) 
-		{
-/*			NBTTagCompound compound = new NBTTagCompound();
 
-			ExtendedEntityData oldProps = ExtendedEntityData.get(e.original);
-			oldProps.saveNBTData(compound);
-			ExtendedEntityData newProps = ExtendedEntityData.get(e.entityPlayer);
-			
-			if(oldProps.getUsedFruit().equalsIgnoreCase("yomiyomi") && !oldProps.hasYomiActive())
-			{
-				AbilityProperties newAbilityProps = AbilityProperties.get(e.entityPlayer);
-				
-				for(Ability a : abilities)
-					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
-						abilityProps.addDevilFruitAbility(a);
-				newProps.setYomiActive(true);
-			}*/
+	@SubscribeEvent
+	public void onYomiDeath(YomiTriggerEvent event)
+	{
+		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
+		{
+			event.newPlayerData.setUsedFruit("yomiyomi");
+			event.newPlayerData.setZoanPoint("yomi");
 		}
 	}
 

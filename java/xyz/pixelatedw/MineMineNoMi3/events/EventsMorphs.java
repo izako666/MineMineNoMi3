@@ -140,7 +140,7 @@ public class EventsMorphs
 			EntityPlayer owner = (EntityPlayer) event.entity;
 			ExtendedEntityData props = ExtendedEntityData.get(owner);
 
-			if (!props.getZoanPoint().toLowerCase().equals("n/a"))
+			if (!props.getZoanPoint().toLowerCase().equals("n/a") && !props.getZoanPoint().toLowerCase().equals("yomi"))
 			{
 				props.setZoanPoint("n/a");
 

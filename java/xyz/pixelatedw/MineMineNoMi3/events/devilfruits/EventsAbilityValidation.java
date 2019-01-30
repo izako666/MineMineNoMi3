@@ -41,7 +41,8 @@ public class EventsAbilityValidation
 					
 					abilityProps.clearDevilFruitAbilities();
 					props.setGear(1);
-					props.setZoanPoint("n/a");
+					if(!props.getZoanPoint().equalsIgnoreCase("yomi"))
+						props.setZoanPoint("n/a");
 					
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
 						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))

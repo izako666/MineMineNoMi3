@@ -268,13 +268,13 @@ public class GomuAbilities
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Bazooka");
 					this.projectile = new GomuProjectiles.GomuGomuNoBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOBAZOOKA);
 					this.attr.setAbilityCooldown(12);
-					this.attr.setAbilityCharges(20);
+					this.attr.setAbilityCharges(30);
 					break;
 				case 2:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Jet Bazooka");
 					this.projectile = new GomuProjectiles.GomuGomuNoJetBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETBAZOOKA);
 					this.attr.setAbilityCooldown(6);
-					this.attr.setAbilityCharges(10);
+					this.attr.setAbilityCharges(20);
 					break;
 				case 3:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Grizzly Magnum");

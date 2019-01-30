@@ -23,8 +23,8 @@ public class AbilityAttribute
 	
 	// Projectile related fields
 	private boolean projectileMoveThroughBlocks, projectileExplosionHasFire = true, projectileExplosionCanBreakBlocks = true;
-	private int projectileTicks = 60, projectileSpeed = 1, projectileExplosionPower;
-	private float projectileAlpha = 255, projectileDamage = 1;
+	private int projectileTicks = 60, projectileExplosionPower;
+	private float projectileAlpha = 255, projectileDamage = 1, projectileSpeed = 1.5F;
 	private double projectileXRotation, projectileYRotation, projectileZRotation;
 	private Color projectileColor = Color.decode("#FFFFFF");
 	private double[] projectileScale = new double[] {1, 1, 1}, projectileCollisionSize = new double[] {1, 1}, projectileModelOffset = new double[] {0, 0, 0};
@@ -122,7 +122,7 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;this.abilityExplosionCanBreakBlocks = explosion;return this;}
 	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
 	public AbilityAttribute setProjectileExplosion(int i) {this.projectileExplosionPower = i;return this;}
-	public AbilityAttribute setProjectileSpeed(int i) {this.projectileSpeed = i;return this;}
+	public AbilityAttribute setProjectileSpeed(float speed) {this.projectileSpeed = speed; return this;}
 	public AbilityAttribute setProjectileTexture(String textureName) {this.projectileTexture = new ResourceLocation(ID.PROJECT_ID + ":textures/models/projectiles/" + textureName +".png"); return this;}
 	public AbilityAttribute setProjectileXRotation(double angle) { projectileXRotation = angle; return this;}
 	public AbilityAttribute setProjectileYRotation(double angle) { projectileYRotation = angle; return this;}
@@ -166,7 +166,7 @@ public class AbilityAttribute
 	public Color getProjectileColor() { return projectileColor; }
 	public ModelBase getProjectileModel() { return projectileModel; }
 	public double[] getProjectileSize() { return projectileScale; }
-	public int getProjectileSpeed() { return projectileSpeed; }
+	public float getProjectileSpeed() { return projectileSpeed; }
 	public int getProjectileExplosionPower() { return projectileExplosionPower; }		
 	public boolean canExplosionSetFire() { return projectileExplosionHasFire; }
 	public boolean canExplosionDestroyBlocks() { return abilityExplosionCanBreakBlocks; }	

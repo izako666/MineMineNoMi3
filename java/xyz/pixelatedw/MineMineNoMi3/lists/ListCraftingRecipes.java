@@ -12,8 +12,8 @@ public class ListCraftingRecipes
 	{
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Umbrella), new Object[]
 				{ ".X.", ".X.", "OOO", 'X', Items.stick, 'O', Blocks.wool });	
-		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.ColaBackpack), new Object[]
-				{ ".X.", "XOO", ".OO", 'X', Blocks.cobblestone, 'O', Items.iron_ingot });	
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Scissors), new Object[]
+				{ "XX.", "XOO", ".OO", 'X', Blocks.cobblestone, 'O', Items.iron_ingot });	
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.ColaBackpack), new Object[]
 				{ "X.X", "XOX", "X.X", 'X', ListMisc.UltraCola, 'O', Items.iron_ingot });	
@@ -28,7 +28,7 @@ public class ListCraftingRecipes
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(ListMisc.Kairoseki, 9), ListMisc.KairosekiBlock);
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBlock), new Object[]
-				{ "XXX", "XXX", "XXX", 'X', ListMisc.Kairoseki });	    
+				{ "XXX", "XXX", "XXX", 'X', ListMisc.Kairoseki });
 		
 	    GameRegistry.addShapedRecipe(new ItemStack(ListMisc.DenseKairoseki), new Object[] 
 	    		{ "#$.", "$#.", "...", '#', ListMisc.Kairoseki, '$', Items.iron_ingot });

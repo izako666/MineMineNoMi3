@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -24,6 +26,8 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 
 public class EventsCore
 {
@@ -48,8 +52,11 @@ public class EventsCore
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone e) 
 	{
-		if(e.wasDeath && ( !ExtendedEntityData.get(e.original).getUsedFruit().equalsIgnoreCase("yomiyomi") && ExtendedEntityData.get(e.original).hasYomiActive() )) 
+		if(e.wasDeath) 
 		{
+			ExtendedEntityData oldPlayerProps = ExtendedEntityData.get(e.original);	
+			ExtendedEntityData newPlayerProps = ExtendedEntityData.get(e.entityPlayer);
+			
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
 			{
 				NBTTagCompound compound = new NBTTagCompound();
@@ -59,7 +66,6 @@ public class EventsCore
 				oldProps.triggerActiveHaki(false);
 				oldProps.triggerBusoHaki(false);
 				oldProps.triggerKenHaki(false);
-				oldProps.setYomiActive(false);
 				oldProps.setGear(1);
 				oldProps.setZoanPoint("n/a");
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
@@ -82,29 +88,25 @@ public class EventsCore
 			}
 			else if(MainConfig.enableKeepIEEPAfterDeath.equals("auto"))
 			{
-				ExtendedEntityData props = ExtendedEntityData.get(e.original);
-				NBTTagCompound compound = new NBTTagCompound();
+				ExtendedEntityData oldProps = ExtendedEntityData.get(e.original);
 				
-				String faction = props.getFaction();
-				String race = props.getRace();
-				String fightStyle = props.getFightStyle();
-				String crew = props.getCrew();			
-				
-				props.resetNBTData(compound);
-				props.loadNBTData(compound);
-								
+				String faction = oldProps.getFaction();
+				String race = oldProps.getRace();
+				String fightStyle = oldProps.getFightStyle();
+				String crew = oldProps.getCrew();
+
+				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
 				props.setFaction(faction);
 				props.setRace(race);
 				props.setFightStyle(fightStyle);
-				props.setCrew(crew);
-				
+				props.setCrew(crew);			
 				props.setMaxCola(100);
-				props.setCola(props.getMaxCola());
-				
-				props.saveNBTData(compound);
-								
-				ExtendedEntityData.get(e.entityPlayer).loadNBTData(compound);
+				props.setCola(oldProps.getMaxCola());
 			}
+			
+			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(oldPlayerProps, newPlayerProps);
+			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
+				return;
 			
 			NBTTagCompound compound = new NBTTagCompound();
 			QuestProperties.get(e.original).saveNBTData(compound);

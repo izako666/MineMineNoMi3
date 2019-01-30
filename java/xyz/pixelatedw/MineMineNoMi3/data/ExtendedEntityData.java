@@ -23,7 +23,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
-			isCandleLocked = false, isTaktBlocked = false, isYomiActive = false;
+			isCandleLocked = false, isTaktBlocked = false;
 
 	private String tempPreviousAbility = "";
 	
@@ -42,6 +42,11 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		return (ExtendedEntityData) entity.getExtendedProperties(EXT_PROP_NAME);
 	}
 
+	public EntityLivingBase getEntity()
+	{
+		return this.entity;
+	}
+	
 	public void saveNBTData(NBTTagCompound compound) 
 	{
 		NBTTagCompound props = new NBTTagCompound();
@@ -78,7 +83,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
 		props.setBoolean("isCandleLocked", this.isCandleLocked);
 		props.setBoolean("isTaktBlocked", this.isTaktBlocked);
-		props.setBoolean("isYomiActive", this.isYomiActive);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -121,7 +125,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
 		this.isCandleLocked = props.getBoolean("isCandleLocked");
 		this.isTaktBlocked = props.getBoolean("isTaktBlocked");
-		this.isYomiActive = props.getBoolean("isYomiActive");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 	}
@@ -162,7 +165,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasColaBackpack", false);
 		props.setBoolean("isCandleLocked", false);
 		props.setBoolean("isTaktBlocked", false);
-		props.setBoolean("isYomiActive", false);
 		
 		props.setBoolean("isInCombatMode", false);		
 		
@@ -184,7 +186,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		System.out.println(" > Has Shadow : " + props.getBoolean("hasShadow"));
 		System.out.println(" > Has Heart : " + props.getBoolean("hasHeart"));
 		System.out.println(" > Has Yami Power : " + props.getBoolean("hasYamiPower"));
-		System.out.println(" > Has Yomi Power : " + props.getBoolean("isYomiActive"));
 		System.out.println(" > Has Haki Active : " + props.getBoolean("hasHakiActive"));
 		System.out.println(" > Has Buso Haki Active : " + props.getBoolean("hasBusoHakiActive"));
 		System.out.println(" > Has Ken Haki Active : " + props.getBoolean("hasKenHakiActive"));
@@ -346,9 +347,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	
 	public void setYamiPower(boolean bool) { this.hasYamiPower = bool; }
 	public boolean hasYamiPower() { return hasYamiPower; } 
-	
-	public void setYomiActive(boolean bool) { this.isYomiActive = bool; }
-	public boolean hasYomiActive() { return isYomiActive; } 
 	
 	public void setColaBackpack(boolean bool) { this.hasColaBackpack = bool; }
 	public boolean hasColaBackpack() { return hasColaBackpack; }

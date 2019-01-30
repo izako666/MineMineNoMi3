@@ -80,7 +80,7 @@ public class MainMod
 			Values.RESOURCES_FOLDER = basicPath.substring(0, basicPath.indexOf("/bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
 			
 			WyHelper.generateLangFiles();
-			WyHelper.generateExtraWebAppFiles();
+			WyHelper.generateNewExtraWebAppFiles();
 		}
 	}
 

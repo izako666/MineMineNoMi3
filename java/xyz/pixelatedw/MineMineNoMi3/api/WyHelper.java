@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -36,7 +37,14 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
+import xyz.pixelatedw.MineMineNoMi3.abilities.CyborgAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.HakiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
@@ -170,9 +178,144 @@ public class WyHelper
 		}
 	}
 
+	public static void generateNewExtraWebAppFiles()
+	{
+		writeFancyAbilitiesList();
+		
+		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
+		folder.mkdirs();
+
+		if (folder.exists())
+		{
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fruits.txt"), "UTF-8")))
+			{
+				writer.write("export const devilFruits: Group[] =\n[\n");
+				
+				// Devil Fruits
+				for (Item f : Values.devilfruits)
+				{
+					AkumaNoMi fruit = (AkumaNoMi) f;
+					ItemStack itemStack = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, fruit.getUnlocalizedName().substring(5)));
+					Map<String, Object> devilFruitElements = new LinkedHashMap<String, Object>();
+
+					devilFruitElements.put("name", "\'" + itemStack.getDisplayName() + "\'");
+					devilFruitElements.put("type", "\'" + fruit.getType().getName() + "\'");			
+					devilFruitElements.put("abilities", "[ " + generateAbilitiesString(fruit.abilities) + " ]");
+					
+					writer.write("{ ");
+					for(String devilFruitKey : devilFruitElements.keySet())
+					{
+						Object key = devilFruitElements.get(devilFruitKey);
+						if(key instanceof String)
+							writer.write( devilFruitKey + ": " + key + ", " );
+					}
+					writer.write("},\n");
+					
+					//writer.write("{ name: \'" + itemStack.getDisplayName() + "\', " + "type: \'" + fruit.getType().getName() + "\', " + "abilities: [" + getAbilitiesFor(fruit) + "] };\n");
+				}
+				
+				writer.write("];\n\n");
+				
+				writer.write("export const specialGroups: Group[] =\n[\n");
+				
+				// Human Collection
+				Ability[] humanAbilities = Stream.of(RokushikiAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
+				writer.write("{ name: \'Human\', type: \'n/a\', abilities: [ " + generateAbilitiesString(humanAbilities) + " ]},\n");
+				
+				// Fishman Collection
+				Ability[] fishmanAbilities = Stream.of(FishKarateAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
+				writer.write("{ name: \'Fishman\', type: \'n/a\', abilities: [ " + generateAbilitiesString(fishmanAbilities) + " ]},\n");
+
+				// Cybord Collection
+				Ability[] cyborgAbilities = Stream.of(CyborgAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
+				writer.write("{ name: \'Cyborg\', type: \'n/a\', abilities: [ " + generateAbilitiesString(cyborgAbilities) + " ]},\n");
+				
+				// Swordsman Collection
+				writer.write("{ name: \'Swordsman\', type: \'n/a\', abilities: [ " + generateAbilitiesString(SwordsmanAbilities.abilitiesArray) + " ]},\n");
+
+				// Sniper Collection
+				writer.write("{ name: \'Sniper\', type: \'n/a\', abilities: [ " + generateAbilitiesString(SniperAbilities.abilitiesArray) + " ]},\n");
+				
+				writer.write("];");
+				
+				writer.close();
+			}
+			catch (Exception e)
+			{
+				e.getStackTrace();
+			}
+		}
+	}
+	
+	private static String generateAbilitiesString(Ability[] abilities)
+	{
+		StringBuilder abilitiesString = new StringBuilder();
+		
+		for(Ability ability : abilities)
+		{
+			StringBuilder abilityString = new StringBuilder();		
+			abilityString.append("{ ");
+			
+			Map<String, Object> loadedParams = new LinkedHashMap<String, Object>();
+			AbilityAttribute abilityAttribute = ability.getAttribute();
+			
+			loadedParams.put("name", abilityAttribute.getAbilityDisplayName());
+			loadedParams.put("texture", WyHelper.getFancyName(abilityAttribute.getAbilityTexture()));
+			
+			if(abilityAttribute.getAbilityCooldown() > 0) loadedParams.put("cooldown", abilityAttribute.getAbilityCooldown() / 20);
+			if(abilityAttribute.getAbilityCharges() > 0) loadedParams.put("chargeTime", abilityAttribute.getAbilityCharges() / 20);
+			if(abilityAttribute.getProjectileDamage() > 1) loadedParams.put("projectileDamage", abilityAttribute.getProjectileDamage());
+			if(abilityAttribute.hasProjectile() && abilityAttribute.isRepeater()) loadedParams.put("projectileNumber", (abilityAttribute.getAbilityCooldown() / abilityAttribute.getAbilityRepeaterTime()) / abilityAttribute.getAbilityRepeaterTime());
+			if(abilityAttribute.getProjectileExplosionPower() > 0) loadedParams.put("projectileExplosion", abilityAttribute.getProjectileExplosionPower());
+
+			if(abilityAttribute.getPotionEffectsForAoE() != null && abilityAttribute.getPotionEffectsForAoE().length > 0) loadedParams.put("aoeEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForAoE()) + "]");
+			if(abilityAttribute.getPotionEffectsForProjectile() != null && abilityAttribute.getPotionEffectsForProjectile().length > 0) loadedParams.put("onHitEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForProjectile()) + "]");
+			if(abilityAttribute.getPotionEffectsForUser() != null && abilityAttribute.getPotionEffectsForUser().length > 0) loadedParams.put("selfEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForUser()) + "]");
+
+			for(String manualParamKey : Values.abilityWebAppExtraParams.keySet())
+			{
+				if(WyHelper.getFancyName(abilityAttribute.getAttributeName()).equalsIgnoreCase(manualParamKey))
+				{
+					String[] params = Values.abilityWebAppExtraParams.get(manualParamKey);
+					
+					for(int j = 0; j < params.length; j++)
+					{
+						String parm = params[j];
+						Object paramValue = params[++j];
+
+						try
+						{
+							paramValue = Integer.parseInt((String) paramValue);
+						}
+						catch(Exception e) {}
+						
+						if(loadedParams.containsKey(parm))
+							loadedParams.replace(parm, paramValue);
+						else
+							loadedParams.put(parm, paramValue);
+					}
+				}
+			}
+			
+			for(String loadedParamKey : loadedParams.keySet())
+			{
+				Object key = loadedParams.get(loadedParamKey);
+				if((key instanceof Integer || key instanceof Double || key instanceof Float) || (loadedParamKey.equalsIgnoreCase("aoeEffects") || loadedParamKey.equalsIgnoreCase("onHitEffects") || loadedParamKey.equalsIgnoreCase("selfEffects")))
+					abilityString.append(loadedParamKey + ": " + key + ",");
+				else if(loadedParams.get(loadedParamKey) instanceof String)
+					abilityString.append(loadedParamKey + ": \'" + key + "\',");
+			}		
+			
+			abilityString.append("},");		
+			abilitiesString.append(abilityString.toString());
+		}
+		
+		return abilitiesString.toString();
+	}
+	
 	public static void generateExtraWebAppFiles()
 	{
-		getFancyAbilitiesList();
+		writeFancyAbilitiesList();
 		
 		Map<String, Ability> sorted = AbilityManager.instance().getHashMap();
 		Set set = sorted.entrySet();
@@ -276,7 +419,7 @@ public class WyHelper
 		}
 	}
 
-	private static void getFancyAbilitiesList()
+	private static void writeFancyAbilitiesList()
 	{
 		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
 		folder.mkdirs();
@@ -290,7 +433,7 @@ public class WyHelper
 					writer.write(devilFruit.getItemStackDisplayName(new ItemStack(devilFruit)) + "\n");
 					for(Ability ability : devilFruit.abilities)
 					{
-						writer.write("> " + ability.getAttribute().getAttributeName() + "\n");
+						writer.write("> " + ability.getAttribute().getAbilityDisplayName() + "\n");
 					}
 					writer.write("\n");
 				}

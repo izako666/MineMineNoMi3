@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
@@ -36,20 +37,15 @@ public class AbilityProjectile extends EntityThrowable
 		this.ticks = attr.getProjectileTicks();
 		this.maxticks = ticks;
 		this.user = player;
-		
-		/*this.motionX *= attr.getProjectileSpeed();
-		this.motionY *= attr.getProjectileSpeed();
-		this.motionZ *= attr.getProjectileSpeed();*/
-			/*
-			if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.SOUTH)
-				this.attr.setPosition(this.attr.getPosition()[0], this.attr.getPosition()[1], this.attr.getPosition()[2]);
-			else if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.EAST)
-				this.attr.setPosition(this.attr.getPosition()[2], this.attr.getPosition()[1], this.attr.getPosition()[0]);
-			else if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.NORTH)
-				this.attr.setPosition(this.attr.getPosition()[0], this.attr.getPosition()[1], this.attr.getPosition()[2]);
-			else if(WyHelper.instance().get4Directions(player) == WyHelper.Direction.WEST)
-				this.attr.setPosition(this.attr.getPosition()[2], this.attr.getPosition()[1], this.attr.getPosition()[0]);
-			*/
+
+		if(this.attr != null)
+		{
+			this.setLocationAndAngles(this.user.posX, this.user.posY + (double)this.user.getEyeHeight(), this.user.posZ, this.user.rotationYaw, this.user.rotationPitch);
+	        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+	        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+	        this.motionY = (double)(-MathHelper.sin((this.rotationPitch + this.func_70183_g()) / 180.0F * (float)Math.PI) * 0.4);        
+	        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, attr.getProjectileSpeed(), 1.0F);
+		}
 	}
 
 	public AbilityAttribute getAttribute()
@@ -60,7 +56,7 @@ public class AbilityProjectile extends EntityThrowable
 	public void onEntityUpdate()
 	{			
 		if(this.attr != null)
-		{
+		{						
 			if(ticks <= 0)
 			{
 				ticks = maxticks;
@@ -77,7 +73,7 @@ public class AbilityProjectile extends EntityThrowable
 	protected void onImpact(MovingObjectPosition hit)
 	{
 		if (!this.worldObj.isRemote)
-		{
+		{			
 			if(this.attr != null)
 			{
 				if (hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
@@ -99,7 +95,7 @@ public class AbilityProjectile extends EntityThrowable
 					this.setDead();
 				}
 				else
-				{				
+				{
 					if(this.attr.getProjectileExplosionPower() > 0)
 						this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower(), this.attr.canExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canExplosionDestroyBlocks() : false);
 					//else if(this.attr.getProjectileNewExplosionPower() > 0)

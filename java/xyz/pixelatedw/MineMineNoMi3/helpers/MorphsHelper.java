@@ -8,6 +8,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelYomi;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouHybrid;
 
@@ -41,6 +42,10 @@ public class MorphsHelper
 		morphsMap.put("dokudoku", new Object[][]
 				{
 						{ "venomDemon", new RenderZoanMorph(new ModelVenomDemon(), "venomdemon") },
+				});
+		morphsMap.put("yomiyomi", new Object[][]
+				{
+						{ "yomi", new RenderZoanMorph(new ModelYomi(), "skeleton", 1.1, new float[] { 0, 0.3f, 0 }) },
 				});
 	}
 	
