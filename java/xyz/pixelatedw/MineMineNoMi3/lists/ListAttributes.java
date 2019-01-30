@@ -49,8 +49,8 @@ public class ListAttributes
 	public static AbilityAttribute PHOENIXGOEN = new AbilityAttribute("Phoenix Goen").setAbilityCooldown(10).setProjectileDamage(12);
 	public static AbilityAttribute TENSEINOSOEN = new AbilityAttribute("Tensei no Soen").setAbilityCooldown(30).setAbilityCharges(5 * 20);
 	
-	public static AbilityAttribute BISON_POWERPOINT = new AbilityAttribute("Bison Power Point").setAbilityCooldown(1).setAbilityDisplayName("Power Point").setAbilityTexture("powerpoint").setAbilityPassive(true);
-	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Speed Point").setAbilityTexture("speedpoint").setAbilityPassive(true);	
+	public static AbilityAttribute BISON_POWERPOINT = new AbilityAttribute("Bison Power Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("powerpoint").setAbilityPassive(true);
+	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Bison Point").setAbilityTexture("speedpoint").setAbilityPassive(true);	
 	public static AbilityAttribute FIDDLEBANFF = new AbilityAttribute("Fiddle Banff").setAbilityCooldown(7);
 	public static AbilityAttribute KOKUTEICROSS = new AbilityAttribute("Kokutei Cross").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	
