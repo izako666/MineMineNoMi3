@@ -30,6 +30,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
@@ -78,6 +79,15 @@ public class EventsPassives
 				player.fallDistance = 0;
 			}
 
+			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
+			if(props.getUsedFruit().equalsIgnoreCase("juryojuryo") && abareHimatsuri != null && abareHimatsuri.isPassiveActive())
+				player.capabilities.allowFlying = true;
+			else if(!player.capabilities.isCreativeMode)
+			{
+				player.capabilities.allowFlying = false;
+				player.capabilities.isFlying = false;
+			}
+			
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
 				if (player.isPotionActive(Potion.poison.id))
@@ -217,6 +227,24 @@ public class EventsPassives
 	@SubscribeEvent
 	public void onEntityAttack(LivingHurtEvent event)
 	{
+		if (event.source.getSourceOfDamage() instanceof EntityLivingBase && event.entityLiving instanceof EntityPlayer)
+		{
+			EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
+			EntityPlayer attacked = (EntityPlayer) event.entityLiving;
+			ExtendedEntityData props = ExtendedEntityData.get(attacked);
+			AbilityProperties abilityProps = AbilityProperties.get(attacked);
+			
+			if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
+			{
+				Ability soulParade = abilityProps.getAbilityFromName(ListAttributes.SOULPARADE.getAttributeName());
+				
+				if(soulParade != null && soulParade.isPassiveActive())
+				{
+					attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 1));
+				}
+			}
+		}
+		
 		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
 		{
 			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
@@ -240,7 +268,7 @@ public class EventsPassives
 				if (doppelman != null)
 					doppelman.forcedTargets.add(attacked);
 			}
-
+			
 			if (props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 

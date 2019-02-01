@@ -38,6 +38,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectBlackWorld;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectDarkMatter;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectKorouzu;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yomi.ParticleEffectKasuriutaFubukiGiri1;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yuki.ParticleEffectFubuki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.zou.ParticleEffectGreatStomp;
 
@@ -135,6 +136,10 @@ public class ParticleManager
 		// Kilo
 		map.put(ID.PARTICLEFX_KILO, new ParticleEffectHeavyPunch());
 		
+		// Yomi
+		map.put(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI1, new ParticleEffectKasuriutaFubukiGiri1());
+		map.put(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI2, new ParticleEffectHeavyPunch());
+		map.put(ID.PARTICLEFX_SOULPARADE, new ParticleEffectHeavyPunch());
 		
 		return map;
 	}

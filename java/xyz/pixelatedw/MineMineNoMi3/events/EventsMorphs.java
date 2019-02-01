@@ -11,6 +11,7 @@ import org.lwjgl.util.glu.Sphere;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -21,22 +22,29 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.helpers.HandRendererHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -47,6 +55,7 @@ public class EventsMorphs
 	private Minecraft mc;
 
 	private RenderCandleLock candleLock = new RenderCandleLock(new ModelCandleLock());
+	private RenderAbareHimatsuri abareHimatsuri = new RenderAbareHimatsuri(new ModelAbareHimatsuri());
 
 	public EventsMorphs(Minecraft mc)
 	{
@@ -57,7 +66,7 @@ public class EventsMorphs
 	public void onEntityRendered(RenderLivingEvent.Pre event)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(event.entity);
-
+		
 		if (!props.getZoanPoint().toLowerCase().equals("n/a"))
 		{
 			if(event.entity.hurtTime > 0)
@@ -80,14 +89,32 @@ public class EventsMorphs
 		}
 		
 		if(props.isCandleLocked())
+			candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);	
+		
+		if(event.entity instanceof EntityPlayer)
 		{
-			if (Minecraft.getMinecraft().thePlayer.equals(event.entity))
-				candleLock.doRender(event.entity, 0D, -1.625D, 0D, 0F, 0.0625F);
-			else
-				candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);	
+			AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) event.entity);
+
+			Ability abilityAbareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
+			if(abilityProps != null && abilityAbareHimatsuri != null && abilityAbareHimatsuri.isPassiveActive() )
+			{
+				if(event.entity.onGround)
+				{
+					Block block = event.entity.worldObj.getBlock((int)event.entity.posX, (int)event.entity.posY - 2, (int)event.entity.posZ);
+					String texture = Blocks.dirt.getIcon(1, 0).getIconName();
+					int blockTint = event.entity.worldObj.getBlock((int)event.entity.posX, (int)event.entity.posY - 2, (int)event.entity.posZ).colorMultiplier(event.entity.worldObj, (int)event.entity.posX, (int)event.entity.posY - 2, (int)event.entity.posZ);
+
+					if(block.getIcon(1, 0) != null)
+						texture = block.getIcon(1, 0).getIconName();
+					
+					abareHimatsuri.setTextureAndTint(texture, blockTint);
+				}
+				
+				if(!event.entity.onGround)
+					abareHimatsuri.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);	
+			}			
 		}
-		
-		
+				
 /*		if(event.entity instanceof EntityDojoSensei)
 		{
 			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);

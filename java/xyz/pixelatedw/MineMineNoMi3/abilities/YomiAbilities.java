@@ -9,16 +9,32 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldServer;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
 public class YomiAbilities
 {
-	public static Ability[] abilitiesArray = new Ability[] {new KasuriutaFubukiGiri()};
+	public static Ability[] abilitiesArray = new Ability[] {new KasuriutaFubukiGiri(), new SoulParade()};
+	
+	public static class SoulParade extends Ability
+	{
+		public SoulParade() 
+		{
+			super(ListAttributes.SOULPARADE); 
+		}
+		
+		public void duringPassive(EntityPlayer player, int passiveTimer)
+		{
+			if(player.getHeldItem() == null || !ItemsHelper.isSword(player.getHeldItem()))
+				super.passive(player);
+		}
+	}
 	
 	public static class KasuriutaFubukiGiri extends Ability
 	{
@@ -58,14 +74,15 @@ public class YomiAbilities
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-			if(currentCooldown > 4 * 20)
-			{
+			if(currentCooldown > 6 * 20)
+			{			
 				for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 				{
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 8);
 					e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
 					e.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));
 				}
+		    	WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI1, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			}
 	    }
 	}

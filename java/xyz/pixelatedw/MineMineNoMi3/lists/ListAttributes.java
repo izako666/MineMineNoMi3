@@ -35,6 +35,7 @@ public class ListAttributes
 	public static AbilityAttribute IVORYSTOMP = new AbilityAttribute("Ivory Stomp").setAbilityCooldown(7).setAbilityPunch();
 	public static AbilityAttribute TRUNKSHOT = new AbilityAttribute("Trunk Shot").setAbilityCooldown(7).setProjectileModel(new ModelCube()).setProjectileSize(1, 1, 3).setProjectileColor("838993").setProjectileDamage(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.weakness.id, 5 * 20));
 	
+	public static AbilityAttribute SOULPARADE = new AbilityAttribute("Soul Parade").addEffects(EffectType.USER,new PotionEffect(Potion.resistance.id, 30, 100), new PotionEffect(Potion.moveSlowdown.id, 30, 3)).setAbilityCooldown(5).setAbilityPassive();
 	public static AbilityAttribute KASURIUTAFUBUKIGIRI = new AbilityAttribute("Kasuriuta: Fubuki Giri").setAbilityCooldown(10);
 	
 	public static AbilityAttribute BAKUBAKUFACTORY = new AbilityAttribute("Baku Baku Factory");
@@ -56,7 +57,7 @@ public class ListAttributes
 	
 	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(20).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("51585B").setProjectileSize(50, 50, 50).setProjectileDamage(50).setProjectileExplosion(20, false);
 	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(12).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
-	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityPassive();
+	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityCooldown(10).setAbilityPassive();
 	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityCooldown(12).setAbilityPassive();
 	
 	public static AbilityAttribute BLACKWORLD = new AbilityAttribute("Black World").setAbilityCooldown(25).addEffects(EffectType.AOE, new PotionEffect(Potion.moveSlowdown.id, 200, 100), new PotionEffect(Potion.digSlowdown.id, 200, 100), new PotionEffect(Potion.blindness.id, 200, 2)).setEffectRadius(20);
@@ -231,7 +232,7 @@ public class ListAttributes
 	public static AbilityAttribute SHIGAN = new AbilityAttribute("Shigan").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute KAMIE = new AbilityAttribute("Kamie").setAbilityCooldown(10).addEffects(EffectType.USER, new PotionEffect(Potion.resistance.id, 20, 100)).setAbilityPassive();
 
-	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive();
+	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive(true);
 	public static AbilityAttribute KICKOFFJUMP = new AbilityAttribute("Kick Off Jump").setAbilityPassive().setAbilityCooldown(4);
 	public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive();
 	public static AbilityAttribute KILOPRESS = new AbilityAttribute("Kilo Press").setAbilityCooldown(10).setAbilityPassive();

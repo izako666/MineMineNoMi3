@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class EventsSpecialFlying
 {
@@ -25,22 +26,24 @@ public class EventsSpecialFlying
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+			boolean hasFlyingFruit = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
+			{
+				if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
+					return true;
+				
+				return props.getUsedFruit().equalsIgnoreCase(p);
+			});	
 			
 			if(!player.capabilities.isCreativeMode)
 			{
-				if(MainConfig.enableSpecialFlying)
+				if(MainConfig.enableSpecialFlying && hasFlyingFruit)
 				{
 					if(player.isInWater())
 						player.capabilities.isFlying = false;
 					
-					player.capabilities.allowFlying = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
-					{
-						if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
-							return true;
-						
-						return props.getUsedFruit().equalsIgnoreCase(p);
-					});
-					
+					player.capabilities.allowFlying = true;
+
 					if(!player.capabilities.allowFlying)
 						player.capabilities.isFlying = false;
 					

@@ -22,8 +22,23 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class JuryoAbilities
 {
-	public static Ability[] abilitiesArray = new Ability[] {new SagariNoRyusei(), new Juryoku(), new Moko()};
+	public static Ability[] abilitiesArray = new Ability[] {new SagariNoRyusei(), new Juryoku(), new Moko(), new AbareHimatsuri()};
 	
+	public static class AbareHimatsuri extends Ability
+	{
+		public AbareHimatsuri() 
+		{
+			super(ListAttributes.ABAREHIMATSURI); 
+		}
+
+		public void passive(EntityPlayer player) 
+		{
+			if(!player.capabilities.isFlying && player.onGround)
+				super.passive(player);
+			else if(player.capabilities.isFlying)
+				super.passive(player);
+		}
+	}
 	
 	public static class Moko extends Ability
 	{

@@ -28,13 +28,16 @@ public class EventsDFWeaknesses
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();
 
-			if (props.hasDevilFruit() && !player.worldObj.isRemote)
+			if(props.hasDevilFruit())
 			{
 				if( player.isInsideOfMaterial(Material.water) 
 						|| (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding() ))
 					if(!player.capabilities.isCreativeMode)
 						player.motionY -= 5;
-				
+			}
+			
+			if (props.hasDevilFruit() && !player.worldObj.isRemote)
+			{				
 				if (ItemsHelper.hasKairosekiItem(player))
 					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
 

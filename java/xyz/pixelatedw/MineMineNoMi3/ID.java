@@ -110,7 +110,10 @@ public class ID
 	PARTICLEFX_KOROUZU = "korouzu",
 	PARTICLEFX_KILO = "kilo",
 	PARTICLEFX_GREATSTOMP = "greatStomp",
-
+	PARTICLEFX_KASURIUTAFUBUKIGIRI1 = "kasuriutaFubukiGiri1",
+	PARTICLEFX_KASURIUTAFUBUKIGIRI2 = "kasuriutaFubukiGiri2",
+	PARTICLEFX_SOULPARADE = "soulParade",
+			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
 	CREW_ALVIDAPIRATES = "Alvida Pirates",
