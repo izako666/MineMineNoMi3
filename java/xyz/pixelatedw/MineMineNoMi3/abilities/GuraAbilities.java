@@ -9,6 +9,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GuraProjectiles;
@@ -41,7 +42,10 @@ public class GuraAbilities
 		{			
 			super.hitEntity(player, target);
 			target.attackEntityFrom(DamageSource.causePlayerDamage(player), 100);
-			WyHelper.explosion(player, target.posX, target.posY, target.posZ, 3);
+			AbilityExplosion explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 3);
+			explosion.setDamageOwner(false);
+			explosion.setSmokeParticles("");
+			explosion.doExplosion();
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_GEKISHIN, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 	}

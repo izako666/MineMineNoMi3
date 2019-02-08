@@ -41,7 +41,7 @@ public class MorphsHelper
 				});
 		morphsMap.put("dokudoku", new Object[][]
 				{
-						{ "venomDemon", new RenderZoanMorph(new ModelVenomDemon(), "venomdemon") },
+						{ "venomDemon", new RenderZoanMorph(new ModelVenomDemon(), "venomdemon", 1.1, new float[] { 0, 0.5f, 0 }) },
 				});
 		morphsMap.put("yomiyomi", new Object[][]
 				{

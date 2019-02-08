@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class FishKarateProjectiles 
@@ -50,7 +51,9 @@ public class FishKarateProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			WyHelper.explosion(this, this.posX, this.posY, this.posZ, 2.2f);
+			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2);
+			explosion.setDamageOwner(false);
+			explosion.doExplosion();
 		}
 	}
 }

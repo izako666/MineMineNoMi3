@@ -58,7 +58,7 @@ public class ParticleTaskCharge extends TimerTask
 					{
 						if(this.particle instanceof EntityParticleFX)
 						{
-							EntityParticleFX clone = ((EntityParticleFX)particle).clone(this.posX + x, this.posY + y, this.posZ + z);
+							EntityParticleFX clone = ((EntityParticleFX)particle).clone(this.posX + x, this.posY + y, this.posZ + z, 0, 5, 0);
 							Minecraft.getMinecraft().effectRenderer.addEffect(clone);
 						}
 						else							

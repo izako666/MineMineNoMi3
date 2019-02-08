@@ -65,7 +65,7 @@ public class BlockDemonPoison extends Block
     		{
     			if(!((EntityLivingBase)entity).isPotionActive(Potion.regeneration.id))
     			{
-    				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 1));
+    				((EntityLivingBase)entity).addPotionEffect(new PotionEffect(Potion.regeneration.id, 50, 1, true));
     			}
     		}
     	}

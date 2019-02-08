@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku.ParticleEffectBakuMunch;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectCommonExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectDokuGumo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.fishkarate.ParticleEffectSamehada;
@@ -60,6 +61,9 @@ public class ParticleManager
 	private HashMap<String, ParticleEffect> createMap()
 	{
 		HashMap<String, ParticleEffect> map = new HashMap<String, ParticleEffect>();
+		
+		// Zou
+		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
 		
 		// Zou
 		map.put(ID.PARTICLEFX_GREATSTOMP, new ParticleEffectGreatStomp());

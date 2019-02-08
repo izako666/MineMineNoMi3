@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
@@ -88,13 +89,16 @@ public class EventsMorphs
 			}
 		}
 		
+		if(event.entity.isPotionActive(Potion.invisibility) && event.entity.getActivePotionEffect(Potion.invisibility).getAmplifier() >= 5)
+			event.setCanceled(true);
+		
 		if(props.isCandleLocked())
 			candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);	
 		
 		if(event.entity instanceof EntityPlayer)
 		{
 			AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) event.entity);
-
+			
 			Ability abilityAbareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
 			if(abilityProps != null && abilityAbareHimatsuri != null && abilityAbareHimatsuri.isPassiveActive() )
 			{

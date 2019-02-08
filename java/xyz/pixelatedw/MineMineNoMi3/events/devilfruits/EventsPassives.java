@@ -73,7 +73,7 @@ public class EventsPassives
 					WyHelper.createFilledSphere(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ, 2, Blocks.ice, "liquids");
 				}
 			}
-
+			
 			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia() || props.getUsedFruit().equals("kilokilo"))
 			{
 				player.fallDistance = 0;

@@ -114,7 +114,7 @@ public class ExtraProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			WyHelper.explosion(this, this.posX, this.posY, this.posZ, 4f);
+			WyHelper.doExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 4);
 		}	
 	}	
 	

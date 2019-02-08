@@ -62,11 +62,16 @@ public class WyHelper
 
 	public static AxisAlignedBB NULL_AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
 
-	public static AbilityExplosion explosion(Entity entity, double posX, double posY, double posZ, float size)
+	public static AbilityExplosion newExplosion(Entity entity, double posX, double posY, double posZ, double size)
 	{
 		AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);
-		explosion.doExplosionA();
 		return explosion;
+	}
+	
+	public static void doExplosion(Entity entity, double posX, double posY, double posZ, double size)
+	{
+		AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);
+		explosion.doExplosion();
 	}
 
 	public static boolean isBlockNearby(EntityLivingBase player, int radius, Block... blocks)

@@ -6,13 +6,14 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EntityAuraFX;
+import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 
-public class EntityParticleFX extends EntityAuraFX
+public class EntityParticleFX extends EntityFX
 {
 	private ResourceLocation texture;
 	private String partName;
@@ -30,6 +31,10 @@ public class EntityParticleFX extends EntityAuraFX
 		this.setRBGColorF(1.0F, 1.0F, 1.0F);
 		this.particleMaxAge = 30 + this.rand.nextInt(10);
 		this.particleAge = 0;
+		
+		this.motionX = motionX;
+		this.motionY = motionY;
+		this.motionZ = motionZ;
 	}
 
 	@Override
@@ -76,15 +81,14 @@ public class EntityParticleFX extends EntityAuraFX
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
+        //this.motionY = -0.04D * (double)this.particleGravity; 
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.99D;
         this.motionY *= 0.99D;
         this.motionZ *= 0.99D;
 
-        if (this.particleAge++ >= this.particleMaxAge)
-            this.setDead();
-
-        this.motionY = -0.04D * (double)this.particleGravity;    	
+        if (this.particleAge++ >= this.particleMaxAge || this.onGround)
+            this.setDead();	
     }
 
     public EntityParticleFX setParticleScale(float f) { this.particleScale = f; return this; }
@@ -107,9 +111,14 @@ public class EntityParticleFX extends EntityAuraFX
     
     public EntityParticleFX clone(double posX, double posY, double posZ)
     {
+    	return clone(posX, posY, posZ, 0, 0, 0);
+    }
+    
+    public EntityParticleFX clone(double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+    {
     	EntityParticleFX clone = new EntityParticleFX(this.worldObj, this.texture,
     			posX, posY, posZ,
-    			0, 0, 0)
+    			motionX, motionY, motionZ)
     			.setParticleScale(this.particleScale).setParticleGravity(this.particleGravity).setParticleAge(this.particleMaxAge);
     	
     	if(this.hasZoom)

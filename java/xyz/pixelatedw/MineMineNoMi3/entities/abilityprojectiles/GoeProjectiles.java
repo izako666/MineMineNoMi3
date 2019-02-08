@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles.GasRobe;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.GasuProjectiles.Gastille;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -36,7 +37,10 @@ public class GoeProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			WyHelper.explosion(this, this.posX, this.posY, this.posZ, 3f);
+			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 3);
+			explosion.setDamageOwner(false);
+			explosion.setSmokeParticles("");
+			explosion.doExplosion();
 		}	
 	}
 }
