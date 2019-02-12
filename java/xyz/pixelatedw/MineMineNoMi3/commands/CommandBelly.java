@@ -59,7 +59,7 @@ public class CommandBelly extends CommandBase
 					props.alterBellyFromCommand( Values.MAX_GENERAL - plusBelly );
 				}
 				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBelly + " doriki to " + target.getCommandSenderName()); 
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBelly + " belly to " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("-"))
 			{
@@ -80,7 +80,7 @@ public class CommandBelly extends CommandBase
 						props.setBellyFromCommand(0);
 				}
 				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBelly + " doriki from " + target.getCommandSenderName()); 
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBelly + " belly from " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("="))
 			{
@@ -89,14 +89,14 @@ public class CommandBelly extends CommandBase
 					props.setBellyFromCommand( Values.MAX_GENERAL );
 					props.setBelly( Values.MAX_GENERAL );
 					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " doriki"); 
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " belly"); 
 				}
 				else if(plusBelly <= Values.MAX_GENERAL)
 				{
 					props.setBellyFromCommand(plusBelly);
 					props.setBelly(plusBelly);
 					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBelly + " doriki"); 
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBelly + " belly"); 
 				}				
 			}
 			 

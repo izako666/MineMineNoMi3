@@ -79,15 +79,6 @@ public class EventsPassives
 				player.fallDistance = 0;
 			}
 
-			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
-			if(props.getUsedFruit().equalsIgnoreCase("juryojuryo") && abareHimatsuri != null && abareHimatsuri.isPassiveActive())
-				player.capabilities.allowFlying = true;
-			else if(!player.capabilities.isCreativeMode)
-			{
-				player.capabilities.allowFlying = false;
-				player.capabilities.isFlying = false;
-			}
-			
 			if (props.getUsedFruit().equals("dokudoku"))
 			{
 				if (player.isPotionActive(Potion.poison.id))

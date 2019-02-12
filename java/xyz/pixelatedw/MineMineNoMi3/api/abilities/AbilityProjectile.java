@@ -12,6 +12,7 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProjectile extends EntityThrowable
@@ -83,10 +84,14 @@ public class AbilityProjectile extends EntityThrowable
 							((EntityLivingBase)hit.entityHit).addPotionEffect(new PotionEffect(p));
 				
 					if(this.attr.getProjectileExplosionPower() > 0)
-						this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower(), this.attr.canExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canExplosionDestroyBlocks() : false);
-					//else if(this.attr.getProjectileNewExplosionPower() > 0)
-					//	WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
-					
+					{
+						AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower());
+						explosion.setDamageOwner(false);
+						explosion.setFireAfterExplosion(this.attr.canProjectileExplosionSetFire());
+						explosion.setDestroyBlocks(this.attr.canProjectileExplosionDestroyBlocks());
+						explosion.doExplosion();
+					}
+
 					if(this.attr.getProjectileDamage() > 0)
 						hit.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage());
 					
@@ -97,10 +102,14 @@ public class AbilityProjectile extends EntityThrowable
 				else
 				{
 					if(this.attr.getProjectileExplosionPower() > 0)
-						this.worldObj.newExplosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower(), this.attr.canExplosionSetFire(), MainConfig.enableGriefing ? this.attr.canExplosionDestroyBlocks() : false);
-					//else if(this.attr.getProjectileNewExplosionPower() > 0)
-					//	WyHelper.explosion(this, this.posX, this.posY, this.posZ, this.attr.getProjectileNewExplosionPower());
-
+					{
+						AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower());
+						explosion.setDamageOwner(false);
+						explosion.setFireAfterExplosion(this.attr.canProjectileExplosionSetFire());
+						explosion.setDestroyBlocks(this.attr.canProjectileExplosionDestroyBlocks());
+						explosion.doExplosion();
+					}
+					
 					tasksImapct(hit);
 
 					Material hitMat = this.worldObj.getBlock(hit.blockX, hit.blockY, hit.blockZ).getMaterial();

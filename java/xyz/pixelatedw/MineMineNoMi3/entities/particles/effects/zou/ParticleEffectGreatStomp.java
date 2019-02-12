@@ -1,19 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.zou;
 
-import java.util.Random;
 import java.util.Timer;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
-import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
-import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskCharge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.tasks.ParticleTaskWave;
 
 public class ParticleEffectGreatStomp extends ParticleEffect

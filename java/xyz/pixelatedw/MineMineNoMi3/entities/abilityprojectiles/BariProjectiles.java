@@ -49,8 +49,15 @@ public class BariProjectiles
 
 				if(ability != null)
 				{
+					if(!ability.isPassiveActive())
+					{
+						this.setDead();
+						return;
+					}
+					
 					((BariAbilities.BarrierbilityStairs)ability).fillBlocksList(WyHelper.createFilledCube(this.worldObj, this.posX, this.posY - 2, this.posZ, new int[] {1, 1, 1}, ListMisc.Barrier, "air"));
 				}
+
 			}
 			
 			super.onUpdate();

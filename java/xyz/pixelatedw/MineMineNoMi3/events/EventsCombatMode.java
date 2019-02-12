@@ -56,6 +56,19 @@ public class EventsCombatMode extends Gui
 
 		GuiIngameForge.left_height += 1;
 
+		/*GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glShadeModel(GL11.GL_SMOOTH);
+        
+		WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#FF69B4").getRGB(), 7, 0, 0, 512, 512, 0);
+		
+        GL11.glShadeModel(GL11.GL_FLAT);
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);*/
+		
 		if (event.type == ElementType.FOOD && props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
 			event.setCanceled(true);
 		

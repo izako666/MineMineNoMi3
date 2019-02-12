@@ -11,6 +11,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
@@ -27,17 +28,21 @@ public class EventsSpecialFlying
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
+
+
+			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
+			boolean hasAbareHimatsuri = props.getUsedFruit().equalsIgnoreCase("juryojuryo") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
+			
+			boolean hasToriFruit = props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");
+			
 			boolean hasFlyingFruit = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
-			{
-				if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a"))
-					return true;
-				
+			{				
 				return props.getUsedFruit().equalsIgnoreCase(p);
 			});	
 			
 			if(!player.capabilities.isCreativeMode)
 			{
-				if(MainConfig.enableSpecialFlying && hasFlyingFruit)
+				if((MainConfig.enableSpecialFlying && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)
 				{
 					if(player.isInWater())
 						player.capabilities.isFlying = false;
@@ -46,33 +51,40 @@ public class EventsSpecialFlying
 
 					if(!player.capabilities.allowFlying)
 						player.capabilities.isFlying = false;
+				}
+				else
+				{
+					player.capabilities.allowFlying = false;
+					player.capabilities.isFlying = false;
+				}
+			
+				if(player.capabilities.isFlying && player.worldObj.isRemote)
+				{
+					ResourceLocation particleToUse = null;
+					if(props.getUsedFruit().equalsIgnoreCase("mokumoku") )
+						particleToUse = ID.PARTICLE_ICON_MOKU;
+					else if(props.getUsedFruit().equalsIgnoreCase("gasugasu") )
+						particleToUse = ID.PARTICLE_ICON_GASU;
+					else if(props.getUsedFruit().equalsIgnoreCase("sunasuna") )
+						particleToUse = ID.PARTICLE_ICON_SUNA2;
+					else if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") )
+						particleToUse = ID.PARTICLE_ICON_BLUEFLAME;
 					
-					if(player.capabilities.isFlying && player.worldObj.isRemote)
+					if(particleToUse != null)
 					{
-						ResourceLocation particleToUse = null;
-						if(props.getUsedFruit().equalsIgnoreCase("mokumoku") )
-							particleToUse = ID.PARTICLE_ICON_MOKU;
-						else if(props.getUsedFruit().equalsIgnoreCase("gasugasu") )
-							particleToUse = ID.PARTICLE_ICON_GASU;
-						else if(props.getUsedFruit().equalsIgnoreCase("sunasuna") )
-							particleToUse = ID.PARTICLE_ICON_SUNA2;
-
-						if(particleToUse != null)
-						{
-							for (int i = 0; i < 10; i++)
-							{							
-								double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-								double offsetY = (new Random().nextInt(13) + 1.0D - 10.0D) / 10.0D;
-								double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
-									
-								MainMod.proxy.spawnCustomParticles(player, 
-										new EntityParticleFX(player.worldObj, particleToUse, 
-												player.posX + offsetX, 
-												player.posY - 1 + offsetY, 
-												player.posZ + offsetZ, 
-												0, 0, 0)
-										.setParticleScale(1.3F).setParticleGravity(0).setParticleAge(5));
-							}
+						for (int i = 0; i < 5; i++)
+						{							
+							double offsetX = 0.5 - player.worldObj.rand.nextDouble();
+							double offsetY = player.worldObj.rand.nextDouble();
+							double offsetZ = 0.5 - player.worldObj.rand.nextDouble();
+								
+							MainMod.proxy.spawnCustomParticles(player, 
+									new EntityParticleFX(player.worldObj, particleToUse, 
+											player.posX + offsetX, 
+											player.posY - 2 + offsetY, 
+											player.posZ + offsetZ, 
+											0, 0, 0)
+									.setParticleScale(1.3F).setParticleGravity(-0.05F).setParticleAge(5));
 						}
 					}
 				}

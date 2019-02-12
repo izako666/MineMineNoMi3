@@ -73,7 +73,7 @@ public class EventsMorphs
 			if(event.entity.hurtTime > 0)
 			{
 				GL11.glPushMatrix();
-				GL11.glColor3f(1.0f, 0, 0);	        
+				GL11.glColor3f(1.0f, 0, 0);
 				GL11.glPopMatrix();
 			}
 			
@@ -88,6 +88,8 @@ public class EventsMorphs
 				});
 			}
 		}
+		
+		//GL11.glColor3d(1.0, 0.41, 0.70);
 		
 		if(event.entity.isPotionActive(Potion.invisibility) && event.entity.getActivePotionEffect(Potion.invisibility).getAmplifier() >= 5)
 			event.setCanceled(true);
@@ -190,12 +192,12 @@ public class EventsMorphs
 		
 		boolean renderHandFlag = false;
 		boolean renderHandEffectFlag = false;
-		
+
 		if(player.getHeldItem() == null && props.hasBusoHakiActive())
 		{
 			renderHandFlag = true;
 		}
-	
+		
 		if(MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 		{
 			for(Object[] x : MorphsHelper.getMorphsMap().get(props.getUsedFruit()))

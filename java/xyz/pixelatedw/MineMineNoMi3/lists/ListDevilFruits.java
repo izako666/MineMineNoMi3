@@ -92,7 +92,7 @@ public class ListDevilFruits
 			YukiYukiNoMi, JuryoJuryoNoMi, YamiYamiNoMi, ItoItoNoMi, HoroHoroNoMi, SupaSupaNoMi, OriOriNoMi, 
 			MeroMeroNoMi, GoeGoeNoMi, KiloKiloNoMi, HanaHanaNoMi, HoruHoruNoMi, BetaBetaNoMi, IshiIshiNoMi, 
 			PamuPamuNoMi, UshiUshiNoMiBison, ToriToriNoMiPhoenix, BakuBakuNoMi, YomiYomiNoMi, ZouZouNoMi,
-			SabiSabiNoMi;
+			SabiSabiNoMi, HitoHitoNoMi;
 
 	private static final Ability[][] EVERY_FRUIT = 
 		{
@@ -122,6 +122,10 @@ public class ListDevilFruits
 	{
 		int totalFruits = 0, totalAbilities = 0;
 		
+		HitoHitoNoMi = new AkumaNoMi(EnumFruitType.ZOAN, new Ability[] {});
+		addITEM(HitoHitoNoMi, "Hito Hito no Mi");
+		SabiSabiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SabiAbilities.abilitiesArray);
+		addITEM(SabiSabiNoMi, "Sabi Sabi no Mi");
 		ZouZouNoMi = new AkumaNoMi(EnumFruitType.ZOAN, ZouAbilities.abilitiesArray);
 		addITEM(ZouZouNoMi, "Zou Zou no Mi");
 		YomiYomiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, YomiAbilities.abilitiesArray);
@@ -170,8 +174,6 @@ public class ListDevilFruits
 		addITEM(GuraGuraNoMi, "Gura Gura no Mi");
 		BomuBomuNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, BomuAbilities.abilitiesArray);
 		addITEM(BomuBomuNoMi, "Bomu Bomu no Mi");
-		SabiSabiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SabiAbilities.abilitiesArray);
-		addITEM(SabiSabiNoMi, "Sabi Sabi no Mi");
 		NikyuNikyuNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, NikyuAbilities.abilitiesArray);
 		addITEM(NikyuNikyuNoMi, "Nikyu Nikyu no Mi");
 		MokuMokuNoMi = new AkumaNoMi(EnumFruitType.LOGIA, MokuAbilities.abilitiesArray);

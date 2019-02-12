@@ -59,7 +59,7 @@ public class CommandExtol extends CommandBase
 					props.alterExtolFromCommand( Values.MAX_GENERAL - plusExtol );
 				}
 				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusExtol + " doriki to " + target.getCommandSenderName()); 
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusExtol + " extol to " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("-"))
 			{
@@ -80,7 +80,7 @@ public class CommandExtol extends CommandBase
 						props.setExtolFromCommand(0);
 				}
 				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusExtol + " doriki from " + target.getCommandSenderName()); 
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusExtol + " extol from " + target.getCommandSenderName()); 
 			}
 			else if(str[0].equals("="))
 			{
@@ -89,14 +89,14 @@ public class CommandExtol extends CommandBase
 					props.setExtolFromCommand( Values.MAX_GENERAL );
 					props.setExtol( Values.MAX_GENERAL );
 					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " doriki"); 
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " extol"); 
 				}
 				else if(plusExtol <= Values.MAX_GENERAL)
 				{
 					props.setExtolFromCommand(plusExtol);
 					props.setExtol(plusExtol);
 					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusExtol + " doriki"); 
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusExtol + " extol"); 
 				}				
 			}
 			 

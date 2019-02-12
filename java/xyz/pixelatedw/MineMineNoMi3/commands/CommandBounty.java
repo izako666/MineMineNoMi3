@@ -61,7 +61,7 @@ public class CommandBounty extends CommandBase
 					props.alterBountyFromCommand(Values.MAX_GENERAL - plusBounty);
 				}
 
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBounty + " doriki to " + target.getCommandSenderName());
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBounty + " bounty to " + target.getCommandSenderName());
 			}
 			else if (str[0].equals("-"))
 			{
@@ -82,7 +82,7 @@ public class CommandBounty extends CommandBase
 						props.setBountyFromCommand(0);
 				}
 
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBounty + " doriki from " + target.getCommandSenderName());
+				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBounty + " bounty from " + target.getCommandSenderName());
 			}
 			else if (str[0].equals("="))
 			{
@@ -91,14 +91,14 @@ public class CommandBounty extends CommandBase
 					props.setBountyFromCommand(Values.MAX_GENERAL);
 					props.setBounty(Values.MAX_GENERAL);
 
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " doriki");
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " bounty");
 				}
 				else if (plusBounty <= Values.MAX_GENERAL)
 				{
 					props.setBountyFromCommand(plusBounty);
 					props.setBounty(plusBounty);
 
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBounty + " doriki");
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBounty + " bounty");
 				}
 			}
 

@@ -27,8 +27,10 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectYataNoKagami;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.rokushiki.ParticleEffectGeppo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.sniper.ParticleEffectKemuriBoshi;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertEncierro;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertGirasole;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertGirasole2;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertSpada;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectGroundDeath;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectSables;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.toriphoenix.ParticleEffectBlueFlames;
@@ -62,7 +64,7 @@ public class ParticleManager
 	{
 		HashMap<String, ParticleEffect> map = new HashMap<String, ParticleEffect>();
 		
-		// Zou
+		// Common
 		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
 		
 		// Zou
@@ -94,7 +96,9 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_GROUNDDEATH, new ParticleEffectGroundDeath());	
 		map.put(ID.PARTICLEFX_DESERTGIRASOLE, new ParticleEffectDesertGirasole());
 		map.put(ID.PARTICLEFX_DESERTGIRASOLE2, new ParticleEffectDesertGirasole2());
-
+		map.put(ID.PARTICLEFX_DESERTENCIERRO, new ParticleEffectDesertEncierro());
+		map.put(ID.PARTICLEFX_DESERTSPADA, new ParticleEffectDesertSpada());
+		
 		// Ushi Bison
 		map.put(ID.PARTICLEFX_KOKUTEICROSS, new ParticleEffectKokuteiCross());	
 		

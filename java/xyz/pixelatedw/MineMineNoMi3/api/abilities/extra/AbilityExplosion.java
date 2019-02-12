@@ -22,6 +22,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class AbilityExplosion
@@ -165,9 +166,6 @@ public class AbilityExplosion
 			}
 		}
 
-		if (this.hasSmokeParticles())
-			WyNetworkHelper.sendToAllAround(new PacketParticles(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), this.exploder.dimension, this.explosionX, this.explosionY, this.explosionZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-
 		if (this.canDestroyBlocks && MainConfig.enableGriefing)
 		{
 			iterator = this.affectedBlockPositions.iterator();
@@ -180,12 +178,15 @@ public class AbilityExplosion
 				posZ = chunkposition.chunkPosZ;
 				block = this.worldObj.getBlock(posX, posY, posZ);
 
-				if (block.getMaterial() != Material.air)
+				if (block.getMaterial() != Material.air) //&& block != ListMisc.KairosekiOre && block != ListMisc.KairosekiBlock)
 				{
 					block.dropBlockAsItemWithChance(this.worldObj, posX, posY, posZ, this.worldObj.getBlockMetadata(posX, posY, posZ), 0, 0);
 					this.worldObj.setBlockToAir(posX, posY, posZ);
 				}
 			}
+			
+			if (this.hasSmokeParticles())
+				WyNetworkHelper.sendToAllAround(new PacketParticles(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), this.exploder.dimension, this.explosionX, this.explosionY, this.explosionZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 
 		if (this.canStartFireAfterExplosion)

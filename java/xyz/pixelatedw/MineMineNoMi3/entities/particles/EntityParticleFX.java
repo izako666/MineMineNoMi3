@@ -81,7 +81,8 @@ public class EntityParticleFX extends EntityFX
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
-        //this.motionY = -0.04D * (double)this.particleGravity; 
+        if(this.particleGravity != 0)
+        	this.motionY = -0.04D * (double)this.particleGravity; 
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.99D;
         this.motionY *= 0.99D;

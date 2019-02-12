@@ -28,8 +28,6 @@ public class WantedPoster extends Item
 		{
 			if (blockFace == 0 || blockFace == 1)
 				return false;
-			else if (!world.getBlock(posY, posY, posZ).getMaterial().isSolid())
-				return false;
 			else
 			{
 				if (blockFace == 2)

@@ -23,7 +23,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
-			isCandleLocked = false, isTaktBlocked = false;
+			isCandleLocked = false;
 
 	private String tempPreviousAbility = "";
 	
@@ -82,7 +82,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
 		props.setBoolean("isCandleLocked", this.isCandleLocked);
-		props.setBoolean("isTaktBlocked", this.isTaktBlocked);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -124,7 +123,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
 		this.isCandleLocked = props.getBoolean("isCandleLocked");
-		this.isTaktBlocked = props.getBoolean("isTaktBlocked");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 	}
@@ -285,7 +283,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public void setIsLogia(boolean i) {this.isLogia = i;}
 	
 	public String getUsedFruit() {return this.akumaNoMiUsed;}
-	public boolean hasDevilFruit() { return !this.akumaNoMiUsed.isEmpty(); }
+	public boolean hasDevilFruit() { return !this.akumaNoMiUsed.isEmpty() && !this.akumaNoMiUsed.equalsIgnoreCase("n/a"); }
 	public void setUsedFruit(String name) {this.akumaNoMiUsed = name;}
 	
 	public boolean hasHeart() {return this.hasHeart;}

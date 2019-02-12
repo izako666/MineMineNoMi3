@@ -104,6 +104,8 @@ public class ID
 	PARTICLEFX_WHITESTRIKE = "whiteStrike",
 	PARTICLEFX_DESERTGIRASOLE = "desertGirasole",
 	PARTICLEFX_DESERTGIRASOLE2 = "desertGirasole2",
+	PARTICLEFX_DESERTENCIERRO = "desertEncierro",
+	PARTICLEFX_DESERTSPADA = "desertSpada",
 	PARTICLEFX_KARI = "kari",
 	PARTICLEFX_RAIGO = "raigo",
 	PARTICLEFX_BAKUMUNCH = "bakuMunch",

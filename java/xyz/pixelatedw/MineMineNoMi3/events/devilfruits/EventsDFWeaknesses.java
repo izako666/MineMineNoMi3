@@ -37,7 +37,7 @@ public class EventsDFWeaknesses
 			}
 			
 			if (props.hasDevilFruit() && !player.worldObj.isRemote)
-			{				
+			{
 				if (ItemsHelper.hasKairosekiItem(player))
 					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
 
@@ -51,6 +51,7 @@ public class EventsDFWeaknesses
 							abilityProps.getAbilityFromSlot(i).disable(player, true);
 						}
 					}
+					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
 				}
 				else
 				{

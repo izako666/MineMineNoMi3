@@ -65,6 +65,10 @@ public class AbilityAttribute
 		this.abilityRepeaterTime = attr.abilityRepeaterTime;
 		this.abilityRepeaterFreq = attr.abilityRepeaterFreq;
 		this.projectileMoveThroughBlocks = attr.projectileMoveThroughBlocks;
+		this.projectileExplosionHasFire = attr.projectileExplosionHasFire;
+		this.projectileExplosionCanBreakBlocks = attr.projectileExplosionCanBreakBlocks;
+		this.abilityExplosionHasFire = attr.abilityExplosionHasFire;
+		this.abilityExplosionCanBreakBlocks = attr.abilityExplosionCanBreakBlocks;
 		
 		this.projectileAlpha = attr.projectileAlpha;
 		this.projectileDamage = attr.projectileDamage;
@@ -119,7 +123,7 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileAlpha(float alpha) { this.projectileAlpha = alpha; return this; }
 	public AbilityAttribute setProjectileSize(double x, double y, double z) { this.projectileScale = new double[] {x, y, z}; return this; }
 	public AbilityAttribute setProjectileSize(double i[]) { this.projectileScale = i; return this; }
-	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;this.abilityExplosionCanBreakBlocks = explosion;return this;}
+	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.projectileExplosionPower = i; this.projectileExplosionHasFire = fire; this.abilityExplosionCanBreakBlocks = explosion; return this;}
 	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
 	public AbilityAttribute setProjectileExplosion(int i) {this.projectileExplosionPower = i;return this;}
 	public AbilityAttribute setProjectileSpeed(float speed) {this.projectileSpeed = speed; return this;}
@@ -168,8 +172,8 @@ public class AbilityAttribute
 	public double[] getProjectileSize() { return projectileScale; }
 	public float getProjectileSpeed() { return projectileSpeed; }
 	public int getProjectileExplosionPower() { return projectileExplosionPower; }		
-	public boolean canExplosionSetFire() { return projectileExplosionHasFire; }
-	public boolean canExplosionDestroyBlocks() { return abilityExplosionCanBreakBlocks; }	
+	public boolean canProjectileExplosionSetFire() { return projectileExplosionHasFire; }
+	public boolean canProjectileExplosionDestroyBlocks() { return projectileExplosionCanBreakBlocks; }	
 	public float getProjectileAlpha() { return this.projectileAlpha; }
 	public ResourceLocation getProjectileTexture() { return this.projectileTexture; }
 	public double getProjectileXRotation() { return this.projectileXRotation; }

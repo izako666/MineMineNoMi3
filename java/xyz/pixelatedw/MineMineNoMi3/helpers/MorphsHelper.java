@@ -26,17 +26,17 @@ public class MorphsHelper
 	{
 		morphsMap.put("ushiushibison", new Object[][] 
 				{
-						{ "power", new RenderZoanMorph(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.8f, 0 }) },
+						{ "power", new RenderZoanMorph(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.7f, 0 }) },
 						{ "speed", new RenderZoanMorph(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 }) }					
 				});
 		morphsMap.put("toritoriphoenix", new Object[][]
 				{
 						{ "full", new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull", 1.3, new float[] { 0, 0.3f, 0 }) },
-						{ "hybrid", new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid", 1, new float[] { 0, 0.3f, 0 }) }		
+						{ "hybrid", new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid", 1, new float[] { 0, 0.2f, 0 }) }		
 				});
 		morphsMap.put("zouzou", new Object[][]
 				{
-						{ "full", new RenderZoanMorph(new ModelZouFull(), "zoufull", 1.3, new float[] { 0, 0.7f, 0 }) },
+						{ "full", new RenderZoanMorph(new ModelZouFull(), "zoufull", 1.3, new float[] { 0, 0.65f, 0 }) },
 						{ "hybrid", new RenderZoanMorph(new ModelZouHybrid(), "zouhybrid", 1.0, new float[] { 0, 0.2f, 0 }) }		
 				});
 		morphsMap.put("dokudoku", new Object[][]

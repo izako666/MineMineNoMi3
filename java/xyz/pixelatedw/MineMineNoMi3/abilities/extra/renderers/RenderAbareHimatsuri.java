@@ -12,7 +12,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 
 public class RenderAbareHimatsuri extends Render
 {
-	private ResourceLocation texture;
+	private ResourceLocation texture = new ResourceLocation("minecraft:textures/blocks/dirt.png");;
 	private int blockTint;
 	private ModelAbareHimatsuri model;
 	private double scale;
