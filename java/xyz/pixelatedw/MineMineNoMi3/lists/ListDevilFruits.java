@@ -35,6 +35,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.SabiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SniperAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SunaAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.SupaAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SwordsmanAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ToriPhoenixAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.UshiBisonAbilities;
@@ -76,6 +77,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProject
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SniperProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SukeProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SupaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ToriPhoenixProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
@@ -102,7 +104,8 @@ public class ListDevilFruits
 				KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
-				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray, SabiAbilities.abilitiesArray,
+				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray, 
+				SabiAbilities.abilitiesArray, SupaAbilities.abilitiesArray,
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
@@ -116,12 +119,14 @@ public class ListDevilFruits
 				ItoProjectiles.abilitiesClassesArray, FishKarateProjectiles.abilitiesClassesArray, CyborgProjectiles.abilitiesClassesArray, ExtraProjectiles.abilitiesClassesArray, BariProjectiles.abilitiesClassesArray,
 				HoroProjectiles.abilitiesClassesArray, GoeProjectiles.abilitiesClassesArray, NoroProjectiles.abilitiesClassesArray, YamiProjectiles.abilitiesClassesArray, GomuProjectiles.abilitiesClassesArray,
 				SwordsmanProjectiles.abilitiesClassesArray, ToriPhoenixProjectiles.abilitiesClassesArray, SniperProjectiles.abilitiesClassesArray, JuryoProjectiles.abilitiesClassesArray, BakuProjectiles.abilitiesClassesArray,
-				ZouProjectiles.abilitiesClassesArray};
+				ZouProjectiles.abilitiesClassesArray, SupaProjectiles.abilitiesClassesArray};
 	
 	public static void init() 
 	{
 		int totalFruits = 0, totalAbilities = 0;
 		
+		SupaSupaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SupaAbilities.abilitiesArray);
+		addITEM(SupaSupaNoMi, "Supa Supa no Mi");
 		HitoHitoNoMi = new AkumaNoMi(EnumFruitType.ZOAN, new Ability[] {});
 		addITEM(HitoHitoNoMi, "Hito Hito no Mi");
 		SabiSabiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SabiAbilities.abilitiesArray);
@@ -147,9 +152,7 @@ public class ListDevilFruits
 		/*HoruHoruNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, HORU);
 		addITEM(HoruHoruNoMi, "Horu Horu no Mi");
 		MeroMeroNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, MERO);
-		addITEM(MeroMeroNoMi, "Mero Mero no Mi");
-		/*SupaSupaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SUPA);
-		addITEM(SupaSupaNoMi, "Supa Supa no Mi");*/
+		addITEM(MeroMeroNoMi, "Mero Mero no Mi");*/
 		HoroHoroNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, HoroAbilities.abilitiesArray);
 		addITEM(HoroHoroNoMi, "Horo Horo no Mi");
 		BariBariNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, BariAbilities.abilitiesArray);

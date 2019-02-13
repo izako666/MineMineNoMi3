@@ -107,7 +107,7 @@ public class AbilityAttribute
 	public AbilityAttribute setAbilityPassive() { this.abilityIsPassive = true; return this;}
 	public AbilityAttribute setAbilityPassive(boolean freePassive) { this.abilityIsPassive = true; this.abilityIsFreePassive = freePassive; return this;}
 	public AbilityAttribute setAbilityPunch() { this.abilityIsPassive = true; this.abilityIsPunch = true; return this; }
-	public AbilityAttribute setAbilityPunch(float damage) { this.abilityIsPunch = true; this.abilityPunchDamage = damage; return this; }
+	public AbilityAttribute setAbilityPunch(float damage) { this.abilityIsPassive = true; this.abilityIsPunch = true; this.abilityPunchDamage = damage; return this; }
 	public AbilityAttribute setAbilityRepeater() { this.abilityIsRepeater = true; this.abilityRepeaterTime = 6; this.abilityRepeaterFreq = 1; return this; }
 	public AbilityAttribute setAbilityRepeater(int time) { this.abilityIsRepeater = true; this.abilityRepeaterTime = time; this.abilityRepeaterFreq = 1; return this; }
 	public AbilityAttribute setAbilityRepeater(int time, int frequency) { this.abilityIsRepeater = true; this.abilityRepeaterTime = time; this.abilityRepeaterFreq = frequency; return this; }

@@ -33,6 +33,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertSpada;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectGroundDeath;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectSables;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.supa.ParticleEffectAtomicSpurt;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.toriphoenix.ParticleEffectBlueFlames;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.toriphoenix.ParticleEffectTenseiNoSoen;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.toriphoenix.ParticleEffectTenseiNoSoen2;
@@ -66,6 +67,9 @@ public class ParticleManager
 		
 		// Common
 		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
+		
+		// Supa
+		map.put(ID.PARTICLEFX_ATOMICSPURT, new ParticleEffectAtomicSpurt());
 		
 		// Zou
 		map.put(ID.PARTICLEFX_GREATSTOMP, new ParticleEffectGreatStomp());

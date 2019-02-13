@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -66,6 +67,28 @@ public class EventsPassives
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();
 
+			Ability atomicSpurt = abilityProps.getAbilityFromName(ListAttributes.ATOMICSPURT.getAttributeName());
+			if (props.getUsedFruit().equals("supasupa"))
+			{
+				if(atomicSpurt != null && atomicSpurt.isPassiveActive())
+				{
+					if (player.onGround)
+					{
+						if(Math.abs(player.motionX) < 0.5 || Math.abs(player.motionZ) < 0.5)
+						{
+							player.motionX *= 1.6D;
+							player.motionZ *= 1.6D;
+						}
+						
+						if(Math.abs(player.motionX) > 0.15 || Math.abs(player.motionZ) > 0.15)
+						{
+							for(EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
+								e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
+						}
+					}
+				}
+			}
+			
 			if (props.getUsedFruit().equals("hiehie"))
 			{
 				if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))

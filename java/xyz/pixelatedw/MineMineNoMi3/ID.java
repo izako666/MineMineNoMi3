@@ -116,6 +116,7 @@ public class ID
 	PARTICLEFX_KASURIUTAFUBUKIGIRI2 = "kasuriutaFubukiGiri2",
 	PARTICLEFX_SOULPARADE = "soulParade",
 	PARTICLEFX_COMMONEXPLOSION = "commonExplosion",
+	PARTICLEFX_ATOMICSPURT = "atomicSpurt",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
