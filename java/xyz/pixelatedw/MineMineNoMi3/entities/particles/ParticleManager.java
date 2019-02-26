@@ -7,6 +7,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku.ParticleEffectBakuMunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectCommonExplosion;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectWaterExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectDokuGumo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.fishkarate.ParticleEffectSamehada;
@@ -20,6 +21,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffec
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectHeavyPunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai2;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mero.ParticleEffectPerfumeFemur;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mero.ParticleEffectSlaveArrow;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.moku.ParticleEffectWhiteLauncher;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.moku.ParticleEffectWhiteStrike;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectAmaterasu;
@@ -43,6 +46,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectDarkMatter;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yami.ParticleEffectKorouzu;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yomi.ParticleEffectKasuriutaFubukiGiri1;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yomi.ParticleEffectSoulParade;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.yuki.ParticleEffectFubuki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.zou.ParticleEffectGreatStomp;
 
@@ -67,6 +71,11 @@ public class ParticleManager
 		
 		// Common
 		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
+		map.put(ID.PARTICLEFX_WATEREXPLOSION, new ParticleEffectWaterExplosion());	
+
+		// Mero
+		map.put(ID.PARTICLEFX_SLAVEARROW, new ParticleEffectSlaveArrow());	
+		map.put(ID.PARTICLEFX_PERFUMEFEMUR, new ParticleEffectPerfumeFemur());
 		
 		// Supa
 		map.put(ID.PARTICLEFX_ATOMICSPURT, new ParticleEffectAtomicSpurt());
@@ -149,9 +158,8 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_KILO, new ParticleEffectHeavyPunch());
 		
 		// Yomi
-		map.put(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI1, new ParticleEffectKasuriutaFubukiGiri1());
-		map.put(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI2, new ParticleEffectHeavyPunch());
-		map.put(ID.PARTICLEFX_SOULPARADE, new ParticleEffectHeavyPunch());
+		map.put(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI, new ParticleEffectKasuriutaFubukiGiri1());
+		map.put(ID.PARTICLEFX_SOULPARADE, new ParticleEffectSoulParade());
 		
 		return map;
 	}

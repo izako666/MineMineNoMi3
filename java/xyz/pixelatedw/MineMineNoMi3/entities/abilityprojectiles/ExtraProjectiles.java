@@ -7,6 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -47,7 +49,10 @@ public class ExtraProjectiles
 			{
 				if(life <= 0)
 					this.setDead();
-								
+						
+				for(EntityLivingBase target : WyHelper.getEntitiesNear(thrower, 2))
+					target.addPotionEffect(new PotionEffect(Potion.poison.id, 100, 1));
+				
 				life--;
 			}
 			

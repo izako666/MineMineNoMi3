@@ -29,6 +29,14 @@ public class YomiAbilities
 			super(ListAttributes.SOULPARADE); 
 		}
 		
+		public void passive(EntityPlayer player)
+		{
+			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
+				super.passive(player);
+			else
+				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
+		}
+		
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
 			if(player.getHeldItem() == null || !ItemsHelper.isSword(player.getHeldItem()))
@@ -82,7 +90,7 @@ public class YomiAbilities
 					e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
 					e.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));
 				}
-		    	WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI1, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+		    	WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			}
 	    }
 	}

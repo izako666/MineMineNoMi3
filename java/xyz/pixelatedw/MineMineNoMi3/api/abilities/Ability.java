@@ -206,11 +206,16 @@ public class Ability
 	public void endCharging(EntityPlayer player)
 	{
 		isCharging = false;
-		//isOnCooldown = true;
+		isOnCooldown = true;
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 		
 		if(projectile != null)
-			player.worldObj.spawnEntityInWorld(projectile);
+		{
+			if(this.attr.isRepeater())
+				startRepeater(player);
+			else
+				player.worldObj.spawnEntityInWorld(projectile);
+		}
 		
 		this.sendShounenScream(player, 2);
 		

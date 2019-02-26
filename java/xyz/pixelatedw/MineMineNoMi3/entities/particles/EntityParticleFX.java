@@ -52,7 +52,7 @@ public class EntityParticleFX extends EntityFX
 		float x = (float) (prevPosX + (posX - prevPosX) * partialTicks - interpPosX);
 		float y = (float) (prevPosY + (posY - prevPosY) * partialTicks - interpPosY);
 		float z = (float) (prevPosZ + (posZ - prevPosZ) * partialTicks - interpPosZ);
-
+		
 		float ticks = particleAge;
 		
 		if(hasZoom)
@@ -87,7 +87,12 @@ public class EntityParticleFX extends EntityFX
         this.motionX *= 0.99D;
         this.motionY *= 0.99D;
         this.motionZ *= 0.99D;
-
+        
+        //float lifePercentage = (float)this.particleAge / this.particleMaxAge;
+        
+        //if(lifePercentage < 0.7)
+        //	this.particleAlpha = (lifePercentage * 10) / 3;
+                
         if (this.particleAge++ >= this.particleMaxAge || this.onGround)
             this.setDead();	
     }

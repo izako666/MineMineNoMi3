@@ -26,6 +26,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 			isCandleLocked = false;
 
 	private String tempPreviousAbility = "";
+
+	private String[] extraEffects = new String[8];
 	
 	public ExtendedEntityData(EntityLivingBase entity) 
 	{
@@ -85,6 +87,10 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
+		for(int i = 0; i < this.extraEffects.length; i++)
+			if(this.extraEffects[i] != null && !this.extraEffects[i].isEmpty())
+				props.setString("extraEffect_" + i, this.extraEffects[i]);
+		
 		compound.setTag(EXT_PROP_NAME, props);
 	}
 
@@ -125,6 +131,9 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.isCandleLocked = props.getBoolean("isCandleLocked");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
+		
+		for(int i = 0; i < this.extraEffects.length; i++)
+			this.extraEffects[i] = props.getString("extraEffect_" + i);
 	}
 
 	public void resetNBTData(NBTTagCompound compound) 
@@ -193,7 +202,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		System.out.println(" > Belly : " + props.getInteger("Belly"));
 		System.out.println("");
 	}
-	
+
 	public void init(Entity entity, World world) {}
 	
 	public void setCombatMode(boolean value) { this.isInCombatMode = value; }
@@ -351,4 +360,45 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	
 	public void setTempPreviousAbility(String temp) { this.tempPreviousAbility = temp; }
 	public String getTempPreviousAbility() { return this.tempPreviousAbility; }
+	
+	public boolean addExtraEffect(String eff)
+	{
+		for(int i = 0; i < this.extraEffects.length; i++)
+		{
+			if(this.extraEffects[i] == null || this.extraEffects[i].isEmpty())
+			{
+				this.extraEffects[i] = eff;
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	public void removeExtraEffects(String eff)
+	{
+		for(int i = 0; i < this.extraEffects.length; i++)
+		{
+			if(this.extraEffects[i] != null && !this.extraEffects[i].isEmpty())
+			{
+				this.extraEffects[i] = null;
+				break;
+			}
+		}
+	}	
+	public boolean hasExtraEffects(String eff)
+	{
+		for(int i = 0; i < this.extraEffects.length; i++)
+		{
+			if(this.extraEffects[i] != null && !this.extraEffects[i].isEmpty() && this.extraEffects[i] == eff)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}	
+	public String[] getExtraEffects()
+	{ 
+		return this.extraEffects; 
+	}
 }

@@ -21,6 +21,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
@@ -53,6 +54,10 @@ public class EventsPassives
 				{
 					propz.setIsCandleLocked(false);
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(event.entityLiving.getEntityId(), propz));
+				}
+				if(propz.hasExtraEffects(ID.EXTRAEFFECT_MERO))
+				{
+					
 				}
 			}
 
@@ -255,6 +260,11 @@ public class EventsPassives
 				if(soulParade != null && soulParade.isPassiveActive())
 				{
 					attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 1));
+					AbilityExplosion explosion = WyHelper.newExplosion(attacked, attacker.posX, attacker.posY, attacker.posZ, 2);
+					explosion.setDamageOwner(false);
+					explosion.setDestroyBlocks(false);
+					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
+					explosion.doExplosion(); 
 				}
 			}
 		}

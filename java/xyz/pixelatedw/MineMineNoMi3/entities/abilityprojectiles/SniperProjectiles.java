@@ -86,14 +86,8 @@ public class SniperProjectiles
 
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			if(hit.entityHit != null)
-			{
-				((EntityLivingBase)hit.entityHit).addPotionEffect(new PotionEffect(Potion.poison.id, 200, 0));
-				((EntityLivingBase)hit.entityHit).addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 0));
-			}
-			
 			EntityCloud smokeCloud = new EntityCloud(worldObj);
-			smokeCloud.setLocationAndAngles(hit.blockX, (hit.blockY + 1), hit.blockZ, 0, 0);
+			smokeCloud.setLocationAndAngles(this.posX, (this.posY + 1), this.posZ, 0, 0);
 			smokeCloud.motionX = 0;
 			smokeCloud.motionZ = 0;
 			smokeCloud.motionY = 0;	

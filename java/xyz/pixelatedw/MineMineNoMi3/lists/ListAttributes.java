@@ -6,6 +6,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelCube;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.ModelSphere;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelBrickBat;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHeart;
@@ -27,6 +28,9 @@ import java.awt.*;
 
 public class ListAttributes 
 {
+	
+	public static AbilityAttribute CHIYUPOPO = new AbilityAttribute("Chiyupopo").setAbilityCooldown(10);
+	public static AbilityAttribute HEALINGTOUCH = new AbilityAttribute("Healing Touch").setAbilityCooldown(15).setAbilityPunch();
 	
 	public static AbilityAttribute ZOU_HYBRIDPOINT = new AbilityAttribute("Zou Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("zouhybridpoint").setAbilityPassive(true);
 	public static AbilityAttribute ZOU_FULLPOINT = new AbilityAttribute("Zou Point").setAbilityCooldown(1).setAbilityPassive(true);
@@ -68,10 +72,10 @@ public class ListAttributes
 	
 	public static AbilityAttribute TODOROKI = new AbilityAttribute("Todoroki").setAbilityCooldown(20).setProjectileModel(new ModelCube()).setProjectileColor("#87CEFA").setProjectileSize(2, 2, 4).setProjectileDamage(15).setAbilityRepeater(20, 3);
 	
-	public static AbilityAttribute PISTOLKISS = new AbilityAttribute("Pistol Kiss").setAbilityCooldown(100).setProjectileModel(new ModelCube()).setProjectileSize(.3, .3, .3).setProjectileColor("#FFC0DB").setProjectileDamage(5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 100, 1), new PotionEffect(Potion.digSlowdown.id, 100, 1));
-//	public static AbilityAttribute PERFUMEFEMUR = new AbilityAttribute("Perfume Femur").setAbilityCooldown(200).setItemDamage(15).addTasks(Tasks.parfumefemur);
-	public static AbilityAttribute SLAVEARROW = new AbilityAttribute("Slave Arrow").setAbilityCooldown(100).setProjectileModel(new ModelCube()).setProjectileSize(.3, .3, .3).setProjectileColor("#FFC0DB").setProjectileDamage(5).setAbilityRepeater();
-	public static AbilityAttribute MEROMEROMELLOW = new AbilityAttribute("Mero Mero Mellow").setAbilityCooldown(150).setProjectileModel(new ModelHeart()).setProjectileSize(3, 3, 3).setProjectileColor("#FFC0DB").setProjectileDamage(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 200, 1), new PotionEffect(Potion.digSlowdown.id, 200, 1));
+	public static AbilityAttribute PERFUMEFEMUR = new AbilityAttribute("Perfume Femur").setAbilityCooldown(10).setAbilityPunch(10);
+	public static AbilityAttribute SLAVEARROW = new AbilityAttribute("Slave Arrow").setAbilityCooldown(10).setProjectileModel(new ModelArrow()).setProjectileColor("#FF69B4").setProjectileSize(1, 1, 2).setProjectileDamage(6).setAbilityRepeater().setAbilityCharges(7 * 20);
+	public static AbilityAttribute PISTOLKISS = new AbilityAttribute("Pistol Kiss").setAbilityCooldown(5).setProjectileModel(new ModelHeart()).setProjectileSize(.5, .5, .5).setProjectileTexture("meromeromellow").setProjectileDamage(4).setModelOffsets(0, -0.5, 0).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 100, 5), new PotionEffect(Potion.digSlowdown.id, 100, 5));
+	public static AbilityAttribute MEROMEROMELLOW = new AbilityAttribute("Mero Mero Mellow").setAbilityCooldown(20).setProjectileModel(new ModelHeart()).setProjectileSize(3, 3, 3).setProjectileTexture("meromeromellow").setProjectileDamage(20).setModelOffsets(0, -1, 0).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 400, 100), new PotionEffect(Potion.digSlowdown.id, 400, 100));
 	
 	public static AbilityAttribute SPARKLINGDAISY = new AbilityAttribute("Sparkling Daisy").setAbilityCooldown(10);
 	public static AbilityAttribute SPIRALHOLLOW = new AbilityAttribute("Spiral Hollow").setAbilityCooldown(10).setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileColor("#F8F8FF").setProjectileSize(3, 3, 5).setProjectileTicks(3);
@@ -195,7 +199,7 @@ public class ListAttributes
 	
 	public static AbilityAttribute FLASH = new AbilityAttribute("Flash").setAbilityCooldown(5).addEffects(EffectType.AOE, new PotionEffect(Potion.blindness.id, 7 * 20, 3), new PotionEffect(Potion.moveSlowdown.id, 7 * 20, 1)).setEffectRadius(10);
 	public static AbilityAttribute AMANOMURAKUMO = new AbilityAttribute("Ama no Murakumo").setAbilityPassive(true);
-	public static AbilityAttribute AMATERASU = new AbilityAttribute("Amaterasu").setAbilityCooldown(15).setProjectileTicks(150).setProjectileModel(new ModelCube()).setProjectileSize(1.2, 1.2, 5).setProjectileColor("FFFF00").setProjectileSpeed(7).setProjectileDamage(35).setProjectileExplosion(6, false).setAbilityCharges(2 * 20);
+	public static AbilityAttribute AMATERASU = new AbilityAttribute("Amaterasu").setAbilityCooldown(15).setProjectileTicks(150).setProjectileModel(new ModelCube()).setProjectileSize(1, 1, 1).setProjectileColor("FFFF00").setProjectileSpeed(5).setProjectileDamage(35).setProjectileExplosion(6, false).setAbilityCharges(2 * 20);
 	public static AbilityAttribute YASAKANINOMAGATAMA = new AbilityAttribute("Yasakani no Magatama").setAbilityCooldown(2.5).setProjectileModel(new ModelSphere()).setProjectileSize(.5, .5, .5).setProjectileColor("FFFF00").setAbilityRepeater(2).setProjectileDamage(2).setProjectileExplosion(1, false).setProjectileSpeed(5);
 	public static AbilityAttribute YATANOKAGAMI = new AbilityAttribute("Yata no Kagami").setAbilityCooldown(4);
 	 
@@ -248,8 +252,8 @@ public class ListAttributes
 	public static AbilityAttribute SAKURETSUSABOTENBOSHI = new AbilityAttribute("Sakuretsu Saboten Boshi").setAbilityCooldown(12).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(6).setProjectileExplosion(2, false, false).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
 	
 	public static AbilityAttribute SHISHISHISONSON = new AbilityAttribute("Shi Shishi Sonson").setAbilityCooldown(7);
-	public static AbilityAttribute SANBYAKUROKUJUPOUNDHO = new AbilityAttribute("Sanbyakurokuju Pound Ho").setAbilityCooldown(5).setProjectileTicks(100).setProjectileModel(new ModelCube()).setProjectileSize(6, 0.4, 1.5).setProjectileColor("bbf7b4").setProjectileDamage(20).setProjectileExplosion(3);
-	public static AbilityAttribute YAKKODORI = new AbilityAttribute("Yakkodori").setAbilityCooldown(3).setAbilityCooldown(5).setProjectileTicks(20).setProjectileModel(new ModelCube()).setProjectileSize(0.4, 6, 0.4).setProjectileColor("bbf7b4").setProjectileDamage(10).setProjectileExplosion(1).setProjectileMoveThroughBlocks(true);
+	public static AbilityAttribute SANBYAKUROKUJUPOUNDHO = new AbilityAttribute("Sanbyakurokuju Pound Ho").setAbilityCooldown(5).setProjectileTicks(100).setProjectileModel(new ModelCube()).setProjectileSize(6, 0.4, 1.5).setProjectileColor("bbf7b4").setProjectileDamage(20).setProjectileExplosion(3, false);
+	public static AbilityAttribute YAKKODORI = new AbilityAttribute("Yakkodori").setAbilityCooldown(3).setAbilityCooldown(5).setProjectileTicks(20).setProjectileModel(new ModelCube()).setProjectileSize(0.4, 6, 0.4).setProjectileColor("bbf7b4").setProjectileDamage(10).setProjectileExplosion(1, false).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute OTATSUMAKI = new AbilityAttribute("O Tatsumaki").setAbilityCooldown(7);
 		
 	//public static AbilityAttribute MURASAME = new AbilityAttribute("Murasame").setAbilityCooldown(250).setProjectileModel(new ModelCube()).setProjectileColor("00CED1").setProjectileSize(1.8, 1, 1).setProjectileDamage(15).setAbilityRepeater();

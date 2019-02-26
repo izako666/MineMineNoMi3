@@ -151,6 +151,8 @@ public class AbilityExplosion
 		int posX, posY, posZ;
 		Block block;
 
+        this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+		
 		if (this.canDamageEntities)
 		{
 			for (EntityLivingBase entity : WyHelper.getEntitiesNear((int) this.explosionX, (int) this.explosionY, (int) this.explosionZ, this.worldObj, this.explosionSize * 1.5, EntityLivingBase.class))
@@ -183,11 +185,11 @@ public class AbilityExplosion
 					block.dropBlockAsItemWithChance(this.worldObj, posX, posY, posZ, this.worldObj.getBlockMetadata(posX, posY, posZ), 0, 0);
 					this.worldObj.setBlockToAir(posX, posY, posZ);
 				}
-			}
-			
-			if (this.hasSmokeParticles())
-				WyNetworkHelper.sendToAllAround(new PacketParticles(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), this.exploder.dimension, this.explosionX, this.explosionY, this.explosionZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			}			
 		}
+		
+		if (this.hasSmokeParticles())
+			WyNetworkHelper.sendToAllAround(new PacketParticles(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), this.exploder.dimension, this.explosionX, this.explosionY, this.explosionZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
 		if (this.canStartFireAfterExplosion)
 		{

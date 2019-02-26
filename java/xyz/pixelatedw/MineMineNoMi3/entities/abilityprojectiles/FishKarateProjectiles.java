@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
@@ -52,6 +53,7 @@ public class FishKarateProjectiles
 		public void tasksImapct(MovingObjectPosition hit)
 		{
 			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2);
+			explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
 			explosion.setDamageOwner(false);
 			explosion.doExplosion();
 		}

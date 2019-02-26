@@ -1,12 +1,9 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
+import java.awt.Color;
 import java.util.Arrays;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.util.glu.GLU;
-import org.lwjgl.util.glu.Project;
-import org.lwjgl.util.glu.Sphere;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -14,20 +11,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -37,7 +24,6 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -89,13 +75,31 @@ public class EventsMorphs
 			}
 		}
 		
-		//GL11.glColor3d(1.0, 0.41, 0.70);
-		
 		if(event.entity.isPotionActive(Potion.invisibility) && event.entity.getActivePotionEffect(Potion.invisibility).getAmplifier() >= 5)
 			event.setCanceled(true);
 		
 		if(props.isCandleLocked())
 			candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);	
+		
+		if(props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
+		{
+			GL11.glPushMatrix();
+			
+			Color c = WyHelper.hexToRGB("#5d6060");
+			GL11.glColor3d((double)c.getRed() / 255, (double)c.getGreen() / 255, (double)c.getBlue() / 255);
+			
+			GL11.glPopMatrix();
+		}
+		
+		/*if(props.hasExtraEffects(ID.EXTRAEFFECT_HIE))
+		{
+			GL11.glPushMatrix();
+			
+			Color c = WyHelper.hexToRGB("#1be2e2");
+			GL11.glColor3d((double)c.getRed() / 255, (double)c.getGreen() / 255, (double)c.getBlue() / 255);
+			
+			GL11.glPopMatrix();
+		}*/
 		
 		if(event.entity instanceof EntityPlayer)
 		{

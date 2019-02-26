@@ -32,6 +32,7 @@ public class ID
 	PARTICLE_ICON_GURA2 = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_gura2.png"),	
 	PARTICLE_ICON_HIE = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_hie.png"),
 	PARTICLE_ICON_KILO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_kilo.png"),
+	PARTICLE_ICON_MERO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_mero.png"),
 			
 	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
 	
@@ -81,6 +82,7 @@ public class ID
 	PARTICLEFX_FUBUKI = "fubuki",	
 	PARTICLEFX_WHITELAUNCHER = "whiteLauncher",	
 	PARTICLEFX_SAMEHADA = "samehada",
+	PARTICLEFX_WATEREXPLOSION = "waterExplosion",
 	PARTICLEFX_SABLES = "sables",
 	PARTICLEFX_GROUNDDEATH = "groundDeath",
 	PARTICLEFX_KOKUTEICROSS = "kokuteiCross",
@@ -112,12 +114,16 @@ public class ID
 	PARTICLEFX_KOROUZU = "korouzu",
 	PARTICLEFX_KILO = "kilo",
 	PARTICLEFX_GREATSTOMP = "greatStomp",
-	PARTICLEFX_KASURIUTAFUBUKIGIRI1 = "kasuriutaFubukiGiri1",
-	PARTICLEFX_KASURIUTAFUBUKIGIRI2 = "kasuriutaFubukiGiri2",
+	PARTICLEFX_KASURIUTAFUBUKIGIRI = "kasuriutaFubukiGiri",
 	PARTICLEFX_SOULPARADE = "soulParade",
 	PARTICLEFX_COMMONEXPLOSION = "commonExplosion",
 	PARTICLEFX_ATOMICSPURT = "atomicSpurt",
+	PARTICLEFX_SLAVEARROW = "slaveArrow",
+	PARTICLEFX_PERFUMEFEMUR = "perfumeFemur",
 			
+	EXTRAEFFECT_MERO = "mero",
+	EXTRAEFFECT_HIE = "hie",
+	
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
 	CREW_ALVIDAPIRATES = "Alvida Pirates",
