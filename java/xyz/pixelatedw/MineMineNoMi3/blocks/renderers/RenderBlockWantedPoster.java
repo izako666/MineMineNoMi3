@@ -85,7 +85,6 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 
 		GL11.glPushMatrix();
 		{
-			GL11.glNormal3f(0.0F, 0.0F, -1.0F);
 			GL11.glDepthMask(false);
 
 			GL11.glTranslated(posX + 1.05, posY + 1.2, posZ + 0.87);
@@ -103,6 +102,8 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 
 			GL11.glPushMatrix();
 			{
+				GL11.glNormal3f(0.0F, 1.0F, -1.0F);
+
 				GL11.glTranslated(textX + 0.065, textY + 0.83, textZ - 0.45);
 				GL11.glRotatef(-textRotation, 0F, 1F, 0F);
 				GL11.glScalef(.007F, .007F, .007F);
@@ -114,15 +115,30 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 				String bounty = "0";
 				try
 				{
-					bounty = decimalFormat.format(Integer.parseInt(te2.getPosterBounty()));
+					bounty = decimalFormat.format(Long.parseLong(te2.getPosterBounty().replace("L", "")));
 				}
 				catch(Exception e)
 				{
 					bounty = "0";
+					e.printStackTrace();
 				}
-				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + bounty, -20, 13, WyHelper.hexToRGB("513413").getRGB());
+				
+				boolean flag = bounty.length() > 10;
+
+				if(flag)
+				{
+					GL11.glPushMatrix();
+					GL11.glTranslated(-40, -13.5, 0);	
+					GL11.glTranslated(128, 128, 512);
+					GL11.glScaled(.72, 0.89, 1.005);	
+					GL11.glTranslated(-128, -128, -512);
+				}
+				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + bounty, -20, 13, WyHelper.hexToRGB("#513413").getRGB());
+				if(flag)
+					GL11.glPopMatrix();
+				
 				GL11.glScalef(0.7F, 0.9F, 0.8F);
-				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + te2.getIssuedDate(), -40, 30, WyHelper.hexToRGB("513413").getRGB());
+				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + te2.getIssuedDate(), -40, 30, WyHelper.hexToRGB("#513413").getRGB());
 			}
 			GL11.glPopMatrix();
 			

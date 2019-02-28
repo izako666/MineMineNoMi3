@@ -53,16 +53,29 @@ public class GUIWantedPoster extends GuiScreen
 		
 		// Rendering the actualy bounty + bounty symbol + wanted name
 		this.mc.renderEngine.bindTexture(ID.TEXTURE_CURRENCIES);
-		this.drawTexturedModalRect(-1, 63, 0, 0, 32, 32);
+		this.drawTexturedModalRect(-2, 63, 0, 0, 32, 32);
 		DecimalFormat decimalFormat = new DecimalFormat("#,##0");
         String bounty = decimalFormat.format(this.wantedData.getLong("Bounty"));
-		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + bounty, 22, 76, WyHelper.hexToRGB("513413").getRGB());
 		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + this.wantedData.getString("Name"), 50 - mc.fontRenderer.getStringWidth(this.wantedData.getString("Name")) / 2, 62, WyHelper.hexToRGB("513413").getRGB());
-				
+		
+		boolean flag = bounty.length() > 10;
+		
+		if(flag)
+		{
+			GL11.glPushMatrix();
+			GL11.glTranslated(-21, -5, 0);	
+			GL11.glTranslated(128, 128, 512);
+			GL11.glScaled(.82, 0.89, 0);	
+			GL11.glTranslated(-128, -128, -512);
+		}
+		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + bounty, 22, 76, WyHelper.hexToRGB("513413").getRGB());
+		if(flag)
+			GL11.glPopMatrix();
+		
 		// Scaling down the entire thing so the date could fit
-		GL11.glTranslated(-26, -2, 0);	
+		GL11.glTranslated(-24, -2, 0);	
 		GL11.glTranslated(128, 128, 512);
-		GL11.glScaled(.74, .92, 0);	
+		GL11.glScaled(.78, .92, 0);	
 		GL11.glTranslated(-128, -128, -512);
 		
 		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + this.wantedData.getString("Date"), 36 - mc.fontRenderer.getStringWidth(this.wantedData.getString("Date")) / 2, 90, WyHelper.hexToRGB("513413").getRGB());
