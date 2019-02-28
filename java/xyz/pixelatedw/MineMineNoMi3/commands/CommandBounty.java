@@ -37,7 +37,7 @@ public class CommandBounty extends CommandBase
 			if (str.length == 3)
 			{
 				if (MainConfig.commandPermissionBounty != 1)
-					target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);
+					target = getPlayer(sender, str[2]);
 				else
 				{
 					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
@@ -49,16 +49,16 @@ public class CommandBounty extends CommandBase
 
 			if (str[0].equals("+"))
 			{
-				if (plusBounty + props.getBounty() <= Values.MAX_GENERAL)
+				if (plusBounty + props.getBounty() <= Values.MAX_BOUNTY)
 				{
 					props.alterBounty(plusBounty);
-					if (props.getBountyFromCommand() + plusBounty <= Values.MAX_GENERAL)
+					if (props.getBountyFromCommand() + plusBounty <= Values.MAX_BOUNTY)
 						props.alterBountyFromCommand(plusBounty);
 				}
 				else
 				{
-					props.setBounty(Values.MAX_GENERAL);
-					props.alterBountyFromCommand(Values.MAX_GENERAL - plusBounty);
+					props.setBounty(Values.MAX_BOUNTY);
+					props.alterBountyFromCommand(Values.MAX_BOUNTY - plusBounty);
 				}
 
 				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBounty + " bounty to " + target.getCommandSenderName());
@@ -88,12 +88,12 @@ public class CommandBounty extends CommandBase
 			{
 				if (str[1].equals("INF"))
 				{
-					props.setBountyFromCommand(Values.MAX_GENERAL);
-					props.setBounty(Values.MAX_GENERAL);
+					props.setBountyFromCommand(Values.MAX_BOUNTY);
+					props.setBounty(Values.MAX_BOUNTY);
 
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " bounty");
+					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_BOUNTY + " bounty");
 				}
-				else if (plusBounty <= Values.MAX_GENERAL)
+				else if (plusBounty <= Values.MAX_BOUNTY)
 				{
 					props.setBountyFromCommand(plusBounty);
 					props.setBounty(plusBounty);

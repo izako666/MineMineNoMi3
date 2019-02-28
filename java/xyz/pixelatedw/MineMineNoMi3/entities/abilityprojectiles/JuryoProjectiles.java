@@ -46,21 +46,18 @@ public class JuryoProjectiles
 		{
 			if(this.worldObj.isRemote)
 			{
-				for(int i = 0; i < 2; i++)
-				{
-					double posXOffset = this.worldObj.rand.nextGaussian() * 0.52D;
-					double posYOffset = this.worldObj.rand.nextGaussian() * 0.52D;
-					double posZOffset = this.worldObj.rand.nextGaussian() * 0.52D;		
+				double posXOffset = this.worldObj.rand.nextGaussian() * 0.52D;
+				double posYOffset = this.worldObj.rand.nextGaussian() * 0.52D;
+				double posZOffset = this.worldObj.rand.nextGaussian() * 0.52D;		
 		
-					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
-							posX + posXOffset, 
-							posY + posYOffset, 
-							posZ + posZOffset, 
-							0, 0, 0)
-							.setParticleAge(20).setParticleScale(0.7F);
+				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_GASU, 
+						posX + posXOffset, 
+						posY + posYOffset, 
+						posZ + posZOffset, 
+						0, 0, 0)
+						.setParticleAge(20).setParticleScale(0.7F);
 					
-					MainMod.proxy.spawnCustomParticles(this, particle);	
-				}
+				MainMod.proxy.spawnCustomParticles(this, particle);	
 			}
 			super.onUpdate();
 		}
@@ -76,10 +73,8 @@ public class JuryoProjectiles
 					int posY = (int)hit.entityHit.posY - 1;
 					int posZ = (int)hit.entityHit.posZ + z;
 					
-					Block tempBlock = this.worldObj.getBlock(posX, posY, posZ);
 					if(DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
 					{
-						tempBlock.dropBlockAsItem(this.worldObj, posX, posY, posZ, 0, 0);
 						hit.entityHit.motionX = 0;
 						hit.entityHit.motionZ = 0;
 						hit.entityHit.motionY -= 5;
@@ -89,11 +84,7 @@ public class JuryoProjectiles
 			}
 			else
 			{
-				Block tempBlock = this.worldObj.getBlock(hit.blockX, hit.blockY, hit.blockZ);
-				if(DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.air, "all", "restricted", "ignore liquid"))
-				{
-					tempBlock.dropBlockAsItem(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, 0, 0);
-				}
+				DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.air, "all", "restricted", "ignore liquid");
 			}
 		}
 	}

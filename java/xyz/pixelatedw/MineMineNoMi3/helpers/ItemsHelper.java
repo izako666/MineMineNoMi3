@@ -34,7 +34,7 @@ public class ItemsHelper
     	ExtendedWorldData worldData = ExtendedWorldData.get(world);
     	
     	// Populating the list with wanted posters
-    	List<Entry<String, Integer>> bountiesInPackage = new ArrayList<Entry<String, Integer>>();
+    	List<Entry<String, Long>> bountiesInPackage = new ArrayList<Entry<String, Long>>();
     	    	
     	if(!WyHelper.getEntitiesNear(posX, posY, posZ, world, 10).isEmpty())
     	{
@@ -43,7 +43,7 @@ public class ItemsHelper
     			return x instanceof EntityPlayer && ExtendedEntityData.get(x).isPirate() && worldData.getBounty(x.getCommandSenderName()) != 0;
     		}).forEach(x -> 
     		{
-    			SimpleEntry<String, Integer> se = new SimpleEntry<String, Integer>( x.getCommandSenderName().toLowerCase(), worldData.getBounty(x.getCommandSenderName()) );
+    			SimpleEntry<String, Long> se = new SimpleEntry<String, Long>( x.getCommandSenderName().toLowerCase(), worldData.getBounty(x.getCommandSenderName()) );
     			bountiesInPackage.add( se );
     		});
     	}
@@ -60,14 +60,14 @@ public class ItemsHelper
     	});
 	}
 	
-	public static NBTTagCompound setWantedData(String entityName, int bounty)
+	public static NBTTagCompound setWantedData(String entityName, long bounty)
 	{
 		NBTTagCompound data = null;
 
 		data = new NBTTagCompound();
 
 		data.setString("Name", entityName);
-		data.setInteger("Bounty", bounty);
+		data.setLong("Bounty", bounty);
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String dateString = format.format(new Date());

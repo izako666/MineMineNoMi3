@@ -21,6 +21,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
@@ -90,6 +91,8 @@ public class DokuAbilities
 			if (props.getZoanPoint().isEmpty())
 				props.setZoanPoint("n/a");
 
+			WyNetworkHelper.sendTo(new PacketNewAABB(1.5F, 3.5F), (EntityPlayerMP) player);
+			
 			props.setZoanPoint("venomDemon");
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
@@ -106,10 +109,15 @@ public class DokuAbilities
 			
 			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock))
 			{
-				if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != Blocks.air
+				for(int x = -1; x < 1; x++)
+				for(int z = -1; z < 1; z++)
+				{
+					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX + x, (int)player.posY, (int)player.posZ + z, ListMisc.DemonPoison, "core", "foliage", "air");
+				}
+				/*if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != Blocks.air
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.DemonPoison)
-					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison, "core", "foliage", "air");
+					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.DemonPoison, "core", "foliage", "air");*/
 			}
 			
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_VENOMDEMON, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
@@ -118,6 +126,8 @@ public class DokuAbilities
 		public void endPassive(EntityPlayer player) 
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
+			
+			WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) player);
 			
 			props.setZoanPoint("n/a");	
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);

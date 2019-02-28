@@ -37,7 +37,7 @@ public class CommandDoriki extends CommandBase
 			if(str.length == 3)
 			{
 				if(MainConfig.commandPermissionDoriki != 1)				
-					target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[2]);
+					target = getPlayer(sender, str[2]);
 				else
 				{
 					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");

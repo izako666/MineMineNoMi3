@@ -23,7 +23,7 @@ public class BlockPoison extends Block
 {
 	protected static final AxisAlignedBB CARPET_AABB = AxisAlignedBB.getBoundingBox(0.0D, 0.0D, 0.0D, 1.0D, 0.0625D, 1.0D);
 	
-	private int ticks = 120;
+	private int ticks = 200;
 	
 	public BlockPoison()
 	{
@@ -71,17 +71,30 @@ public class BlockPoison extends Block
     	}
     }
     
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand)
+    public void onBlockAdded(World world, int x, int y, int z) 
+    {
+    	world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
+    	super.onBlockAdded(world, x, y, z);
+    }
+    
+    public int tickRate(World p_149738_1_)
+    {
+        return 1;
+    }
+    
+    public void updateTick(World world, int x, int y, int z, Random rand) 
     {
     	if(world.getBlock(x, y - 1, z) == Blocks.air)
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
-    	
+
     	if(ticks > 0)
     		ticks--;
     	else
     	{
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
-    		ticks = 60;
+    		ticks = 200 + rand.nextInt(50);
     	}
-	}
+    	
+    	world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
+    }
 }

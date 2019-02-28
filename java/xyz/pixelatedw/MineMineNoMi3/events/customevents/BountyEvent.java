@@ -9,14 +9,14 @@ public class BountyEvent extends EntityEvent
 {
 	public EntityPlayer player;
 	public ExtendedEntityData props;
-	public int amount;
+	public long amount;
 	
 	public BountyEvent(EntityPlayer entity) 
 	{
 		this(entity, 0);
 	}
 	
-	public BountyEvent(EntityPlayer entity, int plusBounty) 
+	public BountyEvent(EntityPlayer entity, long plusBounty) 
 	{
 		super(entity);
 		this.player = entity;

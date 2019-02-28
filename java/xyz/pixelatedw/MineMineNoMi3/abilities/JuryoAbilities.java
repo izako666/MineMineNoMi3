@@ -109,9 +109,7 @@ public class JuryoAbilities
 							int posY = (int)entity.posY - 1;
 							int posZ = (int)entity.posZ + z;
 							
-							Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
-							if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
-								tempBlock.dropBlockAsItem(player.worldObj, posX, posY, posZ, 0, 0);				
+							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid");
 						}
 					}
 				}

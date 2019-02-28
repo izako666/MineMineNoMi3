@@ -22,7 +22,8 @@ public class Values
 	
 	public static final int MAX_DORIKI = 10000;
 	public static final int MAX_ULTRACOLA = 10;
-	public static final int MAX_GENERAL = 999999999; //Used by Bounty, Reputation, Belly & Extol
+	public static final int MAX_GENERAL = 999999999;
+	public static final long MAX_BOUNTY = 100000000000L;
 	public static final int MAX_CREW = 50;
 	public static final int MAX_ACTIVITIES = 4;
 	

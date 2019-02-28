@@ -54,6 +54,7 @@ public class ListForge
 			
 			// Morphing related code including both full body model and 1st person hand
 			MinecraftForge.EVENT_BUS.register(new EventsMorphs(Minecraft.getMinecraft()));
+			FMLCommonHandler.instance().bus().register(new EventsMorphs(Minecraft.getMinecraft()));
 			
 			// Custom Keys
 			FMLCommonHandler.instance().bus().register(new MainKeys());

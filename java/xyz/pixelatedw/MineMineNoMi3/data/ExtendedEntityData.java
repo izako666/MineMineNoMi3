@@ -20,7 +20,8 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 
 	private boolean isInCombatMode = false;
 	
-	private int doriki, dorikiCmd, bounty, bountyCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
+	private int doriki, dorikiCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
+	private long bounty, bountyCmd;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
 			isCandleLocked = false;
@@ -55,8 +56,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 
 		props.setInteger("Doriki", this.doriki);
 		props.setInteger("DorikiCmd", this.dorikiCmd);
-		props.setInteger("Bounty", this.bounty);
-		props.setInteger("BountyCmd", this.bountyCmd);
 		props.setInteger("Belly", this.belly);
 		props.setInteger("BellyCmd", this.bellyCmd);
 		props.setInteger("Extol", this.extol);
@@ -65,6 +64,9 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setInteger("MaxCola", this.maxCola);	
 		props.setInteger("UltraCola", this.ultraCola);
 		props.setInteger("Gear", this.gear);
+		
+		props.setLong("Bounty", this.bounty);
+		props.setLong("BountyCmd", this.bountyCmd);
 		
 		props.setString("AkumaNoMi", this.akumaNoMiUsed);
 		props.setString("Faction", this.faction);
@@ -100,8 +102,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 
 		this.doriki = props.getInteger("Doriki");
 		this.dorikiCmd = props.getInteger("DorikiCmd");
-		this.bounty = props.getInteger("Bounty");
-		this.bountyCmd = props.getInteger("BountyCmd");
 		this.belly = props.getInteger("Belly");
 		this.bellyCmd = props.getInteger("BellyCmd");
 		this.extol = props.getInteger("Extol");
@@ -110,6 +110,9 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.maxCola = props.getInteger("MaxCola");
 		this.ultraCola = props.getInteger("UltraCola");
 		this.gear = props.getInteger("Gear");
+		
+		this.bounty = props.getLong("Bounty");
+		this.bountyCmd = props.getLong("BountyCmd");
 		
 		this.akumaNoMiUsed = props.getString("AkumaNoMi");
 		this.faction = props.getString("Faction");
@@ -256,21 +259,21 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	}
 	public void setBellyFromCommand(int i)	{this.bellyCmd = i;}
 	
-	public int getBounty() {return this.bounty;}
-	public void alterBounty(int i)
+	public long getBounty() {return this.bounty;}
+	public void alterBounty(long i)
 	{
 		if(bounty + i < 0) bounty = 0;
 		else bounty = bounty + i;
 	}
-	public void setBounty(int i) {this.bounty = i;}
+	public void setBounty(long i) {this.bounty = i;}
 
-	public int getBountyFromCommand() {return this.bountyCmd;}
-	public void alterBountyFromCommand(int i)
+	public long getBountyFromCommand() {return this.bountyCmd;}
+	public void alterBountyFromCommand(long i)
 	{
 		if(bountyCmd + i < 0) bountyCmd = 0;
 		else bountyCmd = bountyCmd + i;
 	}
-	public void setBountyFromCommand(int i) {this.bountyCmd = i;}
+	public void setBountyFromCommand(long i) {this.bountyCmd = i;}
 	
 	public int getCola() {return this.cola;}
 	public void alterCola(int i)

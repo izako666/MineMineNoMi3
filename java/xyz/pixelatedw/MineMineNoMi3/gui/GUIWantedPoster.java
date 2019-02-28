@@ -55,7 +55,7 @@ public class GUIWantedPoster extends GuiScreen
 		this.mc.renderEngine.bindTexture(ID.TEXTURE_CURRENCIES);
 		this.drawTexturedModalRect(-1, 63, 0, 0, 32, 32);
 		DecimalFormat decimalFormat = new DecimalFormat("#,##0");
-        String bounty = decimalFormat.format(this.wantedData.getInteger("Bounty"));
+        String bounty = decimalFormat.format(this.wantedData.getLong("Bounty"));
 		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + bounty, 22, 76, WyHelper.hexToRGB("513413").getRGB());
 		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + this.wantedData.getString("Name"), 50 - mc.fontRenderer.getStringWidth(this.wantedData.getString("Name")) / 2, 62, WyHelper.hexToRGB("513413").getRGB());
 				

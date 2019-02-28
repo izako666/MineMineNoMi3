@@ -17,7 +17,7 @@ public class ExtendedWorldData extends WorldSavedData
 
 	private boolean isSwordsmanDojoSpawned = false;
 	private int totalDojosSpawned;
-	private HashMap<String, Integer> issuedBounties = new HashMap<String, Integer>();
+	private HashMap<String, Long> issuedBounties = new HashMap<String, Long>();
 		
 	public ExtendedWorldData()
 	{
@@ -51,7 +51,7 @@ public class ExtendedWorldData extends WorldSavedData
 
 		 bounties.func_150296_c().stream().forEach(x -> 
 		 {
-			 this.issuedBounties.put((String)x, bounties.getInteger((String)x));
+			 this.issuedBounties.put((String)x, bounties.getLong((String)x));
 		 });
 	}
 
@@ -66,19 +66,19 @@ public class ExtendedWorldData extends WorldSavedData
 		{
 			issuedBounties.entrySet().stream().forEach(x -> 
 			{
-				bounties.setInteger(x.getKey(), x.getValue());
+				bounties.setLong(x.getKey(), x.getValue());
 			});
 		}
 		
 		nbt.setTag("issuedBounties", bounties);
 	}
 	
-	public HashMap<String, Integer> getAllBounties()
+	public HashMap<String, Long> getAllBounties()
 	{
 		return this.issuedBounties;
 	}
 	
-	public int getBounty(String name)
+	public long getBounty(String name)
 	{
 		if(this.issuedBounties.containsKey(name.toLowerCase()))
 			return this.issuedBounties.get(name.toLowerCase());
@@ -86,7 +86,7 @@ public class ExtendedWorldData extends WorldSavedData
 		return 0;
 	}
 	
-	public void issueBounty(String name, int bounty)
+	public void issueBounty(String name, long bounty)
 	{
 		if(this.issuedBounties.containsKey(name.toLowerCase()))
 		{

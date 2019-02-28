@@ -25,7 +25,7 @@ public class WyTelemetry
 			urlConnection = "http://stats.pixelatedw.xyz/globalstats.php";
 	}
 	
-	public static void addStat(final String statName, final int value) 
+	public static void addStat(final String statName, final long value) 
 	{
         Thread newThread = new Thread()
         {

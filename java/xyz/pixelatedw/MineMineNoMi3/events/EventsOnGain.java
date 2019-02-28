@@ -147,7 +147,8 @@ public class EventsOnGain
 			IAttributeInstance attrHP = target.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.maxHealth);
 
 			int rng = player.worldObj.rand.nextInt(3) + 1;
-			int plusBounty = 0, plusBelly = 0;
+			int plusBelly = 0;
+			long plusBounty = 0;
 			double plusDoriki = 0;
 
 			boolean targetPlayer = false;

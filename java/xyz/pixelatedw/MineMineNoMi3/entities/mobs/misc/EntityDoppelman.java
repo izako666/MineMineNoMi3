@@ -87,19 +87,17 @@ public class EntityDoppelman extends EntityMob
 		if(!this.worldObj.isRemote && this.owner != null)
 		{					
 			if(this.getDistanceToEntity(owner) > 10)
-			{
 				this.getNavigator().tryMoveToEntityLiving(owner, 1.5);
-			}
 			
 			if(this.getDistanceToEntity(owner) > 80)
-			{
 				this.setPositionAndUpdate(this.owner.posX, this.owner.posY, this.owner.posZ);
-			}
 			
-			ExtendedEntityData ownerProps = ExtendedEntityData.get(this.owner);
-			
+			ExtendedEntityData ownerProps = ExtendedEntityData.get(this.owner);		
 			List<EntityLivingBase> doppelmanAttackList = isAggressive ? WyHelper.getEntitiesNear(this, 10, EntityPlayer.class, MarineData.class, PirateData.class) : !forcedTargets.isEmpty() ? forcedTargets : new ArrayList<EntityLivingBase>();
 
+			if(!ownerProps.getUsedFruit().equalsIgnoreCase("kagekage"))
+				this.setDead();
+			
 			if(!doppelmanAttackList.isEmpty())
 			{
 				if(doppelmanAttackList.contains(owner))

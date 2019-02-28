@@ -73,12 +73,12 @@ public class MainMod
 		ListQuests.init();
 
 		proxy.init();
-		
-		if(WyDebug.isDebug() && FMLCommonHandler.instance().getEffectiveSide().isClient())
+
+		if (WyDebug.isDebug() && FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{
-			String basicPath = MainMod.class.getResource("MainMod.class").toString();	
+			String basicPath = MainMod.class.getResource("MainMod.class").toString();
 			Values.RESOURCES_FOLDER = basicPath.substring(0, basicPath.indexOf("/bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
-			
+
 			WyHelper.generateLangFiles();
 			WyHelper.generateNewExtraWebAppFiles();
 		}
@@ -87,25 +87,15 @@ public class MainMod
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent evt)
 	{
-/*		if (!WyDebug.isDebug())
-		{
-			WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", 1);
-			Runtime.getRuntime().addShutdownHook(new Thread()
-			{
-				public void run()
-				{
-					try
-					{
-						WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") + "onlinePlayers", -1);
-						this.sleep(100);
-					}
-					catch (InterruptedException e)
-					{
-						e.printStackTrace();
-					}
-				}
-			});
-		}*/
+		/*
+		 * if (!WyDebug.isDebug()) {
+		 * WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") +
+		 * "onlinePlayers", 1); Runtime.getRuntime().addShutdownHook(new
+		 * Thread() { public void run() { try {
+		 * WyTelemetry.addStat(ID.PROJECT_MCVERSION.replace(".", "") +
+		 * "onlinePlayers", -1); this.sleep(100); } catch (InterruptedException
+		 * e) { e.printStackTrace(); } } }); }
+		 */
 	}
 
 	@EventHandler
