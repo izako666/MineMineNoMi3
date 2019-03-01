@@ -5,6 +5,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -84,7 +85,7 @@ public class BlockDemonPoison extends Block
     
     public void updateTick(World world, int x, int y, int z, Random rand) 
     {
-    	if(world.getBlock(x, y - 1, z) == Blocks.air)
+    	if(world.getBlock(x, y - 1, z) == Blocks.air || world.getBlock(x, y - 1, z) instanceof BlockBush)
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
 
     	if(ticks > 0)

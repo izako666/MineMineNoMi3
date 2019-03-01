@@ -47,7 +47,10 @@ public class EventsAbilityValidation
 					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
 						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
 							abilityProps.addDevilFruitAbility(a);
-
+					
+					for(Ability a : abilityProps.getAbilitiesInHotbar())
+						if(a != null && a.isOnCooldown())
+							a.startUpdate(player);
 				}
 				
 				DevilFruitsHelper.validateRacialMoves(player);
@@ -64,9 +67,9 @@ public class EventsAbilityValidation
 				
 				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				WyNetworkHelper.sendTo(new PacketQuestSync(questProps), (EntityPlayerMP) player);
-				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);	
 				
-				WyNetworkHelper.sendTo(new PacketAbilityReset(true), (EntityPlayerMP) player);
+				//WyNetworkHelper.sendTo(new PacketAbilityReset(true), (EntityPlayerMP) player);
 			}		
 		}
 	}

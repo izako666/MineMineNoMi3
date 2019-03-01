@@ -72,7 +72,7 @@ public class PacketAbilityReset implements IMessage
 				}
 			}
 			
-			return null;
+			return new PacketAbilityReset(true);
 		}
 	}
 }
