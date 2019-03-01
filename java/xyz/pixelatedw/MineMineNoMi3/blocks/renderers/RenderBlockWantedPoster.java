@@ -107,7 +107,12 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 				GL11.glTranslated(textX + 0.065, textY + 0.83, textZ - 0.45);
 				GL11.glRotatef(-textRotation, 0F, 1F, 0F);
 				GL11.glScalef(.007F, .007F, .007F);
-				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + te2.getEntityName(), 3 - Minecraft.getMinecraft().fontRenderer.getStringWidth(te2.getEntityName()) / 2, 0, WyHelper.hexToRGB("513413").getRGB());
+				
+				String name = te2.getEntityName();
+				if(name.length() > 13)
+					name = name.substring(0, 10) + "...";			
+				Minecraft.getMinecraft().fontRenderer.drawString(EnumChatFormatting.BOLD + name, 3 - Minecraft.getMinecraft().fontRenderer.getStringWidth(name) / 2, 0, WyHelper.hexToRGB("513413").getRGB());
+				
 				GL11.glScalef(1.2F, 1.2F, 1.2F);
 				DecimalFormat decimalFormat = new DecimalFormat("#,##0");
 				if (te2.getPosterBounty() == null)

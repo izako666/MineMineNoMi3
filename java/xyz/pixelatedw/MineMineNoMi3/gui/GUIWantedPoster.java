@@ -55,11 +55,14 @@ public class GUIWantedPoster extends GuiScreen
 		this.mc.renderEngine.bindTexture(ID.TEXTURE_CURRENCIES);
 		this.drawTexturedModalRect(-2, 63, 0, 0, 32, 32);
 		DecimalFormat decimalFormat = new DecimalFormat("#,##0");
+        
+        String name = this.wantedData.getString("Name");     
+		if(name.length() > 13)
+			name = name.substring(0, 10) + "...";
+		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + name, 47 - mc.fontRenderer.getStringWidth(name) / 2, 62, WyHelper.hexToRGB("513413").getRGB());
+		
         String bounty = decimalFormat.format(this.wantedData.getLong("Bounty"));
-		mc.fontRenderer.drawString(EnumChatFormatting.BOLD + this.wantedData.getString("Name"), 50 - mc.fontRenderer.getStringWidth(this.wantedData.getString("Name")) / 2, 62, WyHelper.hexToRGB("513413").getRGB());
-		
-		boolean flag = bounty.length() > 10;
-		
+		boolean flag = bounty.length() > 10;		
 		if(flag)
 		{
 			GL11.glPushMatrix();
