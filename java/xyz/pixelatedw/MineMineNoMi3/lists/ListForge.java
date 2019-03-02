@@ -4,6 +4,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.MainKeys;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsBounty;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCombatMode;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCore;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
@@ -13,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.events.EventsOnGain;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsQuestsProgress;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsAbilityValidation;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsDFWeaknesses;
+import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsEffectOverlay;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsLogiaInvulnerability;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsPassives;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsSpecialFlying;
@@ -25,6 +27,10 @@ public class ListForge
 	{
 		// Handles some core features of the mod, like IEEP registrations, update notifications or Early Access protection 		
 		MinecraftForge.EVENT_BUS.register(new EventsCore());
+		
+		// Handles any bounty/wanted poster related event
+		MinecraftForge.EVENT_BUS.register(new EventsBounty());
+		FMLCommonHandler.instance().bus().register(new EventsBounty());
 		
 		// Handles the drop events from different sources
 		MinecraftForge.EVENT_BUS.register(new EventsDrops());
@@ -49,6 +55,9 @@ public class ListForge
 		// Handles client sided stuff only
 		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
 		{
+			// Devil Fruit related client-sided events
+			MinecraftForge.EVENT_BUS.register(new EventsEffectOverlay());
+			
 			// Handles Combat Mode GUI (including extra hearts, cola bar and obviously the ability slots) and the FOV remover
 			MinecraftForge.EVENT_BUS.register(new EventsCombatMode(Minecraft.getMinecraft()));
 			

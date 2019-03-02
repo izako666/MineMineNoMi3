@@ -207,7 +207,7 @@ public class YukiAbilities
 		}
 		
 		public void use(EntityPlayer player)
-		{	
+		{
 			if(!isOnCooldown)
 			{
 				if(MainConfig.enableGriefing)

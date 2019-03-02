@@ -123,7 +123,10 @@ public class ID
 			
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
-	
+	EXTRAEFFECT_CHIYUHORMONE = "chiyuHormone",
+	EXTRAEFFECT_TENSIONHORMONE = "tensionHormone",
+	EXTRAEFFECT_NORO = "noro",
+			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
 	CREW_ALVIDAPIRATES = "Alvida Pirates",

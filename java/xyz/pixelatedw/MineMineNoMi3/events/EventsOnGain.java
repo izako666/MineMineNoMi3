@@ -35,26 +35,9 @@ public class EventsOnGain
 {
 
 	@SubscribeEvent
-	public void onBountyGained(BountyEvent event)
-	{
-		ExtendedWorldData worldData = ExtendedWorldData.get(event.player.worldObj);
-
-		if(event.props.getBounty() >= 20000 && event.props.getBounty() < 50000)		
-			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
-		else if(event.props.getBounty() >= 50000 && event.props.getBounty() < 100000)		
-			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
-		else if(event.props.getBounty() >= 100000 && event.props.getBounty() < 500000)	
-			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
-		else if(event.props.getBounty() >= 500000 && event.props.getBounty() < 1000000)	
-			worldData.issueBounty(event.player.getPersistentID().toString(), event.props.getBounty());
-	}
-	
-	@SubscribeEvent
 	public void onDorikiGained(DorikiEvent event)
 	{
-		ExtendedEntityData props = ExtendedEntityData.get(event.player);
-		
-		if (props.isHuman())
+		if (event.props.isHuman())
 		{			
 			gainAbility(event.player, 500, RokushikiAbilities.SORU);
 			gainAbility(event.player, 1500, RokushikiAbilities.TEKKAI);
@@ -91,10 +74,10 @@ public class EventsOnGain
 		{
 			IAttributeInstance maxHp = event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth);
 						
-			if(props.getDoriki() / 100 <= 20)
+			if(event.props.getDoriki() / 100 <= 20)
 				event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20);
 			else
-				event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(props.getDoriki() / 100);
+				event.player.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(event.props.getDoriki() / 100);
 		}
 	}	
 

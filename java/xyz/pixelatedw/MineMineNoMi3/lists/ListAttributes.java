@@ -29,6 +29,11 @@ import java.awt.*;
 public class ListAttributes 
 {
 	
+	public static AbilityAttribute GANMENSEICHOHORMONE = new AbilityAttribute("Ganmen Seicho Hormone").setAbilityCooldown(5).setAbilityPunch();
+	public static AbilityAttribute TENSIONHORMONE = new AbilityAttribute("Tension Hormone").setAbilityCooldown(40).setAbilityPunch();
+	public static AbilityAttribute CHIYUHORMONE = new AbilityAttribute("Chiyu Hormone").setAbilityCooldown(20).setAbilityPunch();
+	public static AbilityAttribute ONNAHORMONE = new AbilityAttribute("Onna Hormone").setAbilityCooldown(15).setAbilityPunch();
+	
 	public static AbilityAttribute CHIYUPOPO = new AbilityAttribute("Chiyupopo").setAbilityCooldown(10);
 	public static AbilityAttribute HEALINGTOUCH = new AbilityAttribute("Healing Touch").setAbilityCooldown(15).setAbilityPunch();
 	

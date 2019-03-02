@@ -392,7 +392,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	{
 		for(int i = 0; i < this.extraEffects.length; i++)
 		{
-			if(this.extraEffects[i] != null && !this.extraEffects[i].isEmpty() && this.extraEffects[i] == eff)
+			if(this.extraEffects[i] != null && !this.extraEffects[i].isEmpty() && this.extraEffects[i].equalsIgnoreCase(eff))
 			{
 				return true;
 			}

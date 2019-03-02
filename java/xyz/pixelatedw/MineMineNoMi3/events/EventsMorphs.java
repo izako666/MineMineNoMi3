@@ -70,7 +70,7 @@ public class EventsMorphs
 		{
 			Object[][] forms = MorphsHelper.getMorphsMap().get(props.getUsedFruit());
 
-			for(Object[] form : forms)
+			for (Object[] form : forms)
 			{
 				if (props.getZoanPoint().equalsIgnoreCase((String) form[0]) && (EntityRenderer) form[2] != null)
 				{
@@ -125,26 +125,6 @@ public class EventsMorphs
 
 		if (props.isCandleLocked())
 			candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);
-
-		if (props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
-		{
-			GL11.glPushMatrix();
-
-			Color c = WyHelper.hexToRGB("#5d6060");
-			GL11.glColor3d((double) c.getRed() / 255, (double) c.getGreen() / 255, (double) c.getBlue() / 255);
-
-			GL11.glPopMatrix();
-		}
-
-		/*
-		 * if(props.hasExtraEffects(ID.EXTRAEFFECT_HIE)) { GL11.glPushMatrix();
-		 * 
-		 * Color c = WyHelper.hexToRGB("#1be2e2");
-		 * GL11.glColor3d((double)c.getRed() / 255, (double)c.getGreen() / 255,
-		 * (double)c.getBlue() / 255);
-		 * 
-		 * GL11.glPopMatrix(); }
-		 */
 
 		if (event.entity instanceof EntityPlayer)
 		{

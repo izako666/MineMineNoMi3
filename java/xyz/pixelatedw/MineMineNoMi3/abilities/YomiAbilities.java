@@ -10,8 +10,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -88,7 +90,13 @@ public class YomiAbilities
 				{
 					e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 8);
 					e.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
-					e.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));
+					e.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));		
+					new DFEffectHieSlowness(e, 100);
+					AbilityExplosion explosion = WyHelper.newExplosion(player, e.posX, e.posY, e.posZ, 2);
+					explosion.setDamageOwner(false);
+					explosion.setDestroyBlocks(false);
+					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);
+					explosion.doExplosion(); 
 				}
 		    	WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 			}

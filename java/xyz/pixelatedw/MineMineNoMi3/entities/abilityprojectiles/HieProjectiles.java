@@ -107,7 +107,7 @@ public class HieProjectiles
 				new DFEffectHieSlowness(entity, 100);
 			}
 			
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)posX, (int)posY, (int)posZ, Blocks.packed_ice, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)posX, (int)posY, (int)posZ, Blocks.packed_ice, "core", "foliage");
 		}
 		
 		public void onUpdate()
