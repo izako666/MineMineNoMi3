@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityMarineCaptain extends MarineData
@@ -20,6 +21,11 @@ public class EntityMarineCaptain extends MarineData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(50.0D);
+		
+		ExtendedEntityData props = ExtendedEntityData.get(this);
+		
+		props.setDoriki(15 + this.worldObj.rand.nextInt(5));
+		props.setBelly(20 + this.worldObj.rand.nextInt(20));
 	}
 	
     protected void addRandomArmor()
@@ -31,7 +37,4 @@ public class EntityMarineCaptain extends MarineData
 	{
 		return new double[] {0, 0, -0.1};
 	}
-	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(5) + 12; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(20) + 10; }
 }

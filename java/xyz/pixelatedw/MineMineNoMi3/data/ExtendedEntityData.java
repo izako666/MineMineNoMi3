@@ -23,12 +23,11 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private int doriki, dorikiCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private long bounty, bountyCmd;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
-	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false,
-			isCandleLocked = false;
+	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false;
 
 	private String tempPreviousAbility = "";
 
-	private String[] extraEffects = new String[8];
+	private String[] extraEffects = new String[32];
 	
 	public ExtendedEntityData(EntityLivingBase entity) 
 	{
@@ -85,7 +84,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasKenHakiActive", this.hasKenHakiActive);
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
-		props.setBoolean("isCandleLocked", this.isCandleLocked);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -131,7 +129,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.hasKenHakiActive = props.getBoolean("hasKenHakiActive");
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
-		this.isCandleLocked = props.getBoolean("isCandleLocked");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 		
@@ -351,9 +348,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 
 	public void setKilo(boolean kilo) { this.kilo = kilo; }
 	public boolean getKilo() { return kilo; } 
-	
-	public void setIsCandleLocked(boolean value) { this.isCandleLocked = value; }
-	public boolean isCandleLocked() { return isCandleLocked; } 	
 	
 	public void setYamiPower(boolean bool) { this.hasYamiPower = bool; }
 	public boolean hasYamiPower() { return hasYamiPower; } 

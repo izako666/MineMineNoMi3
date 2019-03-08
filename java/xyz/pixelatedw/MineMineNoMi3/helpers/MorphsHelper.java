@@ -7,6 +7,9 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityRendererZoanEyes;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelGiraffePower;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelGiraffeSpeed;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelMoguPower;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
@@ -29,7 +32,7 @@ public class MorphsHelper
 		morphsMap.put("ushiushibison", new Object[][] 
 				{
 						{ "power", new RenderZoanMorph(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.7f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.6) },
-						{ "speed", new RenderZoanMorph(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 }), null }					
+						{ "speed", new RenderZoanMorph(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.3) }					
 				});
 		morphsMap.put("toritoriphoenix", new Object[][]
 				{
@@ -48,6 +51,15 @@ public class MorphsHelper
 		morphsMap.put("yomiyomi", new Object[][]
 				{
 						{ "yomi", new RenderZoanMorph(new ModelYomi(), "skeleton", 1.1, new float[] { 0, 0.3f, 0 }), null },
+				});
+		morphsMap.put("mogumogu", new Object[][]
+				{
+						{ "power", new RenderZoanMorph(new ModelMoguPower(), "mogu", 0.9, new float[] { 0, 0.1f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.1) },
+				});
+		morphsMap.put("ushiushigiraffe", new Object[][]
+				{
+						{ "power", new RenderZoanMorph(new ModelGiraffePower(), "giraffepower", 1.4, new float[] { 0, 0.7f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.2) },
+						{ "speed", new RenderZoanMorph(new ModelGiraffeSpeed(), "giraffespeed", 1.4, new float[] { 0, 0.7f, 0 }), null },
 				});
 	}
 	

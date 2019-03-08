@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAISharpshooter;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -25,13 +26,13 @@ public class EntityPirateWithGun extends PirateData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		
+		ExtendedEntityData props = ExtendedEntityData.get(this);
+		
+		props.setDoriki(10 + this.worldObj.rand.nextInt(3));
+		props.setBelly(5 + this.worldObj.rand.nextInt(10));
 	}
-	
-	public int getCombatType() { return 1; }
-	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
-	
+
     protected void dropRareDrop(int i)
     {
         switch (this.rand.nextInt(4))

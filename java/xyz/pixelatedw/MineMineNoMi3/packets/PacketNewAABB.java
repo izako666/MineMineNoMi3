@@ -55,8 +55,23 @@ public class PacketNewAABB implements IMessage
 
 			player.width = message.sizeX;
 			player.height = message.sizeY;
-			player.boundingBox.setBounds(player.boundingBox.minX, player.boundingBox.minY, player.boundingBox.minZ, player.boundingBox.minX + message.sizeX, player.boundingBox.minY + message.sizeY, player.boundingBox.minZ + message.sizeZ);			
+
+			double minX = player.boundingBox.minX;
+			double minY = player.boundingBox.minY;
+			double minZ = player.boundingBox.minZ;
+			double maxX = minX + message.sizeX;
+			double maxY = minY + message.sizeY;
+			double maxZ = minZ + message.sizeZ;
 			
+			player.boundingBox.setBounds(
+					minX, 
+					minY, 
+					minZ, 
+					maxX, 
+					maxY, 
+					maxZ
+				);			
+
 			return null;
 		}
 	}
@@ -69,8 +84,22 @@ public class PacketNewAABB implements IMessage
 
 			player.width = message.sizeX;
 			player.height = message.sizeY;
-			player.boundingBox.setBounds(player.boundingBox.minX, player.boundingBox.minY, player.boundingBox.minZ, player.boundingBox.minX + message.sizeX, player.boundingBox.minY + message.sizeY, player.boundingBox.minZ + message.sizeZ);			
-	
+					
+			double minX = player.boundingBox.minX;
+			double minY = player.boundingBox.minY;
+			double minZ = player.boundingBox.minZ;
+			double maxX = minX + message.sizeX;
+			double maxY = minY + message.sizeY;
+			double maxZ = minZ + message.sizeZ;
+			
+			player.boundingBox.setBounds(
+					minX, 
+					minY, 
+					minZ, 
+					maxX, 
+					maxY, 
+					maxZ
+				);	
 			return new PacketNewAABB(message.sizeX, message.sizeY, message.sizeZ);
 		}
 	}

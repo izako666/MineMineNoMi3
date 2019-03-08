@@ -34,6 +34,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.models.ModelArlo
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.models.ModelChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.models.ModelKuroobi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.EntityBandit;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.models.ModelMr0;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
@@ -142,7 +144,9 @@ public class ClientProxy extends CommonProxy
 		RenderingRegistry.registerEntityRenderingHandler(EntityDonKrieg.class, new MobRenderer(new ModelKrieg(), "krieg"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityGin.class, new MobRenderer(new ModelGin(), "gin"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPearl.class, new MobRenderer(new ModelPearl(), "pearl"));
-
+		//Baroque Works Pirates
+		RenderingRegistry.registerEntityRenderingHandler(EntityMr0.class, new MobRenderer(new ModelMr0(), "mr0"));
+		
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new RenderDoppelman());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));

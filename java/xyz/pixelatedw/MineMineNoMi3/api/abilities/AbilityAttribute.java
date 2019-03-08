@@ -27,7 +27,7 @@ public class AbilityAttribute
 	private float projectileAlpha = 255, projectileDamage = 1, projectileSpeed = 1.5F;
 	private double projectileXRotation, projectileYRotation, projectileZRotation;
 	private Color projectileColor = Color.decode("#FFFFFF");
-	private double[] projectileScale = new double[] {1, 1, 1}, projectileCollisionSize = new double[] {1, 1}, projectileModelOffset = new double[] {0, 0, 0};
+	private double[] projectileScale = new double[] {1, 1, 1}, projectileCollisionSize = new double[] {0.25, 0.25, 0.25}, projectileModelOffset = new double[] {0, 0, 0};
 	private ResourceLocation projectileTexture;
 	private ModelBase projectileModel;
 	
@@ -132,7 +132,8 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileYRotation(double angle) { projectileYRotation = angle; return this;}
 	public AbilityAttribute setProjectileZRotation(double angle) { projectileZRotation = angle; return this;}
 	public AbilityAttribute setProjectileMoveThroughBlocks(boolean flag) { projectileMoveThroughBlocks = flag; return this; }
-	public AbilityAttribute setProjectileCollisionSizes(double i, double j) { this.projectileCollisionSize = new double[] {i, j}; return this; }
+	public AbilityAttribute setProjectileCollisionSizes(double i) { this.projectileCollisionSize = new double[] {i, i, i}; return this; }
+	public AbilityAttribute setProjectileCollisionSizes(double i, double j, double k) { this.projectileCollisionSize = new double[] {i, j, k}; return this; }
 	public AbilityAttribute setModelOffsets(double i, double j, double k) { this.projectileModelOffset = new double[] {i, j, k}; return this; }
 		//Potion Effects
 	public AbilityAttribute addEffects(EffectType type, PotionEffect... e) 

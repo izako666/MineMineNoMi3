@@ -126,6 +126,7 @@ public class ID
 	EXTRAEFFECT_CHIYUHORMONE = "chiyuHormone",
 	EXTRAEFFECT_TENSIONHORMONE = "tensionHormone",
 	EXTRAEFFECT_NORO = "noro",
+	EXTRAEFFECT_DORULOCK = "doruLock",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

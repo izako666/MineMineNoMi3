@@ -2,21 +2,14 @@ package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityTracker;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import xyz.pixelatedw.MineMineNoMi3.MainMod;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectDoruLock;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -61,12 +54,10 @@ public class DoruProjectiles
 		public void tasksImapct(MovingObjectPosition hit)
 		{			
 			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
-			{
+			{						
 				EntityLivingBase target = ((EntityLivingBase)hit.entityHit);
-				ExtendedEntityData propz = ExtendedEntityData.get(target);
-				
-				propz.setIsCandleLocked(true);
-				WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getEntityId(), propz));
+
+				new DFEffectDoruLock(target, 400);
 			}
 		}
 	}

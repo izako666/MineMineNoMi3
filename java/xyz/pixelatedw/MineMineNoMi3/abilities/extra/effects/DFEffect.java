@@ -44,7 +44,7 @@ public abstract class DFEffect
 		{
 			this.setName("Update Thread for " + effect.toUpperCase() +  " effect");
 			this.props = props;
-			this.timer = timer * 2;
+			this.timer = (timer * 2) + 100;
 		}
 		
 		public void run()

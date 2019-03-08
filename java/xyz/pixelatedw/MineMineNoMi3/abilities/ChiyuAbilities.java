@@ -41,10 +41,12 @@ public class ChiyuAbilities
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target) 
 		{
-			super.hitEntity(player, target);
-			
 			target.setHealth(target.getHealth() + 20);
 			target.addPotionEffect(new PotionEffect(Potion.regeneration.id, 400, 1));
+
+			passiveActive = false;
+			startCooldown();
+			this.startExtUpdate(player);
 		}
 	}
 	

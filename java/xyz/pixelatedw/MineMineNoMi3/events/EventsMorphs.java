@@ -45,7 +45,6 @@ public class EventsMorphs
 
 	private Minecraft mc;
 
-	private RenderCandleLock candleLock = new RenderCandleLock(new ModelCandleLock());
 	private RenderAbareHimatsuri abareHimatsuri = new RenderAbareHimatsuri(new ModelAbareHimatsuri());
 
 	private EntityRenderer renderer, prevRenderer;
@@ -122,9 +121,6 @@ public class EventsMorphs
 
 		if (event.entity.isPotionActive(Potion.invisibility) && event.entity.getActivePotionEffect(Potion.invisibility).getAmplifier() >= 5)
 			event.setCanceled(true);
-
-		if (props.isCandleLocked())
-			candleLock.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);
 
 		if (event.entity instanceof EntityPlayer)
 		{

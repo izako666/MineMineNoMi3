@@ -1,6 +1,11 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -87,6 +92,18 @@ public class GuraAbilities
 		public void use(EntityPlayer player)
 		{	
 			this.projectile = new GuraProjectiles.ShimaYurashi(player.worldObj, player, attr);
+			
+			/*for(int[] loc : WyHelper.getBlockLocationsNearby(player, 5))
+			{
+				Block block = player.worldObj.getBlock(loc[0], loc[1], loc[2]);
+                EntityFallingBlock entityfallingblock = new EntityFallingBlock(player.worldObj, (double)((float)loc[0] + 0.5F), (double)((float)loc[1] + 0.5F), (double)((float)loc[2] + 1.5F), block, player.worldObj.getBlockMetadata(loc[0], loc[1], loc[2]));
+               
+                entityfallingblock.motionY = 0.5;
+                entityfallingblock.motionZ = 1;
+                
+                player.worldObj.spawnEntityInWorld(entityfallingblock);
+			}*/
+			
 			super.use(player);
 		} 
 	}

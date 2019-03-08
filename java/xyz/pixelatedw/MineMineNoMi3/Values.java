@@ -29,7 +29,7 @@ public class Values
 	
 	public static String RESOURCES_FOLDER;
 	
-	public static final Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
+	public static Item[] KAIROSEKI_ITEMS = new Item[] {ListMisc.Kairoseki, ListMisc.KairosekiBullets, ListMisc.DenseKairoseki};
 	
 	public static HashMap<Class, EnumQuestlines> questGivers = createQuestGiversMap();
 

@@ -7,6 +7,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EntityPirate extends PirateData
@@ -24,6 +25,11 @@ public class EntityPirate extends PirateData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(2.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		
+		ExtendedEntityData props = ExtendedEntityData.get(this);
+		
+		props.setDoriki(10 + this.worldObj.rand.nextInt(3));
+		props.setBelly(5 + this.worldObj.rand.nextInt(10));
 	}
 
     protected void addRandomArmor()
@@ -36,9 +42,6 @@ public class EntityPirate extends PirateData
 	{
 		return new double[] {0, 0, -0.1};
 	}
-	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 1; }
 	
     protected void dropRareDrop(int i)
     {

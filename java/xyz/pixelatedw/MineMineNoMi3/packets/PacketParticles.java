@@ -88,7 +88,7 @@ public class PacketParticles implements IMessage
 				double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
 				double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 15.0D;
 
-				EntityParticleFX logiaParticle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_MERA, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0D, 0D)
+				EntityParticleFX logiaParticle = new EntityParticleFX(player.worldObj, ID.PARTICLE_ICON_MERA, message.posX + offsetX, (message.posY + 1) + offsetY, message.posZ + offsetZ, 0D, 0.01D, 0D)
 						.setParticleAge(10);
 				
 				if(devilFruit.equals("meramera"))

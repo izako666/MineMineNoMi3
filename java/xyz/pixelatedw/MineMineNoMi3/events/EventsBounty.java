@@ -15,7 +15,7 @@ public class EventsBounty
 		if(event.phase == Phase.END && event.side == Side.SERVER)
 		{
 			//36000 ticks, 30 minutes
-			System.out.println("" + event.player.ticksExisted);
+			//System.out.println("" + event.player.ticksExisted);
 		}
 	}
 	

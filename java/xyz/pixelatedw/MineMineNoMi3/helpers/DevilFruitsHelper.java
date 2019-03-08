@@ -101,9 +101,20 @@ public class DevilFruitsHelper
 		return map;
 	}
 	
+	public static boolean isAffectedByWater(EntityLivingBase entity)
+	{
+		if(entity.isInsideOfMaterial(Material.water) ||
+				(entity.isWet() && !entity.isRiding() && (entity.worldObj.getBlock((int) entity.posX, (int) entity.posY - 1, (int) entity.posZ) == Blocks.water || entity.worldObj.getBlock((int) entity.posX, (int) entity.posY - 1, (int) entity.posZ) == Blocks.flowing_water) ))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public static boolean isNearbyKairoseki(EntityPlayer player)
 	{
-		if (WyHelper.isBlockNearby(player, 4, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiOre)) || (player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding())))
+		if (WyHelper.isBlockNearby(player, 4, ListMisc.KairosekiBlock, ListMisc.KairosekiOre) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiOre))  || isAffectedByWater(player))
 		{
 			return true;
 		}

@@ -49,15 +49,6 @@ public class EventsPassives
 			EntityLivingBase entity = (EntityLivingBase) event.entityLiving;
 			ExtendedEntityData propz = ExtendedEntityData.get(entity);
 
-			if (!entity.worldObj.isRemote)
-			{
-				if (propz.isCandleLocked() && !entity.isPotionActive(Potion.moveSlowdown.id))
-				{
-					propz.setIsCandleLocked(false);
-					WyNetworkHelper.sendToAll(new PacketSyncInfo(event.entityLiving.getEntityId(), propz));
-				}
-			}
-
 			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F)
 				entity.setFire(3);
 		}
@@ -127,6 +118,23 @@ public class EventsPassives
 				}
 			}
 
+			if (player.isInsideOfMaterial(Material.lava) && !player.capabilities.isCreativeMode)
+			{
+				if (props.getUsedFruit().equals("magumagu"))
+				{
+					if ((player.motionX >= 5.0D) || (player.motionZ >= 5.0D))
+					{
+						player.motionX /= 1.9D;
+						player.motionZ /= 1.9D;
+					}
+					else
+					{
+						player.motionX *= 1.9D;
+						player.motionZ *= 1.9D;
+					}
+				}
+			}
+
 			if ((player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding())))
 			{
 				if (props.isFishman() && props.getUsedFruit().equals("N/A"))
@@ -146,24 +154,7 @@ public class EventsPassives
 					}
 				}
 			}
-
-			if (player.isInsideOfMaterial(Material.lava) && !player.capabilities.isCreativeMode)
-			{
-				if (props.getUsedFruit().equals("magumagu"))
-				{
-					if ((player.motionX >= 5.0D) || (player.motionZ >= 5.0D))
-					{
-						player.motionX /= 1.9D;
-						player.motionZ /= 1.9D;
-					}
-					else
-					{
-						player.motionX *= 1.9D;
-						player.motionZ *= 1.9D;
-					}
-				}
-			}
-
+			
 			boolean hasColaBackpack = false;
 
 			for (ItemStack armorStack : player.inventory.armorInventory)

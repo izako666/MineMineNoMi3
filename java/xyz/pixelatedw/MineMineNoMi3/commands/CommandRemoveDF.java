@@ -45,6 +45,9 @@ public class CommandRemoveDF extends CommandBase
 		props.setUsedFruit("N/A");
 		props.setYamiPower(false);
 		props.setIsLogia(false);
+		props.triggerActiveHaki(false);
+		props.triggerBusoHaki(false);
+		props.triggerKenHaki(false);
 		
 		abilityProps.clearHotbar();
 		abilityProps.clearDevilFruitAbilities();

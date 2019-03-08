@@ -35,6 +35,8 @@ public class EventsZoanPassives
 			if(props.getUsedFruit().equalsIgnoreCase("zouzou") && props.getZoanPoint().equalsIgnoreCase("hybrid"))
 				event.ammount += 3;
 				
+			if(props.getUsedFruit().equalsIgnoreCase("mogumogu") && props.getZoanPoint().equalsIgnoreCase("power"))
+				event.ammount += 3;
 		}
 	}
 	

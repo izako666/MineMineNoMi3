@@ -153,9 +153,11 @@ public class EventsOnGain
 
 				if (target instanceof EntityNewMob)
 				{
-					if ((props.getDoriki() / 100) > ((EntityNewMob) target).getDorikiPower())
+					ExtendedEntityData targetprops = ExtendedEntityData.get(target);
+					
+					if ((props.getDoriki() / 100) > targetprops.getDoriki())
 					{
-						int x = (props.getDoriki() / 100) - ((EntityNewMob) target).getDorikiPower();
+						int x = (props.getDoriki() / 100) - targetprops.getDoriki();
 						if (x <= 0)
 							x = 1;
 
@@ -164,10 +166,10 @@ public class EventsOnGain
 							plusDoriki = 1;
 					}
 					else
-						plusDoriki = ((EntityNewMob) target).getDorikiPower();
+						plusDoriki = targetprops.getDoriki();
 
-					plusBounty = (((EntityNewMob) target).getDorikiPower() * 2) + rng;
-					plusBelly = ((EntityNewMob) target).getBellyInPockets() + rng;
+					plusBounty = (targetprops.getDoriki() * 2) + rng;
+					plusBelly = targetprops.getBelly() + rng;
 
 					if (!ID.DEV_EARLYACCESS && !player.worldObj.isRemote && !player.capabilities.isCreativeMode)
 						WyTelemetry.addStat("defeated_" + WyHelper.getFancyName(target.getClass().getSimpleName()).replace("entity", ""), 1);

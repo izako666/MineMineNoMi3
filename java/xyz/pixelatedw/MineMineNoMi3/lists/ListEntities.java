@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityArlong;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityChew;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.arlongPirates.EntityKuroobi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.bandits.EntityBandit;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityDonKrieg;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityGin;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.kriegPirates.EntityPearl;
@@ -96,7 +97,9 @@ public class ListEntities
 		WyRegistry.registerMob("Don Krieg", EntityDonKrieg.class);
 		WyRegistry.registerMob("Gin", EntityGin.class);
 		WyRegistry.registerMob("Pearl", EntityPearl.class);
-				
+		//Baroque Works Pirates
+		WyRegistry.registerMob("Mr 0", EntityMr0.class);
+		
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);

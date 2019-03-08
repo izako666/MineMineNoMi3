@@ -96,6 +96,13 @@ public class ModelMr0 extends ModelBiped
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
+		
+		this.bipedLeftLeg.isHidden = true;
+		this.bipedRightLeg.isHidden = true;
+		this.bipedHead.isHidden = true;
+		this.bipedHeadwear.isHidden = true;
+		this.bipedBody.isHidden = false;
+		
 		head.render(f5);
 		body.render(f5);
 		rightarm.render(f5);

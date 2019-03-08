@@ -146,12 +146,16 @@ public class HieProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			if(!this.worldObj.isRemote)
-			{	
-				if(MainConfig.enableGriefing)
-				{
-					WyHelper.createEmptySphere(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, 6, Blocks.packed_ice);
-				}
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
+			{
+				EntityLivingBase entity = (EntityLivingBase) hit.entityHit;
+				
+				new DFEffectHieSlowness(entity, 100);
+			}
+			
+			if(MainConfig.enableGriefing)
+			{
+				WyHelper.createEmptySphere(this.worldObj, (int)this.posX, (int)this.posY, (int)this.posZ, 6, Blocks.packed_ice, "air");
 			}
 		}
 	}

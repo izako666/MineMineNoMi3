@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.ai.EntityAISharpshooter;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -30,12 +31,12 @@ public class EntityMarineWithGun extends MarineData
 		this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.23000000417232513D);
 		this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D);
+		
+		ExtendedEntityData props = ExtendedEntityData.get(this);
+		
+		props.setDoriki(10 + this.worldObj.rand.nextInt(3));
+		props.setBelly(5 + this.worldObj.rand.nextInt(10));
 	}
-	
-	public int getCombatType() { return 1; }
-	
-	public int getDorikiPower() { return this.worldObj.rand.nextInt(3) + 10; }
-	public int getBellyInPockets() { return this.worldObj.rand.nextInt(10) + 5; }
 	
     protected void dropRareDrop(int i)
     {

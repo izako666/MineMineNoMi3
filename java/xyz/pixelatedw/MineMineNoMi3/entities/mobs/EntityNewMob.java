@@ -34,10 +34,6 @@ public class EntityNewMob extends EntityMob implements IDynamicRenderer
 	
 	public boolean hasBusoHaki() { return false; }
 	public boolean hasHaoHaki() { return false; }
-	public boolean isLogia() { return false; }	
-	public String getDevilFruitUsed() { return "n/a"; }
-	public int getDorikiPower() { return 1; }
-	public int getBellyInPockets() { return 1; }
 	
 	public void writeEntityToNBT(NBTTagCompound nbt)
 	{
