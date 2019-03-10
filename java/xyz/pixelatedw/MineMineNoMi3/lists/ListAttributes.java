@@ -196,7 +196,8 @@ public class ListAttributes
 	public static AbilityAttribute KYUBIRUSH = new AbilityAttribute("Kyubi Rush").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute NORONOROBEAMSWORD = new AbilityAttribute("Noro Noro Beam Sword").setAbilityPassive(true);
 
-	public static AbilityAttribute AIRDOOR = new AbilityAttribute("Air Door").setAbilityPassive(true).setAbilityCooldown(10);
+	public static AbilityAttribute AIRDOOR = new AbilityAttribute("Air Door").setAbilityPassive(true).setAbilityCooldown(40);
+	public static AbilityAttribute DOOR = new AbilityAttribute("Door").setAbilityCooldown(8);
 
 	public static AbilityAttribute SUKEPUNCH = new AbilityAttribute("Suke Punch").setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute SHISHANOTE = new AbilityAttribute("Shisha no Te").setAbilityCooldown(3).setProjectileDamage(5).setProjectileModel(new ModelCube()).setProjectileSize(0, 0, 0).setProjectileExplosion(3, false);
