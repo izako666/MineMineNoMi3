@@ -4,14 +4,18 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.OriProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
 import java.util.ArrayList;
 
@@ -121,6 +125,10 @@ public class OriAbilities {
 
         public void hitEntity(EntityPlayer player, EntityLivingBase target) {
             target.addPotionEffect(new PotionEffect(2, 20 * 8, 40));
+            target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * 8, 30));
+            ExtendedEntityData propz = ExtendedEntityData.get(target);
+            propz.setIsChained(true);
+            WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getEntityId(), propz));
             super.hitEntity(player,target);
         }
     }

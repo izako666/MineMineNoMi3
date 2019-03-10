@@ -1,8 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
-import java.util.Arrays;
-
-import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,22 +7,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
-import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
-import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -51,7 +47,14 @@ public class EventsPassives
 
 			if (!propz.hasShadow() && entity.getBrightness(1.0F) > 0.8F)
 				entity.setFire(3);
+
+			if(propz.isSetChained()  && !entity.isPotionActive(Potion.moveSlowdown.id)){
+				propz.setIsChained(false);
+				WyNetworkHelper.sendToAll(new PacketSyncInfo(event.entityLiving.getEntityId(), propz));
+			}
 		}
+
+
 
 		if (event.entityLiving instanceof EntityPlayer)
 		{
@@ -81,6 +84,7 @@ public class EventsPassives
 					}
 				}
 			}
+
 			
 			if (props.getUsedFruit().equals("hiehie"))
 			{
@@ -322,5 +326,45 @@ public class EventsPassives
 			event.newPlayerData.setZoanPoint("yomi");
 		}
 	}
+
+	@SubscribeEvent
+	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event) {
+		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
+		if(propz.isInAirWorld()) {
+			event.setCanceled(true);
+
+		}
+
+	}
+
+	@SubscribeEvent
+	public void onPlayerAction(PlayerInteractEvent event) {
+		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
+		if(propz.isInAirWorld()) {
+			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public void onAttack(AttackEntityEvent event) {
+		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
+		if(propz.isInAirWorld()) {
+			event.setCanceled(true);
+		}
+
+
+	}
+
+	@SubscribeEvent
+	public void onDamage(LivingHurtEvent event) {
+		if (event.entityLiving instanceof EntityPlayer) {
+			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
+		 	if (props.isInAirWorld()){
+				event.setCanceled(true);
+			}
+		}
+	}
+
+
 
 }

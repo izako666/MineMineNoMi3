@@ -1,16 +1,10 @@
 package xyz.pixelatedw.MineMineNoMi3.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 
 public class ExtendedEntityData implements IExtendedEntityProperties 
 {
@@ -23,7 +17,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private int doriki, dorikiCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private long bounty, bountyCmd;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
-	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false;
+	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false, isSetChained = false, isInAirWorld= false;
 
 	private String tempPreviousAbility = "";
 
@@ -82,8 +76,10 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasHakiActive", this.hasHakiActive);
 		props.setBoolean("hasBusoHakiActive", this.hasBusoHakiActive);
 		props.setBoolean("hasKenHakiActive", this.hasKenHakiActive);
+		props.setBoolean("isSetChained", this.isSetChained);
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
+		props.setBoolean("isInAirWorld", this.isInAirWorld);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -124,11 +120,13 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.hasHeart = props.getBoolean("hasHeart");
 		this.firstTime = props.getBoolean("firstTime");
 		this.kilo = props.getBoolean("hasKiloActive");
+		this.isSetChained = props.getBoolean("isSetChained");
 		this.hasHakiActive = props.getBoolean("hasHakiActive");
 		this.hasBusoHakiActive = props.getBoolean("hasBusoHakiActive");
 		this.hasKenHakiActive = props.getBoolean("hasKenHakiActive");
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
+		this.isInAirWorld = props.getBoolean("isInAirWorld");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 		
@@ -172,6 +170,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasColaBackpack", false);
 		props.setBoolean("isCandleLocked", false);
 		props.setBoolean("isTaktBlocked", false);
+		props.setBoolean("isInAirWorld", false);
 		
 		props.setBoolean("isInCombatMode", false);		
 		
@@ -354,6 +353,12 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	
 	public void setColaBackpack(boolean bool) { this.hasColaBackpack = bool; }
 	public boolean hasColaBackpack() { return hasColaBackpack; }
+
+	public void setInAirWorld(boolean value) { this.isInAirWorld = value;}
+	public boolean isInAirWorld(){ return this.isInAirWorld; }
+
+	public void setIsChained(boolean value) { this.isSetChained = value;}
+	public boolean isSetChained(){ return this.isSetChained; }
 	
 	public void setTempPreviousAbility(String temp) { this.tempPreviousAbility = temp; }
 	public String getTempPreviousAbility() { return this.tempPreviousAbility; }

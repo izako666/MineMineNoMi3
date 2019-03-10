@@ -1,5 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.api.math;
 
+import net.minecraft.entity.player.EntityPlayer;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+
 import java.util.Random;
 
 public class WyMathHelper
@@ -17,4 +20,30 @@ public class WyMathHelper
     public static int clampi(int val, int min, int max) { return Math.max(min, Math.min(max, val)); }
     
     public static double lerp(double a, double b, double f) { return a + (b - a) * f; }
+
+    public static int[] moveAway (EntityPlayer player, int[] current) {
+        WyHelper.Direction dir = WyHelper.get8Directions(player);
+        if (dir == WyHelper.Direction.NORTH) {
+            current[2] -=1;
+        } else if (dir == WyHelper.Direction.NORTH_EAST){
+            current[0] +=1;
+            current[2] -=1;
+        } else if (dir == WyHelper.Direction.EAST) {
+            current[0] += 1;
+        } else if (dir == WyHelper.Direction.SOUTH_EAST) {
+            current[0] +=1;
+            current[2] +=1;
+        } else if (dir == WyHelper.Direction.SOUTH) {
+            current [2] +=1;
+        } else if (dir == WyHelper.Direction.SOUTH_WEST) {
+            current[0] -=1;
+            current[2] +=1;
+        } else if(dir == WyHelper.Direction.WEST) {
+            current[0] -= 1;
+        } else if (dir == WyHelper.Direction.NORTH_WEST) {
+            current[0] -= 1;
+            current[2] -= 1;
+        }
+        return current;
+    }
 }

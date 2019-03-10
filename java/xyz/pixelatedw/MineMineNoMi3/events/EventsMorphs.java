@@ -1,11 +1,5 @@
 package xyz.pixelatedw.MineMineNoMi3.events;
 
-import java.awt.Color;
-import java.util.Arrays;
-import java.util.Iterator;
-
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;
@@ -23,9 +17,8 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import xyz.pixelatedw.MineMineNoMi3.ID;
+import org.lwjgl.opengl.GL11;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelAbareHimatsuri;
-import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -35,12 +28,13 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityRendererZoanEyes;
 import xyz.pixelatedw.MineMineNoMi3.helpers.HandRendererHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
+
+import java.util.Arrays;
 
 @SideOnly(Side.CLIENT)
 public class EventsMorphs
@@ -68,8 +62,6 @@ public class EventsMorphs
 
 		ExtendedEntityData props = ExtendedEntityData.get(this.mc.thePlayer);
 		
-		//WyRenderHelper.drawColourOnScreen(255, 0, 0, 100, 0, 0, 500, 500, 100);
-		
 		if (MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 		{
 			Object[][] forms = MorphsHelper.getMorphsMap().get(props.getUsedFruit());
@@ -93,6 +85,10 @@ public class EventsMorphs
 					mc.entityRenderer = prevRenderer;
 				}
 			}
+		}
+
+		if(props.isInAirWorld()) {
+			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, 500, 500, 100);
 		}
 	}
 
