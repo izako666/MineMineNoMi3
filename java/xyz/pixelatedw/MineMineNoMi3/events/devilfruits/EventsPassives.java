@@ -6,11 +6,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -28,6 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -353,16 +357,35 @@ public class EventsPassives
 		}
 
 
+
+
 	}
 
 	@SubscribeEvent
-	public void onDamage(LivingHurtEvent event) {
+	public void onDamage(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
 		 	if (props.isInAirWorld()){
 				event.setCanceled(true);
 			}
 		}
+
+		if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
+		    if (event.entityLiving instanceof EntityPlayer) {
+		        EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
+                EntityPlayer reciever = (EntityPlayer) event.entityLiving;
+                ExtendedEntityData props = ExtendedEntityData.get(reciever);
+
+                if (attacker.getHeldItem() !=null && props.getUsedFruit().equals("sabisabi")) {
+                    System.out.println("Works");
+                    if (ItemsHelper.isSword(attacker.getHeldItem())) {
+                        event.setCanceled(true);
+                        System.out.println("Works");
+                        attacker.getHeldItem().damageItem(50, attacker);
+                    }
+                }
+            }
+        }
 	}
 
 
