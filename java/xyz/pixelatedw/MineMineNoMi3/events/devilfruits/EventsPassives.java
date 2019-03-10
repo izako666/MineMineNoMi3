@@ -356,12 +356,28 @@ public class EventsPassives
 	}
 
 	@SubscribeEvent
-	public void onDamage(LivingHurtEvent event) {
+	public void onDamage(LivingAttackEvent event)
 		if (event.entityLiving instanceof EntityPlayer) {
 			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
 		 	if (props.isInAirWorld()){
 				event.setCanceled(true);
 			}
+
+	if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
+		if (event.entityLiving instanceof EntityPlayer) {
+			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
+			EntityPlayer reciever = (EntityPlayer) event.entityLiving;
+			ExtendedEntityData props = ExtendedEntityData.get(reciever);
+
+			if (attacker.getHeldItem() !=null && props.getUsedFruit().equals("sabisabi")) {
+				if (ItemsHelper.isSword(attacker.getHeldItem())) {
+					event.setCanceled(true);
+					System.out.println("Works");
+					attacker.getHeldItem().damageItem(50, attacker);
+				}
+			}
+		}
+	}
 		}
 	}
 
