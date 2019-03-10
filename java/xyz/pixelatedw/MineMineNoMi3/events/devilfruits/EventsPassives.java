@@ -372,7 +372,6 @@ public class EventsPassives
 			if (attacker.getHeldItem() !=null && props.getUsedFruit().equals("sabisabi")) {
 				if (ItemsHelper.isSword(attacker.getHeldItem())) {
 					event.setCanceled(true);
-					System.out.println("Works");
 					attacker.getHeldItem().damageItem(50, attacker);
 				}
 			}
