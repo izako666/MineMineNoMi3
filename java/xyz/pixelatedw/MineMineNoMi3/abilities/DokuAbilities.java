@@ -107,7 +107,7 @@ public class DokuAbilities
 				this.endPassive(player);
 			}
 			
-			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock))
+			if(!WyHelper.isBlockNearby(player, 2, Blocks.water, Blocks.flowing_water, ListMisc.KairosekiOre, ListMisc.KairosekiBlock, ListMisc.KairosekiBars))
 			{
 				for(int x = -1; x < 1; x++)
 				for(int z = -1; z < 1; z++)

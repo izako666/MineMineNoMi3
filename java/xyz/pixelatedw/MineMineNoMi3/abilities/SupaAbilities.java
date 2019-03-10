@@ -14,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities.ShishaNoTe;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities.Skatting;
 import xyz.pixelatedw.MineMineNoMi3.abilities.SukeAbilities.SukePunch;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectSpiderOverlay;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -25,6 +26,7 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class SupaAbilities
 {
@@ -145,6 +147,19 @@ public class SupaAbilities
 		public Spider()
 		{
 			super(ListAttributes.SPIDER);
+		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			new DFEffectSpiderOverlay(player, 30);
+			WyNetworkHelper.sendTo(new PacketSync(ExtendedEntityData.get(player)), (EntityPlayerMP) player);
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			ExtendedEntityData.get(player).removeExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY);
+			WyNetworkHelper.sendTo(new PacketSync(ExtendedEntityData.get(player)), (EntityPlayerMP) player);
+			super.endPassive(player);
 		}
 	}
 	

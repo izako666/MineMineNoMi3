@@ -128,6 +128,8 @@ public class ID
 	EXTRAEFFECT_TENSIONHORMONE = "tensionHormone",
 	EXTRAEFFECT_NORO = "noro",
 	EXTRAEFFECT_DORULOCK = "doruLock",
+	EXTRAEFFECT_RUSTOVERLAY = "rustOverlay",	
+	EXTRAEFFECT_SPIDEROVERLAY = "spiderOverlay",	
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",

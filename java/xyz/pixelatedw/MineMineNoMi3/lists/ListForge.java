@@ -57,7 +57,8 @@ public class ListForge
 		{
 			// Devil Fruit related client-sided events
 			MinecraftForge.EVENT_BUS.register(new EventsEffectOverlay());
-			
+			FMLCommonHandler.instance().bus().register(new EventsEffectOverlay());
+
 			// Handles Combat Mode GUI (including extra hearts, cola bar and obviously the ability slots) and the FOV remover
 			MinecraftForge.EVENT_BUS.register(new EventsCombatMode(Minecraft.getMinecraft()));
 			

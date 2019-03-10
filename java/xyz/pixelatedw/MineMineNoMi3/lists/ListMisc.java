@@ -99,7 +99,18 @@ public class ListMisc
 	public static Block WantedPostersPackage = new BlockWantedPostersPackage();
 	public static Block WantedPosterBlock = new BlockWantedPoster();
 	public static Block OriBars = new BlockCustomBars("oribars", "oribars");
-	public static Block KairosekiBars = new BlockCustomBars("kairosekibars", "kairosekibars");
+	public static Block KairosekiBars = new BlockCustomBars("kairosekibars", "kairosekibars")
+	{
+		public int quantityDropped(Random random)
+		{
+			return 1;
+		}
+
+		public Item getItemDropped(int id, Random rand, int fortune)
+		{
+			return Item.getItemFromBlock(KairosekiBars);
+		}
+	};
 	public static Block WaxBlock = new NewBlock(Material.clay);
 	
 	public static Block DialEisenBlock = new BlockEisenDial();
@@ -291,9 +302,9 @@ public class ListMisc
 		addBLOCK(SunaSand, "Suna Sand", 1.0F, null, null);
 		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, null, null);
 		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 1.0F, TileEntityWantedPoster.class, null);
-		addBLOCK(OriBars, "Ori Bars", 5.0F, null, null);
-		addBLOCK(KairosekiBars, "Kairoseki Bars", 8.0F, null, ListCreativeTabs.tabMisc);
-		addBLOCK(WaxBlock, "Wax Block", 4.0F, null, null);
+		addBLOCK(OriBars, "Ori Bars", 10.0F, null, null);
+		addBLOCK(KairosekiBars, "Kairoseki Bars", 12.0F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);

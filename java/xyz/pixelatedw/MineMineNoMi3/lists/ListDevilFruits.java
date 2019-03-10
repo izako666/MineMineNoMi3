@@ -133,6 +133,8 @@ public class ListDevilFruits
 	{
 		int totalFruits = 0, totalAbilities = 0;
 		
+		DoaDoaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
+		addITEM(DoaDoaNoMi, "Doa Doa no Mi");
 		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, new Ability[] {});
 		addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
 		MoguMoguNoMi = new AkumaNoMi(EnumFruitType.ZOAN, MoguAbilities.abilitiesArray);
@@ -157,6 +159,8 @@ public class ListDevilFruits
 		addITEM(BakuBakuNoMi, "Baku Baku no Mi");
 		KiloKiloNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, KiloAbilities.abilitiesArray);
 		addITEM(KiloKiloNoMi, "Kilo Kilo no Mi");
+		OriOriNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, OriAbilities.abilitiesArray);
+		addITEM(OriOriNoMi, "Ori Ori no Mi");
 		ToriToriNoMiPhoenix = new AkumaNoMi(EnumFruitType.MYTHICALZOAN, ToriPhoenixAbilities.abilitiesArray);
 		addITEM(ToriToriNoMiPhoenix, "Tori Tori no Mi, Model Phoenix");
 		UshiUshiNoMiBison = new AkumaNoMi(EnumFruitType.ZOAN, UshiBisonAbilities.abilitiesArray);
@@ -195,14 +199,10 @@ public class ListDevilFruits
 		addITEM(NikyuNikyuNoMi, "Nikyu Nikyu no Mi");
 		MokuMokuNoMi = new AkumaNoMi(EnumFruitType.LOGIA, MokuAbilities.abilitiesArray);
 		addITEM(MokuMokuNoMi, "Moku Moku no Mi");
-		OriOriNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, OriAbilities.abilitiesArray);
-		addITEM(OriOriNoMi, "Ori Ori no Mi");
 		GoroGoroNoMi = new AkumaNoMi(EnumFruitType.LOGIA, GoroAbilities.abilitiesArray);
 		addITEM(GoroGoroNoMi, "Goro Goro no Mi");
 		OpeOpeNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, OpeAbilities.abilitiesArray);
 		addITEM(OpeOpeNoMi, "Ope Ope no Mi");
-		DoaDoaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
-		addITEM(DoaDoaNoMi, "Doa Doa no Mi");
 		NoroNoroNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, NoroAbilities.abilitiesArray);
 		addITEM(NoroNoroNoMi, "Noro Noro no Mi");
 		SukeSukeNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, SukeAbilities.abilitiesArray);
