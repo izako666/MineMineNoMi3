@@ -42,7 +42,8 @@ public class EventsDFWeaknesses
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();
-
+			boolean updateDisabledAbilities = false;
+			
 			if (props.hasDevilFruit() && !player.worldObj.isRemote)
 			{
 				if (ItemsHelper.hasKairosekiItem(player))
@@ -52,35 +53,43 @@ public class EventsDFWeaknesses
 				{
 					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
-						if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown())
+						if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled())
 						{
+							abilityProps.getAbilityFromSlot(i).endPassive(player);
 							abilityProps.getAbilityFromSlot(i).setCooldownActive(true);
+							abilityProps.getAbilityFromSlot(i).disable(player, true);
+							updateDisabledAbilities = true;
 						}
-					}			
-					WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+					}		
 					
+					if(updateDisabledAbilities)
+						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);					
 					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 100, 0));
 				}
 				else
 				{
 					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
-					{
-						if (abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isOnCooldown())
+					{										
+						if (abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isDisabled())
 						{
-							//abilityProps.getAbilityFromSlot(i).disable(player, false);
+							abilityProps.getAbilityFromSlot(i).setPassiveActive(false);
+							abilityProps.getAbilityFromSlot(i).disable(player, false);
 							abilityProps.getAbilityFromSlot(i).startUpdate(player);
+							updateDisabledAbilities = true;
 						}
+						
 					}
-					
-					/*for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+
+					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{					
 						if(abilityProps.getAbilityFromSlot(i) != null && abilityProps.getAbilityFromSlot(i).isRepeating())
 						{ 					
 							abilityProps.getAbilityFromSlot(i).duringRepeater(player);
 						}				
-					}*/
-					
-					WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);	
+					}
+
+					if(updateDisabledAbilities)
+						WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 				}
 			}
 		}

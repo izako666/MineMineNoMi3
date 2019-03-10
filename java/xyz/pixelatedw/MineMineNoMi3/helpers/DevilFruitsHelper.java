@@ -55,11 +55,14 @@ public class DevilFruitsHelper
 	private static String[][] zoanModels = new String[][]
 	{
 			{
-					"ushiushibison", "bison"
+				"ushiushibison", "bison"
 			},
 			{
-					"toritoriphoenix", "phoenix"
-			}
+				"toritoriphoenix", "phoenix"
+			},
+			{
+				"ushiushigiraffe", "giraffe"
+			},
 	};
 
 	public static String[] flyingFruits = new String[]
@@ -85,7 +88,7 @@ public class DevilFruitsHelper
 
 		map.put("foliage", Arrays.asList(new Block[]
 				{
-						Blocks.leaves, Blocks.leaves2, Blocks.waterlily, Blocks.double_plant, Blocks.yellow_flower, Blocks.red_flower, Blocks.vine, Blocks.brown_mushroom, Blocks.brown_mushroom_block, Blocks.red_mushroom, Blocks.red_mushroom_block, Blocks.tallgrass, Blocks.potatoes, Blocks.carrots, Blocks.cactus
+						Blocks.leaves, Blocks.leaves2, Blocks.waterlily, Blocks.double_plant, Blocks.yellow_flower, Blocks.red_flower, Blocks.vine, Blocks.brown_mushroom, Blocks.brown_mushroom_block, Blocks.red_mushroom, Blocks.red_mushroom_block, Blocks.tallgrass, Blocks.potatoes, Blocks.carrots, Blocks.cactus, Blocks.deadbush
 				}));
 		
 		map.put("ores", Arrays.asList(new Block[]

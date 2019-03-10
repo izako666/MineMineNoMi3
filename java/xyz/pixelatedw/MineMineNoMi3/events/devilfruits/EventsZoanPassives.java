@@ -51,6 +51,14 @@ public class EventsZoanPassives
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			ItemStack heldItem = player.getHeldItem();
 			
+			if(props.getUsedFruit().equalsIgnoreCase("mogumogu") && props.getZoanPoint().equalsIgnoreCase("power"))
+			{
+				if(!player.worldObj.isRemote && player.worldObj.getBlockLightValue((int)player.posX, (int)player.posY, (int)player.posZ) < 7)
+				{
+					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 1, true));					
+				}
+			}
+			
 			if(props.getUsedFruit().equals("zouzou"))
 			{
 				if(props.getZoanPoint().equals("full"))

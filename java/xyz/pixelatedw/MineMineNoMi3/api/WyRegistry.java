@@ -45,7 +45,7 @@ public class WyRegistry
 	public static void registerBlock(Block block, String localizedName, float hard, CreativeTabs tab, Class<? extends TileEntity> tile)
 	{	
 		String truename = WyHelper.getFancyName(localizedName);
-		block.setBlockName(truename).setBlockTextureName(ID.PROJECT_ID + ":" + truename).setHardness(hard);
+		block.setBlockName(truename).setBlockTextureName(ID.PROJECT_ID + ":" + truename).setHardness(hard).setResistance(hard);
 		GameRegistry.registerBlock(block, truename);
 		if(tab != null)
 			block.setCreativeTab(tab);

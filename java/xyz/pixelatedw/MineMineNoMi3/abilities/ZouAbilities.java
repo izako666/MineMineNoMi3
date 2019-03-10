@@ -87,7 +87,7 @@ public class ZouAbilities
 			super(ListAttributes.IVORYSTOMP); 
 		}	
 		
-		public void passive(EntityPlayer player) 
+		public void passive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			

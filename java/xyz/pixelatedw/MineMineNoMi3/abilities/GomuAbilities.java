@@ -191,18 +191,18 @@ public class GomuAbilities
 					case 1:
 						type = 0;
 						if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Gatling");
-						this.attr.setAbilityCooldown(3.5);
+						this.attr.setAbilityCooldown(4);
 						break;
 					case 2:
 						type = 1;
 						if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Jet Gatling");
-						this.attr.setAbilityCooldown(1.5);
+						this.attr.setAbilityCooldown(2);
 						break;
 					case 3:
 						type = 2;
 						projectileSpace = 7;
 						if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Elephant Gatling");
-						this.attr.setAbilityCooldown(5.5);
+						this.attr.setAbilityCooldown(6);
 						break;
 					case 4:
 						type = 3;
@@ -268,13 +268,13 @@ public class GomuAbilities
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Bazooka");
 					this.projectile = new GomuProjectiles.GomuGomuNoBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOBAZOOKA);
 					this.attr.setAbilityCooldown(12);
-					this.attr.setAbilityCharges(30);
+					this.attr.setAbilityCharges(18);
 					break;
 				case 2:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Jet Bazooka");
 					this.projectile = new GomuProjectiles.GomuGomuNoJetBazooka(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOJETBAZOOKA);
 					this.attr.setAbilityCooldown(6);
-					this.attr.setAbilityCharges(20);
+					this.attr.setAbilityCharges(13);
 					break;
 				case 3:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Grizzly Magnum");
@@ -309,7 +309,7 @@ public class GomuAbilities
 				case 1:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Pistol");
 					this.projectile = new GomuProjectiles.GomuGomuNoPistol(player.worldObj, player, ListExtraAttributes.GOMUGOMUNOPISTOL);
-					this.attr.setAbilityCooldown(10);
+					this.attr.setAbilityCooldown(8);
 					break;
 				case 2:
 					if(MainConfig.enableAnimeScreaming) this.attr.setAttributeName("Gomu Gomu no Jet Pistol");

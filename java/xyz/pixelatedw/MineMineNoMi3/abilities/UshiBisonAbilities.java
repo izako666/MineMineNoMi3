@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -168,10 +169,12 @@ public class UshiBisonAbilities
 		public void startPassive(EntityPlayer player) 
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
+			AbilityProperties abilityProps = AbilityProperties.get(player);
 			
 			if(!props.getZoanPoint().equals("power"))
 			{
 				this.setPassiveActive(false);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);					
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Power Point is active !");
 			}
 		}

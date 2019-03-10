@@ -9,6 +9,8 @@ import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -60,15 +62,15 @@ public class KiloAbilities {
                     double mX = 0;
                    WyHelper.Direction dir = WyHelper.get8Directions(player);
                     if(dir == WyHelper.Direction.NORTH) mZ -= 0.25;
-                    if(dir == WyHelper.Direction.NORTH_WEST) {mZ -= 0.25; mX -= 0.25;}
+                    if(dir == WyHelper.Direction.NORTH_WEST) {mZ -= 0.20; mX -= 0.20;}
                     if(dir == WyHelper.Direction.SOUTH) mZ += 0.25;
-                    if(dir == WyHelper.Direction.NORTH_EAST) {mZ -= 0.25; mX += 0.25;}
+                    if(dir == WyHelper.Direction.NORTH_EAST) {mZ -= 0.20; mX += 0.20;}
                     if(dir == WyHelper.Direction.WEST) mX -= 0.25;
-                    if(dir == WyHelper.Direction.SOUTH_WEST) {mZ += 0.25; mX -= 0.25;}
+                    if(dir == WyHelper.Direction.SOUTH_WEST) {mZ += 0.20; mX -= 0.20;}
                     if(dir == WyHelper.Direction.EAST) mX += 0.25;
-                    if(dir == WyHelper.Direction.SOUTH_EAST) {mZ += 0.25; mX += 0.25;}
+                    if(dir == WyHelper.Direction.SOUTH_EAST) {mZ += 0.20; mX += 0.20;}
                     player.fallDistance = 0;
-                    movePlayer("=",mX,-0.2,mZ,player);
+                    movePlayer("=",mX,-0.1,mZ,player);
                 } else if (player.getHeldItem() != null && player.getHeldItem().getItem() == ListMisc.Umbrella) {
                     int slot = player.inventory.currentItem;
                     player.inventory.setInventorySlotContents(slot, new ItemStack(ListMisc.UmbrellaOpen));
@@ -80,8 +82,7 @@ public class KiloAbilities {
         }
 
         public void endPassive(EntityPlayer player) {
-            this.startCooldown();
-            this.startExtUpdate(player);
+        	this.setPassiveActive(false);
             replaceUmbrella(player);
 
         }
@@ -120,7 +121,7 @@ public class KiloAbilities {
             if (!isFlying && player.posY > this.initialY) {
                 this.isFlying = true;
             } else if (isFlying && this.countDoon <= 10) {
-                movePlayer("=",player.motionX,1,player.motionZ,player);
+                movePlayer("=",player.motionX,2.5,player.motionZ,player);
                 this.countDoon += 1;
             } else if (isFlying && this.countDoon >=4) {
                 this.setPassiveActive(false);
@@ -137,8 +138,6 @@ public class KiloAbilities {
             this.startCooldown();
             this.startExtUpdate(player);
         }
-    } {
-
     }
 
     public static class HeavyPunch extends Ability {
@@ -190,6 +189,13 @@ public class KiloAbilities {
 
         public void passive(EntityPlayer player) {
             if (!this.isOnCooldown) {
+            	AbilityProperties abilityProps = AbilityProperties.get(player);
+            	Weightless weightless = (Weightless) abilityProps.getAbilityFromName(ListAttributes.WEIGHTLESS.getAttributeName());
+            	if(weightless != null && weightless.isPassiveActive())
+            	{
+            		weightless.endPassive(player);
+    				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);					
+            	}
                 this.initialY = player.posY;
                 super.passive(player);
             }
@@ -215,8 +221,7 @@ public class KiloAbilities {
                 }
             }
 
-
-            this.startCooldown();
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KILOPRESS, player.posX, player.posY, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
             this.startExtUpdate(player);
         }
     }

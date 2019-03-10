@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.Type;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -27,6 +29,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -64,7 +67,9 @@ public class EventsMorphs
 			return;
 
 		ExtendedEntityData props = ExtendedEntityData.get(this.mc.thePlayer);
-
+		
+		//WyRenderHelper.drawColourOnScreen(255, 0, 0, 100, 0, 0, 500, 500, 100);
+		
 		if (MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 		{
 			Object[][] forms = MorphsHelper.getMorphsMap().get(props.getUsedFruit());
@@ -118,7 +123,7 @@ public class EventsMorphs
 				});
 			}
 		}
-
+		
 		if (event.entity.isPotionActive(Potion.invisibility) && event.entity.getActivePotionEffect(Potion.invisibility).getAmplifier() >= 5)
 			event.setCanceled(true);
 

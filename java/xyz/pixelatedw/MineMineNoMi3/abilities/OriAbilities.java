@@ -11,6 +11,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.OriProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 import java.util.ArrayList;
 
@@ -58,7 +59,7 @@ public class OriAbilities {
         public void use(EntityPlayer player) {
             if (!isOnCooldown) {
                 if (MainConfig.enableGriefing) {
-                	WyHelper.createEmptyCube(player, new int[] {5, 3, 5}, Blocks.iron_bars, "air");
+                	WyHelper.createEmptyCube(player, new int[] {5, 3, 5}, ListMisc.OriBars, "air");
                 }
 
                 super.use(player);
@@ -78,19 +79,22 @@ public class OriAbilities {
             MovingObjectPosition point = WyHelper.rayTraceBlocks(player);
             if (!this.isOnCooldown && point != null) {
                 if (this.blockList == null) {
-                    this.blockList = makeShapeSquare(player,point.blockX,point.blockY,point.blockZ,Blocks.iron_bars,Blocks.air);
+                    this.blockList = makeShapeSquare(player,point.blockX,point.blockY,point.blockZ,ListMisc.OriBars,Blocks.air);
                 }
                 super.passive(player);
             }
         }
 
         public void endPassive(EntityPlayer player) {
-            for (int count = 0; count < blockList.size(); count++) {
-                int[] currentArray = blockList.get(count);
-                if (player.worldObj.getBlock(currentArray[0], currentArray[1], currentArray[2]) == Blocks.air) {
-                    player.worldObj.setBlock(currentArray[0],currentArray[1],currentArray[2], Blocks.iron_bars);
-                }
-            }
+        	if(blockList != null)
+        	{
+	            for (int count = 0; count < blockList.size(); count++) {
+	                int[] currentArray = blockList.get(count);
+	                if (player.worldObj.getBlock(currentArray[0], currentArray[1], currentArray[2]) == Blocks.air) {
+	                    player.worldObj.setBlock(currentArray[0],currentArray[1],currentArray[2], ListMisc.OriBars);
+	                }
+	            }
+        	}
             this.blockList = null;
             this.startCooldown();
             this.startExtUpdate(player);

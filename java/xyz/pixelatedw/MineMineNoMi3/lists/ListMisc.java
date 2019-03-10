@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.lists;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -13,6 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.NewBlock;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomBars;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDarkness;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDemonPoison;
@@ -96,7 +98,10 @@ public class ListMisc
 	public static Block SunaSand = new BlockSunaSand();
 	public static Block WantedPostersPackage = new BlockWantedPostersPackage();
 	public static Block WantedPosterBlock = new BlockWantedPoster();
-
+	public static Block OriBars = new BlockCustomBars("oribars", "oribars");
+	public static Block KairosekiBars = new BlockCustomBars("kairosekibars", "kairosekibars");
+	public static Block WaxBlock = new NewBlock(Material.clay);
+	
 	public static Block DialEisenBlock = new BlockEisenDial();
 	public static Block DialFireBlock = new BlockFlameDial();
 	public static Block DialAxeBlock = new BlockAxeDial();
@@ -286,7 +291,10 @@ public class ListMisc
 		addBLOCK(SunaSand, "Suna Sand", 1.0F, null, null);
 		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, null, null);
 		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 1.0F, TileEntityWantedPoster.class, null);
-
+		addBLOCK(OriBars, "Ori Bars", 5.0F, null, null);
+		addBLOCK(KairosekiBars, "Kairoseki Bars", 8.0F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(WaxBlock, "Wax Block", 4.0F, null, null);
+		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);
 		addBLOCK(DialAxeBlock, "Axe Dial Block", .3F, TileEntityAxeDial.class, null);

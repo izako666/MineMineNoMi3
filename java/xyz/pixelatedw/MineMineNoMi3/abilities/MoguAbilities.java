@@ -6,17 +6,21 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
@@ -49,58 +53,71 @@ public class MoguAbilities
 
 		public void use(EntityPlayer player)
 		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
 			if (!this.isOnCooldown)
 			{
 				if (MainConfig.enableGriefing)
 				{
-					if(player.isSneaking())
+					if (props.getZoanPoint().equals("power"))
 					{
-						int i = 0;
-						for (int x = -1; x < 1; x++)
-							for (int y = 0; y < 10; y++)
-								for (int z = -1; z < 1; z++)
-								{
-									int posX = (int) player.posX + x;
-									int posY = (int) player.posY - y;
-									int posZ = (int) player.posZ + z;
-									
-									player.addPotionEffect(new PotionEffect(Potion.resistance.id, 50, 100, true));
-									player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 400, 2, true));
-	
-									Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
-									if (DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
+						if(player.isSneaking())
+						{
+							int i = 0;
+							for (int x = -1; x < 1; x++)
+								for (int y = 0; y < 10; y++)
+									for (int z = -1; z < 1; z++)
 									{
-										WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player.dimension, posX, posY, posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+										int posX = (int) player.posX + x;
+										int posY = (int) player.posY - y;
+										int posZ = (int) player.posZ + z;
+										
+										player.addPotionEffect(new PotionEffect(Potion.resistance.id, 50, 100, true));
+										player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 400, 2, true));
+		
+										Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
+										if (DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
+										{
+											player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
+											WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player.dimension, posX, posY, posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+										}
 									}
-								}
+							this.attr.setAbilityCooldown(2);
+						}
+						else
+						{
+							double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+							double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+							
+							this.initialY = (int) player.posY;
+							this.breakBlocks = true;
+							
+							double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
+							mX /= (double)f2;
+							mZ /= (double)f2;
+							mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+							mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+							mX *= 4;
+							mZ *= 4;
+						
+							motion("=", mX, player.motionY, mZ, player);
+							
+							this.attr.setAbilityCooldown(10);
+						}
+						
+						super.use(player);
 					}
 					else
-					{
-						double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-						double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-						
-						this.initialY = (int) player.posY;
-						this.breakBlocks = true;
-						
-						double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
-						mX /= (double)f2;
-						mZ /= (double)f2;
-						mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-						mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-						mX *= 4;
-						mZ *= 4;
-					
-						motion("=", mX, player.motionY, mZ, player);
-					}				
+						WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Mole Point is active !");
 				}
-				super.use(player);
 			}
 		}
 		
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
-	    	//System.out.println("" + currentCooldown);
-			if(currentCooldown > 190 && player.posY >= this.initialY)
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
+			if(currentCooldown > 100 && player.posY >= this.initialY && props.getZoanPoint().equals("power"))
 			{
 				for(int[] location : WyHelper.getBlockLocationsNearby(player, 2))
 				{
@@ -109,6 +126,8 @@ public class MoguAbilities
 						if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, location[0], location[1], location[2], Blocks.air, "core", "foliage"))
 						{
 							WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player.dimension, location[0], location[1], location[2], ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+							if (player.worldObj instanceof WorldServer)
+								((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
 						}
 					}
 				}
@@ -130,10 +149,12 @@ public class MoguAbilities
 		public void startPassive(EntityPlayer player)
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
-
+			AbilityProperties abilityProps = AbilityProperties.get(player);
+			
 			if (!props.getZoanPoint().equals("power"))
 			{
 				this.setPassiveActive(false);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 				WyHelper.sendMsgToPlayer(player, "" + this.getAttribute().getAttributeName() + " can only be used while Power Point is active !");
 			}
 		}
@@ -184,8 +205,7 @@ public class MoguAbilities
 			if (props.getZoanPoint().isEmpty())
 				props.setZoanPoint("n/a");
 
-			// player.addPotionEffect(new PotionEffect(Potion.digSpeed.id,
-			// Integer.MAX_VALUE, 100, true));
+			 player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, Integer.MAX_VALUE, 3, true));
 
 			WyNetworkHelper.sendTo(new PacketNewAABB(0.5F, 1.5F), (EntityPlayerMP) player);
 
@@ -198,7 +218,7 @@ public class MoguAbilities
 		{
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 
-			// player.removePotionEffect(Potion.digSpeed.id);
+			player.removePotionEffect(Potion.digSpeed.id);
 
 			WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) player);
 

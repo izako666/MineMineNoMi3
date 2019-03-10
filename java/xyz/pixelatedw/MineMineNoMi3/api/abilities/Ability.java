@@ -150,8 +150,8 @@ public class Ability
 	
 	public void disable(EntityPlayer player, boolean bool) 
 	{
-		if(bool)
-			(new ResetDisable(player, attr)).start();
+		//if(bool)
+		//	(new ResetDisable(player, attr)).start();
 		isDisabled = bool;
 		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 	}
@@ -324,7 +324,7 @@ public class Ability
 					setCooldownActive(false);
 					try
 					{
-						this.join();
+						return;
 					} 
 					catch (Exception e) 
 					{

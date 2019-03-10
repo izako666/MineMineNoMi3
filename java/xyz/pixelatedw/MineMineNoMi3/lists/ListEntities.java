@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.EntityMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
@@ -102,6 +103,7 @@ public class ListEntities
 		
 		//Others
 		WyRegistry.registerMob("Doppelman", EntityDoppelman.class);
+		WyRegistry.registerMob("Black Knight", EntityBlackKnight.class);
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Wanted Posters Package", EntityWantedPostersPackage.class);

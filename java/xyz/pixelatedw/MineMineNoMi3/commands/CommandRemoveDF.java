@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -57,6 +58,7 @@ public class CommandRemoveDF extends CommandBase
 		
 		target.clearActivePotions();
 		
+		WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) target);
 		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);	
 		WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getDisplayName(), props));	
 		WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP)target);	

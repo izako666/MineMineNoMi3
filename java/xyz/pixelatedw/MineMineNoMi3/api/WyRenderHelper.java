@@ -76,6 +76,7 @@ public class WyRenderHelper
 		{
 			return;
 		}
+		GL11.glColorMask(true, false, false, true);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
@@ -87,6 +88,7 @@ public class WyRenderHelper
 		tessellator.addVertex(posX, posY, zLevel);
 		tessellator.draw();
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glColorMask(true, true, true, true);
 	}
 
 	public static void renderTestStencil()

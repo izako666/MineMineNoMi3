@@ -50,12 +50,14 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarineWithGun;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMorgan;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDojoSensei;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.models.ModelDojoSensei;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.renderers.RenderBlackKnight;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.renderers.RenderDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
@@ -149,6 +151,7 @@ public class ClientProxy extends CommonProxy
 		
 		//Others
 		RenderingRegistry.registerEntityRenderingHandler(EntityDoppelman.class, new RenderDoppelman());
+		RenderingRegistry.registerEntityRenderingHandler(EntityBlackKnight.class, new RenderBlackKnight());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDenDenMushi.class, new MobRenderer(new ModelDenDenMushi(), "denden"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityDojoSensei.class, new MobRenderer(new ModelDojoSensei()));
 		RenderingRegistry.registerEntityRenderingHandler(EntityWantedPostersPackage.class, new MobRenderer(new ModelWantedPostersPackage(), "wantedposterspackage"));

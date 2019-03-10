@@ -74,7 +74,7 @@ public class ListAttributes
 	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(20).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("51585B").setProjectileSize(50, 50, 50).setProjectileDamage(50).setProjectileExplosion(20, false).setProjectileCollisionSizes(2, 2, 2);
 	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setAbilityCooldown(12).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityCooldown(10).setAbilityPassive();
-	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityCooldown(12).setAbilityPassive();
+	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityDisplayName("Jigoku Tabi").setAbilityCooldown(12).setAbilityPassive();
 	
 	public static AbilityAttribute BLACKWORLD = new AbilityAttribute("Black World").setAbilityCooldown(25).addEffects(EffectType.AOE, new PotionEffect(Potion.moveSlowdown.id, 200, 100), new PotionEffect(Potion.digSlowdown.id, 200, 100), new PotionEffect(Potion.blindness.id, 200, 2)).setEffectRadius(20);
 	public static AbilityAttribute DARKMATTER = new AbilityAttribute("Dark Matter").setAbilityCooldown(12).setProjectileModel(new ModelSphere()).setProjectileColor("000000").setProjectileSize(7, 7, 7);
@@ -99,7 +99,7 @@ public class ListAttributes
 	public static AbilityAttribute MINIHOLLOW = new AbilityAttribute("Mini Hollow").setAbilityCooldown(3).setProjectileModel(new ModelMiniHollow()).setProjectileSize(0.4, 0.4, 0.4).setProjectileColor("#F8F8FF").setProjectileAlpha(150).setProjectileDamage(2).setProjectileExplosion(2, false).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.confusion.id, 120, 0), new PotionEffect(Potion.moveSlowdown.id, 120, 0)).setAbilityRepeater();
 	public static AbilityAttribute TOKUHOLLOW = new AbilityAttribute("Toku Hollow").setAbilityCooldown(10).setProjectileModel(new ModelTokuHollow()).setProjectileTexture("tokuhollow").setProjectileAlpha(150).setProjectileSize(4, 4, 4).setProjectileDamage(10).setProjectileExplosion(7, false).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.confusion.id, 400, 1), new PotionEffect(Potion.moveSlowdown.id, 400, 1)).setProjectileCollisionSizes(1.5, 1.5, 1.5);
 	
-//	public static AbilityAttribute BLACKKNIGHT = new AbilityAttribute("Black Knight");
+	public static AbilityAttribute BLACKKNIGHT = new AbilityAttribute("Black Knight").setAbilityCooldown(15).setAbilityPassive();
 	public static AbilityAttribute KUMONOSUGAKI = new AbilityAttribute("Kumo no Sugaki").setAbilityCooldown(10).addEffects(EffectType.USER,new PotionEffect(Potion.resistance.id, 30, 100), new PotionEffect(Potion.moveSlowdown.id, 30, 100), new PotionEffect(Potion.digSlowdown.id, 30, 5), new PotionEffect(Potion.jump.id, 30, -100)).setAbilityPassive();;
 	public static AbilityAttribute TORIKAGO = new AbilityAttribute("Torikago").setAbilityCooldown(2).setAbilityPassive(true);
 	public static AbilityAttribute TAMAITO = new AbilityAttribute("Tamaito").setAbilityCooldown(5).setProjectileDamage(6).setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5");
@@ -135,7 +135,7 @@ public class ListAttributes
 	public static AbilityAttribute CHLOROBALL = new AbilityAttribute("Chloro Ball").setAbilityCooldown(6).setProjectileDamage(10).setProjectileModel(new ModelSphere()).setProjectileColor("A020F0").setProjectileSize(5, 5, 5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 240, 1));
 	public static AbilityAttribute HYDRA = new AbilityAttribute("Hydra").setAbilityCooldown(8).setProjectileDamage(30).setProjectileModel(new ModelHydra()).setProjectileTexture("hydra").setProjectileSize(2, 2, 2.4).setProjectileTicks(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.poison.id, 500, 1));
 	
-	public static AbilityAttribute CANDLELOCK = new AbilityAttribute("Candle Lock").setAbilityCooldown(15).setProjectileDamage(6).setProjectileModel(new ModelCube()).setProjectileColor("A2ADD0").setProjectileSize(.5, .5, 5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 400, 100), new PotionEffect(Potion.digSlowdown.id, 400, 100), new PotionEffect(Potion.jump.id, 400, -1));
+	public static AbilityAttribute CANDLELOCK = new AbilityAttribute("Candle Lock").setAbilityCooldown(15).setProjectileDamage(6).setProjectileModel(new ModelCube()).setProjectileColor("A2ADD0").setProjectileSize(.5, .5, 1).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 400, 100), new PotionEffect(Potion.digSlowdown.id, 400, 100), new PotionEffect(Potion.jump.id, 400, -1));
 	public static AbilityAttribute CANDLEHOUSE = new AbilityAttribute("Candle House").setAbilityCooldown(30);
 	public static AbilityAttribute CANDLEWALL = new AbilityAttribute("Candle Wall").setAbilityCooldown(4);
 	public static AbilityAttribute DORUDORUARTSKEN = new AbilityAttribute("Doru Doru Arts : Ken").setAbilityPassive(true);
@@ -233,7 +233,7 @@ public class ListAttributes
 	public static AbilityAttribute HIGAN = new AbilityAttribute("Higan").setAbilityCooldown(4).setProjectileModel(new ModelCube()).setProjectileDamage(5).setProjectileColor("FF0000").setProjectileSize(.3, .3, .3).setAbilityRepeater(4);
 	public static AbilityAttribute HIKEN = new AbilityAttribute("Hiken").setAbilityCooldown(8).setProjectileModel(new ModelFist()).setProjectileTexture("hiken").setModelOffsets(0, 0.5, 0).setProjectileDamage(20).setProjectileSize(1.5, 1.5, 1.5).setProjectileExplosion(2);
 
-	public static AbilityAttribute GREATCAGE = new AbilityAttribute("Great Cage").setAbilityCooldown(30);
+	public static AbilityAttribute GREATCAGE = new AbilityAttribute("Great Cage").setAbilityCooldown(20);
 	public static AbilityAttribute PRISONBREAK = new AbilityAttribute("Prison Break").setAbilityCooldown(3).setAbilityPassive();
 	public static AbilityAttribute AWASEBAORI = new AbilityAttribute("Awase Baori").setAbilityCooldown(12).setProjectileModel(new ModelSphere()).setProjectileColor("000000").setProjectileSize(7, 7, 7);
 	public static AbilityAttribute BIND = new AbilityAttribute("Bind").setAbilityCooldown(10).setAbilityPassive().setAbilityPunch();

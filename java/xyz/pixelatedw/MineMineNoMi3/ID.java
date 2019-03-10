@@ -113,6 +113,7 @@ public class ID
 	PARTICLEFX_BAKUMUNCH = "bakuMunch",
 	PARTICLEFX_KOROUZU = "korouzu",
 	PARTICLEFX_KILO = "kilo",
+	PARTICLEFX_KILOPRESS = "kiloPress",
 	PARTICLEFX_GREATSTOMP = "greatStomp",
 	PARTICLEFX_KASURIUTAFUBUKIGIRI = "kasuriutaFubukiGiri",
 	PARTICLEFX_SOULPARADE = "soulParade",

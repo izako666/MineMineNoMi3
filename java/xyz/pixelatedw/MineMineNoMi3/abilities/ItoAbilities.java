@@ -9,17 +9,15 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper.Direction;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
-import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ItoProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -38,7 +36,46 @@ public class ItoAbilities
 		Values.abilityWebAppExtraParams.put("torikago", new String[] {"desc", "Creates an indestructible dome made of strings, that damage anyone who toches then"});
 	}
 	
-	public static Ability[] abilitiesArray = new Ability[] {new Parasite(), new SoraNoMichi(), new Overheat(), new Tamaito(), new KumoNoSugaki(), new Torikago()};	
+	public static Ability[] abilitiesArray = new Ability[] {new Parasite(), new SoraNoMichi(), new Overheat(), new Tamaito(), new KumoNoSugaki(), new Torikago(), new BlackKnight()};	
+	
+	public static class BlackKnight extends Ability
+	{
+		private EntityBlackKnight blackKnight;
+
+		public BlackKnight()
+		{
+			super(ListAttributes.BLACKKNIGHT);
+		}
+
+		public void passive(EntityPlayer player)
+		{			
+			if(this.passiveActive && player.isSneaking() && blackKnight != null)
+			{
+				blackKnight.isAggressive = !blackKnight.isAggressive;
+				WyHelper.sendMsgToPlayer(player, "Your Black Knight is now " + (blackKnight.isAggressive ? "aggressive" : "defensive"));
+			}
+			else
+				super.passive(player);
+		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			blackKnight = new EntityBlackKnight(player.worldObj, player);
+			blackKnight.setPositionAndRotation(player.posX, player.posY, player.posZ, 180, 0);
+			blackKnight.getEntityData().setString("TextureName", "test");
+			player.worldObj.spawnEntityInWorld(blackKnight);
+		}
+
+		public void endPassive(EntityPlayer player)
+		{
+			if (!WyHelper.getEntitiesNear(player, 20, EntityBlackKnight.class).isEmpty())
+				WyHelper.getEntitiesNear(player, 20, EntityBlackKnight.class).forEach(x -> x.setDead());
+
+			this.startCooldown();
+			this.startExtUpdate(player);
+		}
+
+	}
 	
 	public static class Torikago extends Ability
 	{

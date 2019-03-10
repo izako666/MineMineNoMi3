@@ -1,0 +1,48 @@
+package xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.renderers;
+
+import java.util.Map;
+
+import org.lwjgl.opengl.GL11;
+
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.IDynamicRenderer;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.MobRenderer;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.models.ModelMarine;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityBlackKnight;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
+
+@SideOnly(Side.CLIENT)
+public class RenderBlackKnight extends MobRenderer
+{
+
+	public RenderBlackKnight()
+	{
+		super(new ModelBiped());
+	}
+	
+	
+	protected ResourceLocation getEntityTexture(Entity entity) 
+	{
+		ResourceLocation rs = AbstractClientPlayer.locationStevePng;
+		
+        Minecraft minecraft = Minecraft.getMinecraft();
+        Map map = minecraft.func_152342_ad().func_152788_a(minecraft.thePlayer.getGameProfile());
+
+        if (map.containsKey(Type.SKIN))
+            rs = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture)map.get(Type.SKIN), Type.SKIN);
+        
+		return rs;
+	}
+}

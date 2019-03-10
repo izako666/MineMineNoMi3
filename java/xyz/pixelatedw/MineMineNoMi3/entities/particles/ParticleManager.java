@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gura.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.hie.ParticleEffectIceAge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffectKumoNoSugaki;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectHeavyPunch;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectKiloPress;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai2;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mero.ParticleEffectPerfumeFemur;
@@ -156,6 +157,7 @@ public class ParticleManager
 
 		// Kilo
 		map.put(ID.PARTICLEFX_KILO, new ParticleEffectHeavyPunch());
+		map.put(ID.PARTICLEFX_KILOPRESS, new ParticleEffectKiloPress());
 		
 		// Yomi
 		map.put(ID.PARTICLEFX_KASURIUTAFUBUKIGIRI, new ParticleEffectKasuriutaFubukiGiri1());

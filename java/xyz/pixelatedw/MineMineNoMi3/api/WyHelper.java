@@ -108,6 +108,20 @@ public class WyHelper
 		return null;
 	}
 	
+	public static List<int[]> getBlockLocationsNearby(EntityLivingBase entity, int[] radius)
+	{
+		List<int[]> nearbyBlocks = new ArrayList<int[]>();
+		
+		for (int x = -radius[0]; x < radius[0]; x++)
+			for (int y = -radius[1]; y < radius[1]; y++)
+				for (int z = -radius[2]; z < radius[2]; z++)
+				{
+					nearbyBlocks.add(new int[] {(int) entity.posX + x, (int) entity.posY + y, (int) entity.posZ + z});
+				}
+
+		return nearbyBlocks;
+	}
+	
 	public static List<int[]> getBlockLocationsNearby(EntityLivingBase entity, int radius)
 	{
 		List<int[]> nearbyBlocks = new ArrayList<int[]>();
