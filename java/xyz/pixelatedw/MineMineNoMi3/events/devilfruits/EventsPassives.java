@@ -382,22 +382,18 @@ public class EventsPassives
 				if (event.entityLiving instanceof EntityPlayer) {
 					EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
-					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
+					ExtendedEntityData props = ExtendedEntityData.get(reciever);
 
-					if (attacker.getHeldItem() != null && propz.getUsedFruit().equals("sabisabi")) {
+					if (attacker.getHeldItem() != null && props.getUsedFruit().equals("sabisabi")) {
 						if (ItemsHelper.isSword(attacker.getHeldItem())) {
 							event.setCanceled(true);
-							System.out.println("Works");
 							attacker.getHeldItem().damageItem(50, attacker);
 						}
 					}
+
 				}
 			}
 
+
 		}
 	}
-
-
-
-
-}
