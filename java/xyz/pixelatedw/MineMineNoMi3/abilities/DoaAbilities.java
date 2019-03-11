@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -13,6 +14,9 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class DoaAbilities {
 
     public static Ability[] abilitiesArray = new Ability[]{new AirDoor(), new Door()};
@@ -24,11 +28,13 @@ public class DoaAbilities {
         }
 
         public void passive(EntityPlayer player) {
-            ExtendedEntityData propz = ExtendedEntityData.get(player);
+            if (!this.isOnCooldown()) {
+                ExtendedEntityData propz = ExtendedEntityData.get(player);
             propz.setInAirWorld(true);
             WyNetworkHelper.sendTo(new PacketSync(propz), (EntityPlayerMP) player);
             WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getEntityId(), propz));
             super.passive(player);
+        }
         }
 
         public void duringPassive(EntityPlayer player, int timer) {
@@ -63,6 +69,7 @@ public class DoaAbilities {
         }
 
         public void use(EntityPlayer player) {
+            if (!this.isOnCooldown()) {
 
             MovingObjectPosition MOP = WyHelper.rayTraceBlocks(player);
 
@@ -89,9 +96,10 @@ public class DoaAbilities {
                         super.use(player);
                     }
 
-
+                }
                 }
             }
         }
     }
+
 }

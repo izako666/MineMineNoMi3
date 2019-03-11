@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.events.devilfruits;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,12 +11,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -28,6 +32,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -343,6 +348,16 @@ public class EventsPassives
 		if(propz.isInAirWorld()) {
 			event.setCanceled(true);
 		}
+
+		if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) {
+			MovingObjectPosition MOP = WyHelper.rayTraceBlocks(event.entityPlayer);
+			if (propz.getUsedFruit().equalsIgnoreCase("sabisabi") && MOP != null) {
+				Block block = event.entityPlayer.getEntityWorld().getBlock(MOP.blockX,MOP.blockY,MOP.blockZ);
+				if (block == Blocks.iron_block) {
+					event.entityPlayer.getEntityWorld().setBlock(MOP.blockX,MOP.blockY,MOP.blockZ, Blocks.air);
+				}
+			}
+		}
 	}
 
 	@SubscribeEvent
@@ -356,30 +371,32 @@ public class EventsPassives
 	}
 
 	@SubscribeEvent
-	public void onDamage(LivingAttackEvent event)
+	public void onDamage(LivingAttackEvent event) {
 		if (event.entityLiving instanceof EntityPlayer) {
 			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
-		 	if (props.isInAirWorld()){
+			if (props.isInAirWorld()) {
 				event.setCanceled(true);
 			}
 
-	if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
-		if (event.entityLiving instanceof EntityPlayer) {
-			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
-			EntityPlayer reciever = (EntityPlayer) event.entityLiving;
-			ExtendedEntityData props = ExtendedEntityData.get(reciever);
+			if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
+				if (event.entityLiving instanceof EntityPlayer) {
+					EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
+					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
+					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
 
-			if (attacker.getHeldItem() !=null && props.getUsedFruit().equals("sabisabi")) {
-				if (ItemsHelper.isSword(attacker.getHeldItem())) {
-					event.setCanceled(true);
-					System.out.println("Works");
-					attacker.getHeldItem().damageItem(50, attacker);
+					if (attacker.getHeldItem() != null && propz.getUsedFruit().equals("sabisabi")) {
+						if (ItemsHelper.isSword(attacker.getHeldItem())) {
+							event.setCanceled(true);
+							System.out.println("Works");
+							attacker.getHeldItem().damageItem(50, attacker);
+						}
+					}
 				}
 			}
+
 		}
 	}
-		}
-	}
+
 
 
 
