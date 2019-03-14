@@ -247,6 +247,9 @@ public class ListAttributes
 	public static AbilityAttribute SHIGAN = new AbilityAttribute("Shigan").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute KAMIE = new AbilityAttribute("Kamie").setAbilityCooldown(10).addEffects(EffectType.USER, new PotionEffect(Potion.resistance.id, 20, 100)).setAbilityPassive();
 
+	public static AbilityAttribute HOTBOILINGSPECIAL = new AbilityAttribute("Hot Boiling Special").setAbilityPassive().setAbilityCooldown(7);
+	public static AbilityAttribute EVAPORATE = new AbilityAttribute("Evaporate").setAbilityCooldown(15);
+
 	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive(true);
 	public static AbilityAttribute KICKOFFJUMP = new AbilityAttribute("Kick Off Jump").setAbilityPassive().setAbilityCooldown(4);
 	public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive();

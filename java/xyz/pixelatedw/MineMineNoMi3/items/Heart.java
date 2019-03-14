@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.items;
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
