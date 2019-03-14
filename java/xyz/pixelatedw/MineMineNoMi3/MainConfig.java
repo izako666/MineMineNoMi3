@@ -69,8 +69,8 @@ public class MainConfig
 		enableQuestProgression = config.get(Configuration.CATEGORY_GENERAL, "Allow Quest Progression", false).getBoolean();
 		maxDojoSpawn = config.get(Configuration.CATEGORY_GENERAL, "Max Dojos to Spawn per World", 5).getInt();
 		
-		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 100).getInt();
-		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 101).getInt();
+		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 255).getInt();
+		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 256).getInt();
 		
 		enableTelemetry = config.get("system", "Allow Telemetry", true).getBoolean();
 		enableUpdateMsg = config.get("system", "Allow Update Message", true).getBoolean();	
