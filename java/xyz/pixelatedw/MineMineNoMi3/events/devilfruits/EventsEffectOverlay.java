@@ -98,6 +98,8 @@ public class EventsEffectOverlay
 			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#a04921").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY))
 			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 200);
+		if(props.isInAirWorld())
+			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, 500, 500, 100);
 	}
 	
 }

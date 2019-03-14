@@ -28,7 +28,6 @@ public class EventsZoanPassives
 			AbilityProperties abilityProps = AbilityProperties.get(attacker);
 			EntityLivingBase attacked = event.entityLiving;
 			
-			
 			if(props.getUsedFruit().equalsIgnoreCase("ushiushibison") && props.getZoanPoint().equalsIgnoreCase("power"))
 				event.ammount += 3;
 			

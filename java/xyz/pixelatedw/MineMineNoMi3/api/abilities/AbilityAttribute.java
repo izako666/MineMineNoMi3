@@ -22,7 +22,7 @@ public class AbilityAttribute
 	private float abilityPunchDamage = 1;
 	
 	// Projectile related fields
-	private boolean projectileMoveThroughBlocks, projectileExplosionHasFire = true, projectileExplosionCanBreakBlocks = true;
+	private boolean projectileMoveThroughBlocks, projectileExplosionHasFire = true, projectileExplosionCanBreakBlocks = true, projectileIsPhysical = false;
 	private int projectileTicks = 60, projectileExplosionPower;
 	private float projectileAlpha = 255, projectileDamage = 1, projectileSpeed = 1.5F;
 	private double projectileXRotation, projectileYRotation, projectileZRotation;
@@ -69,6 +69,7 @@ public class AbilityAttribute
 		this.projectileExplosionCanBreakBlocks = attr.projectileExplosionCanBreakBlocks;
 		this.abilityExplosionHasFire = attr.abilityExplosionHasFire;
 		this.abilityExplosionCanBreakBlocks = attr.abilityExplosionCanBreakBlocks;
+		this.projectileIsPhysical = attr.projectileIsPhysical;
 		
 		this.projectileAlpha = attr.projectileAlpha;
 		this.projectileDamage = attr.projectileDamage;
@@ -135,6 +136,7 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileCollisionSizes(double i) { this.projectileCollisionSize = new double[] {i, i, i}; return this; }
 	public AbilityAttribute setProjectileCollisionSizes(double i, double j, double k) { this.projectileCollisionSize = new double[] {i, j, k}; return this; }
 	public AbilityAttribute setModelOffsets(double i, double j, double k) { this.projectileModelOffset = new double[] {i, j, k}; return this; }
+	public AbilityAttribute setProjectilePhysical() { this.projectileIsPhysical = true; return this; }
 		//Potion Effects
 	public AbilityAttribute addEffects(EffectType type, PotionEffect... e) 
 	{
@@ -183,6 +185,7 @@ public class AbilityAttribute
 	public boolean canProjectileMoveThroughBlocks() { return this.projectileMoveThroughBlocks; }
 	public double[] getProjectileCollisionSizes() { return this.projectileCollisionSize; }
 	public double[] getModelOffsets() { return this.projectileModelOffset; }
+	public boolean isProjectilePhysical() { return this.projectileIsPhysical; }
 		//Potion Effects
 	public PotionEffect[] getPotionEffectsForHit() {return this.potionEffectsForHit;}
 	public PotionEffect[] getPotionEffectsForProjectile() {return this.potionEffectsForProjectile;}

@@ -86,10 +86,6 @@ public class EventsMorphs
 				}
 			}
 		}
-
-		if(props.isInAirWorld()) {
-			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, 500, 500, 100);
-		}
 	}
 
 	@SubscribeEvent

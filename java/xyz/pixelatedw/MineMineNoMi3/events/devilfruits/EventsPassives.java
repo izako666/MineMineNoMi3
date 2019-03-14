@@ -59,8 +59,6 @@ public class EventsPassives
 			}
 		}
 
-
-
 		if (event.entityLiving instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.entityLiving;
@@ -90,7 +88,6 @@ public class EventsPassives
 				}
 			}
 
-			
 			if (props.getUsedFruit().equals("hiehie"))
 			{
 				if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
@@ -382,9 +379,9 @@ public class EventsPassives
 				if (event.entityLiving instanceof EntityPlayer) {
 					EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
-					ExtendedEntityData props = ExtendedEntityData.get(reciever);
+					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
 
-					if (attacker.getHeldItem() != null && props.getUsedFruit().equals("sabisabi")) {
+					if (attacker.getHeldItem() != null && propz.getUsedFruit().equals("sabisabi")) {
 						if (ItemsHelper.isSword(attacker.getHeldItem())) {
 							event.setCanceled(true);
 							attacker.getHeldItem().damageItem(50, attacker);
@@ -397,3 +394,4 @@ public class EventsPassives
 
 		}
 	}
+}

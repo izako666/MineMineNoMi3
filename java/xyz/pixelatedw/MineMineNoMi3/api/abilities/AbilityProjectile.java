@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProjectile extends EntityThrowable
@@ -52,6 +53,7 @@ public class AbilityProjectile extends EntityThrowable
 			this.motionY = (double) (-MathHelper.sin((this.rotationPitch + this.func_70183_g()) / 180.0F * (float) Math.PI) * 0.4);
 			this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, attr.getProjectileSpeed(), 1.0F);
 		}
+
 	}
 
 	public AbilityAttribute getAttribute()
@@ -82,7 +84,7 @@ public class AbilityProjectile extends EntityThrowable
 		super.onUpdate();
 
 		if(this.attr != null)
-		{		
+		{
 			Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
 			Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 			MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
@@ -137,6 +139,12 @@ public class AbilityProjectile extends EntityThrowable
 			{
 				if (hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
 				{
+					ExtendedEntityData props = ExtendedEntityData.get(this.getThrower());
+					ExtendedEntityData propz = ExtendedEntityData.get((EntityLivingBase) hit.entityHit);
+
+					if(propz.isLogia() && this.getAttribute().isProjectilePhysical() && !props.hasBusoHakiActive())
+						return;
+						
 					if (this.attr.getPotionEffectsForProjectile() != null)
 						for (PotionEffect p : this.attr.getPotionEffectsForProjectile())
 							((EntityLivingBase) hit.entityHit).addPotionEffect(new PotionEffect(p));
