@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.DokuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.DoruAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GasuAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.GiraffeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoeAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GomuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.GoroAbilities;
@@ -24,10 +25,12 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HoruAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ItoAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.JuryoAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KageAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.KachiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KiloAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MaguAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeraAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeroAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.MiniAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MoguAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MokuAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.NikyuAbilities;
@@ -101,7 +104,8 @@ public class ListDevilFruits
 			YukiYukiNoMi, JuryoJuryoNoMi, YamiYamiNoMi, ItoItoNoMi, HoroHoroNoMi, SupaSupaNoMi, OriOriNoMi, 
 			MeroMeroNoMi, GoeGoeNoMi, KiloKiloNoMi, HanaHanaNoMi, HoruHoruNoMi, BetaBetaNoMi, IshiIshiNoMi, 
 			PamuPamuNoMi, UshiUshiNoMiBison, ToriToriNoMiPhoenix, BakuBakuNoMi, YomiYomiNoMi, ZouZouNoMi,
-			SabiSabiNoMi, HitoHitoNoMi, ChiyuChiyuNoMi, MoguMoguNoMi, UshiUshiNoMiGiraffe, DoaDoaNoMi;
+			SabiSabiNoMi, HitoHitoNoMi, ChiyuChiyuNoMi, MoguMoguNoMi, UshiUshiNoMiGiraffe, DoaDoaNoMi,
+			KachiKachiNoMi, MiniMiniNoMi;
 
 	private static final Ability[][] EVERY_FRUIT = 
 		{
@@ -112,8 +116,9 @@ public class ListDevilFruits
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
 				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray, 
+				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray,
 				SabiAbilities.abilitiesArray, SupaAbilities.abilitiesArray, MeroAbilities.abilitiesArray, ChiyuAbilities.abilitiesArray, HoruAbilities.abilitiesArray, MoguAbilities.abilitiesArray,
-				DoaAbilities.abilitiesArray,
+				DoaAbilities.abilitiesArray, KachiAbilities.abilitiesArray, MiniAbilities.abilitiesArray, GiraffeAbilities.abilitiesArray,
 				
 				// Special Abilities lists
 				RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
@@ -133,9 +138,13 @@ public class ListDevilFruits
 	{
 		int totalFruits = 0, totalAbilities = 0;
 		
+		//MiniMiniNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, MiniAbilities.abilitiesArray);
+		//addITEM(MiniMiniNoMi, "Mini Mini no Mi");
+		KachiKachiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, KachiAbilities.abilitiesArray);
+		addITEM(KachiKachiNoMi, "Kachi Kachi no Mi");
 		DoaDoaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
 		addITEM(DoaDoaNoMi, "Doa Doa no Mi");
-		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, new Ability[] {});
+		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, GiraffeAbilities.abilitiesArray);
 		addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
 		MoguMoguNoMi = new AkumaNoMi(EnumFruitType.ZOAN, MoguAbilities.abilitiesArray);
 		addITEM(MoguMoguNoMi, "Mogu Mogu no Mi");

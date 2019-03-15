@@ -1,8 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
 
+import java.util.Map;
+
 import org.lwjgl.opengl.GL11;
 
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
@@ -26,7 +32,20 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = 1;
-		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
+		if(texture.contentEquals("$playerskin"))
+		{
+			ResourceLocation rs = AbstractClientPlayer.locationStevePng;
+			
+	        Minecraft minecraft = Minecraft.getMinecraft();
+	        Map map = minecraft.func_152342_ad().func_152788_a(minecraft.thePlayer.getGameProfile());
+
+	        if (map.containsKey(Type.SKIN))
+	            rs = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture)map.get(Type.SKIN), Type.SKIN);
+	        
+	        this.texture = rs;
+		}
+		else
+			this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = new float[] {0, 0, 0};
 	}
 	
@@ -35,7 +54,20 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = scale;
-		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
+		if(texture.contentEquals("$playerskin"))
+		{
+			ResourceLocation rs = AbstractClientPlayer.locationStevePng;
+			
+	        Minecraft minecraft = Minecraft.getMinecraft();
+	        Map map = minecraft.func_152342_ad().func_152788_a(minecraft.thePlayer.getGameProfile());
+
+	        if (map.containsKey(Type.SKIN))
+	            rs = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture)map.get(Type.SKIN), Type.SKIN);
+	        
+	        this.texture = rs;
+		}
+		else
+			this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = new float[] {0, 0, 0};
 	}
 	
@@ -44,7 +76,20 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = scale;
-		this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
+		if(texture.contentEquals("$playerskin"))
+		{
+			ResourceLocation rs = AbstractClientPlayer.locationStevePng;
+			
+	        Minecraft minecraft = Minecraft.getMinecraft();
+	        Map map = minecraft.func_152342_ad().func_152788_a(minecraft.thePlayer.getGameProfile());
+
+	        if (map.containsKey(Type.SKIN))
+	            rs = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture)map.get(Type.SKIN), Type.SKIN);
+	        
+	        this.texture = rs;
+		}
+		else
+			this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
 		this.offset = offset;
 	}
 

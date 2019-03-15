@@ -3,6 +3,7 @@ package xyz.pixelatedw.MineMineNoMi3.helpers;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ModelBiped;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.EntityRendererZoanEyes;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
@@ -58,8 +59,12 @@ public class MorphsHelper
 				});
 		morphsMap.put("ushiushigiraffe", new Object[][]
 				{
-						{ "power", new RenderZoanMorph(new ModelGiraffePower(), "giraffepower", 1.4, new float[] { 0, 0.7f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.2) },
-						{ "speed", new RenderZoanMorph(new ModelGiraffeSpeed(), "giraffespeed", 1.4, new float[] { 0, 0.7f, 0 }), null },
+						{ "power", new RenderZoanMorph(new ModelGiraffePower(), "giraffepower", 1.4, new float[] { 0, 0.7f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.8) },
+						{ "speed", new RenderZoanMorph(new ModelGiraffeSpeed(), "giraffespeed", 1.55, new float[] { 0, 0.95f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.9) },
+				});
+		morphsMap.put("minimini", new Object[][]
+				{
+						{ "mini", new RenderZoanMorph(new ModelBiped(), "$playerskin", 0.15, new float[] { 0, -0.9f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.8) },
 				});
 	}
 	

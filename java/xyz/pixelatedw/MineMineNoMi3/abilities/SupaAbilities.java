@@ -47,26 +47,29 @@ public class SupaAbilities
 		
 		public void use(EntityPlayer player)
 		{	
-			ExtendedEntityData props = ExtendedEntityData.get(player);
-
-			double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
-			double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+			if(!this.isOnCooldown())
+			{
+				ExtendedEntityData props = ExtendedEntityData.get(player);
+	
+				double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+				double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+					
+				this.initialY = (int) player.posY;
+					
+				double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
+				mX /= (double)f2;
+				mZ /= (double)f2;
+				mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+				mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+				mX *= 3;
+				mZ *= 3;
 				
-			this.initialY = (int) player.posY;
-				
-			double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
-			mX /= (double)f2;
-			mZ /= (double)f2;
-			mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-			mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
-			mX *= 3;
-			mZ *= 3;
-			
-			motion("=", mX, player.motionY, mZ, player);
-				
-			super.use(player);
+				motion("=", mX, player.motionY, mZ, player);
+					
+				super.use(player);
+			}
 		}
-		
+			
 	    public void duringCooldown(EntityPlayer player, int currentCooldown)
 	    {
 			if(currentCooldown > 180 && player.posY >= this.initialY)

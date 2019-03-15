@@ -17,7 +17,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private int doriki, dorikiCmd, belly, bellyCmd, extol, extolCmd, cola = 100, maxCola = 100, hakiTimer = 0, ultraCola = 0, gear = 1;
 	private long bounty, bountyCmd;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
-	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false, isSetChained = false, isInAirWorld= false;
+	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false, isInAirWorld= false;
 
 	private String tempPreviousAbility = "";
 
@@ -76,7 +76,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasHakiActive", this.hasHakiActive);
 		props.setBoolean("hasBusoHakiActive", this.hasBusoHakiActive);
 		props.setBoolean("hasKenHakiActive", this.hasKenHakiActive);
-		props.setBoolean("isSetChained", this.isSetChained);
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
 		props.setBoolean("isInAirWorld", this.isInAirWorld);
@@ -120,7 +119,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.hasHeart = props.getBoolean("hasHeart");
 		this.firstTime = props.getBoolean("firstTime");
 		this.kilo = props.getBoolean("hasKiloActive");
-		this.isSetChained = props.getBoolean("isSetChained");
 		this.hasHakiActive = props.getBoolean("hasHakiActive");
 		this.hasBusoHakiActive = props.getBoolean("hasBusoHakiActive");
 		this.hasKenHakiActive = props.getBoolean("hasKenHakiActive");
@@ -357,9 +355,6 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public void setInAirWorld(boolean value) { this.isInAirWorld = value;}
 	public boolean isInAirWorld(){ return this.isInAirWorld; }
 
-	public void setIsChained(boolean value) { this.isSetChained = value;}
-	public boolean isSetChained(){ return this.isSetChained; }
-	
 	public void setTempPreviousAbility(String temp) { this.tempPreviousAbility = temp; }
 	public String getTempPreviousAbility() { return this.tempPreviousAbility; }
 	

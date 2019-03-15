@@ -1,10 +1,14 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
 
-public class ModelGiraffePower extends ModelBase
+public class ModelGiraffePower extends ModelZoanMorph
 {
 	public ModelRenderer leftleg4;
 	public ModelRenderer leftleg3;
@@ -221,6 +225,8 @@ public class ModelGiraffePower extends ModelBase
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
+		this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		
 		this.rightleg4.render(f5);
 		this.body1.render(f5);
 		this.rightarm1.render(f5);
@@ -230,10 +236,54 @@ public class ModelGiraffePower extends ModelBase
 		this.leftleg4.render(f5);
 	}
 
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	{
+		EntityLivingBase entity = ((EntityLivingBase) ent);
+
+		this.head1.rotateAngleY = headYaw / (270F / (float) Math.PI);
+		this.head1.rotateAngleX = headPitch / (360F / (float) Math.PI);
+
+		this.leftleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.8F * limbSwingAmount;
+		this.rightleg4.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.8F * limbSwingAmount;
+
+		this.rightarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
+		this.leftarm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
+
+		if (entity.isSwingInProgress)
+		{
+			this.rightarm1.rotateAngleX = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * 1.2F;
+			this.rightarm1.rotateAngleY = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * -0.2F;
+			this.rightarm1.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.5F;
+		}
+
+		if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.05F && !entity.isSwingInProgress)
+		{
+			this.rightarm1.rotateAngleX = 0;
+			this.rightarm1.rotateAngleY = 0;
+			this.rightarm1.rotateAngleZ = 0.209F;
+		}
+		else if (!entity.isSwingInProgress && ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
+		{
+			this.rightarm1.rotateAngleY = 0;
+			this.rightarm1.rotateAngleZ = 0.209F;
+		}
+
+	}
+	
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	@Override
+	public ModelRenderer getHandRenderer()
+	{
+		GL11.glScaled(1.2, 1.2, 1);
+		GL11.glTranslated(-0.1, -0.1, 0.05);
+		GL11.glRotated(-7, 1, 0, 0);
+		GL11.glRotated(7, 0, 0, 1);
+		return this.rightarm2;
 	}
 }

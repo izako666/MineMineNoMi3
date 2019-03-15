@@ -11,7 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelChains;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderChains;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -20,6 +22,7 @@ public class EventsEffectOverlay
 {
 
 	private RenderCandleLock candleLock = new RenderCandleLock(new ModelCandleLock());
+	private RenderChains oriBind = new RenderChains(new ModelChains());
 
 	@SubscribeEvent
 	public void onEntityRendered(RenderLivingEvent.Pre event)
@@ -74,6 +77,10 @@ public class EventsEffectOverlay
 			GL11.glColor3d((double) c.getRed() / 255, (double) c.getGreen() / 255, (double) c.getBlue() / 255);
 
 			GL11.glPopMatrix();
+		}
+		else if (props.hasExtraEffects(ID.EXTRAEFFECT_ORIBIND))
+		{
+			oriBind.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);
 		}
 	}
 	

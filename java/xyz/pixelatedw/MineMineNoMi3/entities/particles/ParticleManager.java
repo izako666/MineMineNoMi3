@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku.ParticleEffectBakuMunch;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEffectChiyupopo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectCommonExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectWaterExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectDokuGumo;
@@ -74,6 +75,9 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
 		map.put(ID.PARTICLEFX_WATEREXPLOSION, new ParticleEffectWaterExplosion());	
 
+		// Chiyu
+		map.put(ID.PARTICLEFX_CHIYUPOPO, new ParticleEffectChiyupopo());	
+		
 		// Mero
 		map.put(ID.PARTICLEFX_SLAVEARROW, new ParticleEffectSlaveArrow());	
 		map.put(ID.PARTICLEFX_PERFUMEFEMUR, new ParticleEffectPerfumeFemur());
@@ -168,7 +172,6 @@ public class ParticleManager
 	
 	public boolean spawnFX(EntityPlayer player, double posX, double posY, double posZ, String id)
 	{
-	
 		if(this.particleEffects.containsKey(id))
 		{
 			this.particleEffects.get(id).spawn(player, posX, posY, posZ);

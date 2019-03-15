@@ -71,7 +71,6 @@ public class MeraAbilities
 		public void duringCharging(EntityPlayer player, int currentCharge)
 		{
 			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DAIENKAI2, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-			//WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DAIENKAI1, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 		
 		public void endCharging(EntityPlayer player)

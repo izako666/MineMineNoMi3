@@ -3,8 +3,10 @@ package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
 
-public class ModelGiraffeSpeed extends ModelBase
+public class ModelGiraffeSpeed extends ModelZoanMorph
 {
 	public ModelRenderer frontleg2;
 	public ModelRenderer backleg2;
@@ -140,6 +142,8 @@ public class ModelGiraffeSpeed extends ModelBase
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+
 		this.backleg1.render(f5);
 		this.backleg2.render(f5);
 		this.frontleg2.render(f5);
@@ -147,14 +151,28 @@ public class ModelGiraffeSpeed extends ModelBase
 		this.body.render(f5);
 		this.neck.render(f5);
 	}
+	
+	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float headYaw, float headPitch, float scaleFactor, Entity ent)
+	{
+		EntityLivingBase entity = ((EntityLivingBase) ent);
 
-	/**
-	 * This is a helper function from Tabula to set the rotation of model parts
-	 */
+		this.frontleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
+		this.backleg1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
+
+		this.frontleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.3F * limbSwingAmount;
+		this.backleg2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.3F * limbSwingAmount;
+	}
+	
 	public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
 	{
 		modelRenderer.rotateAngleX = x;
 		modelRenderer.rotateAngleY = y;
 		modelRenderer.rotateAngleZ = z;
+	}
+
+	@Override
+	public ModelRenderer getHandRenderer()
+	{
+		return null;
 	}
 }

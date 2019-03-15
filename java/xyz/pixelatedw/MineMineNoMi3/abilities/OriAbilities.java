@@ -8,6 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectOriBind;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -126,9 +127,7 @@ public class OriAbilities {
         public void hitEntity(EntityPlayer player, EntityLivingBase target) {
             target.addPotionEffect(new PotionEffect(2, 20 * 8, 40));
             target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 20 * 8, 30));
-            ExtendedEntityData propz = ExtendedEntityData.get(target);
-            propz.setIsChained(true);
-            WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getEntityId(), propz));
+            new DFEffectOriBind(target, 20 * 8);
             super.hitEntity(player,target);
         }
     }

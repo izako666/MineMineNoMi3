@@ -33,6 +33,7 @@ public class ID
 	PARTICLE_ICON_HIE = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_hie.png"),
 	PARTICLE_ICON_KILO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_kilo.png"),
 	PARTICLE_ICON_MERO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_mero.png"),
+	PARTICLE_ICON_CHIYU = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_chiyu1.png"),
 			
 	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
 	
@@ -121,6 +122,7 @@ public class ID
 	PARTICLEFX_ATOMICSPURT = "atomicSpurt",
 	PARTICLEFX_SLAVEARROW = "slaveArrow",
 	PARTICLEFX_PERFUMEFEMUR = "perfumeFemur",
+	PARTICLEFX_CHIYUPOPO = "chiyupopo",
 			
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
@@ -130,6 +132,7 @@ public class ID
 	EXTRAEFFECT_DORULOCK = "doruLock",
 	EXTRAEFFECT_RUSTOVERLAY = "rustOverlay",	
 	EXTRAEFFECT_SPIDEROVERLAY = "spiderOverlay",	
+	EXTRAEFFECT_ORIBIND = "oriBind",
 			
 	CREW_ARLONG = "Arlong Pirates",
 	CREW_BAROQUEWORKS = "Baroque Works",
