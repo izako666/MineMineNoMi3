@@ -33,7 +33,7 @@ public class BakuAbilities
 	private static Block[] bakuPermittedBlocks = new Block[] 
 			{ 
 					Blocks.grass, Blocks.dirt, Blocks.leaves, Blocks.leaves2, Blocks.planks, Blocks.log, Blocks.log2, Blocks.stone, Blocks.cobblestone, Blocks.sand, Blocks.sandstone,
-					Blocks.gravel, Blocks.packed_ice
+					Blocks.gravel, Blocks.packed_ice, Blocks.clay, Blocks.hardened_clay, Blocks.cactus, Blocks.deadbush
 			};
 	
 	public static class BakuBakuFactory extends Ability
@@ -109,7 +109,7 @@ public class BakuAbilities
 			for(int j = 0; j < this.loadedProjectiles.size(); j++)
 			{
 				AbilityProjectile proj = new BakuProjectiles.BeroCannon(player.worldObj, player, ListAttributes.BEROCANNON);
-				int distanceBetweenProjectiles = this.loadedProjectiles.size() / 6;
+				int distanceBetweenProjectiles = this.loadedProjectiles.size() / 7;
 				
 				proj.setLocationAndAngles(
 						player.posX + WyMathHelper.randomWithRange(-distanceBetweenProjectiles, distanceBetweenProjectiles) + player.worldObj.rand.nextDouble(), 
@@ -186,7 +186,7 @@ public class BakuAbilities
 							int posZ = (int)mop.blockZ + z;
 							
 							Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
-							if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
+							if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquids"))
 							{
 								player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
 								WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player.dimension, posX, posY, posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);

@@ -17,10 +17,10 @@ public class SabiAbilities {
 
         public void hitEntity(EntityPlayer player, EntityLivingBase target) {
             if (!this.isOnCooldown()) {
-                target.addPotionEffect(new PotionEffect(2, 20 * 4, 2));
-                target.addPotionEffect(new PotionEffect(4, 20 * 4, 4));
-                target.addPotionEffect(new PotionEffect(20, 20 * 4, 1));
-                new DFEffectRustOverlay(target, 20 * 4);
+                target.addPotionEffect(new PotionEffect(2, 30 * 4, 2));
+                target.addPotionEffect(new PotionEffect(4, 30 * 4, 4));
+                target.addPotionEffect(new PotionEffect(20, 30 * 4, 1));
+                new DFEffectRustOverlay(target, 30 * 4);
                 super.hitEntity(player, target);
             }
         }

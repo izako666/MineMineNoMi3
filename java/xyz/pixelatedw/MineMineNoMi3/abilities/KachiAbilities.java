@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
@@ -52,12 +53,12 @@ public class KachiAbilities {
 
         public void use(EntityPlayer player) {
             if (!this.isOnCooldown) {
-            List<int[]> coords = WyHelper.createFilledSphere(player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ, 4,Blocks.air, "liquids");
+           	
+            List<int[]> coords = WyHelper.createFilledSphere(player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ, 6,Blocks.air, "liquids");
             for (int count = 0; count < coords.size(); count++) {
                 int[] ints = coords.get(count);
                 if (player.getEntityWorld().getBlock(ints[0], ints[1], ints[2]).equals(Blocks.air)) {
-                    WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_DAIENKAI1, ints[0], ints[1], ints[2]), player.dimension, ints[0], ints[1], ints[2], ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-
+                    WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_EVAPORATE, ints[0], ints[1], ints[2]), player.dimension, ints[0], ints[1], ints[2], ID.GENERIC_PARTICLES_RENDER_DISTANCE);
                 }
             }
             }

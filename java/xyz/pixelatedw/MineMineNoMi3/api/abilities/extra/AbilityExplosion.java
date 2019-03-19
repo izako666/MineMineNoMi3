@@ -127,7 +127,7 @@ public class AbilityExplosion
 
 							if (block.getMaterial() != Material.air)
 							{
-								float f3 = block.getExplosionResistance(this.exploder, worldObj, j1, k1, l1, explosionX, explosionY, explosionZ);
+								float f3 = (float) (block.getExplosionResistance(this.exploder, worldObj, j1, k1, l1, explosionX, explosionY, explosionZ) / 1.25);
 								f1 -= (f3 + 0.1F) * f2;
 							}
 
@@ -164,7 +164,12 @@ public class AbilityExplosion
 				newExplosionPosY = entity.posY + (double) entity.getEyeHeight() - this.explosionY;
 				newExplosionPosZ = entity.posZ - this.explosionZ;
 
-				entity.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) this.exploder), (float) this.explosionSize);
+				Vec3 vec3 = Vec3.createVectorHelper(this.explosionX, this.explosionY, this.explosionZ);
+				double d4 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double)this.explosionSize;
+				double d10 = (double)this.worldObj.getBlockDensity(vec3, entity.boundingBox);
+                double d11 = (1.0D - d4) * d10;
+                float damage = (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
+                entity.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) this.exploder), damage);
 			}
 		}
 

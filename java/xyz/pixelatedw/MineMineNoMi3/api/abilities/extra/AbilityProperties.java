@@ -218,11 +218,14 @@ public class AbilityProperties implements IExtendedEntityProperties
 	
 	public boolean hasRacialAbility(Ability ablTemplate)
 	{
-		for(int i = 0; i < racialAbilities.length; i++)
+		if(ablTemplate != null)
 		{
-			if(this.racialAbilities[i] != null && this.racialAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+			for(int i = 0; i < racialAbilities.length; i++)
 			{
-				return true;
+				if(this.racialAbilities[i] != null && this.racialAbilities[i].getAttribute().getAttributeName().equalsIgnoreCase(ablTemplate.getAttribute().getAttributeName()))
+				{
+					return true;
+				}
 			}
 		}
 		
@@ -329,6 +332,11 @@ public class AbilityProperties implements IExtendedEntityProperties
 	{
 		for(int i = 0; i < this.hotbarAbilities.length; i++)
 			if(this.hotbarAbilities[i] != null)
+			{
+				if(this.hotbarAbilities[i].isPassiveActive())
+					this.hotbarAbilities[i].endPassive(thePlayer);
+				
 				this.hotbarAbilities[i] = null;
+			}
 	}
 }

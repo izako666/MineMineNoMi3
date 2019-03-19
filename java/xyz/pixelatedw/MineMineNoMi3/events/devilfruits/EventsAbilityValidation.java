@@ -44,9 +44,10 @@ public class EventsAbilityValidation
 					if(!props.getZoanPoint().equalsIgnoreCase("yomi"))
 						props.setZoanPoint("n/a");
 					
-					for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
-						if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
-							abilityProps.addDevilFruitAbility(a);
+					if(df != null && df.getItem() != null)
+						for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
+							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
+								abilityProps.addDevilFruitAbility(a);
 					
 					for(Ability a : abilityProps.getAbilitiesInHotbar())
 						if(a != null && a.isOnCooldown())

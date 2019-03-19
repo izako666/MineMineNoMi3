@@ -6,10 +6,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -62,7 +67,27 @@ public class WyHelper
 	}
 
 	public static AxisAlignedBB NULL_AABB = AxisAlignedBB.getBoundingBox(0, 0, 0, 0, 0, 0);
-
+	
+	public static boolean afterDate(String date)
+	{
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+		Calendar target  = null;
+		try
+		{
+			target = Calendar.getInstance();
+			target.setTime(df.parse(date));
+		}
+		catch (ParseException e)
+		{
+			e.printStackTrace();
+		}
+		
+		if(target == null) return false;
+		
+		Calendar now = Calendar.getInstance();
+		return now.after(target);
+	}
+	
 	public static AbilityExplosion newExplosion(Entity entity, double posX, double posY, double posZ, double size)
 	{
 		AbilityExplosion explosion = new AbilityExplosion(entity, posX, posY, posZ, size);

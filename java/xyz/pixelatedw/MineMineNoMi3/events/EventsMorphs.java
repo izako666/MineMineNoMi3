@@ -62,27 +62,30 @@ public class EventsMorphs
 
 		ExtendedEntityData props = ExtendedEntityData.get(this.mc.thePlayer);
 		
-		if (MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
+		if(prevRenderer != null && props.getZoanPoint().equalsIgnoreCase("n/a"))
 		{
-			Object[][] forms = MorphsHelper.getMorphsMap().get(props.getUsedFruit());
-
-			for (Object[] form : forms)
+			mc.entityRenderer = prevRenderer;
+		}
+		else
+		{
+			if (MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 			{
-				if (props.getZoanPoint().equalsIgnoreCase((String) form[0]) && (EntityRenderer) form[2] != null)
+				Object[][] forms = MorphsHelper.getMorphsMap().get(props.getUsedFruit());
+	
+				for (Object[] form : forms)
 				{
-					if (renderer == null || !props.getZoanPoint().equalsIgnoreCase(this.prevZoanPoint))
-						renderer = (EntityRenderer) form[2];
-
-					if (mc.entityRenderer != renderer)
+					if (props.getZoanPoint().equalsIgnoreCase((String) form[0]) && (EntityRenderer) form[2] != null)
 					{
-						prevRenderer = mc.entityRenderer;
-						mc.entityRenderer = renderer;
-						this.prevZoanPoint = props.getZoanPoint();
+						if (renderer == null || !props.getZoanPoint().equalsIgnoreCase(this.prevZoanPoint))
+							renderer = (EntityRenderer) form[2];
+	
+						if (mc.entityRenderer != renderer)
+						{
+							prevRenderer = mc.entityRenderer;
+							mc.entityRenderer = renderer;
+							this.prevZoanPoint = props.getZoanPoint();
+						}
 					}
-				}
-				else if (prevRenderer != null && mc.entityRenderer != prevRenderer && props.getZoanPoint().equalsIgnoreCase("n/a"))
-				{
-					mc.entityRenderer = prevRenderer;
 				}
 			}
 		}

@@ -254,6 +254,11 @@ public class DevilFruitsHelper
 	
 	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
 	{
+		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 3, rules);
+	}
+	
+	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, int flag, String... rules)
+	{
 		Block b = world.getBlock((int) posX, (int) posY, (int) posZ);
 		List<Block> bannedBlocks = new ArrayList<Block>();
 
@@ -308,7 +313,7 @@ public class DevilFruitsHelper
 		{
 			if (b == blk)
 			{
-				world.setBlock(posX, posY, posZ, toPlace, 0, 2);
+				world.setBlock(posX, posY, posZ, toPlace, 0, flag);
 				return true;
 			}
 		}

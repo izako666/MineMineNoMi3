@@ -55,7 +55,7 @@ public class MorphsHelper
 				});
 		morphsMap.put("mogumogu", new Object[][]
 				{
-						{ "power", new RenderZoanMorph(new ModelMoguPower(), "mogu", 0.9, new float[] { 0, 0.1f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.1) },
+						{ "power", new RenderZoanMorph(new ModelMoguPower(), "mogu", 0.9, new float[] { 0, 0.1f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.2) },
 				});
 		morphsMap.put("ushiushigiraffe", new Object[][]
 				{

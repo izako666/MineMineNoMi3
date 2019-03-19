@@ -49,7 +49,7 @@ public class FishKarateAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new FishKarateProjectiles.Uchimizu(player.worldObj, player, ListAttributes.UCHIMIZU);
+			this.projectile = new FishKarateProjectiles.Uchimizu(player.worldObj, player, attr);
 			super.use(player);
 		}
 	}
@@ -63,7 +63,7 @@ public class FishKarateAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			this.projectile = new FishKarateProjectiles.Soshark(player.worldObj, player, ListAttributes.MURASAME);
+			this.projectile = new FishKarateProjectiles.Soshark(player.worldObj, player, attr);
 			super.use(player);
 		}
 	}

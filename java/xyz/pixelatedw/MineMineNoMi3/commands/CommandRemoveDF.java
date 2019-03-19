@@ -9,6 +9,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
@@ -58,7 +59,6 @@ public class CommandRemoveDF extends CommandBase
 		
 		target.clearActivePotions();
 		
-		WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) target);
 		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);	
 		WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getDisplayName(), props));	
 		WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP)target);	

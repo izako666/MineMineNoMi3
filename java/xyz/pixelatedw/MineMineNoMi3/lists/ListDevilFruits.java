@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.lists;
 
+import java.util.Date;
+
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.abilities.BakuAbilities;
@@ -24,8 +26,8 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.HoroAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.HoruAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ItoAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.JuryoAbilities;
-import xyz.pixelatedw.MineMineNoMi3.abilities.KageAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KachiAbilities;
+import xyz.pixelatedw.MineMineNoMi3.abilities.KageAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.KiloAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MaguAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.MeraAbilities;
@@ -51,6 +53,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.YamiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YomiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.YukiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.ZouAbilities;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
@@ -89,6 +92,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SupaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SwordsmanProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ToriPhoenixProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.UshiGiraffeProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ZouProjectiles;
@@ -132,20 +136,28 @@ public class ListDevilFruits
 				ItoProjectiles.abilitiesClassesArray, FishKarateProjectiles.abilitiesClassesArray, CyborgProjectiles.abilitiesClassesArray, ExtraProjectiles.abilitiesClassesArray, BariProjectiles.abilitiesClassesArray,
 				HoroProjectiles.abilitiesClassesArray, GoeProjectiles.abilitiesClassesArray, NoroProjectiles.abilitiesClassesArray, YamiProjectiles.abilitiesClassesArray, GomuProjectiles.abilitiesClassesArray,
 				SwordsmanProjectiles.abilitiesClassesArray, ToriPhoenixProjectiles.abilitiesClassesArray, SniperProjectiles.abilitiesClassesArray, JuryoProjectiles.abilitiesClassesArray, BakuProjectiles.abilitiesClassesArray,
-				ZouProjectiles.abilitiesClassesArray, SupaProjectiles.abilitiesClassesArray, MeroProjectiles.abilitiesClassesArray, OriProjectiles.abilitiesClassesArray};
+				ZouProjectiles.abilitiesClassesArray, SupaProjectiles.abilitiesClassesArray, MeroProjectiles.abilitiesClassesArray, OriProjectiles.abilitiesClassesArray, UshiGiraffeProjectiles.abilitiesClassesArray};
 	
 	public static void init()
 	{
-		int totalFruits = 0, totalAbilities = 0;
-		
+		int totalFruits = 0, totalAbilities = 0;	
+
 		//MiniMiniNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, MiniAbilities.abilitiesArray);
 		//addITEM(MiniMiniNoMi, "Mini Mini no Mi");
 		KachiKachiNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, KachiAbilities.abilitiesArray);
 		addITEM(KachiKachiNoMi, "Kachi Kachi no Mi");
 		DoaDoaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
 		addITEM(DoaDoaNoMi, "Doa Doa no Mi");
-		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, GiraffeAbilities.abilitiesArray);
-		addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
+		if(WyHelper.afterDate("01.04.2019"))
+		{
+			UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, GiraffeAbilities.abilitiesArray);
+			addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
+		}
+		else
+		{
+			String truename = WyHelper.getFancyName("Ushi Ushi no Mi, Model Giraffe");
+			WyRegistry.registerName("item." + truename + ".name", "Ushi Ushi no Mi, Model Giraffe");
+		}
 		MoguMoguNoMi = new AkumaNoMi(EnumFruitType.ZOAN, MoguAbilities.abilitiesArray);
 		addITEM(MoguMoguNoMi, "Mogu Mogu no Mi");
 		HoruHoruNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, HoruAbilities.abilitiesArray);

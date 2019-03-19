@@ -38,7 +38,7 @@ public class DoaAbilities {
         }
 
         public void duringPassive(EntityPlayer player, int timer) {
-            if (timer > 40 * 8) {
+            if (timer > 45 * 8) {
                 this.setPassiveActive(false);
                 this.setCooldownActive(true);
                 this.endPassive(player);

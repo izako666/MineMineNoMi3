@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -94,19 +95,20 @@ public class EventsEffectOverlay
 			return;
 
 		ExtendedEntityData props = ExtendedEntityData.get(player);
+		ScaledResolution sr = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 		
 		if (props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#5d6060").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#5d6060").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_HIE))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#1be2e2").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#1be2e2").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_NORO))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#ce83d3").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#ce83d3").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_RUSTOVERLAY))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#a04921").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 100);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#a04921").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, mc.displayWidth, mc.displayHeight, 200);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		if(props.isInAirWorld())
-			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, 500, 500, 100);
+			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 	}
 	
 }

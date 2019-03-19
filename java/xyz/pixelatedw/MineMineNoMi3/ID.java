@@ -123,6 +123,8 @@ public class ID
 	PARTICLEFX_SLAVEARROW = "slaveArrow",
 	PARTICLEFX_PERFUMEFEMUR = "perfumeFemur",
 	PARTICLEFX_CHIYUPOPO = "chiyupopo",
+	PARTICLEFX_EVAPORATE = "evaporate",
+	PARTICLEFX_HEALINGTOUCH = "healingTouch",
 			
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",

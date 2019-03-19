@@ -21,7 +21,7 @@ public class ListExtraAttributes
 	
 	public static AbilityAttribute ELTHORTHUNDER = new AbilityAttribute("El Thor Thunder").setProjectileTicks(500).setProjectileModel(new ModelCube()).setProjectileSize(60, 10, 10).setProjectileColor("77abff").setProjectileExplosion(2);
 	
-	public static AbilityAttribute TSUNOTOKAGEPILLAR = new AbilityAttribute("Tsuno-Tokage Pillar").setProjectileDamage(30).setProjectileModel(new ModelCube()).setProjectileSize(4, 4, 20).setProjectileColor(Color.BLACK).setProjectileTicks(5);
+	public static AbilityAttribute TSUNOTOKAGEPILLAR = new AbilityAttribute("Tsuno-Tokage Pillar").setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileSize(4, 4, 20).setProjectileColor(Color.BLACK).setProjectileTicks(5);
 
 	public static AbilityAttribute GOMUGOMUNOPISTOL = new AbilityAttribute("Gomu Gomu no Pistol").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunopistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileDamage(6).setProjectilePhysical();
 	public static AbilityAttribute GOMUGOMUNOJETPISTOL = new AbilityAttribute("Gomu Gomu no Jet Pistol").setProjectileModel(new ModelFist()).setProjectileTexture("gomugomunojetpistol").setProjectileSize(3, 3, 3).setModelOffsets(0, 1, 0).setProjectileSpeed(4).setProjectileDamage(12).setProjectilePhysical();

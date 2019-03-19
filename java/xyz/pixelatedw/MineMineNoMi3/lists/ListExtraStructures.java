@@ -151,13 +151,13 @@ public class ListExtraStructures
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.KairosekiBullets, (int) WyMathHelper.randomWithRange(5, 10), 0));	
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 50)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.boat, 1, 0));	
-		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 20)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box1, 1, 0));
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.UltraCola, 1, 0));
-		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 7)
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 15)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box2, 1, 0));
-		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 5)
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
 			chest3.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box3, 1, 0));
 	}
 	
@@ -215,9 +215,9 @@ public class ListExtraStructures
 			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.KairosekiBullets, (int) WyMathHelper.randomWithRange(1, 5), 0));	
 		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 50)
 			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(Items.boat, 1, 0));	
-		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 5)
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 10)
 			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box1, 1, 0));
-		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 1)
+		if(world.rand.nextInt(100) + world.rand.nextDouble() <= 5)
 			chest1.setInventorySlotContents((int) WyMathHelper.randomWithRange(0, 26), new ItemStack(ListMisc.Box2, 1, 0));
 	
 		TileEntityChest chest2 = new TileEntityChest();

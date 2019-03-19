@@ -100,6 +100,7 @@ public class EventsZoanPassives
 					player.removePotionEffect(Potion.moveSpeed.id);
 				}
 			}
+
 		}
 	}
 }

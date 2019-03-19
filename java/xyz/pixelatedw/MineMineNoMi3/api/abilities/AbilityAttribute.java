@@ -124,7 +124,7 @@ public class AbilityAttribute
 	public AbilityAttribute setProjectileAlpha(float alpha) { this.projectileAlpha = alpha; return this; }
 	public AbilityAttribute setProjectileSize(double x, double y, double z) { this.projectileScale = new double[] {x, y, z}; return this; }
 	public AbilityAttribute setProjectileSize(double i[]) { this.projectileScale = i; return this; }
-	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.projectileExplosionPower = i; this.projectileExplosionHasFire = fire; this.abilityExplosionCanBreakBlocks = explosion; return this;}
+	public AbilityAttribute setProjectileExplosion(int i, boolean fire, boolean explosion) {this.projectileExplosionPower = i; this.projectileExplosionHasFire = fire; this.projectileExplosionCanBreakBlocks = explosion; return this;}
 	public AbilityAttribute setProjectileExplosion(int i, boolean fire) {this.projectileExplosionPower = i;this.projectileExplosionHasFire = fire;return this;}
 	public AbilityAttribute setProjectileExplosion(int i) {this.projectileExplosionPower = i;return this;}
 	public AbilityAttribute setProjectileSpeed(float speed) {this.projectileSpeed = speed; return this;}

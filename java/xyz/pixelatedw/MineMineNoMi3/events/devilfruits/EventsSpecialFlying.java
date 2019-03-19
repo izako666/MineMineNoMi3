@@ -31,7 +31,7 @@ public class EventsSpecialFlying
 
 
 			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
-			boolean hasAbareHimatsuri = props.getUsedFruit().equalsIgnoreCase("juryojuryo") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
+			boolean hasAbareHimatsuri = props.getUsedFruit().equalsIgnoreCase("zushizushi") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
 			
 			boolean hasToriFruit = props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");
 			

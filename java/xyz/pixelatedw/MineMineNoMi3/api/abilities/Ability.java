@@ -89,7 +89,7 @@ public class Ability
 	public void duringRepeater(EntityPlayer player)
 	{
 		if(isRepeating)
-		{			
+		{	
 			try 
 			{
 				if(!player.worldObj.isRemote && currentSpawn % ticksForRepeaterFreq == 0)
@@ -392,10 +392,7 @@ public class Ability
 						if(isRepeating)
 						{
 							ticksForRepeater--;
-							if(ticksForRepeater > this.attr.getAbilityCooldown() - (this.attr.getAbilityCooldown() / this.attr.getAbilityRepeaterTime()) && projectile != null)
-							{
-								
-							}
+							if(ticksForRepeater > this.attr.getAbilityCooldown() - (this.attr.getAbilityCooldown() / this.attr.getAbilityRepeaterTime()) && projectile != null) {}
 							else
 							{
 								isRepeating = false;

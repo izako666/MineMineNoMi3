@@ -7,6 +7,7 @@ import net.minecraft.potion.PotionEffect;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -49,7 +50,16 @@ public class ChiyuAbilities
 		{
 			target.setHealth(target.getHealth() + 20);
 			target.addPotionEffect(new PotionEffect(Potion.regeneration.id, 400, 1));
-
+			
+			super.hitEntity(player, target);
+			
+			AbilityExplosion explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 2);
+			explosion.setDamageOwner(false);
+			explosion.setDestroyBlocks(false);
+			explosion.setDamageEntities(false);
+			explosion.setSmokeParticles(ID.PARTICLEFX_HEALINGTOUCH);
+			explosion.doExplosion();
+			
 			passiveActive = false;
 			startCooldown();
 			this.startExtUpdate(player);

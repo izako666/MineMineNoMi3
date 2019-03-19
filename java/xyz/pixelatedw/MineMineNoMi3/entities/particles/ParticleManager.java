@@ -7,6 +7,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ParticleEffect;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.baku.ParticleEffectBakuMunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEffectChiyupopo;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEffectHealingTouch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectCommonExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectWaterExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectDokuGumo;
@@ -19,6 +20,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.goro.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.gura.ParticleEffectGekishin;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.hie.ParticleEffectIceAge;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.ito.ParticleEffectKumoNoSugaki;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kachi.ParticleEffectEvaporate;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectHeavyPunch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.kilo.ParticleEffectKiloPress;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.mera.ParticleEffectDaiEnkai;
@@ -76,8 +78,12 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_WATEREXPLOSION, new ParticleEffectWaterExplosion());	
 
 		// Chiyu
-		map.put(ID.PARTICLEFX_CHIYUPOPO, new ParticleEffectChiyupopo());	
+		map.put(ID.PARTICLEFX_EVAPORATE, new ParticleEffectEvaporate());	
 		
+		// Chiyu
+		map.put(ID.PARTICLEFX_CHIYUPOPO, new ParticleEffectChiyupopo());	
+		map.put(ID.PARTICLEFX_HEALINGTOUCH, new ParticleEffectHealingTouch());	
+
 		// Mero
 		map.put(ID.PARTICLEFX_SLAVEARROW, new ParticleEffectSlaveArrow());	
 		map.put(ID.PARTICLEFX_PERFUMEFEMUR, new ParticleEffectPerfumeFemur());

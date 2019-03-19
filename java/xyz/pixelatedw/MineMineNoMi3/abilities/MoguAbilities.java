@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityTracker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -25,6 +26,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityVelocity;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -123,8 +125,10 @@ public class MoguAbilities
 				{
 					if(location[1] >= player.posY)
 					{
+						Block tempBlock = player.worldObj.getBlock(location[0], location[1], location[2]);
 						if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, location[0], location[1], location[2], Blocks.air, "core", "foliage"))
 						{
+							player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
 							WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player.dimension, location[0], location[1], location[2], ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 							if (player.worldObj instanceof WorldServer)
 								((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new S0BPacketAnimation(player, 0));
@@ -161,20 +165,18 @@ public class MoguAbilities
 
 		public void hitEntity(EntityPlayer player, EntityLivingBase target)
 		{
-			double newPosX = 0, newPosY = 0, newPosZ = 0;
-
-			newPosY += 1;
-			Direction dir = WyHelper.get4Directions(player);
-			if (dir == WyHelper.Direction.SOUTH)
-				newPosZ += WyMathHelper.randomWithRange(0, 20);
-			else if (dir == WyHelper.Direction.EAST)
-				newPosX += WyMathHelper.randomWithRange(0, 20);
-			else if (dir == WyHelper.Direction.NORTH)
-				newPosZ -= WyMathHelper.randomWithRange(0, 20);
-			else if (dir == WyHelper.Direction.WEST)
-				newPosX -= WyMathHelper.randomWithRange(0, 20);
-
-			target.setPositionAndUpdate(target.posX + newPosX, target.posY + newPosY, target.posZ + newPosZ);
+			double mX = (double)(-MathHelper.sin(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+			double mZ = (double)(MathHelper.cos(player.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(player.rotationPitch / 180.0F * (float)Math.PI) * 0.4);
+				
+			double f2 = MathHelper.sqrt_double(mX * mX + player.motionY * player.motionY + mZ * mZ);
+			mX /= (double)f2;
+			mZ /= (double)f2;
+			mX += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+			mZ += player.worldObj.rand.nextGaussian() * 0.007499999832361937D * 1.0;
+			mX *= 2.5;
+			mZ *= 2.5;
+			
+			WyNetworkHelper.sendToAll(new PacketEntityVelocity(target.getEntityId(), mX, 0.1, mZ));
 
 			super.hitEntity(player, target);
 

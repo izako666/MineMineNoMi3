@@ -34,8 +34,7 @@ public class DokuProjectiles
 		abilitiesClassesArray.add(new Object[] {Hydra.class, ListAttributes.HYDRA});
 		abilitiesClassesArray.add(new Object[] {VenomRoad.class, ListAttributes.VENOMROAD});
 	}
-	
-	
+		
 	public static class VenomRoad extends AbilityProjectile
 	{
 		public VenomRoad(World world)

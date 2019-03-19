@@ -35,6 +35,15 @@ public class FishKarateProjectiles
 		{		
 			super(world, player, attr);		
 		}
+		
+		public void tasksImapct(MovingObjectPosition hit)
+		{
+			AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 1.2);
+			explosion.setSmokeParticles(ID.PARTICLEFX_WATEREXPLOSION);
+			explosion.setDestroyBlocks(false);
+			explosion.setDamageOwner(false);
+			explosion.doExplosion();
+		}
 	}
 
 	public static class Soshark extends AbilityProjectile
