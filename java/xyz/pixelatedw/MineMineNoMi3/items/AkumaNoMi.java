@@ -58,6 +58,9 @@ public class AkumaNoMi extends ItemFood
 			
 			props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
 			
+			if(props.getUsedFruit().equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
+				WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
+			
 			if(this.type == EnumFruitType.LOGIA)
 				props.setIsLogia(true);
 			 
@@ -89,6 +92,9 @@ public class AkumaNoMi extends ItemFood
 				{
 					props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
 
+					if(props.getUsedFruit().equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
+						WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
+						
 					if(this.type == EnumFruitType.LOGIA)
 						props.setIsLogia(true);
 					 

@@ -64,7 +64,7 @@ public class JuryoProjectiles
 		
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			if(hit.entityHit != null)
+			if(hit.entityHit != null && hit.entityHit instanceof EntityLivingBase)
 			{
 				for(int x = -1; x < 1; x++)
 				for(int z = -1; z < 1; z++)

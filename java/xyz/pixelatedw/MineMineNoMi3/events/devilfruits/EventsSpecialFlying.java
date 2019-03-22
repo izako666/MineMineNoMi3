@@ -60,6 +60,8 @@ public class EventsSpecialFlying
 			
 				if(player.capabilities.isFlying && player.worldObj.isRemote)
 				{
+					double extraOffset = 0;
+					
 					ResourceLocation particleToUse = null;
 					if(props.getUsedFruit().equalsIgnoreCase("mokumoku") )
 						particleToUse = ID.PARTICLE_ICON_MOKU;
@@ -68,7 +70,10 @@ public class EventsSpecialFlying
 					else if(props.getUsedFruit().equalsIgnoreCase("sunasuna") )
 						particleToUse = ID.PARTICLE_ICON_SUNA2;
 					else if(props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") )
+					{
 						particleToUse = ID.PARTICLE_ICON_BLUEFLAME;
+						extraOffset = 1;
+					}
 					
 					if(particleToUse != null)
 					{
@@ -77,11 +82,11 @@ public class EventsSpecialFlying
 							double offsetX = 0.5 - player.worldObj.rand.nextDouble();
 							double offsetY = player.worldObj.rand.nextDouble();
 							double offsetZ = 0.5 - player.worldObj.rand.nextDouble();
-								
+							
 							MainMod.proxy.spawnCustomParticles(player, 
 									new EntityParticleFX(player.worldObj, particleToUse, 
 											player.posX + offsetX, 
-											player.posY - 2 + offsetY, 
+											player.posY - 2 + offsetY + extraOffset, 
 											player.posZ + offsetZ, 
 											0, 0, 0)
 									.setParticleScale(1.3F).setParticleGravity(-0.05F).setParticleAge(5));

@@ -3,7 +3,6 @@ package xyz.pixelatedw.MineMineNoMi3.lists;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -52,6 +51,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
 import xyz.pixelatedw.MineMineNoMi3.items.Cola;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
+import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialAxe;
@@ -133,7 +133,8 @@ public class ListMisc
 	public static Item Box2;
 	public static Item Box3;
 	public static WantedPoster WantedPoster = (WantedPoster) new WantedPoster().setMaxStackSize(1);
-
+	public static Item SeaKingMeat = new SeaKingMeat();
+	
 	public static Item DialEisen = new DialEisen();
 	public static Item DialFire = new DialFire();
 	public static Item DialAxe = new DialAxe();
@@ -220,7 +221,8 @@ public class ListMisc
 		addITEM(Box2, "Iron Box", ListCreativeTabs.tabMisc);
 		addITEM(Box3, "Golden Box", ListCreativeTabs.tabMisc);
 		addITEM(WantedPoster, "Wanted Poster", null);
-
+		addITEM(SeaKingMeat, "Sea King Meat", ListCreativeTabs.tabMisc);
+		
 		addITEM(KujaArrow, "Kuja Arrow", ListCreativeTabs.tabWeapons);
 		addITEM(PopGreen, "Pop Green", ListCreativeTabs.tabWeapons);
 		addITEM(Bullets, "Bullets", ListCreativeTabs.tabWeapons);
@@ -302,8 +304,8 @@ public class ListMisc
 		addBLOCK(SunaSand, "Suna Sand", 1.0F, null, null);
 		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, null, null);
 		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 1.0F, TileEntityWantedPoster.class, null);
-		addBLOCK(OriBars, "Ori Bars", 10.0F, null, null);
-		addBLOCK(KairosekiBars, "Kairoseki Bars", 12.0F, null, ListCreativeTabs.tabMisc);
+		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
+		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);

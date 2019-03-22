@@ -1,6 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.PotionEffect;
@@ -44,6 +45,11 @@ public class KachiAbilities {
             this.startExtUpdate(player);
             this.startCooldown();
         }
+        
+		public void hitEntity(EntityPlayer player, EntityLivingBase target)
+		{
+			super.hitEntity(player, target);
+		}
     }
 
     public static class Evaporate extends Ability {

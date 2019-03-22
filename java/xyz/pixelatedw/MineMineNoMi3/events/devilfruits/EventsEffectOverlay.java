@@ -88,7 +88,7 @@ public class EventsEffectOverlay
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event)
 	{
-		Minecraft mc = Minecraft.getMinecraft();
+/*		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
 
 		if (player == null)
@@ -108,7 +108,7 @@ public class EventsEffectOverlay
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY))
 			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		if(props.isInAirWorld())
-			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
+			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);*/
 	}
 	
 }

@@ -34,6 +34,7 @@ public class ID
 	PARTICLE_ICON_KILO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_kilo.png"),
 	PARTICLE_ICON_MERO = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_mero.png"),
 	PARTICLE_ICON_CHIYU = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_chiyu1.png"),
+	PARTICLE_ICON_RUST = new ResourceLocation(ID.PROJECT_ID, "textures/particles/particle_rust.png"),
 			
 	ICON_HARROW = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_arrow.png"),
 	
@@ -50,7 +51,8 @@ public class ID
 	ICON_MEDIC = new ResourceLocation(ID.PROJECT_ID, "textures/gui/icons/icon_medic.png"),
 	
 	HANDTEXTURE_ZOANMORPH_BUSO = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/hand_buso.png"),
-	
+	HANDTEXTURE_ZOANMORPH_HOTBOILINGSPECIAL = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/hand_hotboilingspecial.png"),
+			
 	TEXTURE_NULL = new ResourceLocation(ID.PROJECT_ID, "textures/gui/null.png"),
 	
 	TEXTURE_STRINGS1 = new ResourceLocation(ID.PROJECT_ID, "textures/gui/gui_strings.png"),
@@ -125,6 +127,7 @@ public class ID
 	PARTICLEFX_CHIYUPOPO = "chiyupopo",
 	PARTICLEFX_EVAPORATE = "evaporate",
 	PARTICLEFX_HEALINGTOUCH = "healingTouch",
+	PARTICLEFX_RUSTTOUCH = "rustTouch",
 			
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",

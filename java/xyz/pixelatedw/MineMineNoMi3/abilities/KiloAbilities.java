@@ -144,7 +144,7 @@ public class KiloAbilities {
         public HeavyPunch() {
             super (ListAttributes.HEAVYPUNCH);
         }
-
+/*
         public void passive(EntityPlayer player) {
             if (!this.isOnCooldown) {
                 super.passive(player);
@@ -175,7 +175,7 @@ public class KiloAbilities {
             this.startExtUpdate(player);
         }
 
-
+*/
 
     }
 

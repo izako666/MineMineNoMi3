@@ -106,7 +106,7 @@ public class YamiAbilities
 			{
 				if(MainConfig.enableGriefing)
 				{
-					WyHelper.createFilledSphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 10, ListMisc.Darkness, "core", "foliage", "liquids");
+					WyHelper.createFilledSphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 10, ListMisc.Darkness, "core", "foliage", "liquids", "ores");
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKHOLE, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
 				

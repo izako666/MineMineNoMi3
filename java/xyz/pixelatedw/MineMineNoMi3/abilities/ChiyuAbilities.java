@@ -54,6 +54,7 @@ public class ChiyuAbilities
 			super.hitEntity(player, target);
 			
 			AbilityExplosion explosion = WyHelper.newExplosion(player, target.posX, target.posY, target.posZ, 2);
+			explosion.setExplosionSound(false);
 			explosion.setDamageOwner(false);
 			explosion.setDestroyBlocks(false);
 			explosion.setDamageEntities(false);

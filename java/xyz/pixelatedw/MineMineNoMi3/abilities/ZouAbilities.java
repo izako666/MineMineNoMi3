@@ -15,6 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ZouProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityVelocity;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
@@ -106,6 +107,7 @@ public class ZouAbilities
 				super.hitEntity(player, target);
 				target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 20);
 				AbilityExplosion explosion = WyHelper.newExplosion(target, target.posX, target.posY, target.posZ, 1);
+				explosion.setExplosionSound(false);
 				explosion.setDamageOwner(false);
 				explosion.setDestroyBlocks(false);
 				explosion.doExplosion();
@@ -121,7 +123,7 @@ public class ZouAbilities
 				mX *= -2.7;
 				mZ *= -2.7;
 			
-				target.setVelocity(-mX, target.motionY, -mZ);
+				WyNetworkHelper.sendToAll(new PacketEntityVelocity(target.getEntityId(), mX, 0.1, mZ));
 			}
 			else
 			{

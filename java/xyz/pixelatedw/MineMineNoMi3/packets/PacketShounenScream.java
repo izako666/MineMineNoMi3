@@ -64,7 +64,6 @@ public class PacketShounenScream implements IMessage
 			if(message.splitHalf > 0)
 			{
 				String[] abilityWords = localizedName.replaceAll(" [:]", "").split(" ");
-				WyDebug.debug(Arrays.toString(abilityWords));
 				int noOfWords = (int) Math.ceil((double)abilityWords.length / (abilityWords.length > 2 ? 1.5 : 2));
 				
 				if(message.splitHalf == 1)

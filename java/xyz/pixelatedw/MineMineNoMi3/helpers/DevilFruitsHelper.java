@@ -117,7 +117,7 @@ public class DevilFruitsHelper
 	
 	public static boolean isNearbyKairoseki(EntityPlayer player)
 	{
-		if (WyHelper.isBlockNearby(player, 4, ListMisc.KairosekiBlock, ListMisc.KairosekiOre, ListMisc.KairosekiBars) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiOre))  || isAffectedByWater(player))
+		if (WyHelper.isBlockNearby(player, 4, ListMisc.KairosekiBlock, ListMisc.KairosekiOre, ListMisc.KairosekiBars) || ItemsHelper.hasKairosekiItem(player) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBlock)) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiOre)) || player.inventory.hasItem(Item.getItemFromBlock(ListMisc.KairosekiBars))  || isAffectedByWater(player))
 		{
 			return true;
 		}

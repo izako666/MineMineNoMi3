@@ -34,8 +34,7 @@ public class CommandIssueBounty extends CommandBase
 				{
 					EntityPlayer player = this.getCommandSenderAsPlayer(sender);
 					ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
-					
-					
+							
 					player.worldObj.loadedEntityList.stream().filter(x -> 
 					{
 						return x instanceof EntityPlayer && ExtendedEntityData.get((EntityLivingBase) x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && ExtendedEntityData.get((EntityLivingBase) x).getBounty() > 0;
@@ -44,14 +43,6 @@ public class CommandIssueBounty extends CommandBase
 						EntityPlayer pirate = (EntityPlayer) x;
 						worldData.issueBounty(pirate.getCommandSenderName(), ExtendedEntityData.get(pirate).getBounty());
 					});
-				}
-				else if(str[1].equalsIgnoreCase("custom"))
-				{
-					
-				}
-				else
-				{
-					
 				}
 			}
 		}

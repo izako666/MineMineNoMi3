@@ -93,6 +93,7 @@ public class YomiAbilities
 					e.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 5));		
 					new DFEffectHieSlowness(e, 100);
 					AbilityExplosion explosion = WyHelper.newExplosion(player, e.posX, e.posY, e.posZ, 2);
+					explosion.setExplosionSound(false);
 					explosion.setDamageOwner(false);
 					explosion.setDestroyBlocks(false);
 					explosion.setSmokeParticles(ID.PARTICLEFX_SOULPARADE);

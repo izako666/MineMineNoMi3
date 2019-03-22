@@ -38,6 +38,16 @@ public class JuryoAbilities
 			else if(player.capabilities.isFlying)
 				super.passive(player);
 		}
+		
+		public void startPassive(EntityPlayer player)
+		{
+			
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			
+		}
 	}
 	
 	public static class Moko extends Ability

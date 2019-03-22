@@ -95,7 +95,7 @@ public class EventsPassives {
 			}
 
 			if (props.getUsedFruit().equals("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi")) {
-				player.getFoodStats().setFoodSaturationLevel(Float.MAX_VALUE);
+				//player.getFoodStats().setFoodSaturationLevel(Float.MAX_VALUE);
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 0, true));
 
 				if (player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY, (int) player.posZ) == Blocks.water && player.isSprinting()) {
@@ -272,19 +272,15 @@ public class EventsPassives {
 	@SubscribeEvent
 	public void onYomiDeath(YomiTriggerEvent event) {
 		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi")) {
+			
 			event.newPlayerData.setUsedFruit("yomiyomi");
 			event.newPlayerData.setZoanPoint("yomi");
+			
+			EntityPlayer player = (EntityPlayer) event.newPlayerData.getEntity();
+
+			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
+			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), event.newPlayerData));
 		}
-	}
-
-	@SubscribeEvent
-	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event) {
-		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
-		if (propz.isInAirWorld()) {
-			event.setCanceled(true);
-
-		}
-
 	}
 
 	@SubscribeEvent
@@ -327,11 +323,11 @@ public class EventsPassives {
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
 					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
 
-					if (attacker.getHeldItem() != null && propz.getUsedFruit().equals("sabisabi")) {
-						if (ItemsHelper.isSword(attacker.getHeldItem())) {
-							event.setCanceled(true);
-							attacker.getHeldItem().damageItem(50, attacker);
-						}
+					if (attacker.getHeldItem() != null && ItemsHelper.isSword(attacker.getHeldItem()) && propz.getUsedFruit().equals("sabisabi") && !attacker.worldObj.isRemote) {
+						event.setCanceled(true);
+						attacker.getHeldItem().damageItem(50, attacker);
+						if(attacker.getHeldItem().getItemDamage() <= 0)
+							WyHelper.removeStackFromInventory(attacker, attacker.getHeldItem());
 					}
 
 				}

@@ -17,6 +17,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonPower;
@@ -24,6 +26,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelBisonSpeed;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelVenomDemon;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class HandRendererHelper
 {
@@ -83,6 +86,10 @@ public class HandRendererHelper
 	{
 		Minecraft mc = Minecraft.getMinecraft();
 		ExtendedEntityData props = ExtendedEntityData.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
+		
+		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOTBOILINGSPECIAL.getAttributeName());
+		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
 		
 		float f5;
 		float f6;
@@ -104,6 +111,8 @@ public class HandRendererHelper
 		GL11.glRotatef(-f6 * 20.0F, 0.0F, 0.0F, 1.0F);
 		if (props.hasBusoHakiActive())
 			mc.getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_BUSO);
+		else if(hasHotBoilingSpecial)
+			mc.getTextureManager().bindTexture(ID.HANDTEXTURE_ZOANMORPH_HOTBOILINGSPECIAL);
 		else
 			mc.getTextureManager().bindTexture(getTextureFromMorph(player));
 		GL11.glTranslatef(-1.0F, 3.6F, 3.5F);

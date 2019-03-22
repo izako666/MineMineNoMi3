@@ -103,15 +103,15 @@ public class EventsCore
 				props.setMaxCola(100);
 				props.setCola(oldProps.getMaxCola());
 			}
-			
-			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(oldPlayerProps, newPlayerProps);
-			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
-				return;
-			
+					
 			NBTTagCompound compound = new NBTTagCompound();
 			QuestProperties.get(e.original).saveNBTData(compound);
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
 			questProps.loadNBTData(compound);
+			
+			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(oldPlayerProps, newPlayerProps);
+			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
+				return;
 		}
 	}
 	

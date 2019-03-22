@@ -169,8 +169,8 @@ public class ToriPhoenixAbilities
 		{
 			super.hitEntity(player, target);
 			
-			if(target.getHealth() + 4 < target.getMaxHealth())
-				target.setHealth(target.getHealth() + 4);
+			if(target.getHealth() + 6 < target.getMaxHealth())
+				target.setHealth(target.getHealth() + 6);
 			else
 				target.setHealth(target.getHealth());
 			

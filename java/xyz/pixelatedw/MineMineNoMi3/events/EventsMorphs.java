@@ -16,6 +16,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import org.lwjgl.opengl.GL11;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelAbareHimatsuri;
@@ -91,6 +92,15 @@ public class EventsMorphs
 		}
 	}
 
+	@SubscribeEvent
+	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event) {
+		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
+		if (propz.isInAirWorld()) {
+			event.setCanceled(true);
+
+		}
+	}
+	
 	@SubscribeEvent
 	public void onEntityRendered(RenderLivingEvent.Pre event)
 	{
@@ -216,7 +226,9 @@ public class EventsMorphs
 		boolean renderHandFlag = false;
 		boolean renderHandEffectFlag = false;
 
-		if (player.getHeldItem() == null && props.hasBusoHakiActive())
+		Ability hotBoilingSpecial = abilityProps.getAbilityFromName(ListAttributes.HOTBOILINGSPECIAL.getAttributeName());
+		boolean hasHotBoilingSpecial = (hotBoilingSpecial != null && hotBoilingSpecial.isPassiveActive());
+		if (player.getHeldItem() == null && (props.hasBusoHakiActive() || hasHotBoilingSpecial))
 		{
 			renderHandFlag = true;
 		}

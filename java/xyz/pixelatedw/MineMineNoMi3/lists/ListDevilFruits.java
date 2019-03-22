@@ -119,7 +119,6 @@ public class ListDevilFruits
 				KageAbilities.abilitiesArray, SunaAbilities.abilitiesArray, MaguAbilities.abilitiesArray, DoruAbilities.abilitiesArray, DokuAbilities.abilitiesArray, GasuAbilities.abilitiesArray,
 				YukiAbilities.abilitiesArray, ItoAbilities.abilitiesArray, BariAbilities.abilitiesArray, HoroAbilities.abilitiesArray, GoeAbilities.abilitiesArray,
 				NoroAbilities.abilitiesArray, YamiAbilities.abilitiesArray, GomuAbilities.abilitiesArray, UshiBisonAbilities.abilitiesArray, ToriPhoenixAbilities.abilitiesArray,
-				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray, 
 				KiloAbilities.abilitiesArray, BakuAbilities.abilitiesArray, JuryoAbilities.abilitiesArray, OriAbilities.abilitiesArray, YomiAbilities.abilitiesArray, ZouAbilities.abilitiesArray,
 				SabiAbilities.abilitiesArray, SupaAbilities.abilitiesArray, MeroAbilities.abilitiesArray, ChiyuAbilities.abilitiesArray, HoruAbilities.abilitiesArray, MoguAbilities.abilitiesArray,
 				DoaAbilities.abilitiesArray, KachiAbilities.abilitiesArray, MiniAbilities.abilitiesArray, GiraffeAbilities.abilitiesArray,
@@ -250,7 +249,7 @@ public class ListDevilFruits
 				}
 		}
 		
-		WyDebug.info("A total of " + totalFruits + " Devil Fruits have been registered");
+		WyDebug.info("A total of " + (totalFruits - 6) + " Devil Fruits have been registered");
 		WyDebug.info("A total of " + totalAbilities + " abilities have been registered");
 	}
 

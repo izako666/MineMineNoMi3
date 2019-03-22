@@ -33,6 +33,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffe
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectFlash;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.pika.ParticleEffectYataNoKagami;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.rokushiki.ParticleEffectGeppo;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.sabi.ParticleEffectRustTouch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.sniper.ParticleEffectKemuriBoshi;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertEncierro;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.suna.ParticleEffectDesertGirasole;
@@ -77,6 +78,9 @@ public class ParticleManager
 		map.put(ID.PARTICLEFX_COMMONEXPLOSION, new ParticleEffectCommonExplosion());
 		map.put(ID.PARTICLEFX_WATEREXPLOSION, new ParticleEffectWaterExplosion());	
 
+		// Sabi
+		map.put(ID.PARTICLEFX_RUSTTOUCH, new ParticleEffectRustTouch());
+		
 		// Chiyu
 		map.put(ID.PARTICLEFX_EVAPORATE, new ParticleEffectEvaporate());	
 		

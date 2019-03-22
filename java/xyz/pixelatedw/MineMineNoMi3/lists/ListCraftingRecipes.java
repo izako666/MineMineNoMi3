@@ -30,6 +30,11 @@ public class ListCraftingRecipes
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBlock), new Object[]
 				{ "XXX", "XXX", "XXX", 'X', ListMisc.Kairoseki });
 		
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
+				{ "...", "XXX", "XXX", 'X', ListMisc.DenseKairoseki });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
+				{ "XXX", "XXX", "...", 'X', ListMisc.DenseKairoseki });
+		
 	    GameRegistry.addShapedRecipe(new ItemStack(ListMisc.DenseKairoseki), new Object[] 
 	    		{ "#$.", "$#.", "...", '#', ListMisc.Kairoseki, '$', Items.iron_ingot });
 	    GameRegistry.addShapedRecipe(new ItemStack(ListMisc.DenseKairoseki), new Object[] 

@@ -44,7 +44,8 @@ public class AbilityExplosion
 	private boolean canDropBlocksAfterExplosion = false;
 	private boolean canDamageEntities = true;
 	private boolean canDamageOwner = true;
-
+	private boolean canProduceExplosionSound = true;
+	
 	public AbilityExplosion(Entity entity, double posX, double posY, double posZ, double power)
 	{
 		this.worldObj = entity.worldObj;
@@ -89,6 +90,12 @@ public class AbilityExplosion
 	{
 		return !this.smokeParticles.isEmpty();
 	}
+	
+	public void setExplosionSound(boolean hasSound)
+	{
+		this.canProduceExplosionSound = hasSound;
+	}
+
 
 	public void doExplosion()
 	{
@@ -151,7 +158,8 @@ public class AbilityExplosion
 		int posX, posY, posZ;
 		Block block;
 
-        this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+		if(this.canProduceExplosionSound)
+			this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
 		
 		if (this.canDamageEntities)
 		{

@@ -31,12 +31,12 @@ public class ListAttributes
 	public static AbilityAttribute MINIMININOFULLREBOUND = new AbilityAttribute("Mini Mini no Full Rebound").setAbilityCooldown(3).setAbilityPassive(true);
 	
 	public static AbilityAttribute BIGAN = new AbilityAttribute("Bigan").setAbilityCooldown(8).setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileColor("#6D5E24").setProjectileSize(1, 1, 2.4).setProjectileTicks(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.weakness.id, 600, 0), new PotionEffect(Potion.moveSlowdown.id, 600, 2)).setModelOffsets(0, 1.5, 0);
-	public static AbilityAttribute GIRAFFE_SPEEDPOINT = new AbilityAttribute("Giraffe Speed Point").setAbilityDisplayName("Speed Point").setAbilityCooldown(1).setAbilityPassive(true);
-	public static AbilityAttribute GIRAFFE_POWERPOINT = new AbilityAttribute("Giraffe Power Point").setAbilityDisplayName("Power Point").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute GIRAFFE_SPEEDPOINT = new AbilityAttribute("Giraffe Speed Point").setAbilityDisplayName("Speed Point").setAbilityTexture("giraffefull").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute GIRAFFE_POWERPOINT = new AbilityAttribute("Giraffe Power Point").setAbilityDisplayName("Power Point").setAbilityTexture("giraffehybrid").setAbilityCooldown(1).setAbilityPassive(true);
 	
-	public static AbilityAttribute MOGURATONPO = new AbilityAttribute("Mogura Tonpo: Mogugyo").setAbilityCooldown(10);
+	public static AbilityAttribute MOGURATONPO = new AbilityAttribute("Mogura Tonpo: Mogugyo").setAbilityCooldown(10).setAbilityTexture("moguratonpo");
 	public static AbilityAttribute MOGURABANANA = new AbilityAttribute("Mogura Banana").setAbilityCooldown(12).setAbilityPunch(10);
-	public static AbilityAttribute MOGU_POWERPOINT = new AbilityAttribute("Mogu Power Point").setAbilityDisplayName("Mole Point").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute MOGU_POWERPOINT = new AbilityAttribute("Mogu Power Point").setAbilityDisplayName("Mole Point").setAbilityTexture("molepoint").setAbilityCooldown(1).setAbilityPassive(true);
 	
 	public static AbilityAttribute GANMENSEICHOHORMONE = new AbilityAttribute("Ganmen Seicho Hormone").setAbilityCooldown(5).setAbilityPunch();
 	public static AbilityAttribute TENSIONHORMONE = new AbilityAttribute("Tension Hormone").setAbilityCooldown(40).setAbilityPunch();
@@ -46,8 +46,8 @@ public class ListAttributes
 	public static AbilityAttribute CHIYUPOPO = new AbilityAttribute("Chiyupopo").setAbilityCooldown(10);
 	public static AbilityAttribute HEALINGTOUCH = new AbilityAttribute("Healing Touch").setAbilityCooldown(15).setAbilityPunch();
 	
-	public static AbilityAttribute ZOU_HYBRIDPOINT = new AbilityAttribute("Zou Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("zouhybridpoint").setAbilityPassive(true);
-	public static AbilityAttribute ZOU_FULLPOINT = new AbilityAttribute("Zou Point").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute ZOU_HYBRIDPOINT = new AbilityAttribute("Zou Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("zouhybrid").setAbilityPassive(true);
+	public static AbilityAttribute ZOU_FULLPOINT = new AbilityAttribute("Zou Point").setAbilityTexture("zoufull").setAbilityCooldown(1).setAbilityPassive(true);
 	public static AbilityAttribute IVORYDART = new AbilityAttribute("Ivory Dart").setAbilityCooldown(10);
 	public static AbilityAttribute GREATSTOMP = new AbilityAttribute("Great Stomp").setAbilityCooldown(15);
 	public static AbilityAttribute IVORYSTOMP = new AbilityAttribute("Ivory Stomp").setAbilityCooldown(8).setAbilityPunch();
@@ -57,7 +57,7 @@ public class ListAttributes
 	public static AbilityAttribute KASURIUTAFUBUKIGIRI = new AbilityAttribute("Kasuriuta: Fubuki Giri").setAbilityCooldown(10);
 	
 	public static AbilityAttribute BAKUBAKUFACTORY = new AbilityAttribute("Baku Baku Factory");
-	public static AbilityAttribute BAKUTSUIHO = new AbilityAttribute("Baku Tsuiho").setAbilityCooldown(10).setAbilityCharges(15 * 20).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(8);
+	public static AbilityAttribute BAKUTSUIHO = new AbilityAttribute("Baku Tsuiho").setAbilityCooldown(10).setAbilityCharges(10 * 20).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(8);
 	public static AbilityAttribute BEROCANNON = new AbilityAttribute("Bero Cannon").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(4);
 	public static AbilityAttribute BAKUMUNCH = new AbilityAttribute("Baku Munch").setAbilityCooldown(5);
 	
@@ -68,13 +68,13 @@ public class ListAttributes
 	public static AbilityAttribute PHOENIXGOEN = new AbilityAttribute("Phoenix Goen").setAbilityCooldown(10).setProjectileDamage(12);
 	public static AbilityAttribute TENSEINOSOEN = new AbilityAttribute("Tensei no Soen").setAbilityCooldown(30).setAbilityCharges(5 * 20);
 	
-	public static AbilityAttribute BISON_POWERPOINT = new AbilityAttribute("Bison Power Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("bisonhybridpoint").setAbilityPassive(true);
-	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Bison Point").setAbilityTexture("bisonpoint").setAbilityPassive(true);	
+	public static AbilityAttribute BISON_POWERPOINT = new AbilityAttribute("Bison Power Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("bisonhybrid").setAbilityPassive(true);
+	public static AbilityAttribute BISON_SPEEDPOINT = new AbilityAttribute("Bison Speed Point").setAbilityCooldown(1).setAbilityDisplayName("Bison Point").setAbilityTexture("bisonfull").setAbilityPassive(true);	
 	public static AbilityAttribute FIDDLEBANFF = new AbilityAttribute("Fiddle Banff").setAbilityCooldown(7);
 	public static AbilityAttribute KOKUTEICROSS = new AbilityAttribute("Kokutei Cross").setAbilityCooldown(7).setAbilityPassive().setAbilityPunch();
 	
 	public static AbilityAttribute SAGARINORYUSEI = new AbilityAttribute("Sagari no Ryusei").setAbilityCooldown(20).setProjectileTicks(256).setProjectileModel(new ModelSphere()).setProjectileColor("51585B").setProjectileSize(50, 50, 50).setProjectileDamage(50).setProjectileExplosion(20, false).setProjectileCollisionSizes(2, 2, 2);
-	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setProjectileDamage(4).setAbilityCooldown(12).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
+	public static AbilityAttribute MOKO = new AbilityAttribute("Moko").setProjectileDamage(10).setAbilityCooldown(12).setProjectileModel(new ModelCube()).setProjectileSize(new double[] {0, 0, 0}).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute ABAREHIMATSURI = new AbilityAttribute("Abare Himatsuri").setAbilityCooldown(10).setAbilityPassive();
 	public static AbilityAttribute JURYOKU = new AbilityAttribute("Juryoku").setAbilityDisplayName("Jigoku Tabi").setAbilityCooldown(12).setAbilityPassive();
 	
@@ -89,7 +89,7 @@ public class ListAttributes
 	public static AbilityAttribute PERFUMEFEMUR = new AbilityAttribute("Perfume Femur").setAbilityCooldown(10).setAbilityPunch(10);
 	public static AbilityAttribute SLAVEARROW = new AbilityAttribute("Slave Arrow").setAbilityCooldown(10).setProjectileModel(new ModelArrow()).setProjectileColor("#FF69B4").setProjectileSize(1, 1, 2).setProjectileDamage(6).setAbilityRepeater().setAbilityCharges(7 * 20);
 	public static AbilityAttribute PISTOLKISS = new AbilityAttribute("Pistol Kiss").setAbilityCooldown(5).setProjectileModel(new ModelHeart()).setProjectileSize(.5, .5, .5).setProjectileTexture("meromeromellow").setProjectileDamage(4).setModelOffsets(0, -0.5, 0).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 100, 5), new PotionEffect(Potion.digSlowdown.id, 100, 5));
-	public static AbilityAttribute MEROMEROMELLOW = new AbilityAttribute("Mero Mero Mellow").setAbilityCooldown(20).setProjectileModel(new ModelHeart()).setProjectileSize(3, 3, 3).setProjectileTexture("meromeromellow").setProjectileDamage(20).setModelOffsets(0, -1, 0).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 400, 100), new PotionEffect(Potion.digSlowdown.id, 400, 100)).setProjectileCollisionSizes(1.25, 1.25, 1.25);
+	public static AbilityAttribute MEROMEROMELLOW = new AbilityAttribute("Mero Mero Mellow").setAbilityCooldown(20).setProjectileModel(new ModelHeart()).setProjectileSize(3, 3, 3).setProjectileTexture("meromeromellow").setProjectileDamage(10).setModelOffsets(0, -1, 0).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 400, 100), new PotionEffect(Potion.digSlowdown.id, 400, 100)).setProjectileCollisionSizes(1.25, 1.25, 1.25);
 	
 	public static AbilityAttribute SPARKLINGDAISY = new AbilityAttribute("Sparkling Daisy").setAbilityCooldown(12);
 	public static AbilityAttribute SPIRALHOLLOW = new AbilityAttribute("Spiral Hollow").setAbilityCooldown(10).setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileColor("#F8F8FF").setProjectileSize(3, 3, 5).setProjectileTicks(3).setProjectilePhysical();
@@ -243,19 +243,19 @@ public class ListAttributes
 	public static AbilityAttribute AWASEBAORI = new AbilityAttribute("Awase Baori").setAbilityCooldown(12).setProjectileModel(new ModelSphere()).setProjectileColor("000000").setProjectileSize(7, 7, 7);
 	public static AbilityAttribute BIND = new AbilityAttribute("Bind").setAbilityCooldown(10).setAbilityPassive().setAbilityPunch();
 
-	public static AbilityAttribute SORU = new AbilityAttribute("Soru").addEffects(EffectType.USER, new PotionEffect(Potion.moveSpeed.id, 30, 5)).setAbilityPassive();
+	public static AbilityAttribute SORU = new AbilityAttribute("Soru").addEffects(EffectType.USER, new PotionEffect(Potion.moveSpeed.id, 30, 6)).setAbilityPassive();
 	public static AbilityAttribute TEKKAI = new AbilityAttribute("Tekkai").addEffects(EffectType.USER, new PotionEffect(Potion.resistance.id, 30, 100), new PotionEffect(Potion.moveSlowdown.id, 30, 100), new PotionEffect(Potion.digSlowdown.id, 30, 5), new PotionEffect(Potion.jump.id, 30, -100)).setAbilityPassive();
 	public static AbilityAttribute GEPPO = new AbilityAttribute("Geppo").setAbilityCooldown(0.9);
 	public static AbilityAttribute RANKYAKU = new AbilityAttribute("Rankyaku").setAbilityCooldown(9).setProjectileTicks(100).setProjectileModel(new ModelCube()).setProjectileSize(6, 0.4, 1.5).setProjectileColor("69E3FF").setProjectileDamage(20).setProjectileExplosion(2, false).setProjectileCollisionSizes(1.5, 0.3, 1.5).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute SHIGAN = new AbilityAttribute("Shigan").setAbilityCooldown(5).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute KAMIE = new AbilityAttribute("Kamie").setAbilityCooldown(10).addEffects(EffectType.USER, new PotionEffect(Potion.resistance.id, 20, 100)).setAbilityPassive();
 
-	public static AbilityAttribute HOTBOILINGSPECIAL = new AbilityAttribute("Hot Boiling Special").setAbilityPassive().setAbilityCooldown(7);
+	public static AbilityAttribute HOTBOILINGSPECIAL = new AbilityAttribute("Hot Boiling Special").setAbilityPassive().setAbilityPunch(10).setAbilityCooldown(7);
 	public static AbilityAttribute EVAPORATE = new AbilityAttribute("Evaporate").setAbilityCooldown(15);
 
 	public static AbilityAttribute WEIGHTLESS = new AbilityAttribute("Weightless").setAbilityPassive(true);
 	public static AbilityAttribute KICKOFFJUMP = new AbilityAttribute("Kick Off Jump").setAbilityPassive().setAbilityCooldown(4);
-	public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive();
+	public static AbilityAttribute HEAVYPUNCH = new AbilityAttribute("Heavy Punch").setAbilityCooldown(20).setAbilityPassive().setAbilityPunch(20);
 	public static AbilityAttribute KILOPRESS = new AbilityAttribute("Kilo Press").setAbilityCooldown(10).setAbilityPassive();
 
 	public static AbilityAttribute RUSTTOUCH = new AbilityAttribute("Rust Touch").setAbilityCooldown(19).setAbilityPunch().setAbilityPassive();
@@ -266,13 +266,13 @@ public class ListAttributes
 	public static AbilityAttribute SAMEHADASHOTEI = new AbilityAttribute("Samehada Shotei").addEffects(EffectType.USER, new PotionEffect(Potion.resistance.id, 10, 120), new PotionEffect(Potion.moveSlowdown.id, 10, 120), new PotionEffect(Potion.jump.id, 30, -100)).setAbilityPassive();	
 	public static AbilityAttribute KARAKUSAGAWARASEIKEN = new AbilityAttribute("Karakusagawara Seiken").setAbilityCooldown(25);
 	
-	public static AbilityAttribute KAENBOSHI = new AbilityAttribute("Kaen Boshi").setAbilityCooldown(10).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(12).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
+	public static AbilityAttribute KAENBOSHI = new AbilityAttribute("Kaen Boshi").setAbilityCooldown(10).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(8).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
 	public static AbilityAttribute KEMURIBOSHI = new AbilityAttribute("Kemuri Boshi").setAbilityCooldown(10).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(6).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#8741A8");
-	public static AbilityAttribute RENPATSUNAMARIBOSHI = new AbilityAttribute("Renpatsu Namari Boshi").setAbilityCooldown(15).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(4).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileExplosion(1, false).setProjectileColor("#D3D3D3").setAbilityRepeater(10, 3);
-	public static AbilityAttribute SAKURETSUSABOTENBOSHI = new AbilityAttribute("Sakuretsu Saboten Boshi").setAbilityCooldown(12).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(6).setProjectileExplosion(2, false, false).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
+	public static AbilityAttribute RENPATSUNAMARIBOSHI = new AbilityAttribute("Renpatsu Namari Boshi").setAbilityCooldown(15).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(6).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileExplosion(1, false).setProjectileColor("#D3D3D3").setAbilityRepeater(10, 3);
+	public static AbilityAttribute SAKURETSUSABOTENBOSHI = new AbilityAttribute("Sakuretsu Saboten Boshi").setAbilityCooldown(12).setAbilityPassive().setProjectileModel(new ModelSphere()).setProjectileDamage(12).setProjectileExplosion(2, false, false).setProjectileSize(.5, .5, .5).setProjectileTicks(100).setProjectileColor("#D3D3D3");
 	
 	public static AbilityAttribute SHISHISHISONSON = new AbilityAttribute("Shi Shishi Sonson").setAbilityCooldown(7);
-	public static AbilityAttribute SANBYAKUROKUJUPOUNDHO = new AbilityAttribute("Sanbyakurokuju Pound Ho").setAbilityCooldown(5).setProjectileTicks(100).setProjectileModel(new ModelCube()).setProjectileSize(6, 0.4, 1.5).setProjectileColor("bbf7b4").setProjectileDamage(20).setProjectileExplosion(3, false);
+	public static AbilityAttribute SANBYAKUROKUJUPOUNDHO = new AbilityAttribute("Sanbyakurokuju Pound Ho").setAbilityCooldown(5).setProjectileTicks(100).setProjectileModel(new ModelCube()).setProjectileSize(6, 0.4, 1.5).setProjectileColor("bbf7b4").setProjectileDamage(18).setProjectileExplosion(3, false);
 	public static AbilityAttribute YAKKODORI = new AbilityAttribute("Yakkodori").setAbilityCooldown(3).setAbilityCooldown(5).setProjectileTicks(20).setProjectileModel(new ModelCube()).setProjectileSize(0.4, 6, 0.4).setProjectileColor("bbf7b4").setProjectileDamage(10).setProjectileExplosion(1, false).setProjectileMoveThroughBlocks(true);
 	public static AbilityAttribute OTATSUMAKI = new AbilityAttribute("O Tatsumaki").setAbilityCooldown(7);
 		
@@ -281,7 +281,7 @@ public class ListAttributes
 	
 	public static AbilityAttribute FRESHFIRE = new AbilityAttribute("Fresh Fire").setAbilityCooldown(1.5).setProjectileTicks(7).setProjectileSize(.01, .01, .01).setProjectileDamage(1);
 	public static AbilityAttribute COLAOVERDRIVE = new AbilityAttribute("Cola Overdrive").setAbilityCooldown(7).addEffects(EffectType.USER, new PotionEffect(Potion.moveSpeed.id, 200, 0), new PotionEffect(Potion.damageBoost.id, 200, 1));
-	public static AbilityAttribute RADICALBEAM = new AbilityAttribute("Radical Beam").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileColor("FFFF00").setProjectileSize(.5, .5, 1).setProjectileDamage(10).setProjectileExplosion(4, false);
+	public static AbilityAttribute RADICALBEAM = new AbilityAttribute("Radical Beam").setAbilityCooldown(10).setProjectileModel(new ModelCube()).setProjectileColor("FFFF00").setProjectileSize(.5, .5, 1).setProjectileDamage(25).setProjectileExplosion(4, false);
 	public static AbilityAttribute STRONGRIGHT = new AbilityAttribute("Strong Right").setAbilityCooldown(2.5).setProjectileModel(new ModelCube()).setProjectileColor("F5DEB3").setProjectileTicks(5).setProjectileSize(1, 1, 1.5).setProjectileDamage(20);
 	public static AbilityAttribute COUPDEVENT = new AbilityAttribute("Coup de Vent").setAbilityCooldown(10).setProjectileTicks(7).setProjectileSize(.01, .01, .01).setProjectileDamage(10).setAbilityCharges(30);
 	

@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.abilities;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -8,8 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S0BPacketAnimation;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import xyz.pixelatedw.MineMineNoMi3.ID;
@@ -30,7 +33,9 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketPlayer;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -190,23 +195,27 @@ public class OpeAbilities
 			{
 				if (!this.isOnCooldown)
 				{
-					int sphereSize = 0;
-					while (sphereSize < 40) {
-						List<EntityLivingBase> entityList = WyHelper.getEntitiesNear(player,sphereSize);
-						if (entityList.size() > 0) {
-							EntityLivingBase entity = entityList.get( (int) WyMathHelper.randomWithRange(0,entityList.size()-1));
-							if(DevilFruitsHelper.isEntityInRoom(entity)){
-								System.out.println("Ok");
-								double[] beforeCoords = new double[]{player.posX,player.posY,player.posZ};
-								player.setPositionAndRotation(entity.posX,entity.posY,entity.posZ,entity.rotationYaw,entity.rotationPitch);
-								player.setPositionAndUpdate(entity.posX,entity.posY,entity.posZ);
-								entity.setPositionAndUpdate(beforeCoords[0],beforeCoords[1],beforeCoords[2]);
-								break;
-						}
-						}
-						sphereSize += 1;
+					MovingObjectPosition mop = WyHelper.rayTraceBlocks(player);	
+					
+					if(mop != null)
+					{
+						double i = mop.blockX;
+						double j = mop.blockY;
+						double k = mop.blockZ;
+						
+						List<EntityLivingBase> entityList = WyHelper.getEntitiesNear((int)i, (int)j, (int)k, player.worldObj, 4, EntityLivingBase.class);
+						
+						if(entityList.size() <= 0) return;
+						
+						EntityLivingBase target = entityList.get(0);
+						
+						double[] beforeCoords = new double[] { player.posX, player.posY, player.posZ };
+						player.setPositionAndRotation(target.posX, target.posY, target.posZ, target.rotationYaw, target.rotationPitch);
+						player.setPositionAndUpdate(target.posX, target.posY, target.posZ);
+						target.setPositionAndUpdate(beforeCoords[0],beforeCoords[1],beforeCoords[2]);
+						
 					}
-					}
+				}
 				super.use(player);
 			}
 			else
