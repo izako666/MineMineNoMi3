@@ -309,12 +309,15 @@ public class DevilFruitsHelper
 			}
 		});
 
-		for (Block blk : bannedBlocks)
+		if(MainConfig.enableGriefing)
 		{
-			if (b == blk)
+			for (Block blk : bannedBlocks)
 			{
-				world.setBlock(posX, posY, posZ, toPlace, 0, flag);
-				return true;
+				if (b == blk)
+				{
+					world.setBlock(posX, posY, posZ, toPlace, 0, flag);
+					return true;
+				}
 			}
 		}
 

@@ -92,6 +92,7 @@ public class HieAbilities
 			if(!this.isOnCooldown)
 			{		
 				final World world = player.worldObj;
+
 				if(MainConfig.enableGriefing)
 				{
 					for(int i = -15; i < 15; i++)

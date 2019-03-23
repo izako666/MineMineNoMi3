@@ -30,8 +30,11 @@ public class EventsDFWeaknesses
 			EntityLivingBase entity = event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(entity);
 
-			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity) && !(entity instanceof EntityPlayer))
+			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity))
 			{			
+				if(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode)
+					return;
+				
 				entity.motionY -= 5;					
 			}
 		}

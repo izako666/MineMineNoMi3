@@ -9,7 +9,12 @@ public class ListCraftingRecipes
 {
 	
 	public static void init()
-	{
+	{		
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
+				{ "...", "XXX", "XXX", 'X', ListMisc.DenseKairoseki });
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
+				{ "XXX", "XXX", "...", 'X', ListMisc.DenseKairoseki });
+		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Umbrella), new Object[]
 				{ ".X.", ".X.", "OOO", 'X', Items.stick, 'O', Blocks.wool });	
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Scissors), new Object[]
@@ -29,11 +34,6 @@ public class ListCraftingRecipes
 		GameRegistry.addShapelessRecipe(new ItemStack(ListMisc.Kairoseki, 9), ListMisc.KairosekiBlock);
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBlock), new Object[]
 				{ "XXX", "XXX", "XXX", 'X', ListMisc.Kairoseki });
-		
-		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
-				{ "...", "XXX", "XXX", 'X', ListMisc.DenseKairoseki });
-		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
-				{ "XXX", "XXX", "...", 'X', ListMisc.DenseKairoseki });
 		
 	    GameRegistry.addShapedRecipe(new ItemStack(ListMisc.DenseKairoseki), new Object[] 
 	    		{ "#$.", "$#.", "...", '#', ListMisc.Kairoseki, '$', Items.iron_ingot });
