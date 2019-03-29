@@ -220,7 +220,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 	public void onGuiClosed()
 	{
 		WyNetworkHelper.sendToServer(new PacketSync(props));
-		WyNetworkHelper.sendToServer(new PacketAbilityReset(true));
+		//WyNetworkHelper.sendToServer(new PacketAbilityReset(true));
 	}
 	
 	public boolean doesGuiPauseGame()

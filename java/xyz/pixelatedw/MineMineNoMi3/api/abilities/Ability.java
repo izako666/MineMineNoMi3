@@ -207,7 +207,8 @@ public class Ability
 	{
 		isCharging = false;
 		isOnCooldown = true;
-		WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
+		if(player instanceof EntityPlayerMP)
+			WyNetworkHelper.sendTo(new PacketAbilitySync(AbilityProperties.get(player)), (EntityPlayerMP) player);
 		
 		if(projectile != null)
 		{
@@ -284,12 +285,12 @@ public class Ability
 	
 	protected void sendShounenScream(EntityPlayer player, int part)
 	{
-		/*if(MainConfig.enableAnimeScreaming && ExtendedEntityData.get(player).getZoanPoint().equalsIgnoreCase("n/a"))
+		if(MainConfig.enableAnimeScreaming && ExtendedEntityData.get(player).getZoanPoint().equalsIgnoreCase("n/a"))
 		{
     		WyNetworkHelper.sendToAllAround(new PacketShounenScream(player.getCommandSenderName(), WyHelper.getFancyName(this.attr.getAbilityDisplayName()), part), player.dimension, player.posX, player.posY, player.posZ, 15);
     		if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAbilityDisplayName().equalsIgnoreCase(this.originalDisplayName) && part != 1)
     			this.attr.setAbilityDisplayName(originalDisplayName);
-		}*/
+		}
 	}
 	
 	public void reset()
