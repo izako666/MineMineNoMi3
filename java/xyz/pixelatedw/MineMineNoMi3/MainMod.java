@@ -19,6 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.commands.CommandBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandDoriki;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandExtol;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandFG;
+import xyz.pixelatedw.MineMineNoMi3.commands.CommandGetWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandIssueBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandRemoveDF;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIHandler;
@@ -104,12 +105,14 @@ public class MainMod
 		// event.registerServerCommand(new CommandAbility());
 		if (ID.DEV_EARLYACCESS || WyDebug.isDebug())
 			event.registerServerCommand(new CommandFG());
+		
 		event.registerServerCommand(new CommandDoriki());
 		event.registerServerCommand(new CommandBelly());
 		event.registerServerCommand(new CommandBounty());
 		event.registerServerCommand(new CommandExtol());
 		event.registerServerCommand(new CommandRemoveDF());
 		event.registerServerCommand(new CommandIssueBounty());
+		event.registerServerCommand(new CommandGetWantedPoster());
 	}
 
 	public static MainMod getMineMineNoMi()

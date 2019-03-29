@@ -184,8 +184,6 @@ public class ItemCoreWeapon extends Item
 	public void registerIcons(IIconRegister ir)
 	{
 		this.itemIcon = ir.registerIcon(ID.PROJECT_ID + ":" + this.getUnlocalizedName().substring(5));
-		this.sheathedIcon = ir.registerIcon(ID.PROJECT_ID + ":" + this.getUnlocalizedName().substring(5) + "_1");
-		this.hakiImbuedIcon = ir.registerIcon(ID.PROJECT_ID + ":" + this.getUnlocalizedName().substring(5) + "_haki");
 		
 		try
 		{ Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ID.PROJECT_ID + ":textures/items/" + this.getUnlocalizedName().substring(5) + "_1.png")); }
@@ -196,6 +194,11 @@ public class ItemCoreWeapon extends Item
 		{ Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation(ID.PROJECT_ID + ":textures/items/" + this.getUnlocalizedName().substring(5) + "_haki.png")); }
 		catch(Exception e)
 		{ this.hakiImbuedIcon = this.itemIcon; }
+		
+		if(this.sheathedIcon != this.itemIcon)
+			this.sheathedIcon = ir.registerIcon(ID.PROJECT_ID + ":" + this.getUnlocalizedName().substring(5) + "_1");
+		if(this.hakiImbuedIcon != this.itemIcon)
+			this.hakiImbuedIcon = ir.registerIcon(ID.PROJECT_ID + ":" + this.getUnlocalizedName().substring(5) + "_haki");
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -206,7 +209,7 @@ public class ItemCoreWeapon extends Item
 		if(stack.getTagCompound() != null)
     	{
 			if (player.getHeldItem() != null && player.getHeldItem().equals(stack))
-			{								
+			{
 				if(props.hasBusoHakiActive())
 				{
 					stack.getTagCompound().setInteger("metadata", 2);
@@ -214,14 +217,15 @@ public class ItemCoreWeapon extends Item
 				}
 				
 				stack.getTagCompound().setInteger("metadata", 0);
+				return this.itemIcon;
 			}
 			else
 			{
 				stack.getTagCompound().setInteger("metadata", 1);
-				return this.itemIcon;
+				return this.sheathedIcon;
 			}
     	}
-    	
+
 		return this.itemIcon;
 	}
 

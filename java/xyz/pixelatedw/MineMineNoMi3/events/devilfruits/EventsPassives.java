@@ -95,7 +95,9 @@ public class EventsPassives {
 			}
 
 			if (props.getUsedFruit().equals("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi")) {
-				//player.getFoodStats().setFoodSaturationLevel(Float.MAX_VALUE);
+				
+				player.getFoodStats().addStats(9999, 9999);
+				
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 0, true));
 
 				if (player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY, (int) player.posZ) == Blocks.water && player.isSprinting()) {
@@ -106,6 +108,9 @@ public class EventsPassives {
 					}
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, player.posX, player.posY - 0.5, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
+				
+				if(WyHelper.getEntitiesNear(player, 100, EntityPlayer.class).size() > 0 && player.ticksExisted % 500 == 0)
+					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 			}
 
 			if (player.isInsideOfMaterial(Material.lava) && !player.capabilities.isCreativeMode) {
@@ -276,7 +281,7 @@ public class EventsPassives {
 			event.newPlayerData.setUsedFruit("yomiyomi");
 			event.newPlayerData.setZoanPoint("yomi");
 			
-			EntityPlayer player = (EntityPlayer) event.newPlayerData.getEntity();
+			EntityPlayer player = (EntityPlayer) event.entity;
 
 			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), event.newPlayerData));

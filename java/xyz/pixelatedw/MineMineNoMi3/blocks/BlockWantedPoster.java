@@ -1,5 +1,7 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -84,11 +86,16 @@ public class BlockWantedPoster extends BlockContainer
 		TileEntityWantedPoster poster = (TileEntityWantedPoster) world.getTileEntity(posX, posY, posZ);
 		
 		if(poster.getEntityName().isEmpty() || poster.getPosterBounty().isEmpty() || poster.getIssuedDate().isEmpty()) return;
-		
-    	stack.setTagCompound(ItemsHelper.setWantedData( poster.getEntityName(), Long.parseLong(poster.getPosterBounty().replace("L", "")) ));
+
+		stack.setTagCompound(ItemsHelper.setWantedData( poster.getEntityName(), Long.parseLong(poster.getPosterBounty().replace("L", "")) ));
     	world.spawnEntityInWorld(new EntityItem(world, posX, posY + 1, posZ, stack));
     }
 	
+	public int quantityDropped(Random random)
+	{
+		return 0;
+	}
+    
 	public boolean isOpaqueCube()
 	{
 		return false;

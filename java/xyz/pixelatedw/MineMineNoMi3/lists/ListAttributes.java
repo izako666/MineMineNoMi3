@@ -61,8 +61,8 @@ public class ListAttributes
 	public static AbilityAttribute BEROCANNON = new AbilityAttribute("Bero Cannon").setAbilityCooldown(5).setProjectileModel(new ModelCube()).setProjectileSize(2, 2, 2).setProjectileColor("E3E3E3").setProjectileDamage(4);
 	public static AbilityAttribute BAKUMUNCH = new AbilityAttribute("Baku Munch").setAbilityCooldown(5);
 	
-	public static AbilityAttribute PHOENIX_HYBRIDPOINT = new AbilityAttribute("Phoenix Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("phoenixhybridpoint").setAbilityPassive(true);
-	public static AbilityAttribute PHOENIX_FULLPOINT = new AbilityAttribute("Phoenix Point").setAbilityCooldown(1).setAbilityPassive(true);
+	public static AbilityAttribute PHOENIX_HYBRIDPOINT = new AbilityAttribute("Phoenix Hybrid Point").setAbilityCooldown(1).setAbilityDisplayName("Hybrid Point").setAbilityTexture("phoenixhybrid").setAbilityPassive(true);
+	public static AbilityAttribute PHOENIX_FULLPOINT = new AbilityAttribute("Phoenix Point").setAbilityTexture("phoenixfull").setAbilityCooldown(1).setAbilityPassive(true);
 	public static AbilityAttribute BLUEFLAMESOFRESURRECTION = new AbilityAttribute("Blue Flames of Resurrection").setAbilityCooldown(20).addEffects(EffectType.USER, new PotionEffect(Potion.regeneration.id, 3 * 20, 4));
 	public static AbilityAttribute FLAMEOFRESTORATION = new AbilityAttribute("Flame of Restoration").setAbilityCooldown(3).setAbilityPassive().setAbilityPunch();
 	public static AbilityAttribute PHOENIXGOEN = new AbilityAttribute("Phoenix Goen").setAbilityCooldown(10).setProjectileDamage(12);
@@ -153,7 +153,7 @@ public class ListAttributes
 	public static AbilityAttribute GROUNDDEATH = new AbilityAttribute("Ground Death").setAbilityCooldown(15);
 	public static AbilityAttribute BARJAN = new AbilityAttribute("Barjan").setAbilityCooldown(5).setProjectileDamage(15).setProjectileModel(new ModelCube()).setProjectileColor("967117").setProjectileSize(6, 0.4, 1.5).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.hunger.id, 500, 1)).setProjectileMoveThroughBlocks(true).setProjectileCollisionSizes(1.25, 0.3, 1.25);
 	public static AbilityAttribute SABLES = new AbilityAttribute("Sables").setAbilityCooldown(3).setAbilityPassive().setAbilityPunch();
-	public static AbilityAttribute DESERTSPADA = new AbilityAttribute("Desert Spada").setAbilityCooldown(7);
+	public static AbilityAttribute DESERTSPADA = new AbilityAttribute("Desert Spada").setAbilityCooldown(10);
 	
 	public static AbilityAttribute TSUNOTOKAGE = new AbilityAttribute("Tsuno-Tokage").setAbilityCooldown(10);
 //	public static AbilityAttribute SHADOWSASGARD = new AbilityAttribute("Shadow's Asgard").setAbilityCooldown(400).addTasks(Tasks.shadowsasgard);

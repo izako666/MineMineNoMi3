@@ -189,7 +189,8 @@ public class ListMisc
 	public static ItemCoreWeapon Knife2 = new ItemCoreWeapon(3);
 	public static ItemCoreWeapon Knife3 = new ItemCoreWeapon(3).setMaxDamage(250);
 	public static ItemCoreWeapon WadoIchimonji = new ItemCoreWeapon(8);
-	public static ItemCoreWeapon Kitetsu = new ItemCoreWeapon(8);
+	public static ItemCoreWeapon SandaiKitetsu = new ItemCoreWeapon(8);
+	public static ItemCoreWeapon NidaiKitetsu = new ItemCoreWeapon(10);
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
 
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
@@ -267,7 +268,8 @@ public class ListMisc
 		addITEM(Knife2, "Ace's Knife", ListCreativeTabs.tabWeapons);
 		addITEM(Knife3, "Bandit's Knife", ListCreativeTabs.tabWeapons);
 		addITEM(WadoIchimonji, "Wado Ichimonji", ListCreativeTabs.tabWeapons);
-		addITEM(Kitetsu, "Kitetsu", ListCreativeTabs.tabWeapons);
+		addITEM(SandaiKitetsu, "Sandai Kitetsu", ListCreativeTabs.tabWeapons);
+		addITEM(NidaiKitetsu, "Nidai Kitetsu", ListCreativeTabs.tabWeapons);
 		addITEM(Shusui, "Shusui", ListCreativeTabs.tabWeapons);
 
 		addITEM(IceSaber, "Ice Saber", null);
@@ -303,7 +305,7 @@ public class ListMisc
 		addBLOCK(StringMid, "String Mid", Float.POSITIVE_INFINITY, TileEntityString.class, null);
 		addBLOCK(SunaSand, "Suna Sand", 1.0F, null, null);
 		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, null, null);
-		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 1.0F, TileEntityWantedPoster.class, null);
+		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 0.1F, TileEntityWantedPoster.class, null);
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
 		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);

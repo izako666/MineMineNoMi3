@@ -52,10 +52,10 @@ public class YamiAbilities
 		{
 			if(!this.isOnCooldown)
 			{
+				WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKWORLD, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+
 				if(MainConfig.enableGriefing)
-				{
-					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BLACKWORLD, player), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
-	
+				{	
 					for(int i = 0; i < 8; i++)
 					{
 						int a1 = player.getRNG().nextInt(20) - 10;

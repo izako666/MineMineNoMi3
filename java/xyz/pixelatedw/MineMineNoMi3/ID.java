@@ -209,5 +209,5 @@ public class ID
 	
 	public static final boolean 
 	
-	DEV_EARLYACCESS = true;
+	DEV_EARLYACCESS = false;
 }

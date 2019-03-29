@@ -27,9 +27,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackag
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirate;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateCaptain;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.pirates.EntityPirateWithGun;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMokuPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouHybrid;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityBlueno;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityFukuro;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.worldGovernment.EntityJabra;
@@ -107,26 +104,9 @@ public class ListEntities
 		WyRegistry.registerMob("Den Den Mushi", EntityDenDenMushi.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Dojo Sensei", EntityDojoSensei.class, 0xFF00FF, 0x00FF00);
 		WyRegistry.registerMob("Wanted Posters Package", EntityWantedPostersPackage.class);
-		
-		/*
+
 		//Temp
-		WyRegistry.registerMob("TEMP_Fist", TempEntityFist.class);
-		WyRegistry.registerMob("TEMP_Bazooka", TempEntityBazooka.class);
-		WyRegistry.registerMob("TEMP_BrickBat", TempEntityBrickBat.class);
-		WyRegistry.registerMob("TEMP_Hydra", TempEntityHydra.class);
-		WyRegistry.registerMob("TEMP_Meigo", TempEntityMeigo.class);
-		WyRegistry.registerMob("TEMP_NoroBeam", TempEntityNoroBeam.class);	
-		WyRegistry.registerMob("TEMP_Paw", TempEntityPaw.class);
-		WyRegistry.registerMob("TEMP_Pheasant", TempEntityPheasant.class);
-		WyRegistry.registerMob("TEMP_Shark", TempEntityShark.class);
-		WyRegistry.registerMob("TEMP_Spear", TempEntitySpear.class);
-		WyRegistry.registerMob("TEMP_Trident", TempEntityTrident.class);
-		WyRegistry.registerMob("TEMP_YukiRabi", TempEntityYukiRabi.class);
-		WyRegistry.registerMob("TEMP_PhoenixFull", TempEntityPhoenixFull.class);
-		WyRegistry.registerMob("TEMP_PhoenixHybrid", TempEntityPhoenixHybrid.class);*/
-		WyRegistry.registerMob("TEMP_ZouHybrid", TempEntityZouHybrid.class);
-		WyRegistry.registerMob("TEMP_ZouFull", TempEntityZouFull.class);
-		WyRegistry.registerMob("TEMP_MokuPower", TempEntityMokuPower.class);
+		//WyRegistry.registerMob("TEMP_Dummy", TempEntityDummy.class);
 	}
 	
 }

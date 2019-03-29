@@ -36,8 +36,10 @@ public class CommandDoriki extends CommandBase
 				target = this.getCommandSenderAsPlayer(sender);
 			if(str.length == 3)
 			{
-				if(MainConfig.commandPermissionDoriki != 1)				
+				if(MainConfig.commandPermissionDoriki != 1)			
+				{
 					target = getPlayer(sender, str[2]);
+				}
 				else
 				{
 					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");

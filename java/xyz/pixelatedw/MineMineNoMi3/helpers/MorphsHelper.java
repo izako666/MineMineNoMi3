@@ -59,8 +59,8 @@ public class MorphsHelper
 				});
 		morphsMap.put("ushiushigiraffe", new Object[][]
 				{
-						{ "power", new RenderZoanMorph(new ModelGiraffePower(), "giraffepower", 1.4, new float[] { 0, 0.7f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.8) },
-						{ "speed", new RenderZoanMorph(new ModelGiraffeSpeed(), "giraffespeed", 1.55, new float[] { 0, 0.95f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.9) },
+						{ "power", new RenderZoanMorph(new ModelGiraffePower(), "giraffehybrid", 1.4, new float[] { 0, 0.7f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.8) },
+						{ "speed", new RenderZoanMorph(new ModelGiraffeSpeed(), "giraffefull", 1.55, new float[] { 0, 0.95f, 0 }), new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.9) },
 				});
 		morphsMap.put("minimini", new Object[][]
 				{

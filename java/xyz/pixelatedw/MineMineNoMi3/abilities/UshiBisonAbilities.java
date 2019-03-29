@@ -59,7 +59,7 @@ public class UshiBisonAbilities
 				props.setZoanPoint("n/a");
 
 			WyNetworkHelper.sendTo(new PacketNewAABB(1.5F, 2.5F), (EntityPlayerMP) player);
-			
+
 			props.setZoanPoint("power");
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));

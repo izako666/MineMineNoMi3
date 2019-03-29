@@ -49,7 +49,7 @@ public class EntityDojoSensei extends EntityNewMob
 	
     protected void addRandomArmor()
     {
-    	Item[] randomSword = new Item[] {ListMisc.Kitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
+    	Item[] randomSword = new Item[] {ListMisc.NidaiKitetsu, ListMisc.SandaiKitetsu, ListMisc.Shusui, ListMisc.Jitte, ListMisc.Kikoku, ListMisc.WadoIchimonji};
         this.setCurrentItemOrArmor(0, new ItemStack(randomSword[this.rand.nextInt(randomSword.length)]));
     }
     

@@ -22,6 +22,7 @@ public class MainConfig
 	public static boolean enableQuestProgression;
 	public static boolean enableQuests;
 	public static boolean enableGriefing;
+	public static boolean enableWantedPostersPackages;
 	public static boolean enableAnimeScreaming;
 	public static boolean enableSpecialFlying;
 	public static double rateDFDrops;
@@ -41,6 +42,7 @@ public class MainConfig
 	public static int commandPermissionBounty = 2;
 	public static int commandPermissionExtol = 2;
 	public static int commandPermissionIssueBounty = 2;
+	public static int commandPermissionGetWantedPoster = 2;
 	public static String[] abilityRestrictions;
 	
 	
@@ -58,7 +60,8 @@ public class MainConfig
 		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true).getBoolean();
 		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false).getBoolean();
 		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false).getBoolean();
-
+		enableWantedPostersPackages  = config.get(Configuration.CATEGORY_GENERAL, "Allow Wanted Poster Packages", true).getBoolean();
+		
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
 		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
 
@@ -83,6 +86,8 @@ public class MainConfig
 		commandPermissionBounty = config.get("permissions", "Permission : /bounty", 2).getInt();
 		commandPermissionExtol = config.get("permissions", "Permission : /extol", 2).getInt();
 		commandPermissionIssueBounty = config.get("permissions", "Permission : /issueBounty", 2).getInt();
+		commandPermissionGetWantedPoster = config.get("permissions", "Permission : /getwantedposter", 2).getInt();
+
 		abilityRestrictions = config.get("permissions", "Ability Restrictions", new String[] {"example1", "example2"}).getStringList();		
 		
 		

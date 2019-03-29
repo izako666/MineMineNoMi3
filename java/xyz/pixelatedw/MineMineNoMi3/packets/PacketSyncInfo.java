@@ -17,6 +17,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
+import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -77,10 +78,12 @@ public class PacketSyncInfo implements IMessage
 			{
 				EntityPlayer target = null;
 	
+				//System.out.println(Arrays.toString(Minecraft.getMinecraft().theWorld.playerEntities.toArray()));
+				
 				for(Object o : Minecraft.getMinecraft().theWorld.playerEntities)
 				{
 					EntityPlayer t = (EntityPlayer)o;
-					if(t.getDisplayName().toLowerCase().equals(message.user.toLowerCase()))
+					if(t.getDisplayName().equalsIgnoreCase(message.user))
 					{
 						target = t;
 						break;
@@ -90,7 +93,7 @@ public class PacketSyncInfo implements IMessage
 				if(target != null && !target.equals(player))
 				{
 					ExtendedEntityData propz = ExtendedEntityData.get(target);	 
-	
+					
 					propz.loadNBTData(message.data);
 				}
 			}

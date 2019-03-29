@@ -20,34 +20,36 @@ public class PacketAbilityReset implements IMessage
 {
 	public boolean resetOnCooldownOnly;
 
-	public PacketAbilityReset() {}
-	
-	public PacketAbilityReset(boolean resetOnCooldownOnly) 
+	public PacketAbilityReset()
+	{
+	}
+
+	public PacketAbilityReset(boolean resetOnCooldownOnly)
 	{
 		this.resetOnCooldownOnly = resetOnCooldownOnly;
 	}
 
-	public void fromBytes(ByteBuf buffer) 
+	public void fromBytes(ByteBuf buffer)
 	{
 		this.resetOnCooldownOnly = buffer.readBoolean();
 	}
-	
-	public void toBytes(ByteBuf buffer) 
+
+	public void toBytes(ByteBuf buffer)
 	{
 		buffer.writeBoolean(this.resetOnCooldownOnly);
 	}
-	
+
 	public static class ClientHandler implements IMessageHandler<PacketAbilityReset, IMessage>
 	{
 		@SideOnly(Side.CLIENT)
-		public IMessage onMessage(PacketAbilityReset message, MessageContext ctx) 
+		public IMessage onMessage(PacketAbilityReset message, MessageContext ctx)
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			AbilityProperties props = AbilityProperties.get(player);	 
+			AbilityProperties props = AbilityProperties.get(player);
 
-			for(int i = 0; i < 8; i++)
+			for (int i = 0; i < 8; i++)
 			{
-				if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAbilityCooldown() > 0 && (message.resetOnCooldownOnly && props.getAbilityFromSlot(i).isOnCooldown()))
+				if ((props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAbilityCooldown() > 0) || (message.resetOnCooldownOnly && props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isOnCooldown()))
 				{
 					props.getAbilityFromSlot(i).startUpdate(player);
 				}
@@ -56,22 +58,22 @@ public class PacketAbilityReset implements IMessage
 			return null;
 		}
 	}
-	
+
 	public static class ServerHandler implements IMessageHandler<PacketAbilityReset, IMessage>
 	{
-		public IMessage onMessage(PacketAbilityReset message, MessageContext ctx) 
+		public IMessage onMessage(PacketAbilityReset message, MessageContext ctx)
 		{
 			EntityPlayer player = MainMod.proxy.getPlayerEntity(ctx);
-			AbilityProperties props = AbilityProperties.get(player);	 
+			AbilityProperties props = AbilityProperties.get(player);
 
-			for(int i = 0; i < 8; i++)
+			for (int i = 0; i < 8; i++)
 			{
-				if(props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAbilityCooldown() > 0 && (message.resetOnCooldownOnly && props.getAbilityFromSlot(i).isOnCooldown()))
+				if ((props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).getAttribute().getAbilityCooldown() > 0) || (message.resetOnCooldownOnly && props.getAbilityFromSlot(i) != null && props.getAbilityFromSlot(i).isOnCooldown()))
 				{
 					props.getAbilityFromSlot(i).startUpdate(player);
 				}
 			}
-			
+
 			return new PacketAbilityReset(true);
 		}
 	}

@@ -101,10 +101,11 @@ public class ModelGiraffeSpeed extends ModelZoanMorph
 		this.backleg22.addBox(0.0F, 0.0F, 0.0F, 1, 2, 1, 0.0F);
 		this.setRotateAngle(backleg22, -0.12112585008840647F, 0.4883431247080134F, 0.03944444109507184F);
 		this.column = new ModelRenderer(this, 40, 0);
-		this.column.setRotationPoint(-6.0F, -10.5F, 3.0F);
+		this.column.setRotationPoint(-6.02F, -10.5F, 3.0F);
 		this.column.addBox(0.0F, 0.0F, 0.0F, 10, 9, 7, 0.0F);
 		this.setRotateAngle(column, -0.7853981633974483F, -0.0F, 0.0F);
 		this.leftear = new ModelRenderer(this, 67, 24);
+		this.leftear.mirror = true;
 		this.leftear.setRotationPoint(3.5F, 0.7F, 3.0F);
 		this.leftear.addBox(0.0F, 0.0F, 0.0F, 3, 2, 0, 0.0F);
 		this.setRotateAngle(leftear, 0.0F, -0.0F, -0.2617993877991494F);

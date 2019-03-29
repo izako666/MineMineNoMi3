@@ -19,9 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.baroqueWorks.EntityMr0;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityWantedPostersPackage;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityMokuPower;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouFull;
-import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityZouHybrid;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.temp.TempEntityDummy;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
@@ -41,12 +39,8 @@ public class CommandFG extends CommandBase
 			QuestProperties questProps = QuestProperties.get(player);
 			Entity toSpawn = null;
 
-			if(str[0].equalsIgnoreCase("zouhybrid"))
-				toSpawn = new TempEntityZouHybrid(player.worldObj);		
-			else if(str[0].equalsIgnoreCase("zoufull"))
-				toSpawn = new TempEntityZouFull(player.worldObj);
-			else if(str[0].equalsIgnoreCase("mogupower"))
-				toSpawn = new TempEntityMokuPower(player.worldObj);
+			if(str[0].equalsIgnoreCase("dummy"))
+				toSpawn = new TempEntityDummy(player.worldObj);
 			else if(str[0].equalsIgnoreCase("mr0"))
 				toSpawn = new EntityMr0(player.worldObj);
 						

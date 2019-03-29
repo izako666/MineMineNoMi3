@@ -59,7 +59,15 @@ public class AkumaNoMi extends ItemFood
 			props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
 			
 			if(props.getUsedFruit().equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
+			{
 				WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
+				if(props.isFishman())
+				{
+					props.setRace(ID.RACE_HUMAN);
+					DevilFruitsHelper.validateStyleMoves(player);
+					DevilFruitsHelper.validateRacialMoves(player);
+				}
+			}
 			
 			if(this.type == EnumFruitType.LOGIA)
 				props.setIsLogia(true);
@@ -93,7 +101,15 @@ public class AkumaNoMi extends ItemFood
 					props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
 
 					if(props.getUsedFruit().equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
+		 			{
 						WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
+						if(props.isFishman())
+						{
+							props.setRace(ID.RACE_HUMAN);
+							DevilFruitsHelper.validateStyleMoves(player);
+							DevilFruitsHelper.validateRacialMoves(player);
+						}
+					}
 						
 					if(this.type == EnumFruitType.LOGIA)
 						props.setIsLogia(true);

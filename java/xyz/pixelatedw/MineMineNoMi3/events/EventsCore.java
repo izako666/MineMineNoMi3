@@ -109,7 +109,7 @@ public class EventsCore
 			QuestProperties questProps = QuestProperties.get(e.entityPlayer);
 			questProps.loadNBTData(compound);
 			
-			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(oldPlayerProps, newPlayerProps);
+			YomiTriggerEvent yomiEvent = new YomiTriggerEvent(e.entityPlayer, oldPlayerProps, newPlayerProps);
 			if (MinecraftForge.EVENT_BUS.post(yomiEvent))
 				return;
 		}

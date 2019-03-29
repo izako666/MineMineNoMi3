@@ -88,7 +88,7 @@ public class EventsEffectOverlay
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event)
 	{
-/*		Minecraft mc = Minecraft.getMinecraft();
+		Minecraft mc = Minecraft.getMinecraft();
 		EntityPlayer player = mc.thePlayer;
 
 		if (player == null)
@@ -97,7 +97,7 @@ public class EventsEffectOverlay
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		ScaledResolution sr = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
 		
-		if (props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
+		/*if (props.hasExtraEffects(ID.EXTRAEFFECT_MERO))
 			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#5d6060").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_HIE))
 			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#1be2e2").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
@@ -106,9 +106,9 @@ public class EventsEffectOverlay
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_RUSTOVERLAY))
 			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#a04921").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 		else if (props.hasExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY))
-			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
+			WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);*/
 		if(props.isInAirWorld())
-			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);*/
+			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 100);
 	}
 	
 }

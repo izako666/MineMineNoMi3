@@ -10,9 +10,9 @@ public class ListCraftingRecipes
 	
 	public static void init()
 	{		
-		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars, 16), new Object[]
 				{ "...", "XXX", "XXX", 'X', ListMisc.DenseKairoseki });
-		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars), new Object[]
+		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.KairosekiBars, 16), new Object[]
 				{ "XXX", "XXX", "...", 'X', ListMisc.DenseKairoseki });
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ListMisc.Umbrella), new Object[]
