@@ -298,7 +298,7 @@ public class OpeAbilities
 			{
 				if(this.blockList.isEmpty())
 				{
-					this.blockList.addAll(WyHelper.createEmptySphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 20, ListMisc.Ope, "air", "foliage", "liquids"));
+					this.blockList.addAll(WyHelper.createEmptySphere(player.worldObj, (int)player.posX, (int)player.posY, (int)player.posZ, 20, ListMisc.Ope, "air", "foliage", "liquids", "nogrief"));
 					player.worldObj.setBlock((int) player.posX, (int) player.posY, (int) player.posZ, ListMisc.OpeMid);
 					this.blockList.add(new int[] {(int) player.posX, (int) player.posY, (int) player.posZ});
 				}

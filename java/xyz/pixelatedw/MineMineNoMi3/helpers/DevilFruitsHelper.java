@@ -261,7 +261,8 @@ public class DevilFruitsHelper
 	{
 		Block b = world.getBlock((int) posX, (int) posY, (int) posZ);
 		List<Block> bannedBlocks = new ArrayList<Block>();
-
+		boolean noGriefFlag = Arrays.toString(rules).contains("nogrief");
+		
 		Arrays.stream(rules).forEach(rule ->
 		{
 			String formula;
@@ -279,8 +280,8 @@ public class DevilFruitsHelper
 					bannedBlocks.addAll(blockRules.get(rule));
 				else if (formula.equalsIgnoreCase("ignore"))
 					bannedBlocks.removeAll(blockRules.get(rule));
-			}
-			
+			}			
+
 			if (rule.equalsIgnoreCase("all"))
 			{
 				if (formula.equalsIgnoreCase("add"))
@@ -307,9 +308,10 @@ public class DevilFruitsHelper
 				bannedBlocks.remove(ListMisc.StringWall);
 				bannedBlocks.remove(ListMisc.Darkness);
 			}
+
 		});
 
-		if(MainConfig.enableGriefing)
+		if(MainConfig.enableGriefing || noGriefFlag)
 		{
 			for (Block blk : bannedBlocks)
 			{
