@@ -204,7 +204,7 @@ public class AbilityExplosion
 		if (this.hasSmokeParticles())
 			WyNetworkHelper.sendToAllAround(new PacketParticles(this.smokeParticles, this.explosionX, this.explosionY, this.explosionZ), this.exploder.dimension, this.explosionX, this.explosionY, this.explosionZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 
-		if (this.canStartFireAfterExplosion)
+		if (this.canStartFireAfterExplosion && MainConfig.enableGriefing)
 		{
 			iterator = this.affectedBlockPositions.iterator();
 

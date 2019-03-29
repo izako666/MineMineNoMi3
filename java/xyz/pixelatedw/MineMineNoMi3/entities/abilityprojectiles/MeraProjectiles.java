@@ -11,6 +11,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.EnumParticleTypes;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
@@ -235,27 +236,33 @@ public class MeraProjectiles
 			if(hit.entityHit != null)
 			{
 				hit.entityHit.setFire(this.ticks);
-				for(int j = -2; j <= 2; j++)
+				if(MainConfig.enableGriefing)
 				{
-					for(int i = -5; i <= 5; i++)
-						if(this.worldObj.isAirBlock((int)hit.entityHit.posX + i, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ))
-							this.worldObj.setBlock((int)hit.entityHit.posX + i, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ, Blocks.fire);
-						
-					for(int i = -5; i <= 5; i++)
-						if(this.worldObj.isAirBlock((int)hit.entityHit.posX, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ + i))
-							this.worldObj.setBlock((int)hit.entityHit.posX, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ + i, Blocks.fire);
+					for(int j = -2; j <= 2; j++)
+					{
+						for(int i = -5; i <= 5; i++)
+							if(this.worldObj.isAirBlock((int)hit.entityHit.posX + i, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ))
+								this.worldObj.setBlock((int)hit.entityHit.posX + i, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ, Blocks.fire);
+							
+						for(int i = -5; i <= 5; i++)
+							if(this.worldObj.isAirBlock((int)hit.entityHit.posX, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ + i))
+								this.worldObj.setBlock((int)hit.entityHit.posX, (int)hit.entityHit.posY + j, (int)hit.entityHit.posZ + i, Blocks.fire);
+					}
 				}
 			}
 			
-			for(int j = -2; j <= 2; j++)
+			if(MainConfig.enableGriefing)
 			{
-				for(int i = -5; i <= 5; i++)
-					if(this.worldObj.isAirBlock((int)this.posX + i, (int)this.posY + j, (int)this.posZ))
-						this.worldObj.setBlock((int)this.posX + i, (int)this.posY + j, (int)this.posZ, Blocks.fire);
-					
-				for(int i = -5; i <= 5; i++)
-					if(this.worldObj.isAirBlock((int)this.posX, (int)this.posY + j, (int)this.posZ + i))
-						this.worldObj.setBlock((int)this.posX, (int)this.posY + j, (int)this.posZ + i, Blocks.fire);
+				for(int j = -2; j <= 2; j++)
+				{
+					for(int i = -5; i <= 5; i++)
+						if(this.worldObj.isAirBlock((int)this.posX + i, (int)this.posY + j, (int)this.posZ))
+							this.worldObj.setBlock((int)this.posX + i, (int)this.posY + j, (int)this.posZ, Blocks.fire);
+						
+					for(int i = -5; i <= 5; i++)
+						if(this.worldObj.isAirBlock((int)this.posX, (int)this.posY + j, (int)this.posZ + i))
+							this.worldObj.setBlock((int)this.posX, (int)this.posY + j, (int)this.posZ + i, Blocks.fire);
+				}
 			}
 		};
 	}
