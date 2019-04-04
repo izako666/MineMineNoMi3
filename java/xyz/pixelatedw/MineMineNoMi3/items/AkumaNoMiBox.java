@@ -13,6 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -20,16 +21,7 @@ public class AkumaNoMiBox extends Item
 {
 	
 	private int tier;
-	/*private AkumaNoMi[] tier1Fruits = new AkumaNoMi[] 
-			{ListDevilFruits.BaneBaneNoMi, ListDevilFruits.SukeSukeNoMi, ListDevilFruits.NoroNoroNoMi, ListDevilFruits.BomuBomuNoMi, ListDevilFruits.DoruDoruNoMi, ListDevilFruits.BariBariNoMi, 
-			 ListDevilFruits.HoroHoroNoMi, ListDevilFruits.GoeGoeNoMi, ListDevilFruits.KiloKiloNoMi};
-	private AkumaNoMi[] tier2Fruits = new AkumaNoMi[] 
-			{ListDevilFruits.GomuGomuNoMi, ListDevilFruits.OpeOpeNoMi, ListDevilFruits.NikyuNikyuNoMi, ListDevilFruits.KageKageNoMi,
-			 ListDevilFruits.DokuDokuNoMi, ListDevilFruits.ItoItoNoMi, ListDevilFruits.UshiUshiNoMiBison};
-	private AkumaNoMi[] tier3Fruits = new AkumaNoMi[] 
-			{ListDevilFruits.MeraMeraNoMi, ListDevilFruits.HieHieNoMi, ListDevilFruits.PikaPikaNoMi, ListDevilFruits.GoroGoroNoMi, ListDevilFruits.SunaSunaNoMi, ListDevilFruits.MaguMaguNoMi, 
-			 ListDevilFruits.GasuGasuNoMi, ListDevilFruits.MokuMokuNoMi, ListDevilFruits.YukiYukiNoMi, ListDevilFruits.YamiYamiNoMi, ListDevilFruits.ToriToriNoMiPhoenix, ListDevilFruits.GuraGuraNoMi};*/
-	
+
 	private List<AkumaNoMi> tier1Fruits = new ArrayList<AkumaNoMi>();
 	private List<AkumaNoMi> tier2Fruits = new ArrayList<AkumaNoMi>();
 	private List<AkumaNoMi> tier3Fruits = new ArrayList<AkumaNoMi>();
@@ -98,7 +90,7 @@ public class AkumaNoMiBox extends Item
 				if(player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() == ListMisc.Key)
 				{
 					player.inventory.decrStackSize(i, 1);
-					WyHelper.removeStackFromInventory(player, itemStack);	
+					WyHelper.removeStackFromInventory(player, itemStack);
 					return new ItemStack(roulette());
 				}				
 			}	

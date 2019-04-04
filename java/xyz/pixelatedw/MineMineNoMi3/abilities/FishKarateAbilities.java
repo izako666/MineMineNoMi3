@@ -29,7 +29,7 @@ public class FishKarateAbilities
 		Values.abilityWebAppExtraParams.put("murasame", new String[] {"desc", "The user fires densely compressed shark-shaped waterbullet at the opponent.", "dorikiRequiredForFishman", "2000"});
 		Values.abilityWebAppExtraParams.put("samehadashotei", new String[] {"desc", "The user concentrates their power to their palms, protecting themselves from attacks.", "dorikiRequiredForFishman", "3000"});
 		Values.abilityWebAppExtraParams.put("karakusagawaraseiken", new String[] {"desc", "The user punches the air, which sends a shockwave through water vapor in the air.", "dorikiRequiredForFishman", "7500"});
-		Values.abilityWebAppExtraParams.put("kachiagehaisoku", new String[] {"desc", "The user delivers a powerful kick to the opponent\\'s chin.", "dorikiRequiredForFishman", "2500"});
+		Values.abilityWebAppExtraParams.put("kachiagehaisoku", new String[] {"desc", "The user delivers a powerful kick to the opponent's chin.", "dorikiRequiredForFishman", "2500"});
 	}
 	
 	public static Ability UCHIMIZU = new Uchimizu();

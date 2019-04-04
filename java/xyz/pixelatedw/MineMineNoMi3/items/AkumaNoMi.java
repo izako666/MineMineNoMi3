@@ -4,20 +4,27 @@ import java.util.List;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 
 public class AkumaNoMi extends ItemFood
@@ -64,8 +71,21 @@ public class AkumaNoMi extends ItemFood
 				if(props.isFishman())
 				{
 					props.setRace(ID.RACE_HUMAN);
-					DevilFruitsHelper.validateStyleMoves(player);
-					DevilFruitsHelper.validateRacialMoves(player);
+					
+					for (int i = 0; i < 8; i++)
+					{
+						Ability abl = abilityProps.getAbilityFromSlot(i);
+						for(Ability fshAbl : FishKarateAbilities.abilitiesArray)
+						{
+							if(abl != null && abl.getAttribute().getAttributeName().equalsIgnoreCase(fshAbl.getAttribute().getAttributeName()))
+								abilityProps.setAbilityInSlot(i, null);
+						}
+					}
+					
+					AbilitiesHelper.validateStyleMoves(player);
+					AbilitiesHelper.validateRacialMoves(player);
+					
+					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				}
 			}
 			
@@ -74,7 +94,7 @@ public class AkumaNoMi extends ItemFood
 			 
 			if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
 				for(Ability a : abilities)
-					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+					if(!AbilitiesHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 						abilityProps.addDevilFruitAbility(a);
 		}
 		else
@@ -88,7 +108,7 @@ public class AkumaNoMi extends ItemFood
 				props.setIsLogia(false);
 				
 				for(Ability a : abilities)
-					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+					if(!AbilitiesHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 						abilityProps.addDevilFruitAbility(a);
 			}
 			else
@@ -106,8 +126,21 @@ public class AkumaNoMi extends ItemFood
 						if(props.isFishman())
 						{
 							props.setRace(ID.RACE_HUMAN);
-							DevilFruitsHelper.validateStyleMoves(player);
-							DevilFruitsHelper.validateRacialMoves(player);
+							
+							for (int i = 0; i < 8; i++)
+							{
+								Ability abl = abilityProps.getAbilityFromSlot(i);
+								for(Ability fshAbl : FishKarateAbilities.abilitiesArray)
+								{
+									if(abl != null && abl.getAttribute().getAttributeName().equalsIgnoreCase(fshAbl.getAttribute().getAttributeName()))
+										abilityProps.setAbilityInSlot(i, null);
+								}
+							}		
+							
+							AbilitiesHelper.validateStyleMoves(player);
+							AbilitiesHelper.validateRacialMoves(player);
+							
+							WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
 						}
 					}
 						
@@ -116,7 +149,7 @@ public class AkumaNoMi extends ItemFood
 					 
 					if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
 						for(Ability a : abilities)
-							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+							if(!AbilitiesHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
 								abilityProps.addDevilFruitAbility(a);
 				}
 			}
@@ -129,7 +162,7 @@ public class AkumaNoMi extends ItemFood
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
 		for(int i = 0; i < this.abilities.length; i++)
-			if(!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
+			if(!AbilitiesHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
 				list.add(  I18n.format("ability." + WyHelper.getFancyName(this.abilities[i].getAttribute().getAttributeName()) + ".name") );
 			
 	  	list.add("");

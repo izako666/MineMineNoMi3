@@ -31,7 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -39,11 +39,14 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
-public class EventsPassives {
+public class EventsPassives
+{
 
 	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event) {
-		if (event.entityLiving instanceof EntityLivingBase) {
+	public void onEntityUpdate(LivingUpdateEvent event)
+	{
+		if (event.entityLiving instanceof EntityLivingBase)
+		{
 			EntityLivingBase entity = (EntityLivingBase) event.entityLiving;
 			ExtendedEntityData propz = ExtendedEntityData.get(entity);
 
@@ -60,15 +63,20 @@ public class EventsPassives {
 			ItemStack heldItem = player.getHeldItem();
 
 			Ability atomicSpurt = abilityProps.getAbilityFromName(ListAttributes.ATOMICSPURT.getAttributeName());
-			if (props.getUsedFruit().equals("supasupa")) {
-				if (atomicSpurt != null && atomicSpurt.isPassiveActive()) {
-					if (player.onGround) {
-						if (Math.abs(player.motionX) < 0.5 || Math.abs(player.motionZ) < 0.5) {
+			if (props.getUsedFruit().equals("supasupa"))
+			{
+				if (atomicSpurt != null && atomicSpurt.isPassiveActive())
+				{
+					if (player.onGround)
+					{
+						if (Math.abs(player.motionX) < 0.5 || Math.abs(player.motionZ) < 0.5)
+						{
 							player.motionX *= 1.6D;
 							player.motionZ *= 1.6D;
 						}
 
-						if (Math.abs(player.motionX) > 0.15 || Math.abs(player.motionZ) > 0.15) {
+						if (Math.abs(player.motionX) > 0.15 || Math.abs(player.motionZ) > 0.15)
+						{
 							for (EntityLivingBase e : WyHelper.getEntitiesNear(player, 1.6))
 								e.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) player), 2);
 						}
@@ -76,64 +84,78 @@ public class EventsPassives {
 				}
 			}
 
-
 			if (props.getUsedFruit().equals("hiehie"))
 			{
-				if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
+				if (!AbilitiesHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
 				{
 					WyHelper.createFilledSphere(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ, 2, Blocks.ice, "liquids");
 				}
 			}
 
-			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia() || props.getUsedFruit().equals("kilokilo")) {
+			if (props.getUsedFruit().equals("gomugomu") || props.getUsedFruit().equals("banebane") || props.isLogia() || props.getUsedFruit().equals("kilokilo"))
+			{
 				player.fallDistance = 0;
 			}
 
-			if (props.getUsedFruit().equals("dokudoku")) {
+			if (props.getUsedFruit().equals("dokudoku"))
+			{
 				if (player.isPotionActive(Potion.poison.id))
 					player.removePotionEffect(Potion.poison.id);
 			}
 
-			if (props.getUsedFruit().equals("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi")) {
-				
+			if (props.getUsedFruit().equals("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
+			{
+
 				player.getFoodStats().addStats(9999, 9999);
-				
+
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 0, true));
 
-				if (player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY, (int) player.posZ) == Blocks.water && player.isSprinting()) {
+				if (player.worldObj.getBlock((int) player.posX, (int) player.boundingBox.minY, (int) player.posZ) == Blocks.water && player.isSprinting())
+				{
 					player.onGround = true;
-					if (player.motionY < 0.0D) {
+					if (player.motionY < 0.0D)
+					{
 						player.motionY = 0.0D;
 						player.fallDistance = 0.0F;
 					}
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, player.posX, player.posY - 0.5, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 				}
-				
-				if(WyHelper.getEntitiesNear(player, 100, EntityPlayer.class).size() > 0 && player.ticksExisted % 500 == 0)
+
+				if (WyHelper.getEntitiesNear(player, 100, EntityPlayer.class).size() > 0 && player.ticksExisted % 500 == 0)
 					WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 			}
 
-			if (player.isInsideOfMaterial(Material.lava) && !player.capabilities.isCreativeMode) {
-				if (props.getUsedFruit().equals("magumagu")) {
-					if ((player.motionX >= 5.0D) || (player.motionZ >= 5.0D)) {
+			if (player.isInsideOfMaterial(Material.lava) && !player.capabilities.isCreativeMode)
+			{
+				if (props.getUsedFruit().equals("magumagu"))
+				{
+					if ((player.motionX >= 5.0D) || (player.motionZ >= 5.0D))
+					{
 						player.motionX /= 1.9D;
 						player.motionZ /= 1.9D;
-					} else {
+					}
+					else
+					{
 						player.motionX *= 1.9D;
 						player.motionZ *= 1.9D;
 					}
 				}
 			}
 
-			if ((player.isInsideOfMaterial(Material.water) || (player.isWet() && (player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.water || player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.flowing_water) && !player.isRiding()))) {
-				if (props.isFishman() && props.getUsedFruit().equals("N/A")) {
+			if (AbilitiesHelper.isAffectedByWater(player))
+			{
+				if (props.isFishman() && props.getUsedFruit().equalsIgnoreCase("n/a"))
+				{
 					player.setAir(300);
 					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, 1));
 
-					if ((player.motionX >= 5.0D) || (player.motionZ >= 5.0D)) {
+					if ((player.motionX >= 5.0D) || (player.motionZ >= 5.0D))
+					{
 						player.motionX /= 1.2D;
 						player.motionZ /= 1.2D;
-					} else {
+					}
+					else
+					{
 						player.motionX *= 1.2D;
 						player.motionZ *= 1.2D;
 					}
@@ -142,14 +164,18 @@ public class EventsPassives {
 
 			boolean hasColaBackpack = false;
 
-			for (ItemStack armorStack : player.inventory.armorInventory) {
-				if (armorStack != null && armorStack.getItem() instanceof ItemCoreArmor && ((ItemCoreArmor) armorStack.getItem()).getName().equals("colabackpack")) {
+			for (ItemStack armorStack : player.inventory.armorInventory)
+			{
+				if (armorStack != null && armorStack.getItem() instanceof ItemCoreArmor && ((ItemCoreArmor) armorStack.getItem()).getName().equals("colabackpack"))
+				{
 					hasColaBackpack = true;
 				}
 			}
 
-			if (props.isCyborg()) {
-				if (hasColaBackpack && !props.hasColaBackpack()) {
+			if (props.isCyborg())
+			{
+				if (hasColaBackpack && !props.hasColaBackpack())
+				{
 					props.setMaxCola(props.getMaxCola() + 200);
 					props.setColaBackpack(true);
 
@@ -158,7 +184,9 @@ public class EventsPassives {
 
 					if (!player.worldObj.isRemote)
 						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-				} else if (!hasColaBackpack && props.hasColaBackpack()) {
+				}
+				else if (!hasColaBackpack && props.hasColaBackpack())
+				{
 					props.setMaxCola(props.getMaxCola() - 200);
 
 					if (props.getCola() > props.getMaxCola())
@@ -177,15 +205,18 @@ public class EventsPassives {
 
 			if (props.hasHakiActive())
 				props.addHakiTimer();
-			else {
+			else
+			{
 				if (props.getHakiTimer() > 0)
 					props.decHakiTimer();
 			}
 
-			if (props.getHakiTimer() > 2400) {
+			if (props.getHakiTimer() > 2400)
+			{
 				player.addPotionEffect(new PotionEffect(Potion.confusion.id, 100, 0));
 				player.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 0));
-				if (props.getHakiTimer() > 3600 + (props.getDoriki() / 15)) {
+				if (props.getHakiTimer() > 3600 + (props.getDoriki() / 15))
+				{
 					player.addPotionEffect(new PotionEffect(Potion.confusion.id, 100, 5));
 					player.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 5));
 					player.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
@@ -195,10 +226,12 @@ public class EventsPassives {
 				}
 			}
 
-			if (props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi")) {
+			if (props.getTempPreviousAbility().equals("geppo") || props.getTempPreviousAbility().equals("soranomichi"))
+			{
 				if (!player.onGround && player.worldObj.getBlock((int) player.posX, (int) player.posY - 1, (int) player.posZ) == Blocks.air)
 					player.fallDistance = 0;
-				else {
+				else
+				{
 					props.setTempPreviousAbility("n/a");
 				}
 			}
@@ -206,17 +239,21 @@ public class EventsPassives {
 	}
 
 	@SubscribeEvent
-	public void onEntityAttack(LivingHurtEvent event) {
-		if (event.source.getSourceOfDamage() instanceof EntityLivingBase && event.entityLiving instanceof EntityPlayer) {
+	public void onEntityAttack(LivingHurtEvent event)
+	{
+		if (event.source.getSourceOfDamage() instanceof EntityLivingBase && event.entityLiving instanceof EntityPlayer)
+		{
 			EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
 			EntityPlayer attacked = (EntityPlayer) event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(attacked);
 			AbilityProperties abilityProps = AbilityProperties.get(attacked);
 
-			if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi")) {
+			if (props.getUsedFruit().equalsIgnoreCase("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
+			{
 				Ability soulParade = abilityProps.getAbilityFromName(ListAttributes.SOULPARADE.getAttributeName());
 
-				if (soulParade != null && soulParade.isPassiveActive()) {
+				if (soulParade != null && soulParade.isPassiveActive())
+				{
 					attacker.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 1));
 					attacker.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 1));
 					new DFEffectHieSlowness(attacker, 100);
@@ -229,20 +266,24 @@ public class EventsPassives {
 			}
 		}
 
-		if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
+		if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+		{
 			EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
 			ExtendedEntityData props = ExtendedEntityData.get(attacker);
 			AbilityProperties abilityProps = AbilityProperties.get(attacker);
 			EntityLivingBase attacked = event.entityLiving;
 
-			if (props.getUsedFruit().equalsIgnoreCase("kilokilo")) {
-				if (attacker.isPotionActive(Potion.damageBoost)) {
+			if (props.getUsedFruit().equalsIgnoreCase("kilokilo"))
+			{
+				if (attacker.isPotionActive(Potion.damageBoost))
+				{
 					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KILO, attacked.posX, attacked.posY, attacked.posZ), attacker.dimension, attacker.posX, attacker.posY, attacker.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 					attacker.removePotionEffect(Potion.damageBoost.id);
 				}
 			}
 
-			if (props.getUsedFruit().equalsIgnoreCase("kagekage")) {
+			if (props.getUsedFruit().equalsIgnoreCase("kagekage"))
+			{
 				EntityDoppelman doppelman = (EntityDoppelman) WyHelper.getEntitiesNear(attacker, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
 
 				if (doppelman != null)
@@ -252,7 +293,8 @@ public class EventsPassives {
 			if (props.getUsedFruit().equalsIgnoreCase("dokudoku") && props.getZoanPoint().equalsIgnoreCase("venomDemon"))
 				attacked.addPotionEffect(new PotionEffect(Potion.poison.id, 60, 0));
 
-			if (props.hasBusoHakiActive()) {
+			if (props.hasBusoHakiActive())
+			{
 				double power = props.getDoriki() / 500;
 				event.ammount += power;
 			}
@@ -260,13 +302,17 @@ public class EventsPassives {
 	}
 
 	@SubscribeEvent
-	public void onEntityShootProjectile(ArrowLooseEvent event) {
-		if (event.entityPlayer != null) {
+	public void onEntityShootProjectile(ArrowLooseEvent event)
+	{
+		if (event.entityPlayer != null)
+		{
 			ExtendedEntityData props = ExtendedEntityData.get(event.entityPlayer);
 			AbilityProperties abilityProps = AbilityProperties.get(event.entityPlayer);
 
-			for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++) {
-				if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive() && DevilFruitsHelper.isSniperAbility(abilityProps.getAbilityFromSlot(i))) {
+			for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
+			{
+				if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive() && AbilitiesHelper.isSniperAbility(abilityProps.getAbilityFromSlot(i)))
+				{
 					abilityProps.getAbilityFromSlot(i).use(event.entityPlayer);
 					event.setCanceled(true);
 				}
@@ -275,12 +321,14 @@ public class EventsPassives {
 	}
 
 	@SubscribeEvent
-	public void onYomiDeath(YomiTriggerEvent event) {
-		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi")) {
-			
+	public void onYomiDeath(YomiTriggerEvent event)
+	{
+		if (event.oldPlayerData.getUsedFruit().equalsIgnoreCase("yomiyomi") && !event.oldPlayerData.getZoanPoint().equalsIgnoreCase("yomi"))
+		{
+
 			event.newPlayerData.setUsedFruit("yomiyomi");
 			event.newPlayerData.setZoanPoint("yomi");
-			
+
 			EntityPlayer player = (EntityPlayer) event.entity;
 
 			WyNetworkHelper.sendTo(new PacketSync(event.newPlayerData), (EntityPlayerMP) player);
@@ -289,55 +337,65 @@ public class EventsPassives {
 	}
 
 	@SubscribeEvent
-	public void onPlayerAction(PlayerInteractEvent event) {
+	public void onPlayerAction(PlayerInteractEvent event)
+	{
 		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
-		if (propz.isInAirWorld()) {
+		if (propz.isInAirWorld())
+		{
 			event.setCanceled(true);
 		}
 
 	}
 
 	@SubscribeEvent
-	public void onAttack(AttackEntityEvent event) {
+	public void onAttack(AttackEntityEvent event)
+	{
 		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
-		if (propz.isInAirWorld()) {
+		if (propz.isInAirWorld())
+		{
 			event.setCanceled(true);
 		}
-		if (propz.getUsedFruit().equalsIgnoreCase("kachikachi")) {
+		if (propz.getUsedFruit().equalsIgnoreCase("kachikachi"))
+		{
 			AbilityProperties abilityProps = AbilityProperties.get(event.entityPlayer);
 			Ability fireFist = abilityProps.getAbilityFromName(ListAttributes.HOTBOILINGSPECIAL.getAttributeName());
-			if(fireFist != null && fireFist.isPassiveActive()) {
+			if (fireFist != null && fireFist.isPassiveActive())
+			{
 				event.target.setFire(4);
 			}
 		}
 
-
 	}
 
 	@SubscribeEvent
-	public void onDamage(LivingAttackEvent event) {
-		if (event.entityLiving instanceof EntityPlayer) {
+	public void onDamage(LivingAttackEvent event)
+	{
+		if (event.entityLiving instanceof EntityPlayer)
+		{
 			ExtendedEntityData props = ExtendedEntityData.get((EntityPlayer) event.entity);
-			if (props.isInAirWorld()) {
+			if (props.isInAirWorld())
+			{
 				event.setCanceled(true);
 			}
 
-			if (event.source.getSourceOfDamage() instanceof EntityPlayer) {
-				if (event.entityLiving instanceof EntityPlayer) {
+			if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+			{
+				if (event.entityLiving instanceof EntityPlayer)
+				{
 					EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
 					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
 
-					if (attacker.getHeldItem() != null && ItemsHelper.isSword(attacker.getHeldItem()) && propz.getUsedFruit().equals("sabisabi") && !attacker.worldObj.isRemote) {
+					if (attacker.getHeldItem() != null && ItemsHelper.isSword(attacker.getHeldItem()) && propz.getUsedFruit().equals("sabisabi") && !attacker.worldObj.isRemote)
+					{
 						event.setCanceled(true);
 						attacker.getHeldItem().damageItem(50, attacker);
-						if(attacker.getHeldItem().getItemDamage() <= 0)
+						if (attacker.getHeldItem().getItemDamage() <= 0)
 							WyHelper.removeStackFromInventory(attacker, attacker.getHeldItem());
 					}
 
 				}
 			}
-
 
 		}
 	}

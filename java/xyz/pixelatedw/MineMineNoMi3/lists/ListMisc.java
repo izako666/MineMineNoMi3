@@ -377,7 +377,13 @@ public class ListMisc
 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_ACCEPT, "Accept");
 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_DECLINE, "Decline");
 		WyRegistry.registerName(ID.LANG_GUI_QUESTS_ACCEPTTEXT, "Do you wish to accept this quest ?");
-
+		
+		WyRegistry.registerName("category.mmnmkeys", "Mine Mine no Mi Keys");
+		WyRegistry.registerName("key.combatmode", "Combat Mode");
+		WyRegistry.registerName("key.playerui", "Player UI");
+		for(int i = 1; i < 9; i++)
+			WyRegistry.registerName("key.combatslot." + i, "Ability Slot " + i);
+		
 	}
 
 	private static void addITEM(Item item, String localizedName, CreativeTabs tab)

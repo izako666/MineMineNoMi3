@@ -16,7 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class JuryoProjectiles
@@ -73,7 +73,7 @@ public class JuryoProjectiles
 					int posY = (int)hit.entityHit.posY - 1;
 					int posZ = (int)hit.entityHit.posZ + z;
 					
-					if(DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
+					if(AbilitiesHelper.placeBlockIfAllowed(this.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
 					{
 						hit.entityHit.motionX = 0;
 						hit.entityHit.motionZ = 0;
@@ -84,7 +84,7 @@ public class JuryoProjectiles
 			}
 			else
 			{
-				DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.air, "all", "restricted", "ignore liquid");
+				AbilitiesHelper.placeBlockIfAllowed(this.worldObj, hit.blockX, hit.blockY, hit.blockZ, Blocks.air, "all", "restricted", "ignore liquid");
 			}
 		}
 	}

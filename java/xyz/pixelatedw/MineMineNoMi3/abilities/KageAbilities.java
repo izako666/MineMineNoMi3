@@ -22,10 +22,10 @@ public class KageAbilities
 	
 	static
 	{
-		Values.abilityWebAppExtraParams.put("brickbat", new String[] {"desc", "Launches bats created from the user\\'s shadow at the the opponent."});
+		Values.abilityWebAppExtraParams.put("brickbat", new String[] {"desc", "Launches bats created from the user's shadow at the the opponent."});
 		Values.abilityWebAppExtraParams.put("blackbox", new String[] {"desc", "Encases and suffocates the opponent in a box made of shadows."});
 		Values.abilityWebAppExtraParams.put("tsunotokage", new String[] {"desc", "The user creates a lizard-like shadow under his opponent, which pierces them from below."});
-		Values.abilityWebAppExtraParams.put("doppelman", new String[] {"desc", "Creates a living version of the user\\'s shadow to help them fight."});
+		Values.abilityWebAppExtraParams.put("doppelman", new String[] {"desc", "Creates a living version of the user's shadow to help them fight."});
 	}
 
 	public static Ability[] abilitiesArray = new Ability[]

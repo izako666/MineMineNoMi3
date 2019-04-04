@@ -23,6 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.commands.CommandGetWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandIssueBounty;
 import xyz.pixelatedw.MineMineNoMi3.commands.CommandRemoveDF;
 import xyz.pixelatedw.MineMineNoMi3.gui.GUIHandler;
+import xyz.pixelatedw.MineMineNoMi3.helpers.WebAppHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListBiomes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCraftingRecipes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
@@ -81,7 +82,7 @@ public class MainMod
 			Values.RESOURCES_FOLDER = basicPath.substring(0, basicPath.indexOf("/bin")).replace("file:/", "").replace("%20", " ") + "/src/main/resources";
 
 			WyHelper.generateLangFiles();
-			WyHelper.generateNewExtraWebAppFiles();
+			WebAppHelper.generateWebAppJSONs();
 		}
 	}
 

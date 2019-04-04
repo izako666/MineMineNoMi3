@@ -99,7 +99,7 @@ public class MainWorldGen implements IWorldGenerator
 			{
 				world.setBlock(posX, posY, posZ, blockToSpawn);
 				
-				System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
+				//System.out.println("" + blockToSpawn.getLocalizedName() + " spawned at /tp @p " + posX + " " + (posY + 1) + " " + posZ);
 				
 		    	if(!ID.DEV_EARLYACCESS)
 		    		WyTelemetry.addStat("spawnedDial_" + WyHelper.getFancyName(blockToSpawn.getLocalizedName()), 1);
@@ -133,7 +133,7 @@ public class MainWorldGen implements IWorldGenerator
 							WySchematicHelper.build(s, world, posX, posY - 4, posZ);	
 							ListExtraStructures.buildLargeShip(posX, posY, posZ, world, s.getName());
 						}
-						System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+						//System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 	
 				    	if(!ID.DEV_EARLYACCESS )
 				    		WyTelemetry.addStat("spawnedStructure_" + s.getName(), 1);
@@ -149,7 +149,7 @@ public class MainWorldGen implements IWorldGenerator
 								|| biome.biomeName.equals(biome.icePlains.biomeName) || biome.biomeName.equals(biome.desert.biomeName) || biome.biomeName.equals(biome.swampland.biomeName)) 
 								&& checkForDojoSpawn(s, world, posX, posY, posZ))
 						{		
-							System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
+							//System.out.println("" + s.getName() + " spawned at /tp @p " + posX + " " + posY + " " + posZ);
 							WySchematicHelper.build(s, world, posX, posY, posZ);	
 							ListExtraStructures.buildDojo(posX, posY, posZ, world);
 							worldData.countUpDojoSpawned();

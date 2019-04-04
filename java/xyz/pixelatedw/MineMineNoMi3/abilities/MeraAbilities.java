@@ -18,12 +18,12 @@ public class MeraAbilities
 {
 	static
 	{
-		Values.abilityWebAppExtraParams.put("hiken", new String[] {"desc", "Turns the user\\'s fist into flames and launches it towards the target."});
-		Values.abilityWebAppExtraParams.put("higan", new String[] {"desc", "Turns the user\\'s fingertips into flames and shoots bullets made of fire from them."});
+		Values.abilityWebAppExtraParams.put("hiken", new String[] {"desc", "Turns the user's fist into flames and launches it towards the target."});
+		Values.abilityWebAppExtraParams.put("higan", new String[] {"desc", "Turns the user's fingertips into flames and shoots bullets made of fire from them."});
 		Values.abilityWebAppExtraParams.put("hidaruma", new String[] {"desc", "Creates small green fireballs that set the target on fire."});
 		Values.abilityWebAppExtraParams.put("jujika", new String[] {"desc", "Launches a cross-shaped column of fire at the opponent, leaving a cross of fire."});
 		Values.abilityWebAppExtraParams.put("enjomo", new String[] {"desc", "Creates a circle of fire around the user, burning everyone inside of it."});
-		Values.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user\\'s flames into a gigantic fireball that the user hurls at the opponent."});
+		Values.abilityWebAppExtraParams.put("daienkaientei", new String[] {"desc", "Amasses the user's flames into a gigantic fireball that the user hurls at the opponent."});
 	}
 	
 	public static Ability[] abilitiesArray = new Ability[] {new Hiken(), new Higan(), new DaiEnkaiEntei(), new Hidaruma(), new Jujika(), new Enjomo()};

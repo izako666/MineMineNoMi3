@@ -31,8 +31,8 @@ public class YukiAbilities
 	{
 		Values.abilityWebAppExtraParams.put("fubuki", new String[] {"desc", "The user releases an extremely cold stream of snow that spreads into the air around them."});
 		Values.abilityWebAppExtraParams.put("kamakura", new String[] {"desc", "Creates an igloo-like snow barrier around the user."});
-		Values.abilityWebAppExtraParams.put("kamakurajussoshi", new String[] {"desc", "Like \"Kamakura\", but creates a multi-layered snow barrier."});		
-		Values.abilityWebAppExtraParams.put("yukirabi", new String[] {"desc", "Launches numerous hardened snowballs, that have the shape of a rabbit\\'s head."});
+		Values.abilityWebAppExtraParams.put("kamakurajussoshi", new String[] {"desc", "Like 'Kamakura', but creates a multi-layered snow barrier."});		
+		Values.abilityWebAppExtraParams.put("yukirabi", new String[] {"desc", "Launches numerous hardened snowballs, that have the shape of a rabbit's head."});
 		Values.abilityWebAppExtraParams.put("tabirayuki", new String[] {"desc", "The user creates a sword made of solid hardened snow."});
 		Values.abilityWebAppExtraParams.put("yukigaki", new String[] {"desc", "The user creates a huge wall of snow."});
 	}

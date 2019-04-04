@@ -18,7 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -100,7 +100,7 @@ public class DokuProjectiles
 					double offsetX = new Random().nextInt(5) - 3;
 					double offsetZ = new Random().nextInt(5) - 3;
 					
-					DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison, "air", "foliage");
+					AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison, "air", "foliage");
 				}
 			}
 		}

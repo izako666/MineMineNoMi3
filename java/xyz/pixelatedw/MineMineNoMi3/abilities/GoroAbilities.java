@@ -31,7 +31,7 @@ public class GoroAbilities
 	
 	static
 	{
-		Values.abilityWebAppExtraParams.put("elthor", new String[] {"desc", "Focuses the user\\'s electricity to strike the opponent with lightning from above."});
+		Values.abilityWebAppExtraParams.put("elthor", new String[] {"desc", "Focuses the user's electricity to strike the opponent with lightning from above."});
 		Values.abilityWebAppExtraParams.put("voltvari", new String[] {"desc", "Creates a concentrated ball of lightning, which varies in power."});
 		Values.abilityWebAppExtraParams.put("raigo", new String[] {"desc", "Creates a huge cloud filled with electricity, which causes massive damage."});
 		Values.abilityWebAppExtraParams.put("kari", new String[] {"desc", "Creates an electrical current around the user, which then explodes."});

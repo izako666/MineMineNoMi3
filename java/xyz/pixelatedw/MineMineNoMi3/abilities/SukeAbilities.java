@@ -28,7 +28,7 @@ public class SukeAbilities
 	static
 	{
 		Values.abilityWebAppExtraParams.put("shishanote", new String[] {"desc", "Shoots invisible projectiles that explode upon impact."});
-		Values.abilityWebAppExtraParams.put("skatting", new String[] {"desc", "Turns the user\\'s entire body invisible."});
+		Values.abilityWebAppExtraParams.put("skatting", new String[] {"desc", "Turns the user's entire body invisible."});
 	}
 	
 	public static Ability[] abilitiesArray = new Ability[] {new ShishaNoTe(), new Skatting(), new SukePunch()};

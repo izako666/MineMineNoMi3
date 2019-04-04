@@ -13,7 +13,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.PacketQuestSync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -37,7 +37,7 @@ public class EventsAbilityValidation
 				
 				if(props.getUsedFruit() != null && !props.getUsedFruit().equalsIgnoreCase("n/a"))
 				{					
-					ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
+					ItemStack df = AbilitiesHelper.getDevilFruitItem(props.getUsedFruit());
 					
 					abilityProps.clearDevilFruitAbilities();
 					props.setGear(1);
@@ -46,7 +46,7 @@ public class EventsAbilityValidation
 					
 					if(df != null && df.getItem() != null)
 						for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
-							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
+							if(!AbilitiesHelper.verifyIfAbilityIsBanned(a))
 								abilityProps.addDevilFruitAbility(a);
 					
 					for(Ability a : abilityProps.getAbilitiesInHotbar())
@@ -54,14 +54,14 @@ public class EventsAbilityValidation
 							a.startUpdate(player);
 				}
 				
-				DevilFruitsHelper.validateRacialMoves(player);
-				DevilFruitsHelper.validateStyleMoves(player);
+				AbilitiesHelper.validateRacialMoves(player);
+				AbilitiesHelper.validateStyleMoves(player);
 				
 				for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 				{
 					if(abilityProps.getAbilityFromSlot(i) != null)
 					{
-						if(DevilFruitsHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityFromSlot(i)))
+						if(AbilitiesHelper.verifyIfAbilityIsBanned(abilityProps.getAbilityFromSlot(i)))
 							abilityProps.setAbilityInSlot(i, null);
 					}
 				}			

@@ -26,7 +26,7 @@ public class UshiBisonAbilities
 
 	static
 	{
-		Values.abilityWebAppExtraParams.put("bisonpowerpoint", new String[] {"desc", "The user transforms into a half-bison hybrid, which focuses on strength, Allows the user to use \\'Kokutei Cross\\' and \\'Fiddle Banff\\'"});
+		Values.abilityWebAppExtraParams.put("bisonpowerpoint", new String[] {"desc", "The user transforms into a half-bison hybrid, which focuses on strength, Allows the user to use 'Kokutei Cross' and 'Fiddle Banff'"});
 		Values.abilityWebAppExtraParams.put("bisonspeedpoint", new String[] {"desc", ""});
 		Values.abilityWebAppExtraParams.put("kokuteicross", new String[] {"desc", "The transformed user crosses their hooves to hit the opponent."});
 		Values.abilityWebAppExtraParams.put("fiddlebanff", new String[] {"desc", "The transformed user dashes towards the opponent to crash against them with great power."});

@@ -46,10 +46,11 @@ import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
+import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
-public class DevilFruitsHelper
+public class AbilitiesHelper
 {
 
 	private static String[][] zoanModels = new String[][]
@@ -102,6 +103,27 @@ public class DevilFruitsHelper
 				}));
 		
 		return map;
+	}
+		
+	public static boolean isDevilFruitInWorld(World world, String devilFruitName)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(world);
+
+		if(worldData.isDevilFruitInWorld(devilFruitName))
+			return true;
+		
+		return false;
+	}
+	
+	public static boolean isDevilFruitInWorld(World world, AkumaNoMi devilFruit)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(world);
+		String name = devilFruit.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+		
+		if(worldData.isDevilFruitInWorld(name))
+			return true;
+		
+		return false;
 	}
 	
 	public static boolean isAffectedByWater(EntityLivingBase entity)

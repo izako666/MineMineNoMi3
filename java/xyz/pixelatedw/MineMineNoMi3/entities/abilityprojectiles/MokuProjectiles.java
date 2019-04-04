@@ -10,6 +10,7 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
@@ -79,18 +80,21 @@ public class MokuProjectiles
 		{	
 			if(this.worldObj.isRemote)
 			{
-				double offsetX = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-				double offsetY = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-				double offsetZ = (new Random().nextInt(20) + 1.0D - 10.0D) / 18.0D;
-				      
-				EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU, 
-						posX + offsetX, 
-						posY + offsetY, 
-						posZ + offsetZ, 
-						0, 0, 0)
-						.setParticleAge(15).setParticleScale(3F);
-				
-				MainMod.proxy.spawnCustomParticles(this, particle);	
+				for(int i = 0; i < 5; i++)
+				{
+					double offsetX = WyMathHelper.randomDouble();
+					double offsetY = WyMathHelper.randomDouble();
+					double offsetZ = WyMathHelper.randomDouble();
+					      
+					EntityParticleFX particle = new EntityParticleFX(this.worldObj, ID.PARTICLE_ICON_MOKU, 
+							posX + offsetX, 
+							posY + offsetY, 
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(15).setParticleScale(3F);
+					
+					MainMod.proxy.spawnCustomParticles(this, particle);	
+				}
 			}
 			
 			super.onUpdate();

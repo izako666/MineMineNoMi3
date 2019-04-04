@@ -24,7 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketEntityVelocity;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
@@ -78,7 +78,7 @@ public class MoguAbilities
 										player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 400, 2, true));
 		
 										Block tempBlock = player.worldObj.getBlock(posX, posY, posZ);
-										if (DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
+										if (AbilitiesHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid"))
 										{
 											player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
 											WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, posX, posY, posZ), player.dimension, posX, posY, posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
@@ -126,7 +126,7 @@ public class MoguAbilities
 					if(location[1] >= player.posY)
 					{
 						Block tempBlock = player.worldObj.getBlock(location[0], location[1], location[2]);
-						if(DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, location[0], location[1], location[2], Blocks.air, "core", "foliage"))
+						if(AbilitiesHelper.placeBlockIfAllowed(player.worldObj, location[0], location[1], location[2], Blocks.air, "core", "foliage"))
 						{
 							player.inventory.addItemStackToInventory(new ItemStack(tempBlock));
 							WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, location[0], location[1], location[2]), player.dimension, location[0], location[1], location[2], ID.GENERIC_PARTICLES_RENDER_DISTANCE);

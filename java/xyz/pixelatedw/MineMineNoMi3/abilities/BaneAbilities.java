@@ -21,8 +21,8 @@ public class BaneAbilities
 	static
 	{
 		Values.abilityWebAppExtraParams.put("springhopper", new String[] {"desc", "Turning the userps legs into springs, which launches them into the air."});
-		Values.abilityWebAppExtraParams.put("springdeathknock", new String[] {"desc", "By turning the user\\'s arm into a spring and compressing it, they can launch a powerful punch."});
-		Values.abilityWebAppExtraParams.put("springsnipe", new String[] {"desc", "Turning the user\\'s forelegs into springs, they can launch themselves directly at the opponent."});
+		Values.abilityWebAppExtraParams.put("springdeathknock", new String[] {"desc", "By turning the user's arm into a spring and compressing it, they can launch a powerful punch."});
+		Values.abilityWebAppExtraParams.put("springsnipe", new String[] {"desc", "Turning the user's forelegs into springs, they can launch themselves directly at the opponent."});
 		
 	}
 	

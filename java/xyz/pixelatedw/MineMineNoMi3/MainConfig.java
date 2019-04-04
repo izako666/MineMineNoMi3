@@ -13,6 +13,7 @@ public class MainConfig
 	private static Configuration config;
 	
 	public static String enableKeepIEEPAfterDeath;
+	public static String[] statsToKepp;
 	public static boolean enableShips;
 	public static boolean enableCamps;
 	public static boolean enableDFtoDrop;
@@ -25,6 +26,7 @@ public class MainConfig
 	public static boolean enableWantedPostersPackages;
 	public static boolean enableAnimeScreaming;
 	public static boolean enableSpecialFlying;
+	public static boolean enableOneFruitPerWorld;
 	public static double rateDFDrops;
 	public static double rateShipsSpawn;
 	public static int maxDojoSpawn;
@@ -53,6 +55,7 @@ public class MainConfig
 		config.load();
 		
 		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto").getString();
+		statsToKepp = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();
 		
 		enableShips = config.get(Configuration.CATEGORY_GENERAL, "Allow Ships to Spawn", true).getBoolean();
 		rateShipsSpawn = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Spawning Ships", 5).getDouble();
@@ -61,6 +64,7 @@ public class MainConfig
 		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false).getBoolean();
 		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false).getBoolean();
 		enableWantedPostersPackages  = config.get(Configuration.CATEGORY_GENERAL, "Allow Wanted Poster Packages", true).getBoolean();
+		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false).getBoolean();
 		
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
 		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
@@ -87,9 +91,7 @@ public class MainConfig
 		commandPermissionExtol = config.get("permissions", "Permission : /extol", 2).getInt();
 		commandPermissionIssueBounty = config.get("permissions", "Permission : /issueBounty", 2).getInt();
 		commandPermissionGetWantedPoster = config.get("permissions", "Permission : /getwantedposter", 2).getInt();
-
 		abilityRestrictions = config.get("permissions", "Ability Restrictions", new String[] {"example1", "example2"}).getStringList();		
-		
 		
 		config.save();
 	}

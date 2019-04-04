@@ -16,7 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -30,7 +30,7 @@ public class EventsDFWeaknesses
 			EntityLivingBase entity = event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(entity);
 
-			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity))
+			if(props.hasDevilFruit() && AbilitiesHelper.isAffectedByWater(entity))
 			{			
 				if(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode)
 					return;
@@ -52,7 +52,7 @@ public class EventsDFWeaknesses
 				if (ItemsHelper.hasKairosekiItem(player))
 					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
 				
-				if (DevilFruitsHelper.isNearbyKairoseki(player))
+				if (AbilitiesHelper.isNearbyKairoseki(player))
 				{
 					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{

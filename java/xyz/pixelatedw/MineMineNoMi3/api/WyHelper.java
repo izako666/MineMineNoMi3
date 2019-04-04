@@ -55,7 +55,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
 public class WyHelper
@@ -221,305 +221,6 @@ public class WyHelper
 				e.getStackTrace();
 			}
 		}
-	}
-
-	public static void generateNewExtraWebAppFiles()
-	{
-		writeFancyAbilitiesList();
-		
-		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
-		folder.mkdirs();
-
-		if (folder.exists())
-		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fruits.txt"), "UTF-8")))
-			{
-				writer.write("export const devilFruits: Group[] =\n[\n");
-				
-				// Devil Fruits
-				for (Item f : Values.devilfruits)
-				{
-					AkumaNoMi fruit = (AkumaNoMi) f;
-					ItemStack itemStack = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, fruit.getUnlocalizedName().substring(5)));
-					Map<String, Object> devilFruitElements = new LinkedHashMap<String, Object>();
-
-					devilFruitElements.put("name", "\'" + itemStack.getDisplayName() + "\'");
-					devilFruitElements.put("type", "\'" + fruit.getType().getName() + "\'");			
-					devilFruitElements.put("abilities", "[ " + generateAbilitiesString(fruit.abilities) + " ]");
-					
-					writer.write("{ ");
-					for(String devilFruitKey : devilFruitElements.keySet())
-					{
-						Object key = devilFruitElements.get(devilFruitKey);
-						if(key instanceof String)
-							writer.write( devilFruitKey + ": " + key + ", " );
-					}
-					writer.write("},\n");
-					
-					//writer.write("{ name: \'" + itemStack.getDisplayName() + "\', " + "type: \'" + fruit.getType().getName() + "\', " + "abilities: [" + getAbilitiesFor(fruit) + "] };\n");
-				}
-				
-				writer.write("];\n\n");
-				
-				writer.write("export const specialGroups: Group[] =\n[\n");
-				
-				// Human Collection
-				Ability[] humanAbilities = Stream.of(RokushikiAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
-				writer.write("{ name: \'Human\', type: \'n/a\', abilities: [ " + generateAbilitiesString(humanAbilities) + " ]},\n");
-				
-				// Fishman Collection
-				Ability[] fishmanAbilities = Stream.of(FishKarateAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
-				writer.write("{ name: \'Fishman\', type: \'n/a\', abilities: [ " + generateAbilitiesString(fishmanAbilities) + " ]},\n");
-
-				// Cybord Collection
-				Ability[] cyborgAbilities = Stream.of(CyborgAbilities.abilitiesArray, HakiAbilities.abilitiesArray).flatMap(Stream::of).toArray(Ability[]::new);
-				writer.write("{ name: \'Cyborg\', type: \'n/a\', abilities: [ " + generateAbilitiesString(cyborgAbilities) + " ]},\n");
-				
-				// Swordsman Collection
-				writer.write("{ name: \'Swordsman\', type: \'n/a\', abilities: [ " + generateAbilitiesString(SwordsmanAbilities.abilitiesArray) + " ]},\n");
-
-				// Sniper Collection
-				writer.write("{ name: \'Sniper\', type: \'n/a\', abilities: [ " + generateAbilitiesString(SniperAbilities.abilitiesArray) + " ]},\n");
-				
-				writer.write("];");
-				
-				writer.close();
-			}
-			catch (Exception e)
-			{
-				e.getStackTrace();
-			}
-		}
-	}
-	
-	private static String generateAbilitiesString(Ability[] abilities)
-	{
-		StringBuilder abilitiesString = new StringBuilder();
-		
-		for(Ability ability : abilities)
-		{
-			StringBuilder abilityString = new StringBuilder();		
-			abilityString.append("{ ");
-			
-			Map<String, Object> loadedParams = new LinkedHashMap<String, Object>();
-			AbilityAttribute abilityAttribute = ability.getAttribute();
-			
-			loadedParams.put("name", abilityAttribute.getAbilityDisplayName());
-			loadedParams.put("texture", WyHelper.getFancyName(abilityAttribute.getAbilityTexture()));
-			
-			if(abilityAttribute.getAbilityCooldown() > 0) loadedParams.put("cooldown", abilityAttribute.getAbilityCooldown() / 20);
-			if(abilityAttribute.getAbilityCharges() > 0) loadedParams.put("chargeTime", abilityAttribute.getAbilityCharges() / 20);
-			if(abilityAttribute.getProjectileDamage() > 1) loadedParams.put("projectileDamage", abilityAttribute.getProjectileDamage());
-			if(abilityAttribute.hasProjectile() && abilityAttribute.isRepeater()) loadedParams.put("projectileNumber", (abilityAttribute.getAbilityCooldown() / abilityAttribute.getAbilityRepeaterTime()) / abilityAttribute.getAbilityRepeaterTime());
-			if(abilityAttribute.getProjectileExplosionPower() > 0) loadedParams.put("projectileExplosion", abilityAttribute.getProjectileExplosionPower());
-
-			if(abilityAttribute.getPotionEffectsForAoE() != null && abilityAttribute.getPotionEffectsForAoE().length > 0) loadedParams.put("aoeEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForAoE()) + "]");
-			if(abilityAttribute.getPotionEffectsForProjectile() != null && abilityAttribute.getPotionEffectsForProjectile().length > 0) loadedParams.put("onHitEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForProjectile()) + "]");
-			if(abilityAttribute.getPotionEffectsForUser() != null && abilityAttribute.getPotionEffectsForUser().length > 0) loadedParams.put("selfEffects", "[" + getPotionEffectsFor(abilityAttribute.getPotionEffectsForUser()) + "]");
-
-			for(String manualParamKey : Values.abilityWebAppExtraParams.keySet())
-			{
-				if(WyHelper.getFancyName(abilityAttribute.getAttributeName()).equalsIgnoreCase(manualParamKey))
-				{
-					String[] params = Values.abilityWebAppExtraParams.get(manualParamKey);
-					
-					for(int j = 0; j < params.length; j++)
-					{
-						String parm = params[j];
-						Object paramValue = params[++j];
-
-						try
-						{
-							paramValue = Integer.parseInt((String) paramValue);
-						}
-						catch(Exception e) {}
-						
-						if(loadedParams.containsKey(parm))
-							loadedParams.replace(parm, paramValue);
-						else
-							loadedParams.put(parm, paramValue);
-					}
-				}
-			}
-			
-			for(String loadedParamKey : loadedParams.keySet())
-			{
-				Object key = loadedParams.get(loadedParamKey);
-				if((key instanceof Integer || key instanceof Double || key instanceof Float) || (loadedParamKey.equalsIgnoreCase("aoeEffects") || loadedParamKey.equalsIgnoreCase("onHitEffects") || loadedParamKey.equalsIgnoreCase("selfEffects")))
-					abilityString.append(loadedParamKey + ": " + key + ",");
-				else if(loadedParams.get(loadedParamKey) instanceof String)
-					abilityString.append(loadedParamKey + ": \'" + key + "\',");
-			}		
-			
-			abilityString.append("},");		
-			abilitiesString.append(abilityString.toString());
-		}
-		
-		return abilitiesString.toString();
-	}
-	
-	public static void generateExtraWebAppFiles()
-	{
-		writeFancyAbilitiesList();
-		
-		Map<String, Ability> sorted = AbilityManager.instance().getHashMap();
-		Set set = sorted.entrySet();
-		Iterator i = set.iterator();
-
-		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
-		folder.mkdirs();
-
-		if (folder.exists())
-		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/abilities.txt"), "UTF-8")))
-			{
-				while (i.hasNext())
-				{
-					Map.Entry entry = (Map.Entry) i.next();
-
-					Ability abl = ((Ability) entry.getValue());
-
-					HashMap<String, Object> loadedParams = new HashMap<String, Object>();
-					
-					loadedParams.put("name", abl.getAttribute().getAttributeName());
-					
-					if(abl.getAttribute().getAbilityCooldown() > 0) loadedParams.put("cooldown", abl.getAttribute().getAbilityCooldown() / 20);
-					if(abl.getAttribute().getAbilityCharges() > 0) loadedParams.put("chargeTime", abl.getAttribute().getAbilityCharges() / 20);
-					if(abl.getAttribute().getProjectileDamage() > 1) loadedParams.put("projectileDamage", abl.getAttribute().getProjectileDamage());
-					if(abl.getAttribute().hasProjectile() && abl.getAttribute().isRepeater()) loadedParams.put("projectileNumber", (abl.getAttribute().getAbilityCooldown() / abl.getAttribute().getAbilityRepeaterTime()) / abl.getAttribute().getAbilityRepeaterTime());
-					if(abl.getAttribute().getProjectileExplosionPower() > 0) loadedParams.put("projectileExplosion", abl.getAttribute().getProjectileExplosionPower());
-
-					if(abl.getAttribute().getPotionEffectsForAoE() != null && abl.getAttribute().getPotionEffectsForAoE().length > 0) loadedParams.put("aoeEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForAoE()) + "]");
-					if(abl.getAttribute().getPotionEffectsForProjectile() != null && abl.getAttribute().getPotionEffectsForProjectile().length > 0) loadedParams.put("onHitEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForProjectile()) + "]");
-					if(abl.getAttribute().getPotionEffectsForUser() != null && abl.getAttribute().getPotionEffectsForUser().length > 0) loadedParams.put("selfEffects", "[" + getPotionEffectsFor(abl.getAttribute().getPotionEffectsForUser()) + "]");
-
-					for(String manualParamKey : Values.abilityWebAppExtraParams.keySet())
-					{
-						if(WyHelper.getFancyName(abl.getAttribute().getAttributeName()).equalsIgnoreCase(manualParamKey))
-						{
-							String[] params = Values.abilityWebAppExtraParams.get(manualParamKey);
-							
-							for(int j = 0; j < params.length; j++)
-							{
-								String parm = params[j];
-								Object paramValue = params[++j];
-
-								try
-								{
-									paramValue = Integer.parseInt((String) paramValue);
-								}
-								catch(Exception e) {}
-								
-								if(loadedParams.containsKey(parm))
-									loadedParams.replace(parm, paramValue);
-								else
-									loadedParams.put(parm, paramValue);
-							}
-						}
-					}
-					
-					StringBuilder finalString = new StringBuilder();
-						
-					finalString.append("export var " + WyHelper.getFancyNameNoLowerCase(abl.getAttribute().getAttributeName()) + ": Ability = {" );
-
-					for(String loadedParamKey : loadedParams.keySet())
-					{
-						if((loadedParams.get(loadedParamKey) instanceof Integer || loadedParams.get(loadedParamKey) instanceof Double || loadedParams.get(loadedParamKey) instanceof Float)
-								|| (loadedParamKey.equalsIgnoreCase("aoeEffects") || loadedParamKey.equalsIgnoreCase("onHitEffects") || loadedParamKey.equalsIgnoreCase("selfEffects")))
-							finalString.append(loadedParamKey + ": " + loadedParams.get(loadedParamKey) + ",");
-						else if(loadedParams.get(loadedParamKey) instanceof String)
-							finalString.append(loadedParamKey + ": \'" + loadedParams.get(loadedParamKey) + "\',");
-					}
-					
-					finalString.append("};\n");
-					
-					writer.write(finalString.toString());					
-				}
-				writer.close();
-			}
-			catch (Exception e)
-			{
-				e.getStackTrace();
-			}			
-
-			try (Writer writer = new
-					BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fruits.txt"), "UTF-" +
-					"8")))
-			{
-				for (Item f : Values.devilfruits)
-				{
-					AkumaNoMi fruit = (AkumaNoMi) f;
-
-					ItemStack itemStack = new ItemStack(GameRegistry.findItem(ID.PROJECT_ID, fruit.getUnlocalizedName().substring(5)));
-
-					writer.write("export var " + WyHelper.getFancyNameNoLowerCase(itemStack.getDisplayName()) + ": Group = {" + "name: \'" + itemStack.getDisplayName() + "\', " + "type: \'" + fruit.getType().getName() + "\', " + "abilities: [" + getAbilitiesFor(fruit) + "] " + "};\n");
-
-				}
-				writer.close();
-			}
-			catch (Exception e)
-			{
-				e.getStackTrace();
-			}
-		}
-	}
-
-	private static void writeFancyAbilitiesList()
-	{
-		File folder = new File(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/");
-		folder.mkdirs();
-
-		if (folder.exists())
-		{
-			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/fancylist.txt"), "UTF-8")))
-			{
-				for (AkumaNoMi devilFruit : Values.devilfruits)
-				{
-					writer.write(devilFruit.getItemStackDisplayName(new ItemStack(devilFruit)) + "\n");
-					for(Ability ability : devilFruit.abilities)
-					{
-						writer.write("> " + ability.getAttribute().getAbilityDisplayName() + "\n");
-					}
-					writer.write("\n");
-				}
-			}
-			catch (Exception e)
-			{
-				e.getStackTrace();
-			}
-		}
-	}
-	
-	private static String getAbilitiesFor(AkumaNoMi df)
-	{
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < df.abilities.length; i++)
-		{
-			if (i < df.abilities.length - 1)
-				builder.append("" + WyHelper.getFancyNameNoLowerCase(df.abilities[i].getAttribute().getAttributeName()) + ", ");
-			else
-				builder.append("" + WyHelper.getFancyNameNoLowerCase(df.abilities[i].getAttribute().getAttributeName()) + "");
-		}
-		String abilitiesList = builder.toString();
-
-		return abilitiesList;
-	}
-
-	private static String getPotionEffectsFor(PotionEffect[] pe)
-	{
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < pe.length; i++)
-		{
-			double d = Math.ceil(((double) pe[i].getDuration() / 24));
-			
-			if (i < pe.length - 1)
-				builder.append("\'" + I18n.format(pe[i].getEffectName()) + " " + String.format("%.0f", d) + " " + (d == 1 ? "second" : "seconds") + " (" + (pe[i].getAmplifier() > 0 ? "+" : "-") + ")\', ");
-			else
-				builder.append("\'" + I18n.format(pe[i].getEffectName()) + " " + String.format("%.0f", d) + " " + (d == 1 ? "second" : "seconds") + " (" + (pe[i].getAmplifier() > 0 ? "+" : "-") + ")\'");
-		}
-		String potionList = builder.toString();
-
-		return potionList;
 	}
 
 	/*
@@ -761,7 +462,7 @@ public class WyHelper
 		{
 			if(x == -sizes[0] || x == sizes[0] || y == -sizes[1] || y == sizes[1] || z == -sizes[2] || z == sizes[2])
 			{
-				DevilFruitsHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
+				AbilitiesHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
 				blocks.add(new int[] {(int)posX + x, (int)posY + y, (int)posZ + z} );
 			}
 		}
@@ -781,7 +482,7 @@ public class WyHelper
 		for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
 		for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
 		{
-			DevilFruitsHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
+			AbilitiesHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
 			blocks.add(new int[] {(int)posX + x, (int)posY + y, (int)posZ + z} );
 		}
 		
@@ -803,7 +504,7 @@ public class WyHelper
 					{
 						public void call(int x, int y, int z)
 						{
-							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
+							AbilitiesHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
 							blocks.add(new int[] {x, y, z});
 						}
 					});
@@ -835,7 +536,7 @@ public class WyHelper
 					{
 						public void call(int x, int y, int z)
 						{
-							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
+							AbilitiesHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
 							blocks.add(new int[] {x, y, z});
 						}
 					});

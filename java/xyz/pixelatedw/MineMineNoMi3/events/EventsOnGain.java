@@ -28,7 +28,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.BountyEvent;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 public class EventsOnGain
@@ -88,16 +88,16 @@ public class EventsOnGain
 
 		if(ability instanceof KenbunshokuHaki || ability instanceof BusoshokuHaki)
 		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
+			if (props.getDoriki() >= doriki && !abilityProps.hasHakiAbility(ability) && !AbilitiesHelper.verifyIfAbilityIsBanned(ability))
 				abilityProps.addHakiAbility(ability);
-			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
+			if ((props.getDoriki() < doriki || AbilitiesHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasHakiAbility(ability))
 				abilityProps.removeHakiAbility(ability);
 		}
 		else
 		{
-			if (props.getDoriki() >= doriki && !abilityProps.hasRacialAbility(ability) && !DevilFruitsHelper.verifyIfAbilityIsBanned(ability))
+			if (props.getDoriki() >= doriki && !abilityProps.hasRacialAbility(ability) && !AbilitiesHelper.verifyIfAbilityIsBanned(ability))
 				abilityProps.addRacialAbility(ability);
-			if ((props.getDoriki() < doriki || DevilFruitsHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
+			if ((props.getDoriki() < doriki || AbilitiesHelper.verifyIfAbilityIsBanned(ability)) && abilityProps.hasRacialAbility(ability))
 				abilityProps.removeRacialAbility(ability);	
 		}
 	}	

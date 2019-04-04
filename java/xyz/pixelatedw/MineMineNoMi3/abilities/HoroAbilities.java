@@ -14,7 +14,7 @@ public class HoroAbilities
 
 	static
 	{
-		Values.abilityWebAppExtraParams.put("negativehollow", new String[] {"desc", "The user launches a ghost that drains the target\\'s will."});
+		Values.abilityWebAppExtraParams.put("negativehollow", new String[] {"desc", "The user launches a ghost that drains the target's will."});
 		Values.abilityWebAppExtraParams.put("minihollow", new String[] {"desc", "Launches small ghosts at the opponent, exploding upon impact."});
 		Values.abilityWebAppExtraParams.put("tokuhollow", new String[] {"desc", "Creates a huge ghost that causes a massive explosion upon impact."});
 	}

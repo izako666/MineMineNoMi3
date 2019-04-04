@@ -20,7 +20,7 @@ public class NikyuAbilities
 	{
 		Values.abilityWebAppExtraParams.put("ursusshock", new String[] {"desc", "The user compresses air and sends it towards the opponent to create a massive explosion."});
 		Values.abilityWebAppExtraParams.put("padho", new String[] {"desc", "Launches a paw-shaped shockwave at the opponent."});
-		Values.abilityWebAppExtraParams.put("tsupparipadho", new String[] {"desc", "Similar to \"Pad Ho\", but fires a barrage of shockwaves."});
+		Values.abilityWebAppExtraParams.put("tsupparipadho", new String[] {"desc", "Similar to 'Pad Ho', but fires a barrage of shockwaves."});
 		Values.abilityWebAppExtraParams.put("hanpatsu", new String[] {"desc", "Anyone the user punches gets sent flying far into the air."});
 	}
 	

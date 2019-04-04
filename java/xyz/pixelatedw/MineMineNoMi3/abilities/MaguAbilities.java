@@ -21,7 +21,7 @@ public class MaguAbilities
 	{
 		Values.abilityWebAppExtraParams.put("daifunka", new String[] {"desc", "The user covers their fist in lava and fires it at the opponent."});
 		Values.abilityWebAppExtraParams.put("meigo", new String[] {"desc", "The user transforms their arm into magma and thrusts it at the opponent."});
-		Values.abilityWebAppExtraParams.put("ryuseikazan", new String[] {"desc", "Functions like \"Dai Funka\", but multiple fists are launched at the opponent."});
+		Values.abilityWebAppExtraParams.put("ryuseikazan", new String[] {"desc", "Functions like 'Dai Funka', but multiple fists are launched at the opponent."});
 		Values.abilityWebAppExtraParams.put("bakuretsukazan", new String[] {"desc", "By spreading magma to the surroundings, the user turns everything into lava."});
 	}
 	

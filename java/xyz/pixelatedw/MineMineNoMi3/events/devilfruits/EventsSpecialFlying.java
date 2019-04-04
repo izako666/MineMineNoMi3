@@ -5,6 +5,7 @@ import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -13,10 +14,12 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketSpecialFlying;
 
 public class EventsSpecialFlying
 {
@@ -29,33 +32,35 @@ public class EventsSpecialFlying
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 
-
 			Ability abareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
 			boolean hasAbareHimatsuri = props.getUsedFruit().equalsIgnoreCase("zushizushi") && abareHimatsuri != null && abareHimatsuri.isPassiveActive();
 			
 			boolean hasToriFruit = props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");
 			
-			boolean hasFlyingFruit = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
+			boolean hasFlyingFruit = Arrays.stream(AbilitiesHelper.flyingFruits).anyMatch(p ->
 			{				
 				return props.getUsedFruit().equalsIgnoreCase(p);
 			});	
 			
 			if(!player.capabilities.isCreativeMode)
 			{
-				if((MainConfig.enableSpecialFlying && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)
+				if(!event.entityLiving.worldObj.isRemote)
 				{
-					if(player.isInWater())
+					if((MainConfig.enableSpecialFlying && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)
+					{
+						if(player.isInWater())
+							player.capabilities.isFlying = false;
+						
+						WyNetworkHelper.sendTo(new PacketSpecialFlying(true), (EntityPlayerMP) player);
+	
+						if(!player.capabilities.allowFlying)
+							player.capabilities.isFlying = false;
+					}
+					else
+					{
+						WyNetworkHelper.sendTo(new PacketSpecialFlying(false), (EntityPlayerMP) player);
 						player.capabilities.isFlying = false;
-					
-					player.capabilities.allowFlying = true;
-
-					if(!player.capabilities.allowFlying)
-						player.capabilities.isFlying = false;
-				}
-				else
-				{
-					player.capabilities.allowFlying = false;
-					player.capabilities.isFlying = false;
+					}
 				}
 			
 				if(player.capabilities.isFlying && player.worldObj.isRemote)

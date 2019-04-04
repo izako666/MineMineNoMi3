@@ -22,6 +22,7 @@ import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
@@ -94,6 +95,7 @@ public class EventsCore
 				String race = oldProps.getRace();
 				String fightStyle = oldProps.getFightStyle();
 				String crew = oldProps.getCrew();
+				int doriki = oldProps.getDoriki() / 3;
 
 				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
 				props.setFaction(faction);
@@ -102,6 +104,33 @@ public class EventsCore
 				props.setCrew(crew);			
 				props.setMaxCola(100);
 				props.setCola(oldProps.getMaxCola());
+				props.setDoriki(doriki);
+			}
+			else if(MainConfig.enableKeepIEEPAfterDeath.equals("custom"))
+			{
+				ExtendedEntityData oldProps = ExtendedEntityData.get(e.original);
+				ExtendedEntityData props = ExtendedEntityData.get(e.entityPlayer);
+
+				for(String stat : MainConfig.statsToKepp)
+				{
+					switch(WyHelper.getFancyName(stat))
+					{
+						case "doriki":
+							props.setDoriki(oldProps.getDoriki()); break;
+						case "bounty":
+							props.setBounty(oldProps.getBounty()); break;
+						case "belly":
+							props.setBelly(oldProps.getBelly()); break;
+						case "race":
+							props.setRace(oldProps.getRace()); break;
+						case "faction":
+							props.setFaction(oldProps.getFaction()); break;
+						case "fightingstyle":
+							props.setFightStyle(oldProps.getFightStyle()); break;
+						case "devilfruit":
+							props.setUsedFruit(oldProps.getUsedFruit()); break;
+					}
+				}
 			}
 					
 			NBTTagCompound compound = new NBTTagCompound();

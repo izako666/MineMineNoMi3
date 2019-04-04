@@ -219,6 +219,8 @@ ability.yukirabi.name=Yuki Rabi
 ability.zouhybridpoint.name=Hybrid Point
 ability.zoupoint.name=Zou Point
 
+category.mmnmkeys=Mine Mine no Mi Keys
+
 entity.Arlong.name=Arlong
 entity.Bandit with Sword.name=Bandit with Sword
 entity.Black Knight.name=Black Knight
@@ -385,6 +387,17 @@ item.zushizushinomi.name=Zushi Zushi no Mi
 itemGroup.tab1=Devil Fruits
 itemGroup.tab2=Equipment
 itemGroup.tab3=Miscellaneous
+
+key.combatmode=Combat Mode
+key.combatslot.1=Ability Slot 1
+key.combatslot.2=Ability Slot 2
+key.combatslot.3=Ability Slot 3
+key.combatslot.4=Ability Slot 4
+key.combatslot.5=Ability Slot 5
+key.combatslot.6=Ability Slot 6
+key.combatslot.7=Ability Slot 7
+key.combatslot.8=Ability Slot 8
+key.playerui=Player UI
 
 quest.bountylowlevel01.name=Pirate Hunter
 quest.bountylowlevel01_0.desc=Some low-life pirates are terrorizing the local villagers

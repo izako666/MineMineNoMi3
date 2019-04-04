@@ -23,7 +23,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Hiken;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MeraProjectiles.Jujika;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class HieProjectiles 
@@ -107,7 +107,7 @@ public class HieProjectiles
 				new DFEffectHieSlowness(entity, 100);
 			}
 			
-			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)posX, (int)posY, (int)posZ, Blocks.packed_ice, "core", "foliage");
+			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)posX, (int)posY, (int)posZ, Blocks.packed_ice, "core", "foliage");
 		}
 		
 		public void onUpdate()

@@ -15,7 +15,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketShounenScream;
 
 public class Ability 
@@ -319,7 +319,7 @@ public class Ability
 		{
 			while(isDisabled)
 			{
-				if( !DevilFruitsHelper.isNearbyKairoseki(player)  )
+				if( !AbilitiesHelper.isNearbyKairoseki(player)  )
 				{
 			    	disable(player, false);
 					setCooldownActive(false);

@@ -28,7 +28,7 @@ public class PikaAbilities
 		Values.abilityWebAppExtraParams.put("yatanokagami", new String[] {"desc", "Uses light to instantly teleport the user to their desired location."});
 		Values.abilityWebAppExtraParams.put("amaterasu", new String[] {"desc", "Creates an immense beam of light, which causes massive damage."});
 		Values.abilityWebAppExtraParams.put("flash", new String[] {"desc", "The user creates a bright flash of light, blinding their opponents."});
-		Values.abilityWebAppExtraParams.put("amanomurakumo", new String[] {"desc", "Focuses light in the user\\'s hand to create a sword."});
+		Values.abilityWebAppExtraParams.put("amanomurakumo", new String[] {"desc", "Focuses light in the user's hand to create a sword."});
 
 	}
 	

@@ -85,13 +85,13 @@ public class BlockPoison extends Block
     public void updateTick(World world, int x, int y, int z, Random rand) 
     {
     	if(world.getBlock(x, y - 1, z) == Blocks.air || world.getBlock(x, y - 1, z) instanceof BlockBush)
-    		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+    		world.setBlock(x, y, z, Blocks.air);
 
     	if(ticks > 0)
     		ticks--;
     	else
     	{
-    		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+    		world.setBlock(x, y, z, Blocks.air);
     		ticks = 200 + rand.nextInt(50);
     	}
     	

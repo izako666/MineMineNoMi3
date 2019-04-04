@@ -1,14 +1,13 @@
 package xyz.pixelatedw.MineMineNoMi3.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
-import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorldData;
 
 public class ExtendedWorldData extends WorldSavedData
 {
@@ -18,7 +17,8 @@ public class ExtendedWorldData extends WorldSavedData
 	private boolean isSwordsmanDojoSpawned = false;
 	private int totalDojosSpawned;
 	private HashMap<String, Long> issuedBounties = new HashMap<String, Long>();
-		
+	private List<String> devilFruitsInWorld = new ArrayList<String>();
+	
 	public ExtendedWorldData()
 	{
 		super(IDENTIFIER);
@@ -45,13 +45,18 @@ public class ExtendedWorldData extends WorldSavedData
 		 this.isSwordsmanDojoSpawned = nbt.getBoolean("isSwordsmanDojoSpawned");
 		 this.totalDojosSpawned = nbt.getInteger("totalDojosSpawned");
 		 
-		 NBTTagCompound bounties = nbt.getCompoundTag("issuedBounties");
-		 
+		 NBTTagCompound bounties = nbt.getCompoundTag("issuedBounties");	 
 		 this.issuedBounties.clear();
-
 		 bounties.func_150296_c().stream().forEach(x -> 
 		 {
 			 this.issuedBounties.put((String)x, bounties.getLong((String)x));
+		 });
+		 
+		 NBTTagCompound devilFruits = nbt.getCompoundTag("devilFruits");	 
+		 this.devilFruitsInWorld.clear();
+		 devilFruits.func_150296_c().stream().forEach(x -> 
+		 {
+			 this.devilFruitsInWorld.add((String) x);
 		 });
 	}
 
@@ -60,17 +65,26 @@ public class ExtendedWorldData extends WorldSavedData
 		nbt.setBoolean("isSwordsmanDojoSpawned",  this.isSwordsmanDojoSpawned);
 		nbt.setInteger("totalDojosSpawned", this.totalDojosSpawned);
 		
-		NBTTagCompound bounties = new NBTTagCompound();
-		
+		NBTTagCompound bounties = new NBTTagCompound();	
 		if(issuedBounties.size() > 0)
 		{
 			issuedBounties.entrySet().stream().forEach(x -> 
 			{
 				bounties.setLong(x.getKey(), x.getValue());
 			});
-		}
-		
+		}		
 		nbt.setTag("issuedBounties", bounties);
+		
+		NBTTagCompound devilFruits = new NBTTagCompound();	
+		if(devilFruitsInWorld.size() > 0)
+		{
+			devilFruitsInWorld.stream().forEach(x -> 
+			{
+				devilFruits.setBoolean(x, true);
+			});
+		}		
+		nbt.setTag("devilFruits", devilFruits);
+	
 	}
 	
 	public HashMap<String, Long> getAllBounties()
@@ -131,4 +145,17 @@ public class ExtendedWorldData extends WorldSavedData
 		markDirty();
 	}
 	
+	public void addDevilFruitInWorld(String name)
+	{
+		if(!this.devilFruitsInWorld.contains(name))
+		{
+			this.devilFruitsInWorld.add(name);
+			markDirty();
+		}
+	}
+	
+	public boolean isDevilFruitInWorld(String name)
+	{
+		return this.devilFruitsInWorld.contains(name);
+	}
 }

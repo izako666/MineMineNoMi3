@@ -19,7 +19,7 @@ public class DoruAbilities
 		Values.abilityWebAppExtraParams.put("candlehouse", new String[] {"desc", "Creates a big house-like structure made of wax, to protect the user."});
 		Values.abilityWebAppExtraParams.put("dorudoruartsmori", new String[] {"desc", "The user fires a harpoon made of wax at the opponent."});
 		Values.abilityWebAppExtraParams.put("dorudoruartsken", new String[] {"desc", "The user uses hardened wax to create a sword."});
-		Values.abilityWebAppExtraParams.put("candlelock", new String[] {"desc", "Traps the opponent\\'s feet in hardened wax, which makes them unable to move."});
+		Values.abilityWebAppExtraParams.put("candlelock", new String[] {"desc", "Traps the opponent's feet in hardened wax, which makes them unable to move."});
 	}
 	
 	public static Ability[] abilitiesArray = new Ability[] {new DoruDoruArtsMori(), new DoruDoruArtsKen(), new CandleWall(), new CandleHouse(), new CandleLock()};

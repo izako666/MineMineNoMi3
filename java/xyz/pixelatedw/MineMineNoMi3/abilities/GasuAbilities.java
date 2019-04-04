@@ -23,8 +23,8 @@ public class GasuAbilities
 	static
 	{
 		Values.abilityWebAppExtraParams.put("karakuni", new String[] {"desc", "Removes the oxygen around the user, suffocating everyone in the vicinity."});
-		Values.abilityWebAppExtraParams.put("gastanet", new String[] {"desc", "The user fills castanets with unstable gas, whcih causes an explosion when slammed together."});
-		Values.abilityWebAppExtraParams.put("gastille", new String[] {"desc", "Shoots a beam of poisonous gas from the user\\'s mouth, that explodes on impact."});		
+		Values.abilityWebAppExtraParams.put("gastanet", new String[] {"desc", "The user fills castanets with unstable gas, which causes an explosion when slammed together."});
+		Values.abilityWebAppExtraParams.put("gastille", new String[] {"desc", "Shoots a beam of poisonous gas from the user's mouth, that explodes on impact."});		
 		Values.abilityWebAppExtraParams.put("gasrobe", new String[] {"desc", "Launches a cloud of poison at the opponent."});
 		Values.abilityWebAppExtraParams.put("bluesword", new String[] {"desc", "The user fills a hilt with lamable gas, them sets it on fire to create a sword."});
 	}

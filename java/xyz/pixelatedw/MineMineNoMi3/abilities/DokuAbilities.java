@@ -18,7 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.DokuProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
@@ -112,7 +112,7 @@ public class DokuAbilities
 				for(int x = -1; x < 1; x++)
 				for(int z = -1; z < 1; z++)
 				{
-					DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX + x, (int)player.posY, (int)player.posZ + z, ListMisc.DemonPoison, "core", "foliage", "air");
+					AbilitiesHelper.placeBlockIfAllowed(player.worldObj, (int)player.posX + x, (int)player.posY, (int)player.posZ + z, ListMisc.DemonPoison, "core", "foliage", "air");
 				}
 				/*if (player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != Blocks.air
 				&& player.worldObj.getBlock((int)player.posX, (int)player.posY - 1, (int)player.posZ) != ListMisc.Poison

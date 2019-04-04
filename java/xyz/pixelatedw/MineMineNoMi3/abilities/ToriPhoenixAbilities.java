@@ -24,8 +24,8 @@ public class ToriPhoenixAbilities
 
 	static
 	{
-		Values.abilityWebAppExtraParams.put("hybridpoint", new String[] {"desc", "The user transforms into a phoenix-human hybrid, which allows them to fly. Allows the user to use \\'Phoenix Goen\\' "});
-		Values.abilityWebAppExtraParams.put("phoenixpoint", new String[] {"desc", "The user fully transforms into a phoenix, allowing them to fly at great speed. Allows the user to use both \\'Phoenix Goen\\' and \\'Tensei no Soen\\'"});
+		Values.abilityWebAppExtraParams.put("hybridpoint", new String[] {"desc", "The user transforms into a phoenix-human hybrid, which allows them to fly. Allows the user to use 'Phoenix Goen' "});
+		Values.abilityWebAppExtraParams.put("phoenixpoint", new String[] {"desc", "The user fully transforms into a phoenix, allowing them to fly at great speed. Allows the user to use both 'Phoenix Goen' and 'Tensei no Soen'"});
 		Values.abilityWebAppExtraParams.put("phoenixgoen", new String[] {"desc", "Launches a powerful fiery shockwave made of blue flames at the target."});
 		Values.abilityWebAppExtraParams.put("tenseinosoen", new String[] {"desc", "While in the air, the user amasses spiraling flames, then slams into the ground, releasing a massive shockwave."});		
 		Values.abilityWebAppExtraParams.put("blueflamesofresurrection", new String[] {"desc", "Blue phoenix flames grant the user regeneration."});
