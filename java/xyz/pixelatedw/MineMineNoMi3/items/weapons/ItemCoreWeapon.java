@@ -231,7 +231,13 @@ public class ItemCoreWeapon extends Item
 
 		return this.itemIcon;
 	}
-
+	
+    @SideOnly(Side.CLIENT)
+    public boolean isFull3D() 
+    {
+    	return true;
+    }
+	
     @SideOnly(Side.CLIENT)
     public IIcon getIconIndex(ItemStack stack)
     {

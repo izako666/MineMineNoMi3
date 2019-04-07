@@ -25,7 +25,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OpeProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.Heart;
 import xyz.pixelatedw.MineMineNoMi3.items.weapons.ItemCoreWeapon;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -69,7 +69,7 @@ public class OpeAbilities
 
 		public void use(EntityPlayer player)
 		{
-			if (AbilitiesHelper.isEntityInRoom(player))
+			if (DevilFruitsHelper.isEntityInRoom(player))
 			{
 				if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemCoreWeapon)
 				{
@@ -129,11 +129,11 @@ public class OpeAbilities
 		{
 			if (!this.isPassiveActive())
 			{
-				if (AbilitiesHelper.isEntityInRoom(player))
+				if (DevilFruitsHelper.isEntityInRoom(player))
 				{
 					for (EntityLivingBase entity : WyHelper.getEntitiesNear(player, 40))
 					{
-						if (AbilitiesHelper.isEntityInRoom(entity) && !entity.equals(player))
+						if (DevilFruitsHelper.isEntityInRoom(entity) && !entity.equals(player))
 						{
 							entitiesInRoom.put(entity, entity.posY + 3);
 						}
@@ -151,7 +151,7 @@ public class OpeAbilities
 
 		public void duringPassive(EntityPlayer player, int passiveTimer)
 		{
-			if (!AbilitiesHelper.isEntityInRoom(player))
+			if (!DevilFruitsHelper.isEntityInRoom(player))
 			{
 				this.setPassiveActive(false);
 				this.setCooldownActive(true);
@@ -191,7 +191,7 @@ public class OpeAbilities
 
 		public void use(EntityPlayer player)
 		{
-			if (AbilitiesHelper.isEntityInRoom(player))
+			if (DevilFruitsHelper.isEntityInRoom(player))
 			{
 				if (!this.isOnCooldown)
 				{
@@ -232,7 +232,7 @@ public class OpeAbilities
 
 		public void use(EntityPlayer player)
 		{
-			if (AbilitiesHelper.isEntityInRoom(player))
+			if (DevilFruitsHelper.isEntityInRoom(player))
 			{
 				this.projectile = new OpeProjectiles.GammaKnife(player.worldObj, player, attr);
 				super.use(player);

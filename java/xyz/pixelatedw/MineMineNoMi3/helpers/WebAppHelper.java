@@ -14,6 +14,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -153,18 +154,6 @@ public class WebAppHelper
 		}
 	}
 
-	private static void writeBoxContentsJSON()
-	{
-		try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(Values.RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/EXTRA_BOT_FILES/boxcontent.json"), "UTF-8")))
-		{
-			
-		}
-		catch (Exception e)
-		{
-			e.getStackTrace();
-		}
-	}
-	
 	private static String generateAbilitiesString(Ability[] abilities)
 	{
 		StringBuilder abilitiesString = new StringBuilder();

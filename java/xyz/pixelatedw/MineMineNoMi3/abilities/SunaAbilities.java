@@ -14,7 +14,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SunaProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -178,7 +178,7 @@ public class SunaAbilities
 							int posY = (int) player.posY - (j + 1);
 							int posZ = (int) player.posZ - (k + 2);
 							
-							AbilitiesHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "air", "core");
+							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "core");
 						}
 					}
 					else if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
@@ -191,7 +191,7 @@ public class SunaAbilities
 							int posY = (int) player.posY - (j + 1);
 							int posZ = (int) player.posZ + (k + 2);
 							
-							AbilitiesHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "air", "core");
+							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "core");
 						}
 					}
 					else if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
@@ -204,7 +204,7 @@ public class SunaAbilities
 							int posY = (int) player.posY - (j + 1);
 							int posZ = (int) player.posZ + k;
 							
-							AbilitiesHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "air", "core");
+							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "core");
 						}
 					}
 					else if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
@@ -217,7 +217,7 @@ public class SunaAbilities
 							int posY = (int) player.posY - (j + 1);
 							int posZ = (int) player.posZ + k;
 							
-							AbilitiesHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "air", "core");
+							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, ListMisc.SunaSand, "core");
 						}	
 					}
 					

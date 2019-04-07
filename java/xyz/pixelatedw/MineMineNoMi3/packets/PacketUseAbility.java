@@ -77,7 +77,6 @@ public class PacketUseAbility implements IMessage
 								
 								if (abilityProps.getAbilityFromSlot(i) != abilityProps.getAbilityFromSlot(j) && abilityProps.getAbilityFromSlot(j).isPassiveActive() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive())
 								{
-									System.out.println(abilityProps.getAbilityFromSlot(i).getAttribute().getAbilityDisplayName());
 									if(abilityProps.getAbilityFromSlot(i).getAttribute().isAbilityFreePassive())
 										abilityProps.getAbilityFromSlot(i).passive(player);
 									else if(!abilityProps.getAbilityFromSlot(i).getAttribute().isAbilityFreePassive() && abilityProps.getAbilityFromSlot(j).getAttribute().isAbilityFreePassive() && abilityProps.getAbilityFromSlot(j).isPassiveActive())

@@ -14,6 +14,9 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EventsDrops
@@ -43,11 +46,32 @@ public class EventsDrops
 		{
 			Random rand = new Random();
 			double chance = rand.nextInt(99) + rand.nextDouble();
+			boolean isAvailable = true;
 			
 			if( chance < MainConfig.rateDFDrops )
 			{
-				ItemStack df = new ItemStack(Values.devilfruits.get(rand.nextInt(Values.devilfruits.size())));
-				event.getPlayer().inventory.addItemStackToInventory(df);
+				AkumaNoMi df = Values.devilfruits.get(rand.nextInt(Values.devilfruits.size()));
+				
+				if(MainConfig.enableOneFruitPerWorld)
+				{
+					ExtendedWorldData worldProps = ExtendedWorldData.get(event.world);
+					int chanceForNewFruit = 0;
+					while(DevilFruitsHelper.isDevilFruitInWorld(event.world, df))
+					{
+						if(chanceForNewFruit >= 10)
+						{
+							isAvailable = false;
+							break;
+						}
+						df = Values.devilfruits.get(rand.nextInt(Values.devilfruits.size()));
+						chanceForNewFruit++;
+					}
+					
+					if(isAvailable)
+						worldProps.addDevilFruitInWorld(df);
+				}
+				
+				event.getPlayer().inventory.addItemStackToInventory(new ItemStack(df));
 			}
 			
 		}

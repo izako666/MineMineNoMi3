@@ -62,9 +62,9 @@ public class ListExtraStructures
 		
 		
 		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
-		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn2).setSpawnerLimit(5);
 		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
-		TileEntityCustomSpawner spw4 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw4 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn2).setSpawnerLimit(5);
 		TileEntityCustomSpawner spw5 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
 		TileEntityCustomSpawner spw6 = new TileEntityCustomSpawner().setSpawnerMob(toSpawnCpt).setSpawnerLimit(1);
 		
@@ -180,7 +180,7 @@ public class ListExtraStructures
 		}
 		
 		
-		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
+		TileEntityCustomSpawner spw1 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn2).setSpawnerLimit(5);
 		TileEntityCustomSpawner spw2 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(5);
 		TileEntityCustomSpawner spw3 = new TileEntityCustomSpawner().setSpawnerMob(toSpawn1).setSpawnerLimit(2);
 		

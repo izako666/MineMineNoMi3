@@ -55,7 +55,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.MineMineNoMi3.api.math.ISphere;
 import xyz.pixelatedw.MineMineNoMi3.api.math.Sphere;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
 public class WyHelper
@@ -462,7 +462,7 @@ public class WyHelper
 		{
 			if(x == -sizes[0] || x == sizes[0] || y == -sizes[1] || y == sizes[1] || z == -sizes[2] || z == sizes[2])
 			{
-				AbilitiesHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
+				DevilFruitsHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
 				blocks.add(new int[] {(int)posX + x, (int)posY + y, (int)posZ + z} );
 			}
 		}
@@ -482,7 +482,7 @@ public class WyHelper
 		for (int y = (sizes[1] * 0) - sizes[1]; y <= sizes[1]; y++)
 		for (int z = (sizes[2] * 0) - sizes[2]; z <= sizes[2]; z++)
 		{
-			AbilitiesHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
+			DevilFruitsHelper.placeBlockIfAllowed(world, (int)posX + x, (int)posY + y, (int)posZ + z, blockToPlace, blockRules);
 			blocks.add(new int[] {(int)posX + x, (int)posY + y, (int)posZ + z} );
 		}
 		
@@ -504,7 +504,7 @@ public class WyHelper
 					{
 						public void call(int x, int y, int z)
 						{
-							AbilitiesHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
+							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
 							blocks.add(new int[] {x, y, z});
 						}
 					});
@@ -536,7 +536,7 @@ public class WyHelper
 					{
 						public void call(int x, int y, int z)
 						{
-							AbilitiesHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
+							DevilFruitsHelper.placeBlockIfAllowed(world, x, y, z, block, blockRules);
 							blocks.add(new int[] {x, y, z});
 						}
 					});

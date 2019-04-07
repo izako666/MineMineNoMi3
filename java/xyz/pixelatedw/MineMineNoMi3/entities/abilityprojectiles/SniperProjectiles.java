@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
@@ -49,12 +49,12 @@ public class SniperProjectiles
 				int a1 = worldObj.rand.nextInt(10) - 5;
 				int a2 = worldObj.rand.nextInt(10) - 5;
 				
-				AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY - 3 , (int)posZ + a2, Blocks.cactus, 2, "air");
-				AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY - 2 , (int)posZ + a2, Blocks.cactus, 2, "air");	
-				AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY - 1 , (int)posZ + a2, Blocks.cactus, 2, "air");	
-				AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY , (int)posZ + a2, Blocks.cactus, 2, "air");		
-				AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 1, (int)posZ + a2, Blocks.cactus, 2, "air");		
-				AbilitiesHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 2, (int)posZ + a2, Blocks.cactus, 2, "air");	
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY - 3 , (int)posZ + a2, Blocks.cactus, 2, "air");
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY - 2 , (int)posZ + a2, Blocks.cactus, 2, "air");	
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY - 1 , (int)posZ + a2, Blocks.cactus, 2, "air");	
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY , (int)posZ + a2, Blocks.cactus, 2, "air");		
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 1, (int)posZ + a2, Blocks.cactus, 2, "air");		
+				DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)posX + a1, (int)posY + 2, (int)posZ + a2, Blocks.cactus, 2, "air");	
 			}
 		}
 	}

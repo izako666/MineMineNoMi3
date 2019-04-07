@@ -19,7 +19,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 
 public class GUIPlayer extends GuiScreen
 {
@@ -78,7 +78,7 @@ public class GUIPlayer extends GuiScreen
 			ItemStack df;
 			if(!props.getUsedFruit().equals("yamidummy"))
 			{
-				df = AbilitiesHelper.getDevilFruitItem(props.getUsedFruit());
+				df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 								
 				if(props.hasYamiPower())
 					mc.fontRenderer.drawStringWithShadow(EnumChatFormatting.BOLD + yamiFruit.getDisplayName() + " + " + df.getDisplayName(), posX - 28, posY + 194, -1);

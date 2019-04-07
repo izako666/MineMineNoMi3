@@ -50,7 +50,7 @@ import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
-public class AbilitiesHelper
+public class DevilFruitsHelper
 {
 
 	private static String[][] zoanModels = new String[][]
@@ -117,6 +117,9 @@ public class AbilitiesHelper
 	
 	public static boolean isDevilFruitInWorld(World world, AkumaNoMi devilFruit)
 	{
+		if(devilFruit == null)
+			return true;
+		
 		ExtendedWorldData worldData = ExtendedWorldData.get(world);
 		String name = devilFruit.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
 		
@@ -128,8 +131,11 @@ public class AbilitiesHelper
 	
 	public static boolean isAffectedByWater(EntityLivingBase entity)
 	{
+		Block level1Block = entity.worldObj.getBlock((int) entity.posX, (int) entity.posY - 1, (int) entity.posZ);
+		Block level2Block = entity.worldObj.getBlock((int) entity.posX, (int) entity.posY - 2, (int) entity.posZ);
 		if(entity.isInsideOfMaterial(Material.water) ||
-				(entity.isWet() && !entity.isRiding() && (entity.worldObj.getBlock((int) entity.posX, (int) entity.posY - 1, (int) entity.posZ) == Blocks.water || entity.worldObj.getBlock((int) entity.posX, (int) entity.posY - 1, (int) entity.posZ) == Blocks.flowing_water) ))
+				(entity.isWet() && !entity.isRiding() && 
+				((level1Block == Blocks.water || level1Block == Blocks.flowing_water) && (level2Block == Blocks.water || level2Block == Blocks.flowing_water)) ))
 		{
 			return true;
 		}

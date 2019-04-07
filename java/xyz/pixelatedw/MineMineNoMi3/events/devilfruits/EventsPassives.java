@@ -31,7 +31,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -86,7 +86,7 @@ public class EventsPassives
 
 			if (props.getUsedFruit().equals("hiehie"))
 			{
-				if (!AbilitiesHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
+				if (!DevilFruitsHelper.isNearbyKairoseki(player) && (player.getHealth() > player.getMaxHealth() / 5 || player.capabilities.isCreativeMode))
 				{
 					WyHelper.createFilledSphere(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ, 2, Blocks.ice, "liquids");
 				}
@@ -142,7 +142,7 @@ public class EventsPassives
 				}
 			}
 
-			if (AbilitiesHelper.isAffectedByWater(player))
+			if (DevilFruitsHelper.isAffectedByWater(player))
 			{
 				if (props.isFishman() && props.getUsedFruit().equalsIgnoreCase("n/a"))
 				{
@@ -311,7 +311,7 @@ public class EventsPassives
 
 			for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 			{
-				if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive() && AbilitiesHelper.isSniperAbility(abilityProps.getAbilityFromSlot(i)))
+				if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isOnCooldown() && abilityProps.getAbilityFromSlot(i).getAttribute().isPassive() && abilityProps.getAbilityFromSlot(i).isPassiveActive() && DevilFruitsHelper.isSniperAbility(abilityProps.getAbilityFromSlot(i)))
 				{
 					abilityProps.getAbilityFromSlot(i).use(event.entityPlayer);
 					event.setCanceled(true);

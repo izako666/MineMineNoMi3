@@ -16,12 +16,14 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.PacketAbilitySync;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.mobs.EntityNewMob;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class EventsDFWeaknesses
 {
+
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
 	{
@@ -30,12 +32,12 @@ public class EventsDFWeaknesses
 			EntityLivingBase entity = event.entityLiving;
 			ExtendedEntityData props = ExtendedEntityData.get(entity);
 
-			if(props.hasDevilFruit() && AbilitiesHelper.isAffectedByWater(entity))
+			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity))
 			{			
-				if(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode)
-					return;
-				
-				entity.motionY -= 5;					
+				if(entity instanceof EntityPlayer && !((EntityPlayer) entity).capabilities.isCreativeMode)	
+					entity.motionY -= 5;
+				else if(entity instanceof EntityNewMob)
+					entity.motionY -= 5;
 			}
 		}
 		
@@ -52,12 +54,12 @@ public class EventsDFWeaknesses
 				if (ItemsHelper.hasKairosekiItem(player))
 					player.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 200, 0));
 				
-				if (AbilitiesHelper.isNearbyKairoseki(player))
+				if (DevilFruitsHelper.isNearbyKairoseki(player))
 				{
 					for (int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{
-						if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled())
-						{
+						if (abilityProps.getAbilityFromSlot(i) != null && !abilityProps.getAbilityFromSlot(i).isDisabled() && !abilityProps.getAbilityFromSlot(i).isOnCooldown())
+						{						
 							abilityProps.getAbilityFromSlot(i).endPassive(player);
 							abilityProps.getAbilityFromSlot(i).setCooldownActive(true);
 							abilityProps.getAbilityFromSlot(i).disable(player, true);

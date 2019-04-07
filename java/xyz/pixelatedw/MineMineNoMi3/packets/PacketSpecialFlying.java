@@ -41,6 +41,10 @@ public class PacketSpecialFlying implements IMessage
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 			
 			player.capabilities.allowFlying = message.specialFlying;
+			if(!message.specialFlying)
+			{
+				player.capabilities.isFlying = false;
+			}
 			
 			return null;
 		}

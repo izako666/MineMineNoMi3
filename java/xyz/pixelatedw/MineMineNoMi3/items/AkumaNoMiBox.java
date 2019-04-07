@@ -8,13 +8,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
-import xyz.pixelatedw.MineMineNoMi3.lists.ListDevilFruits;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.WebAppHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 
 public class AkumaNoMiBox extends Item
@@ -77,8 +81,29 @@ public class AkumaNoMiBox extends Item
 				else
 					this.tier3Fruits.add(df);
 			}
+		}	
+
+		if(WyDebug.isDebug()) 
+		{
+			if(tier == 1)
+			{
+				for(AkumaNoMi df : this.tier1Fruits)
+					System.out.print("\"" + new ItemStack(df).getDisplayName() + "\", ");
+				System.out.println();
+			}
+			else if(tier == 2)
+			{
+				for(AkumaNoMi df : this.tier2Fruits)
+					System.out.print("\"" + new ItemStack(df).getDisplayName() + "\", ");
+				System.out.println();
+			}
+			else if(tier == 3)
+			{
+				for(AkumaNoMi df : this.tier3Fruits)
+					System.out.print("\"" + new ItemStack(df).getDisplayName() + "\", ");
+				System.out.println();
+			}
 		}
-		
 	}
 
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
@@ -91,7 +116,39 @@ public class AkumaNoMiBox extends Item
 				{
 					player.inventory.decrStackSize(i, 1);
 					WyHelper.removeStackFromInventory(player, itemStack);
-					return new ItemStack(roulette());
+					AkumaNoMi randomFruit = roulette();
+					boolean isAvailable = true;	
+					
+					if(MainConfig.enableOneFruitPerWorld)
+					{
+						ExtendedWorldData worldProps = ExtendedWorldData.get(world);
+						int chanceForNewFruit = 0;
+						while(DevilFruitsHelper.isDevilFruitInWorld(world, randomFruit))
+						{
+							final AkumaNoMi inContextFruit = randomFruit;
+							this.tier1Fruits.removeIf(x -> x == inContextFruit);
+							this.tier2Fruits.removeIf(x -> x == inContextFruit);
+							this.tier3Fruits.removeIf(x -> x == inContextFruit);
+							
+							if(chanceForNewFruit >= 10)
+							{
+								isAvailable = false;
+								break;
+							}
+							randomFruit = roulette();
+							chanceForNewFruit++;
+						}
+						
+						if(isAvailable)
+							worldProps.addDevilFruitInWorld(randomFruit);
+					}
+					if(isAvailable)
+						return new ItemStack(randomFruit);
+					else
+					{
+						WyHelper.removeStackFromInventory(player, itemStack);
+						return itemStack;
+					}
 				}				
 			}	
 
@@ -111,20 +168,33 @@ public class AkumaNoMiBox extends Item
 			if(tier == 1)
 			{
 				if(rand.nextInt(100) + rand.nextDouble() < 10)
-					return tier2Fruits.get(rand.nextInt(tier2Fruits.size()));				
+				{
+					if(tier2Fruits.size() > 0)
+						return tier2Fruits.get(rand.nextInt(tier2Fruits.size()));		
+				}
 				else
-					return tier1Fruits.get(rand.nextInt(tier1Fruits.size()));
+				{
+					if(tier1Fruits.size() > 0)
+						return tier1Fruits.get(rand.nextInt(tier1Fruits.size()));
+				}
 			}
 			else if(tier == 2)
 			{
 				if(rand.nextInt(100) + rand.nextDouble() < 10)
-					return tier3Fruits.get(rand.nextInt(tier3Fruits.size()));				
+				{
+					if(tier3Fruits.size() > 0)
+						return tier3Fruits.get(rand.nextInt(tier3Fruits.size()));	
+				}
 				else
-					return tier2Fruits.get(rand.nextInt(tier2Fruits.size()));
+				{
+					if(tier2Fruits.size() > 0)
+						return tier2Fruits.get(rand.nextInt(tier2Fruits.size()));
+				}
 			}
 			else if(tier == 3)
 			{
-				return tier3Fruits.get(rand.nextInt(tier3Fruits.size()));
+				if(tier3Fruits.size() > 0)
+					return tier3Fruits.get(rand.nextInt(tier3Fruits.size()));
 			}
 		}
 		

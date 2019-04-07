@@ -95,7 +95,14 @@ public class ListMisc
 	public static Block KageBlock = new BlockKage();
 	public static Block StringWall = new BlockStringWall();
 	public static Block StringMid = new BlockStringMid();
-	public static Block SunaSand = new BlockSunaSand();
+	public static Block SunaSand = new BlockSunaSand()
+	{
+		public int quantityDropped(Random random)
+		{
+			return 0;
+		}
+
+	};
 	public static Block WantedPostersPackage = new BlockWantedPostersPackage();
 	public static Block WantedPosterBlock = new BlockWantedPoster();
 	public static Block OriBars = new BlockCustomBars("oribars", "oribars");
@@ -303,7 +310,7 @@ public class ListMisc
 		addBLOCK(KageBlock, "Kage Block", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(StringWall, "String Wall", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(StringMid, "String Mid", Float.POSITIVE_INFINITY, TileEntityString.class, null);
-		addBLOCK(SunaSand, "Suna Sand", 1.0F, null, null);
+		addBLOCK(SunaSand, "Suna Sand", 0.2F, null, null);
 		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, null, null);
 		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 0.1F, TileEntityWantedPoster.class, null);
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);

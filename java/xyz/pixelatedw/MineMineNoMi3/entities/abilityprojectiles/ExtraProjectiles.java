@@ -16,7 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListExtraAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
@@ -89,16 +89,16 @@ public class ExtraProjectiles
 		
 		public void onUpdate()
 		{
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock, "air");
-			AbilitiesHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX + 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ + 1, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX - 1, (int)this.posY - 1, (int)this.posZ - 1, ListMisc.SkyBlock, "air");
+			DevilFruitsHelper.placeBlockIfAllowed(this.worldObj, (int)this.posX, (int)this.posY - 2, (int)this.posZ, ListMisc.SkyBlock, "air");
 			
 			super.onUpdate();
 		}

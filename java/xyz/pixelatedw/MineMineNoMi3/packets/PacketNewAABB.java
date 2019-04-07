@@ -70,7 +70,7 @@ public class PacketNewAABB implements IMessage
 					maxX, 
 					maxY, 
 					maxZ
-				);			
+				);
 
 			return null;
 		}

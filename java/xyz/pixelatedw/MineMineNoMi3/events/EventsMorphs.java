@@ -19,6 +19,8 @@ import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import org.lwjgl.opengl.GL11;
+
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.models.ModelAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.renderers.RenderCandleLock;
@@ -128,16 +130,13 @@ public class EventsMorphs
 				});
 			}
 		}
-		
-		if (event.entity.isPotionActive(Potion.invisibility) && event.entity.getActivePotionEffect(Potion.invisibility).getAmplifier() >= 5)
+
+		if (props.getUsedFruit().equalsIgnoreCase("sukesuke") && event.entity.isInvisible())
 			event.setCanceled(true);
 
 		if (event.entity instanceof EntityPlayer)
 		{
-			AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) event.entity);
-
-			Ability abilityAbareHimatsuri = abilityProps.getAbilityFromName(ListAttributes.ABAREHIMATSURI.getAttributeName());
-			if (abilityProps != null && abilityAbareHimatsuri != null && abilityAbareHimatsuri.isPassiveActive())
+			if (props.hasExtraEffects(ID.EXTRAEFFECT_ABAREHIMATSURI))
 			{
 				if (event.entity.onGround)
 				{
@@ -150,7 +149,9 @@ public class EventsMorphs
 
 					abareHimatsuri.setTextureAndTint(texture, blockTint);
 				}
-
+				
+				System.out.println(event.entity.onGround);
+				
 				if (!event.entity.onGround)
 					abareHimatsuri.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);
 			}

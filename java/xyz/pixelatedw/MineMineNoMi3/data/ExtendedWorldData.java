@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
 public class ExtendedWorldData extends WorldSavedData
 {
@@ -143,6 +144,17 @@ public class ExtendedWorldData extends WorldSavedData
 	{ 
 		this.isSwordsmanDojoSpawned = value; 
 		markDirty();
+	}
+	
+	public void addDevilFruitInWorld(AkumaNoMi fruit)
+	{
+		String name = fruit.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+	
+		if(!this.devilFruitsInWorld.contains(name))
+		{
+			this.devilFruitsInWorld.add(name);
+			markDirty();
+		}
 	}
 	
 	public void addDevilFruitInWorld(String name)

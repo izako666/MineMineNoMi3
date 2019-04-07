@@ -17,7 +17,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSpecialFlying;
 
@@ -37,7 +37,7 @@ public class EventsSpecialFlying
 			
 			boolean hasToriFruit = props.getUsedFruit().equalsIgnoreCase("toritoriphoenix") && !props.getZoanPoint().toLowerCase().equals("n/a");
 			
-			boolean hasFlyingFruit = Arrays.stream(AbilitiesHelper.flyingFruits).anyMatch(p ->
+			boolean hasFlyingFruit = Arrays.stream(DevilFruitsHelper.flyingFruits).anyMatch(p ->
 			{				
 				return props.getUsedFruit().equalsIgnoreCase(p);
 			});	
@@ -46,21 +46,13 @@ public class EventsSpecialFlying
 			{
 				if(!event.entityLiving.worldObj.isRemote)
 				{
-					if((MainConfig.enableSpecialFlying && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)
+					if((MainConfig.enableSpecialFlying && hasFlyingFruit) || hasToriFruit || hasAbareHimatsuri)		
 					{
-						if(player.isInWater())
-							player.capabilities.isFlying = false;
-						
 						WyNetworkHelper.sendTo(new PacketSpecialFlying(true), (EntityPlayerMP) player);
-	
-						if(!player.capabilities.allowFlying)
-							player.capabilities.isFlying = false;
+						player.fallDistance = 0;
 					}
 					else
-					{
 						WyNetworkHelper.sendTo(new PacketSpecialFlying(false), (EntityPlayerMP) player);
-						player.capabilities.isFlying = false;
-					}
 				}
 			
 				if(player.capabilities.isFlying && player.worldObj.isRemote)
@@ -99,8 +91,6 @@ public class EventsSpecialFlying
 					}
 				}
 			}
-			else
-				player.capabilities.allowFlying = true;
 		}
 	}
 }

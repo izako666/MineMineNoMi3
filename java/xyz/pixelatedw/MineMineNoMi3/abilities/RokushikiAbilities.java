@@ -150,5 +150,11 @@ public class RokushikiAbilities
 				super.endPassive(player);
 			}
 		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			this.startCooldown();
+			this.startExtUpdate(player);	
+		}
 	}
 }

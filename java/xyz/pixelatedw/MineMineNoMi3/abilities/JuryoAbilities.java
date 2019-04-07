@@ -10,13 +10,17 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.WorldServer;
+import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffect;
+import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectZushiAbareHimatsuri;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.JuryoProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
@@ -26,6 +30,8 @@ public class JuryoAbilities
 	
 	public static class AbareHimatsuri extends Ability
 	{
+		private DFEffect extra = null;
+		
 		public AbareHimatsuri() 
 		{
 			super(ListAttributes.ABAREHIMATSURI); 
@@ -33,10 +39,28 @@ public class JuryoAbilities
 
 		public void passive(EntityPlayer player) 
 		{
+			ExtendedEntityData props = ExtendedEntityData.get(player);
+
 			if(!player.capabilities.isFlying && player.onGround)
+			{
+				if(extra == null)
+					extra = new DFEffectZushiAbareHimatsuri(player, 99999);
+				else
+				{
+					extra.forceStop();
+					extra = null;
+				}
 				super.passive(player);
-			else if(player.capabilities.isFlying)
+			}
+			else if(!player.onGround)
+			{
+				if(extra != null)
+				{
+					extra.forceStop();
+					extra = null;
+				}
 				super.passive(player);
+			}
 		}
 		
 		public void startPassive(EntityPlayer player)
@@ -119,7 +143,7 @@ public class JuryoAbilities
 							int posY = (int)entity.posY - 1;
 							int posZ = (int)entity.posZ + z;
 							
-							AbilitiesHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid");
+							DevilFruitsHelper.placeBlockIfAllowed(player.worldObj, posX, posY, posZ, Blocks.air, "all", "restricted", "ignore liquid");
 						}
 					}
 				}

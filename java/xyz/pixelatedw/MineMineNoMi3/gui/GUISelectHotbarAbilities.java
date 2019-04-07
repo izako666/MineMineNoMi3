@@ -24,7 +24,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIAbilitiesList;
 import xyz.pixelatedw.MineMineNoMi3.gui.extra.GUIButtonNoTexture;
-import xyz.pixelatedw.MineMineNoMi3.helpers.AbilitiesHelper;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 
 @SideOnly(Side.CLIENT)
@@ -87,7 +87,7 @@ public class GUISelectHotbarAbilities extends GuiScreen
 				WyRenderHelper.drawDevilFruitIcon("yamiyaminomi", (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			else
 			{
-				ItemStack df = AbilitiesHelper.getDevilFruitItem(props.getUsedFruit());
+				ItemStack df = DevilFruitsHelper.getDevilFruitItem(props.getUsedFruit());
 
 				WyRenderHelper.drawDevilFruitIcon(df.getUnlocalizedName().replace("item.", ""), (posX - 268) / 2, (posY - 187) / 2, 16, 16);
 			}

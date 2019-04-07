@@ -16,6 +16,7 @@ public abstract class DFEffect
 	private String effect;
 	private ExtendedEntityData props;
 	private EntityLivingBase entity;
+	private Update updateThread;
 	
 	protected int timer;
 	
@@ -29,18 +30,34 @@ public abstract class DFEffect
 		if(!props.hasExtraEffects(effect))
 		{
 			props.addExtraEffect(effect);
+			if(entity instanceof EntityPlayerMP)
+				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) entity);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(entity.getEntityId(), props));
-			(new Update(props, timer)).start();
+			updateThread = (new Update(props, timer));
+			updateThread.start();
 		}
 	}
 	
 	public abstract void onEffectStart(EntityLivingBase entity);
 	public abstract void onEffectEnd(EntityLivingBase entity);
 	
+	public void forceStop()
+	{
+		try
+		{
+			updateThread.timer = -1;
+			//updateThread.join();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	class Update extends Thread
 	{
 		private ExtendedEntityData props;
-		private int timer;
+		public int timer;
 		
 		public Update(ExtendedEntityData props, int timer)
 		{
@@ -70,6 +87,8 @@ public abstract class DFEffect
 			}
 			
 			props.removeExtraEffects(effect);
+			if(entity instanceof EntityPlayerMP)
+				WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) entity);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(entity.getEntityId(), props));
 			
 			onEffectEnd(entity);
