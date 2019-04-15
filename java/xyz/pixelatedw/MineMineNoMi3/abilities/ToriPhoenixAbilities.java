@@ -172,7 +172,7 @@ public class ToriPhoenixAbilities
 			if(target.getHealth() + 6 < target.getMaxHealth())
 				target.setHealth(target.getHealth() + 6);
 			else
-				target.setHealth(target.getHealth());
+				target.setHealth(target.getMaxHealth());
 			
 			WyNetworkHelper.sendTo(new PacketParticles(ID.PARTICLEFX_BLUEFLAMES, player), (EntityPlayerMP) player);
 		}

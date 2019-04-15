@@ -196,7 +196,7 @@ public class EventsOnGain
 
 				if (plusDoriki > 0)
 				{
-					if (props.getDoriki() + plusDoriki < Values.MAX_DORIKI)
+					if (props.getDoriki() + plusDoriki <= Values.MAX_DORIKI)
 					{
 						props.alterDoriki((int) Math.round(plusDoriki));
 						DorikiEvent e = new DorikiEvent(player);

@@ -156,7 +156,7 @@ public class AkumaNoMi extends ItemFood
 			}
 		}	
 				
-		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));		
+		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
     	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
     		WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
 	}

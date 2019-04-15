@@ -1,5 +1,6 @@
 package xyz.pixelatedw.MineMineNoMi3.api;
 
+import java.awt.Color;
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
@@ -249,49 +250,59 @@ public class WyRenderHelper
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 
-	/*public static void drawBoundingBox(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
-	{
-		GlStateManager.depthMask(false);
-		GlStateManager.disableTexture2D();
-		GlStateManager.disableLighting();
-		GlStateManager.disableCull();
-		GlStateManager.disableBlend();
-		float f = entity.width / 2.0F;
-		AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox();
-		AxisAlignedBB axisalignedbb1 = new AxisAlignedBB(axisalignedbb.minX - entity.posX + x,
-				axisalignedbb.minY - entity.posY + y, axisalignedbb.minZ - entity.posZ + z,
-				axisalignedbb.maxX - entity.posX + x, axisalignedbb.maxY - entity.posY + y,
-				axisalignedbb.maxZ - entity.posZ + z);
-		RenderGlobal.drawSelectionBoundingBox(axisalignedbb1, 255, 255, 255, 255);
+	/*
+	 * public static void drawBoundingBox(Entity entity, double x, double y,
+	 * double z, float entityYaw, float partialTicks)
+	 * {
+	 * GlStateManager.depthMask(false);
+	 * GlStateManager.disableTexture2D();
+	 * GlStateManager.disableLighting();
+	 * GlStateManager.disableCull();
+	 * GlStateManager.disableBlend();
+	 * float f = entity.width / 2.0F;
+	 * AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox();
+	 * AxisAlignedBB axisalignedbb1 = new AxisAlignedBB(axisalignedbb.minX -
+	 * entity.posX + x,
+	 * axisalignedbb.minY - entity.posY + y, axisalignedbb.minZ - entity.posZ +
+	 * z,
+	 * axisalignedbb.maxX - entity.posX + x, axisalignedbb.maxY - entity.posY +
+	 * y,
+	 * axisalignedbb.maxZ - entity.posZ + z);
+	 * RenderGlobal.drawSelectionBoundingBox(axisalignedbb1, 255, 255, 255,
+	 * 255);
+	 * if (entity instanceof EntityLivingBase)
+	 * {
+	 * float f1 = 0.01F;
+	 * if (entity.getParts() != null)
+	 * {
+	 * for (Entity part : entity.getParts())
+	 * RenderGlobal.drawSelectionBoundingBox(part.getEntityBoundingBox(), 0,
+	 * 255, 0, 255);
+	 * } else
+	 * RenderGlobal.drawSelectionBoundingBox(
+	 * new AxisAlignedBB(x - (double) f, y + (double) entity.getEyeHeight() -
+	 * 0.009999999776482582D,
+	 * z - (double) f, x + (double) f,
+	 * y + (double) entity.getEyeHeight() + 0.009999999776482582D, z + (double)
+	 * f),
+	 * 255, 0, 0, 255);
+	 * }
+	 * Tessellator tessellator = Tessellator.getInstance();
+	 * VertexBuffer vertexbuffer = tessellator.getBuffer();
+	 * Vec3d vec3d = entity.getLook(partialTicks);
+	 * vertexbuffer.begin(3, DefaultVertexFormats.POSITION_COLOR);
+	 * vertexbuffer.pos(x, y + (double) entity.getEyeHeight(), z).color(0, 0,
+	 * 255, 255).endVertex();
+	 * vertexbuffer.pos(x + vec3d.xCoord * 2.0D, y + (double)
+	 * entity.getEyeHeight() + vec3d.yCoord * 2.0D,
+	 * z + vec3d.zCoord * 2.0D).color(0, 0, 255, 255).endVertex();
+	 * tessellator.draw();
+	 * GlStateManager.enableTexture2D();
+	 * GlStateManager.enableLighting();
+	 * GlStateManager.enableCull();
+	 * GlStateManager.disableBlend();
+	 * GlStateManager.depthMask(true);
+	 * }
+	 */
 
-		if (entity instanceof EntityLivingBase)
-		{
-			float f1 = 0.01F;
-			if (entity.getParts() != null)
-			{
-				for (Entity part : entity.getParts())
-					RenderGlobal.drawSelectionBoundingBox(part.getEntityBoundingBox(), 0, 255, 0, 255);
-			} else
-				RenderGlobal.drawSelectionBoundingBox(
-						new AxisAlignedBB(x - (double) f, y + (double) entity.getEyeHeight() - 0.009999999776482582D,
-								z - (double) f, x + (double) f,
-								y + (double) entity.getEyeHeight() + 0.009999999776482582D, z + (double) f),
-						255, 0, 0, 255);
-		}
-
-		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer vertexbuffer = tessellator.getBuffer();
-		Vec3d vec3d = entity.getLook(partialTicks);
-		vertexbuffer.begin(3, DefaultVertexFormats.POSITION_COLOR);
-		vertexbuffer.pos(x, y + (double) entity.getEyeHeight(), z).color(0, 0, 255, 255).endVertex();
-		vertexbuffer.pos(x + vec3d.xCoord * 2.0D, y + (double) entity.getEyeHeight() + vec3d.yCoord * 2.0D,
-				z + vec3d.zCoord * 2.0D).color(0, 0, 255, 255).endVertex();
-		tessellator.draw();
-		GlStateManager.enableTexture2D();
-		GlStateManager.enableLighting();
-		GlStateManager.enableCull();
-		GlStateManager.disableBlend();
-		GlStateManager.depthMask(true);
-	}*/
-	
 }

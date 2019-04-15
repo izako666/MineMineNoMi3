@@ -16,6 +16,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 
 public class PacketUseAbility implements IMessage
 {
@@ -59,6 +60,9 @@ public class PacketUseAbility implements IMessage
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 
+			if(DevilFruitsHelper.checkForRestriction(player))
+				return null;
+			
 			for (int i = 0; i < 8; i++)
 			{
 				if(message.abilitySlot == i)

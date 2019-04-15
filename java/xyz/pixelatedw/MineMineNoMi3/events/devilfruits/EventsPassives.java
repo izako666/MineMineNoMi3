@@ -118,7 +118,11 @@ public class EventsPassives
 						player.motionY = 0.0D;
 						player.fallDistance = 0.0F;
 					}
-					WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_BAKUMUNCH, player.posX, player.posY - 0.5, player.posZ), player.dimension, player.posX, player.posY, player.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+					
+					if(player.isClientWorld())
+					{
+						System.out.println("@@");
+					}					
 				}
 
 				if (WyHelper.getEntitiesNear(player, 100, EntityPlayer.class).size() > 0 && player.ticksExisted % 500 == 0)
@@ -176,7 +180,7 @@ public class EventsPassives
 			{
 				if (hasColaBackpack && !props.hasColaBackpack())
 				{
-					props.setMaxCola(props.getMaxCola() + 200);
+					props.setMaxCola(props.getMaxCola() + 400);
 					props.setColaBackpack(true);
 
 					if (!ID.DEV_EARLYACCESS && !player.capabilities.isCreativeMode && !player.worldObj.isRemote)
@@ -187,7 +191,7 @@ public class EventsPassives
 				}
 				else if (!hasColaBackpack && props.hasColaBackpack())
 				{
-					props.setMaxCola(props.getMaxCola() - 200);
+					props.setMaxCola(props.getMaxCola() - 400);
 
 					if (props.getCola() > props.getMaxCola())
 						props.setCola(props.getMaxCola());
@@ -200,7 +204,18 @@ public class EventsPassives
 					if (!player.worldObj.isRemote)
 						WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 				}
-
+				
+				if(hasColaBackpack && !player.worldObj.isRemote)
+				{
+					if(props.getCola() + 10 <= props.getMaxCola())
+					{
+						if(player.ticksExisted % 100 == 0)
+						{
+							props.alterCola(10);
+							WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
+						}
+					}
+				}
 			}
 
 			if (props.hasHakiActive())

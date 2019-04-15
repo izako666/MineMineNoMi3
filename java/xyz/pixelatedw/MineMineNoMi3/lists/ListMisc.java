@@ -12,6 +12,8 @@ import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.NewBlock;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockAbilityProtection;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockAbilityProtectionArea;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockBarrier;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomBars;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockCustomSpawner;
@@ -40,6 +42,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlameDia
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityRejectDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityAbilityProtection;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityCustomSpawner;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
@@ -119,7 +122,10 @@ public class ListMisc
 		}
 	};
 	public static Block WaxBlock = new NewBlock(Material.clay);
-	
+	public static Block AbilityProtectionBlock = new BlockAbilityProtection();
+	public static Block AbilityProtectionAreaBlock = new BlockAbilityProtectionArea();
+	public static Block AbilityProtectionCenterBlock = new BlockAbilityProtectionArea();
+
 	public static Block DialEisenBlock = new BlockEisenDial();
 	public static Block DialFireBlock = new BlockFlameDial();
 	public static Block DialAxeBlock = new BlockAxeDial();
@@ -316,6 +322,9 @@ public class ListMisc
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
 		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);
 		addBLOCK(WaxBlock, "Wax Block", 6.0F, null, null);
+		addBLOCK(AbilityProtectionBlock, "Ability Protection Block", Float.MAX_VALUE, null, ListCreativeTabs.tabMisc);
+		addBLOCK(AbilityProtectionAreaBlock, "Ability Protection Area Block", Float.MAX_VALUE, null, null);
+		addBLOCK(AbilityProtectionCenterBlock, "Ability Protection Center Block", Float.MAX_VALUE, TileEntityAbilityProtection.class, null);
 		
 		addBLOCK(DialEisenBlock, "Eisen Dial Block", .3F, TileEntityEisenDial.class, null);
 		addBLOCK(DialFireBlock, "Flame Dial Block", .3F, TileEntityFlameDial.class, null);

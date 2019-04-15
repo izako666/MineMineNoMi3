@@ -104,6 +104,20 @@ public class DevilFruitsHelper
 		
 		return map;
 	}
+	
+	
+	public static boolean checkForRestriction(EntityPlayer player)
+	{
+		ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
+
+		if(worldData.isInsideRestrictedArea((int)player.posX, (int)player.posY, (int)player.posZ))
+		{
+			WyHelper.sendMsgToPlayer(player, "Cannot use abilites in a restricted area !");
+			return true;
+		}
+
+		return false;
+	}
 		
 	public static boolean isDevilFruitInWorld(World world, String devilFruitName)
 	{
@@ -278,6 +292,8 @@ public class DevilFruitsHelper
 	 * foliage - things like flowers, vines and leaves liquids - water and lava
 	 * all - all blocks restricted - removes some blocks that should never be
 	 * replaced, has no use for add/ignore param
+	 * 
+	 * nogrief is used for abilities that should place blocks even if griefing is disabled, room or torikago for example
 	 */
 	
 	public static boolean placeBlockIfAllowed(World world, int posX, int posY, int posZ, Block toPlace, String... rules)
@@ -290,6 +306,11 @@ public class DevilFruitsHelper
 		Block b = world.getBlock((int) posX, (int) posY, (int) posZ);
 		List<Block> bannedBlocks = new ArrayList<Block>();
 		boolean noGriefFlag = Arrays.toString(rules).contains("nogrief");
+		
+		ExtendedWorldData worldData = ExtendedWorldData.get(world);
+
+		if(worldData.isInsideRestrictedArea(posX, posY, posZ))
+			return false;		
 		
 		Arrays.stream(rules).forEach(rule ->
 		{

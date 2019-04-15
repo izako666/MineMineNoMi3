@@ -19,6 +19,8 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
+import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 
 public class AbilityProjectile extends EntityThrowable
@@ -44,7 +46,10 @@ public class AbilityProjectile extends EntityThrowable
 		this.ticks = attr.getProjectileTicks();
 		this.maxticks = ticks;
 		this.user = player;
-
+		
+		if(this.getThrower() != null && this.getThrower() instanceof EntityPlayer && DevilFruitsHelper.checkForRestriction((EntityPlayer) this.getThrower()))
+			this.setDead();
+		
 		if (this.attr != null)
 		{
 			this.setLocationAndAngles(this.user.posX, this.user.posY + (double) this.user.getEyeHeight(), this.user.posZ, this.user.rotationYaw, this.user.rotationPitch);
@@ -66,7 +71,7 @@ public class AbilityProjectile extends EntityThrowable
 	};
 
 	public void onEntityUpdate()
-	{
+	{	
 		if (this.attr != null)
 		{
 			if (ticks <= 0)

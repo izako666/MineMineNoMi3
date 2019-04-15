@@ -25,10 +25,12 @@ import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.quests.QuestProperties;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.YomiTriggerEvent;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketNewAABB;
 
 public class EventsCore
 {
@@ -57,6 +59,8 @@ public class EventsCore
 		{
 			ExtendedEntityData oldPlayerProps = ExtendedEntityData.get(e.original);	
 			ExtendedEntityData newPlayerProps = ExtendedEntityData.get(e.entityPlayer);
+			
+			//WyNetworkHelper.sendTo(new PacketNewAABB(0.6F, 1.8F), (EntityPlayerMP) e.entityPlayer);
 			
 			if(MainConfig.enableKeepIEEPAfterDeath.equals("full"))
 			{

@@ -9,11 +9,16 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.client.event.RenderBlockOverlayEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -30,10 +35,12 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityProperties;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
 import xyz.pixelatedw.MineMineNoMi3.helpers.HandRendererHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
@@ -64,8 +71,8 @@ public class EventsMorphs
 			return;
 
 		ExtendedEntityData props = ExtendedEntityData.get(this.mc.thePlayer);
-		
-		if(prevRenderer != null && props.getZoanPoint().equalsIgnoreCase("n/a"))
+
+		if (prevRenderer != null && props.getZoanPoint().equalsIgnoreCase("n/a"))
 		{
 			mc.entityRenderer = prevRenderer;
 		}
@@ -74,14 +81,14 @@ public class EventsMorphs
 			if (MorphsHelper.getMorphsMap().containsKey(props.getUsedFruit()))
 			{
 				Object[][] forms = MorphsHelper.getMorphsMap().get(props.getUsedFruit());
-	
+
 				for (Object[] form : forms)
 				{
 					if (props.getZoanPoint().equalsIgnoreCase((String) form[0]) && (EntityRenderer) form[2] != null)
 					{
 						if (renderer == null || !props.getZoanPoint().equalsIgnoreCase(this.prevZoanPoint))
 							renderer = (EntityRenderer) form[2];
-	
+
 						if (mc.entityRenderer != renderer)
 						{
 							prevRenderer = mc.entityRenderer;
@@ -95,14 +102,16 @@ public class EventsMorphs
 	}
 
 	@SubscribeEvent
-	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event) {
+	public void onRenderPlayerEvent(RenderPlayerEvent.Pre event)
+	{
 		ExtendedEntityData propz = ExtendedEntityData.get(event.entityPlayer);
-		if (propz.isInAirWorld()) {
+		if (propz.isInAirWorld())
+		{
 			event.setCanceled(true);
 
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onEntityRendered(RenderLivingEvent.Pre event)
 	{
@@ -149,9 +158,9 @@ public class EventsMorphs
 
 					abareHimatsuri.setTextureAndTint(texture, blockTint);
 				}
-				
+
 				System.out.println(event.entity.onGround);
-				
+
 				if (!event.entity.onGround)
 					abareHimatsuri.doRender(event.entity, event.x, event.y, event.z, 0F, 0.0625F);
 			}
@@ -167,25 +176,20 @@ public class EventsMorphs
 		 * GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
 		 * GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
 		 * GL11.glColor3f(1.0f, 1.0f, 1.0f);
-		 * 
 		 * // Render original. //new RenderZoanMorph(new ModelBiped(), "null",
 		 * 2).doRender(event.entity, event.x, event.y, event.z, 0, 0);
-		 * 
 		 * GL11.glDisable(GL11.GL_LIGHTING);
 		 * GL11.glStencilFunc(GL11.GL_NOTEQUAL, 1, 0xFFFF);
 		 * GL11.glStencilOp(GL11.GL_KEEP, GL11.GL_KEEP, GL11.GL_REPLACE);
 		 * GL11.glLineWidth(6.5f); GL11.glPolygonMode(GL11.GL_FRONT,
 		 * GL11.GL_LINE); GL11.glColor4f(1.0F, 1.0F, 0.0F, 1.0F);
 		 * GL11.glDisable(GL11.GL_TEXTURE_2D);
-		 * 
 		 * // Render stencil. //new RenderZoanMorph(new ModelBiped(), "null",
 		 * 1.35).doRender(event.entity, event.x, event.y + 1.3, event.z, 0, 0);
 		 * zoanBisonPower.doRender(event.entity, event.x, event.y, event.z, 0F,
 		 * 0F);
-		 * 
 		 * GL11.glEnable(GL11.GL_TEXTURE_2D); GL11.glColor4f(1F, 1F, 1F, 1F);
 		 * GL11.glPopAttrib();
-		 * 
 		 * //event.setCanceled(true); }
 		 */
 
@@ -252,16 +256,12 @@ public class EventsMorphs
 
 			/*
 			 * GL11.glMatrixMode(GL11.GL_PROJECTION); GL11.glLoadIdentity();
-			 * 
 			 * Project.gluPerspective(mc.gameSettings.fovSetting, (float)
 			 * mc.displayWidth / (float) mc.displayHeight, 0.20F, (float)
 			 * (mc.gameSettings.renderDistanceChunks * 16) * 2.0F);
-			 * 
 			 * GL11.glMatrixMode(GL11.GL_MODELVIEW); GL11.glLoadIdentity();
-			 * 
 			 * RenderHelper.enableStandardItemLighting();
 			 * Minecraft.getMinecraft().entityRenderer.enableLightmap(0);
-			 * 
 			 * int i2 = mc.theWorld.getLightBrightnessForSkyBlocks(MathHelper.
 			 * floor_double(player.posX), MathHelper.floor_double(player.posY),
 			 * MathHelper.floor_double(player.posZ), 0); int j = i2 % 65536; int
@@ -276,18 +276,15 @@ public class EventsMorphs
 			 * !mc.renderViewEntity.isPlayerSleeping() &&
 			 * !mc.gameSettings.hideGUI) { GL11.glRotated(180, 0, 0, 1);
 			 * GL11.glScaled(0.05, 0.05, 0.05); GL11.glTranslated(0, 0, 4);
-			 * 
 			 * Minecraft.getMinecraft().getTextureManager().bindTexture(new
 			 * ResourceLocation(ID.PROJECT_ID, "textures/abilities/" +
 			 * WyHelper.getFancyName("baribarinopistol") + ".png")); Tessellator
 			 * tessellator = Tessellator.instance;
-			 * 
 			 * tessellator.startDrawingQuads(); tessellator.addVertexWithUV(x ,
 			 * y + v , 0, 0.0, 1.0); tessellator.addVertexWithUV(x + u , y + v ,
 			 * 0, 1.0, 1.0); tessellator.addVertexWithUV(x + u , y , 0, 1.0,
 			 * 0.0); tessellator.addVertexWithUV(x , y , 0, 0.0, 0.0);
 			 * tessellator.draw();
-			 * 
 			 * tessellator.startDrawingQuads(); tessellator.addVertexWithUV(x +
 			 * u , y , 0, 1.0, 0.0); tessellator.addVertexWithUV(x + u , y + v ,
 			 * 0, 1.0, 1.0); tessellator.addVertexWithUV(x , y + v , 0, 0.0,
@@ -306,7 +303,6 @@ public class EventsMorphs
 		/*
 		 * for(Object[] x :
 		 * HandEffectsHelper.getMap().get(props.getUsedFruit())) {
-		 * 
 		 * }
 		 */
 	}

@@ -443,6 +443,9 @@ style.n/a.name=N/A
 style.sniper.name=Sniper
 style.swordsman.name=Swordsman
 
+tile.abilityprotectionareablock.name=Ability Protection Area Block
+tile.abilityprotectionblock.name=Ability Protection Block
+tile.abilityprotectioncenterblock.name=Ability Protection Center Block
 tile.axedialblock.name=Axe Dial Block
 tile.crashbarrier.name=Crash Barrier
 tile.customspawner.name=Custom Spawner

@@ -25,7 +25,7 @@ public class BlockCustomSpawner extends BlockContainer
 		this.setTickRandomly(true);
 	} 
 
-	public TileEntity createNewTileEntity(World world, int i) { return new TileEntityCustomSpawner();} //entityToSpawn, spawnLimit
+	public TileEntity createNewTileEntity(World world, int i) { return new TileEntityCustomSpawner();}
 	
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {return WyHelper.NULL_AABB;} 
 	
