@@ -5,8 +5,12 @@ import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
@@ -16,7 +20,9 @@ import xyz.pixelatedw.MineMineNoMi3.MainMod;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.EntityParticleFX;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
@@ -102,6 +108,22 @@ public class DokuProjectiles
 					
 					DevilFruitsHelper.placeBlockIfAllowed(worldObj, (int)(this.posX + offsetX), (int)this.posY, (int)(this.posZ + offsetZ), ListMisc.Poison, "air", "foliage");
 				}
+				
+				AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, 2.2);
+				explosion.setExplosionSound(false);
+				explosion.setDestroyBlocks(false);
+				explosion.setSmokeParticles(ID.PARTICLEFX_CHLOROBALL);
+				explosion.setDamageOwner(false);
+				explosion.doExplosion();
+				
+				EntityChloroBallCloud smokeCloud = new EntityChloroBallCloud(worldObj);
+				smokeCloud.setLife(30);
+				smokeCloud.setLocationAndAngles(this.posX, (this.posY + 1), this.posZ, 0, 0);
+				smokeCloud.motionX = 0;
+				smokeCloud.motionZ = 0;
+				smokeCloud.motionY = 0;	
+				smokeCloud.setThrower((EntityPlayer) this.getThrower());
+				this.worldObj.spawnEntityInWorld(smokeCloud);
 			}
 		}
 		
@@ -123,6 +145,25 @@ public class DokuProjectiles
 				MainMod.proxy.spawnCustomParticles(this, particle);		
 			}
 			super.onUpdate();
+		}
+	}
+	
+	public static class EntityChloroBallCloud extends EntityCloud
+	{
+		public EntityChloroBallCloud(World world)
+		{
+			super(world);
+		}
+		
+		public void onUpdate()
+		{
+			super.onUpdate();
+			if(!this.worldObj.isRemote)
+			{				
+				for(EntityLivingBase target : WyHelper.getEntitiesNear(this, 4))
+					target.addPotionEffect(new PotionEffect(Potion.poison.id, 200, 2));
+			}
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_CHLOROBALLCLOUD, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
 		}
 	}
 	

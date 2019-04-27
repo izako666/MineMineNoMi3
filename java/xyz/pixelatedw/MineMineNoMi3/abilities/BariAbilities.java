@@ -120,13 +120,13 @@ public class BariAbilities
 					World world = player.worldObj;
 					if(player.isSneaking())
 					{		
-						blockList.addAll(WyHelper.createEmptySphere(world, (int)player.posX, (int)player.posY, (int)player.posZ, 5, ListMisc.Barrier, "air", "foliage"));
+						blockList.addAll(WyHelper.createEmptySphere(world, (int)player.posX, (int)player.posY, (int)player.posZ, 5, ListMisc.Barrier, "air", "foliage", "nogrief"));
 					}
 					else
 					{
 						if(mop != null && world.getBlock(mop.blockX, mop.blockY, mop.blockZ) != Blocks.air)
 						{
-							blockList.addAll(WyHelper.createEmptySphere(world, mop.blockX, mop.blockY, mop.blockZ, 5, ListMisc.Barrier, "air", "foliage"));
+							blockList.addAll(WyHelper.createEmptySphere(world, mop.blockX, mop.blockY, mop.blockZ, 5, ListMisc.Barrier, "air", "foliage", "nogrief"));
 						}
 					}
 				}
@@ -164,13 +164,13 @@ public class BariAbilities
 				if(this.blockList.isEmpty())
 				{
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.NORTH)
-						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ - 3, new int[] {3, 4, 1}, ListMisc.Barrier, "air", "foliage");
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ - 3, new int[] {3, 4, 1}, ListMisc.Barrier, "air", "foliage", "nogrief");
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.SOUTH)
-						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ + 3, new int[] {3, 4, 1}, ListMisc.Barrier, "air", "foliage");
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX, player.posY, player.posZ + 3, new int[] {3, 4, 1}, ListMisc.Barrier, "air", "foliage", "nogrief");
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.EAST)
-						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX + 3, player.posY, player.posZ, new int[] {1, 4, 3}, ListMisc.Barrier, "air", "foliage");
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX + 3, player.posY, player.posZ, new int[] {1, 4, 3}, ListMisc.Barrier, "air", "foliage", "nogrief");
 					if(WyHelper.get4Directions(player) == WyHelper.Direction.WEST)
-						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX - 3, player.posY, player.posZ, new int[] {1, 4, 3}, ListMisc.Barrier, "air", "foliage");
+						this.blockList = WyHelper.createFilledCube(player.worldObj, player.posX - 3, player.posY, player.posZ, new int[] {1, 4, 3}, ListMisc.Barrier, "air", "foliage", "nogrief");
 				}
 				super.passive(player);
 			}

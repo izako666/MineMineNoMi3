@@ -128,6 +128,8 @@ public class ID
 	PARTICLEFX_EVAPORATE = "evaporate",
 	PARTICLEFX_HEALINGTOUCH = "healingTouch",
 	PARTICLEFX_RUSTTOUCH = "rustTouch",
+	PARTICLEFX_CHLOROBALL = "chloroBall",
+	PARTICLEFX_CHLOROBALLCLOUD = "chloroBallCloud",
 			
 	EXTRAEFFECT_MERO = "mero",
 	EXTRAEFFECT_HIE = "hie",
@@ -194,9 +196,7 @@ public class ID
 	public static final int 
 	
 	GENERIC_PARTICLES_RENDER_DISTANCE = 128,
-	
-	DIMENSION_ID_SCENARIOARENA = DimensionManager.getNextFreeDimId(),
-	
+
 	ENTITY_STATE = 27,
 	
 	GUI_DIALTABLE = 0,
@@ -207,6 +207,10 @@ public class ID
 	public static final int[]
 			
 	COORDS_SWORDSMANPROGRESSION05_DOJOAMBUSH = new int[] {-20000, 64, -20000};
+	
+	public static int
+	
+	DIMENSION_ID_SCENARIOARENA;
 	
 	public static final boolean 
 	

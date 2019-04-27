@@ -9,12 +9,16 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
+import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ExtraProjectiles.EntityCloud;
 import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
+import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 
 public class SniperProjectiles
 {
@@ -88,7 +92,7 @@ public class SniperProjectiles
 
 		public void tasksImapct(MovingObjectPosition hit)
 		{
-			EntityCloud smokeCloud = new EntityCloud(worldObj);
+			EntityKemuriBoshiCloud smokeCloud = new EntityKemuriBoshiCloud(worldObj);
 			smokeCloud.setLife(100);
 			smokeCloud.setLocationAndAngles(this.posX, (this.posY + 1), this.posZ, 0, 0);
 			smokeCloud.motionX = 0;
@@ -97,6 +101,25 @@ public class SniperProjectiles
 			smokeCloud.setThrower((EntityPlayer) this.getThrower());
 			this.worldObj.spawnEntityInWorld(smokeCloud);		
 		}	
+	}
+	
+	public static class EntityKemuriBoshiCloud extends EntityCloud
+	{
+		public EntityKemuriBoshiCloud(World world)
+		{
+			super(world);
+		}
+		
+		public void onUpdate()
+		{
+			super.onUpdate();
+			if(!this.worldObj.isRemote)
+			{				
+				for(EntityLivingBase target : WyHelper.getEntitiesNear(this, 5))
+					target.addPotionEffect(new PotionEffect(Potion.poison.id, 100, 1));
+			}
+			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+		}
 	}
 	
 	public static class KaenBoshi extends AbilityProjectile

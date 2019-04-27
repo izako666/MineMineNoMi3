@@ -27,6 +27,7 @@ public class MainConfig
 	public static boolean enableAnimeScreaming;
 	public static boolean enableSpecialFlying;
 	public static boolean enableOneFruitPerWorld;
+	public static boolean enableYamiSpecialPower;
 	public static double rateDFDrops;
 	public static double rateShipsSpawn;
 	public static int maxDojoSpawn;
@@ -65,6 +66,7 @@ public class MainConfig
 		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false).getBoolean();
 		enableWantedPostersPackages  = config.get(Configuration.CATEGORY_GENERAL, "Allow Wanted Poster Packages", true).getBoolean();
 		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false).getBoolean();
+		enableYamiSpecialPower = config.get(Configuration.CATEGORY_GENERAL, "Allow Yami Users to eat another Devil Fruit", true).getBoolean();
 		
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
 		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();

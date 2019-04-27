@@ -117,12 +117,7 @@ public class EventsPassives
 					{
 						player.motionY = 0.0D;
 						player.fallDistance = 0.0F;
-					}
-					
-					if(player.isClientWorld())
-					{
-						System.out.println("@@");
-					}					
+					}				
 				}
 
 				if (WyHelper.getEntitiesNear(player, 100, EntityPlayer.class).size() > 0 && player.ticksExisted % 500 == 0)

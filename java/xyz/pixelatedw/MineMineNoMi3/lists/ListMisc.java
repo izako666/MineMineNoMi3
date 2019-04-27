@@ -205,7 +205,9 @@ public class ListMisc
 	public static ItemCoreWeapon SandaiKitetsu = new ItemCoreWeapon(8);
 	public static ItemCoreWeapon NidaiKitetsu = new ItemCoreWeapon(10);
 	public static ItemCoreWeapon Shusui = new ItemCoreWeapon(8);
-
+	public static ItemCoreWeapon SoulSolid = new ItemCoreWeapon(8);
+	public static ItemCoreWeapon Durandal = new ItemCoreWeapon(7);
+	
 	public static ItemAbilityWeapon IceSaber = new ItemAbilityWeapon(9).setIsSlownessInducing();
 	public static ItemAbilityWeapon AmaNoMurakumo = new ItemAbilityWeapon(9);
 	public static ItemAbilityWeapon NoroNoroBeamSword = new ItemAbilityWeapon(5).setIsSlownessInducing(75, true);
@@ -215,6 +217,7 @@ public class ListMisc
 
 	public static void init()
 	{
+		ID.DIMENSION_ID_SCENARIOARENA = DimensionManager.getNextFreeDimId();
 		DimensionManager.registerProviderType(ID.DIMENSION_ID_SCENARIOARENA, WorldProviderScenarioArena.class, true);
 		DimensionManager.registerDimension(ID.DIMENSION_ID_SCENARIOARENA, ID.DIMENSION_ID_SCENARIOARENA);
 
@@ -284,7 +287,9 @@ public class ListMisc
 		addITEM(SandaiKitetsu, "Sandai Kitetsu", ListCreativeTabs.tabWeapons);
 		addITEM(NidaiKitetsu, "Nidai Kitetsu", ListCreativeTabs.tabWeapons);
 		addITEM(Shusui, "Shusui", ListCreativeTabs.tabWeapons);
-
+		addITEM(SoulSolid, "Soul Solid", ListCreativeTabs.tabWeapons);
+		addITEM(Durandal, "Durandal", ListCreativeTabs.tabWeapons);
+		
 		addITEM(IceSaber, "Ice Saber", null);
 		addITEM(AmaNoMurakumo, "Ama no Murakumo", null);
 		addITEM(NoroNoroBeamSword, "Noro Noro Beam Sword", null);

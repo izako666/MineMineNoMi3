@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import scala.actors.threadpool.Arrays;
 import xyz.pixelatedw.MineMineNoMi3.EnumFruitType;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.abilities.FishKarateAbilities;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -56,7 +57,7 @@ public class AkumaNoMi extends ItemFood
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
 		
-		if(props.hasYamiPower())
+		if(MainConfig.enableYamiSpecialPower && props.hasYamiPower())
 		{
 			if(!props.getUsedFruit().equals("yamidummy"))
 				player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
@@ -100,11 +101,11 @@ public class AkumaNoMi extends ItemFood
 		}
 		else
 		{	
-			if(this.getUnlocalizedName().substring(5).replace("nomi", "").equals("yamiyami"))
+			if(MainConfig.enableYamiSpecialPower && this.getUnlocalizedName().substring(5).replace("nomi", "").equals("yamiyami"))
 			{
 				props.setYamiPower(true);
 				if(props.getUsedFruit().equalsIgnoreCase("n/a"))
-					props.setUsedFruit("yamidummy");			
+					props.setUsedFruit("yamidummy");
 				
 				props.setIsLogia(false);
 				
@@ -147,7 +148,11 @@ public class AkumaNoMi extends ItemFood
 						
 					if(this.type == EnumFruitType.LOGIA)
 						props.setIsLogia(true);
-					 
+					
+
+					if(!MainConfig.enableYamiSpecialPower && props.getUsedFruit().equalsIgnoreCase("yamiyami"))
+						props.setIsLogia(false);
+					
 					if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
 						for(Ability a : abilities)
 							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))

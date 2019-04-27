@@ -365,12 +365,20 @@ public class WyHelper
 
 	public static List<EntityLivingBase> getEntitiesNear(Entity e, double radius, Class<? extends Entity>... classEntities)
 	{
-		AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(e.posX, e.posY, e.posZ, e.posX + 1, e.posY + 1, e.posZ + 1).expand(radius, radius, radius);
-		List list = new ArrayList();
-		for(Class<? extends Entity> clz : classEntities)
-			list.addAll(e.worldObj.getEntitiesWithinAABB(clz, aabb));
-		list.remove(e);
-		return list;
+		try
+		{
+			AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(e.posX, e.posY, e.posZ, e.posX + 1, e.posY + 1, e.posZ + 1).expand(radius, radius, radius);			List list = new ArrayList();
+			for(Class<? extends Entity> clz : classEntities)
+				list.addAll(e.worldObj.getEntitiesWithinAABB(clz, aabb));
+			list.remove(e);
+			return list;
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	public static List<EntityLivingBase> getEntitiesNear(TileEntity e, double radius)

@@ -10,6 +10,8 @@ import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEff
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.chiyu.ParticleEffectHealingTouch;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectCommonExplosion;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.common.ParticleEffectWaterExplosion;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectChloroBall;
+import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectChloroBallCloud;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectDokuGumo;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.doku.ParticleEffectVenomDemon;
 import xyz.pixelatedw.MineMineNoMi3.entities.particles.effects.fishkarate.ParticleEffectSamehada;
@@ -108,6 +110,8 @@ public class ParticleManager
 		// Doku
 		map.put(ID.PARTICLEFX_DOKUGOMU, new ParticleEffectDokuGumo());
 		map.put(ID.PARTICLEFX_VENOMDEMON, new ParticleEffectVenomDemon());
+		map.put(ID.PARTICLEFX_CHLOROBALL, new ParticleEffectChloroBall());
+		map.put(ID.PARTICLEFX_CHLOROBALLCLOUD, new ParticleEffectChloroBallCloud());
 		
 		// Yuki
 		map.put(ID.PARTICLEFX_FUBUKI, new ParticleEffectFubuki());

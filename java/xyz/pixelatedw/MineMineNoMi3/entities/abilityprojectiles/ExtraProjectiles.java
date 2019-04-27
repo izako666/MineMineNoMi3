@@ -40,7 +40,9 @@ public class ExtraProjectiles
 		private EntityPlayer thrower;
 		
 		public EntityCloud(World world)
-		{super(world);}
+		{
+			super(world);
+		}
 		
 		public void onUpdate()
 		{
@@ -49,19 +51,24 @@ public class ExtraProjectiles
 			{
 				if(life <= 0)
 					this.setDead();
-						
-				for(EntityLivingBase target : WyHelper.getEntitiesNear(thrower, 2))
-					target.addPotionEffect(new PotionEffect(Potion.poison.id, 100, 1));
-				
+
 				life--;
-			}
-			
-			WyNetworkHelper.sendToAllAround(new PacketParticles(ID.PARTICLEFX_KEMURIBOSHI, this.posX, this.posY, this.posZ), this.dimension, this.posX, this.posY, this.posZ, ID.GENERIC_PARTICLES_RENDER_DISTANCE);
+			}		
+		}
+		
+		public EntityPlayer getThrower()
+		{
+			return this.thrower;
 		}
 		
 		public void setThrower(EntityPlayer player)
 		{
 			this.thrower = player;
+		}
+		
+		public int getLife()
+		{
+			return this.life;
 		}
 		
 		public void setLife(int life)

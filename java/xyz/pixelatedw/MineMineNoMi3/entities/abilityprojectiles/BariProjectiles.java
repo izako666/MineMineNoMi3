@@ -44,6 +44,9 @@ public class BariProjectiles
 		{	
 			if(!this.worldObj.isRemote)
 			{
+				if(this.getThrower() == null)
+					return;
+				
 				AbilityProperties abilityProps = AbilityProperties.get((EntityPlayer) this.getThrower());			
 				Ability ability = abilityProps.getAbilityFromName(ListAttributes.BARRIERBILITYSTAIRS.getAttributeName());            
 
@@ -55,7 +58,7 @@ public class BariProjectiles
 						return;
 					}
 					
-					((BariAbilities.BarrierbilityStairs)ability).fillBlocksList(WyHelper.createFilledCube(this.worldObj, this.posX, this.posY - 2, this.posZ, new int[] {1, 1, 1}, ListMisc.Barrier, "air"));
+					((BariAbilities.BarrierbilityStairs)ability).fillBlocksList(WyHelper.createFilledCube(this.worldObj, this.posX, this.posY - 2, this.posZ, new int[] {1, 1, 1}, ListMisc.Barrier, "air", "nogrief"));
 				}
 
 			}

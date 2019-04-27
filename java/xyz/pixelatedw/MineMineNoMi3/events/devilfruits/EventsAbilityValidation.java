@@ -45,9 +45,18 @@ public class EventsAbilityValidation
 						props.setZoanPoint("n/a");
 					
 					if(df != null && df.getItem() != null)
+					{
+						if(props.hasYamiPower())
+						{
+							ItemStack yami = DevilFruitsHelper.getDevilFruitItem("yamiyami");
+							for(Ability a : ((AkumaNoMi)yami.getItem()).abilities)
+								if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
+									abilityProps.addDevilFruitAbility(a);
+						}
 						for(Ability a : ((AkumaNoMi)df.getItem()).abilities)
 							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a))
 								abilityProps.addDevilFruitAbility(a);
+					}
 					
 					for(Ability a : abilityProps.getAbilitiesInHotbar())
 						if(a != null && a.isOnCooldown())
