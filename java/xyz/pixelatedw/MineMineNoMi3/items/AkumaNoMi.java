@@ -59,11 +59,11 @@ public class AkumaNoMi extends ItemFood
 		String eatenFruit = this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
 
 		boolean flag1 = !props.getUsedFruit().equalsIgnoreCase("n/a") && !props.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
-		boolean flag2 = props.hasYamiPower() && (!eatenFruit.equalsIgnoreCase(props.getUsedFruit()) && !props.getUsedFruit().equalsIgnoreCase("yamidummy"));
+		boolean flag2 = props.hasYamiPower() && !eatenFruit.equalsIgnoreCase(props.getUsedFruit()) && !props.getUsedFruit().equalsIgnoreCase("yamidummy");
+		boolean flag3 = !MainConfig.enableYamiSpecialPower && !props.getUsedFruit().equalsIgnoreCase("n/a") && (eatenFruit.equalsIgnoreCase("yamiyami") || !eatenFruit.equalsIgnoreCase(props.getUsedFruit()));
 
-		if (flag1 || flag2)
+		if (flag1 || flag2 || flag3)
 		{
-			WyHelper.sendMsgToPlayer(player, "DAMAGE");
 			player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
 			return;
 		}
@@ -77,7 +77,9 @@ public class AkumaNoMi extends ItemFood
 		if (eatenFruit.equalsIgnoreCase("yamiyami"))
 		{
 			props.setIsLogia(false);
+			
 			props.setYamiPower(true);
+			
 			if (props.getUsedFruit().equalsIgnoreCase("n/a"))
 				props.setUsedFruit("yamidummy");
 		}
