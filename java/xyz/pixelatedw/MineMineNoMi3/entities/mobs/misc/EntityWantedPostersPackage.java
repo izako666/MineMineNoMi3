@@ -45,8 +45,16 @@ public class EntityWantedPostersPackage extends EntityMob
 		
 		if(this.onGround && !this.worldObj.isRemote)
 		{
-			this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, ListMisc.WantedPostersPackage);
-			this.setDead();
+			if(this.worldObj.isAirBlock((int)this.posX, (int)this.posY, (int)this.posZ))
+			{
+				this.worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, ListMisc.WantedPostersPackage);
+				this.setDead();
+			}
+			else if(this.worldObj.isAirBlock((int)this.posX, (int)this.posY + 1, (int)this.posZ))
+			{
+				this.worldObj.setBlock((int)this.posX, (int)this.posY + 1, (int)this.posZ, ListMisc.WantedPostersPackage);
+				this.setDead();
+			}
 		}
 		
 		if(this.isInWater() || this.isInsideOfMaterial(Material.lava))

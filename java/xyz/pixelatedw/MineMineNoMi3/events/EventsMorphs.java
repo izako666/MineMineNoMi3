@@ -108,7 +108,6 @@ public class EventsMorphs
 		if (propz.isInAirWorld())
 		{
 			event.setCanceled(true);
-
 		}
 	}
 

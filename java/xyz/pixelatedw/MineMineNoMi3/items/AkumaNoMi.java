@@ -28,14 +28,13 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListCreativeTabs;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
 
-
 public class AkumaNoMi extends ItemFood
 {
- 
+
 	public EnumFruitType type;
 	public Item ability1, ability2, ability3, ability4;
 	public Ability[] abilities;
-	
+
 	public AkumaNoMi(EnumFruitType type, Ability... abilitiesArray)
 	{
 		super(0, false);
@@ -43,139 +42,93 @@ public class AkumaNoMi extends ItemFood
 		this.type = type;
 		this.abilities = abilitiesArray;
 		this.setCreativeTab(ListCreativeTabs.tabDevilFruits);
-		this.setAlwaysEdible(); 
-	} 
+		this.setAlwaysEdible();
+	}
 
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
-    {
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+	{
 		player.setItemInUse(itemStack, itemUseDuration);
 		return itemStack;
 	}
-    
-	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) 
+
+	public void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		AbilityProperties abilityProps = AbilityProperties.get(player);
-		
-		if(MainConfig.enableYamiSpecialPower && props.hasYamiPower())
+
+		String eatenFruit = this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", "");
+
+		boolean flag1 = !props.getUsedFruit().equalsIgnoreCase("n/a") && !props.hasYamiPower() && !eatenFruit.equalsIgnoreCase("yamiyami");
+		boolean flag2 = props.hasYamiPower() && (!eatenFruit.equalsIgnoreCase(props.getUsedFruit()) && !props.getUsedFruit().equalsIgnoreCase("yamidummy"));
+
+		if (flag1 || flag2)
 		{
-			if(!props.getUsedFruit().equals("yamidummy"))
-				player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
-			
-			if(this.getUnlocalizedName().substring(5).replace("nomi", "").equals("yamiyami"))
-				player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
-			
-			props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
-			
-			if(props.getUsedFruit().equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
-			{
-				WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
-				if(props.isFishman())
-				{
-					props.setRace(ID.RACE_HUMAN);
-					
-					for (int i = 0; i < 8; i++)
-					{
-						Ability abl = abilityProps.getAbilityFromSlot(i);
-						for(Ability fshAbl : FishKarateAbilities.abilitiesArray)
-						{
-							if(abl != null && abl.getAttribute().getAttributeName().equalsIgnoreCase(fshAbl.getAttribute().getAttributeName()))
-								abilityProps.setAbilityInSlot(i, null);
-						}
-					}
-					
-					DevilFruitsHelper.validateStyleMoves(player);
-					DevilFruitsHelper.validateRacialMoves(player);
-					
-					WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-				}
-			}
-			
-			if(this.type == EnumFruitType.LOGIA)
-				props.setIsLogia(true);
-			 
-			if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
-				for(Ability a : abilities)
-					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
-						abilityProps.addDevilFruitAbility(a);
+			WyHelper.sendMsgToPlayer(player, "DAMAGE");
+			player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
+			return;
 		}
-		else
-		{	
-			if(MainConfig.enableYamiSpecialPower && this.getUnlocalizedName().substring(5).replace("nomi", "").equals("yamiyami"))
-			{
-				props.setYamiPower(true);
-				if(props.getUsedFruit().equalsIgnoreCase("n/a"))
-					props.setUsedFruit("yamidummy");
-				
-				props.setIsLogia(false);
-				
-				for(Ability a : abilities)
-					if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
-						abilityProps.addDevilFruitAbility(a);
-			}
-			else
-			{
-				if(!props.getUsedFruit().equalsIgnoreCase("n/a") && !props.hasYamiPower())
-					player.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);			
 
-				if(props.getUsedFruit().equalsIgnoreCase("n/a"))	
+		if (!eatenFruit.equalsIgnoreCase("yamiyami"))
+			props.setUsedFruit(eatenFruit);
+
+		if (this.type == EnumFruitType.LOGIA)
+			props.setIsLogia(true);
+
+		if (eatenFruit.equalsIgnoreCase("yamiyami"))
+		{
+			props.setIsLogia(false);
+			props.setYamiPower(true);
+			if (props.getUsedFruit().equalsIgnoreCase("n/a"))
+				props.setUsedFruit("yamidummy");
+		}
+
+		if (eatenFruit.equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
+		{
+			WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
+			if (props.isFishman())
+			{
+				props.setRace(ID.RACE_HUMAN);
+				
+				for (int i = 0; i < 8; i++)
 				{
-					props.setUsedFruit(this.getUnlocalizedName().substring(5).replace("nomi", "").replace(":", "").replace(",", "").replace("model", ""));
-
-					if(props.getUsedFruit().equalsIgnoreCase("hitohito") && !player.worldObj.isRemote)
-		 			{
-						WyHelper.sendMsgToPlayer(player, "You've gained some enlightenment");
-						if(props.isFishman())
-						{
-							props.setRace(ID.RACE_HUMAN);
-							
-							for (int i = 0; i < 8; i++)
-							{
-								Ability abl = abilityProps.getAbilityFromSlot(i);
-								for(Ability fshAbl : FishKarateAbilities.abilitiesArray)
-								{
-									if(abl != null && abl.getAttribute().getAttributeName().equalsIgnoreCase(fshAbl.getAttribute().getAttributeName()))
-										abilityProps.setAbilityInSlot(i, null);
-								}
-							}		
-							
-							DevilFruitsHelper.validateStyleMoves(player);
-							DevilFruitsHelper.validateRacialMoves(player);
-							
-							WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
-						}
+					Ability abl = abilityProps.getAbilityFromSlot(i);
+					for (Ability fshAbl : FishKarateAbilities.abilitiesArray)
+					{
+						if (abl != null && abl.getAttribute().getAttributeName().equalsIgnoreCase(fshAbl.getAttribute().getAttributeName()))
+							abilityProps.setAbilityInSlot(i, null);
 					}
-						
-					if(this.type == EnumFruitType.LOGIA)
-						props.setIsLogia(true);
-					
-
-					if(!MainConfig.enableYamiSpecialPower && props.getUsedFruit().equalsIgnoreCase("yamiyami"))
-						props.setIsLogia(false);
-					
-					if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
-						for(Ability a : abilities)
-							if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
-								abilityProps.addDevilFruitAbility(a);
 				}
-			}
-		}	
 				
+				DevilFruitsHelper.validateStyleMoves(player);
+				DevilFruitsHelper.validateRacialMoves(player);
+				WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP) player);
+			}
+		}
+
+		if(!props.getUsedFruit().equalsIgnoreCase("yomiyomi"))
+			for(Ability a : abilities)
+				if(!DevilFruitsHelper.verifyIfAbilityIsBanned(a) && !abilityProps.hasDevilFruitAbility(a))
+					abilityProps.addDevilFruitAbility(a);
+		
 		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
-    	if(!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
-    		WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
+		if (!ID.DEV_EARLYACCESS && !world.isRemote && !player.capabilities.isCreativeMode)
+			WyTelemetry.addStat("eaten_" + itemStack.getDisplayName(), 1);
+
 	}
-	
+
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4)
 	{
-		for(int i = 0; i < this.abilities.length; i++)
-			if(!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
-				list.add(  I18n.format("ability." + WyHelper.getFancyName(this.abilities[i].getAttribute().getAttributeName()) + ".name") );
-			
-	  	list.add("");
-	  	list.add(type.getColor() + type.getName());
+		for (int i = 0; i < this.abilities.length; i++)
+			if (!DevilFruitsHelper.verifyIfAbilityIsBanned(this.abilities[i]) && this.abilities[i] != null)
+				list.add(I18n.format("ability." + WyHelper.getFancyName(this.abilities[i].getAttribute().getAttributeName()) + ".name"));
+
+		list.add("");
+		list.add(type.getColor() + type.getName());
 	}
-	
-	public EnumFruitType getType() { return type; }
+
+	public EnumFruitType getType()
+	{
+		return type;
+	}
 
 }

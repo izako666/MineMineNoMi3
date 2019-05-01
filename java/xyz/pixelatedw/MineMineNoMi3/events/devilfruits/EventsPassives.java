@@ -35,6 +35,7 @@ import xyz.pixelatedw.MineMineNoMi3.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
 import xyz.pixelatedw.MineMineNoMi3.items.ItemCoreArmor;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketParticles;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSyncInfo;
@@ -388,20 +389,22 @@ public class EventsPassives
 				event.setCanceled(true);
 			}
 
-			if (event.source.getSourceOfDamage() instanceof EntityPlayer)
+			if (event.source.getSourceOfDamage() instanceof EntityLivingBase)
 			{
 				if (event.entityLiving instanceof EntityPlayer)
 				{
-					EntityPlayer attacker = (EntityPlayer) event.source.getSourceOfDamage();
+					EntityLivingBase attacker = (EntityLivingBase) event.source.getSourceOfDamage();
 					EntityPlayer reciever = (EntityPlayer) event.entityLiving;
 					ExtendedEntityData propz = ExtendedEntityData.get(reciever);
 
 					if (attacker.getHeldItem() != null && ItemsHelper.isSword(attacker.getHeldItem()) && propz.getUsedFruit().equals("sabisabi") && !attacker.worldObj.isRemote)
 					{
 						event.setCanceled(true);
-						attacker.getHeldItem().damageItem(50, attacker);
-						if (attacker.getHeldItem().getItemDamage() <= 0)
-							WyHelper.removeStackFromInventory(attacker, attacker.getHeldItem());
+						attacker.getHeldItem().damageItem(30, attacker);
+						if (attacker instanceof EntityPlayer && attacker.getHeldItem().getItemDamage() <= 0)
+							WyHelper.removeStackFromInventory((EntityPlayer) attacker, attacker.getHeldItem());
+						else if(!(attacker instanceof EntityPlayer) && attacker.getHeldItem().getItemDamage() <= 0)
+							attacker.setCurrentItemOrArmor(0, null);
 					}
 
 				}

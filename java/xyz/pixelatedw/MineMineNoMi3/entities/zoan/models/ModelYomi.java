@@ -75,6 +75,11 @@ public class ModelYomi extends ModelZoanMorph
 		this.bipedRightArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
 		this.bipedLeftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
 
+        /*if (this.heldItemRight != 0)
+        {
+            this.bipedRightArm.rotateAngleX = this.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)this.heldItemRight;
+        }*/
+		
 		if (entity.isSwingInProgress)
 		{
 			bipedRightArm.rotateAngleX = MathHelper.sin(entity.swingProgress * 3.0F + (float) Math.PI) * 1.2F;
