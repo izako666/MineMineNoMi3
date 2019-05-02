@@ -58,7 +58,7 @@ public class PacketShounenScream implements IMessage
 		public IMessage onMessage(PacketShounenScream message, MessageContext ctx) 
 		{
 			EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-			String localizedName = I18n.format("ability." + message.attackName + ".name").toUpperCase();
+			String localizedName = message.attackName.toUpperCase();//I18n.format("ability." + message.attackName + ".name").toUpperCase();
 			String animeScream = localizedName;
 			
 			if(message.splitHalf > 0)

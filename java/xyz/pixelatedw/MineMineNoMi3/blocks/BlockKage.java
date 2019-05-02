@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,12 +22,12 @@ import xyz.pixelatedw.MineMineNoMi3.packets.PacketWorld;
 
 public class BlockKage extends Block
 {	
-	private int ticks = 200;
-	private int maxTicks = 200;
+	private int ticks = 500;
 	
 	public BlockKage()
 	{
 		super(Material.iron);
+		this.setTickRandomly(true);
 	} 
 
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) 
@@ -56,15 +57,31 @@ public class BlockKage extends Block
     	}
 	}
     
-    public void randomDisplayTick(World worldIn, int x, int y, int z, Random rand)
+    public void onBlockAdded(World world, int x, int y, int z) 
     {
+    	world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
+    	super.onBlockAdded(world, x, y, z);
+    }
+    
+    public int tickRate(World p_149738_1_)
+    {
+        return 1;
+    }
+    
+    public void updateTick(World world, int x, int y, int z, Random rand) 
+    {
+    	if(world.getBlock(x, y - 1, z) == Blocks.air || world.getBlock(x, y - 1, z) instanceof BlockBush)
+    		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
+
     	if(ticks > 0)
     		ticks--;
     	else
     	{
     		WyNetworkHelper.sendToServer(new PacketWorld(x, y, z, Block.getIdFromBlock(Blocks.air)));
-    		ticks = maxTicks;
+    		ticks = 500 + rand.nextInt(10);
     	}
-	}
+    	
+    	world.scheduleBlockUpdate(x, y, z, this, this.tickRate(world));
+    }
 	
 }

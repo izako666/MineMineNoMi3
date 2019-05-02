@@ -115,25 +115,25 @@ public class GoroAbilities
 				switch(voltVariType)
 				{
 					case 1:
-						this.attr.setAttributeName("1 Million Volt Vari");
+						this.attr.setAbilityDisplayName("1 Million Volt Vari");
 						break;
 					case 2:
-						this.attr.setAttributeName("5 Million Volt Vari");
+						this.attr.setAbilityDisplayName("5 Million Volt Vari");
 						break;
 					case 3:
-						this.attr.setAttributeName("10 Million Volt Vari");
+						this.attr.setAbilityDisplayName("10 Million Volt Vari");
 						break;
 					case 4:
-						this.attr.setAttributeName("20 Million Volt Vari");
+						this.attr.setAbilityDisplayName("20 Million Volt Vari");
 						break;
 					case 5:
-						this.attr.setAttributeName("50 Million Volt Vari");
+						this.attr.setAbilityDisplayName("50 Million Volt Vari");
 						break;
 					case 6:
-						this.attr.setAttributeName("60 Million Volt Vari");
+						this.attr.setAbilityDisplayName("60 Million Volt Vari");
 						break;
 					case 7:
-						this.attr.setAttributeName("100 Million Volt Vari");
+						this.attr.setAbilityDisplayName("100 Million Volt Vari");
 						break;
 				}
 				
@@ -152,9 +152,9 @@ public class GoroAbilities
 				if(MainConfig.enableAnimeScreaming)
 				{
 					if(truePower > 0 && truePower <= 25)
-						this.attr.setAttributeName("1 Million Volt Vari");
+						this.attr.setAbilityDisplayName("1 Million Volt Vari");
 					else
-						this.attr.setAttributeName("5 Million Volt Vari");
+						this.attr.setAbilityDisplayName("5 Million Volt Vari");
 				}
 				this.projectile = new VoltVari5Million(player.worldObj, player, ListExtraAttributes.VOLTVARI5MILLION);
 			}
@@ -163,9 +163,9 @@ public class GoroAbilities
 				if(MainConfig.enableAnimeScreaming)
 				{
 					if(truePower > 50 && truePower <= 75)
-						this.attr.setAttributeName("10 Million Volt Vari");
+						this.attr.setAbilityDisplayName("10 Million Volt Vari");
 					else
-						this.attr.setAttributeName("20 Million Volt Vari");
+						this.attr.setAbilityDisplayName("20 Million Volt Vari");
 				}
 				this.projectile = new VoltVari20Million(player.worldObj, player, ListExtraAttributes.VOLTVARI20MILLION);
 			}
@@ -174,9 +174,9 @@ public class GoroAbilities
 				if(MainConfig.enableAnimeScreaming)
 				{
 					if(truePower > 100 && truePower <= 125)
-						this.attr.setAttributeName("50 Million Volt Vari");
+						this.attr.setAbilityDisplayName("50 Million Volt Vari");
 					else
-						this.attr.setAttributeName("60 Million Volt Vari");
+						this.attr.setAbilityDisplayName("60 Million Volt Vari");
 				}
 				this.projectile = new VoltVari60Million(player.worldObj, player, ListExtraAttributes.VOLTVARI60MILLION);
 			}
@@ -185,9 +185,9 @@ public class GoroAbilities
 				if(MainConfig.enableAnimeScreaming)
 				{
 					if(truePower > 150 && truePower <= 175)
-						this.attr.setAttributeName("100 Million Volt Vari");
+						this.attr.setAbilityDisplayName("100 Million Volt Vari");
 					else
-						this.attr.setAttributeName("Max 200 Million Volt Vari");
+						this.attr.setAbilityDisplayName("Max 200 Million Volt Vari");
 				}
 				this.projectile = new VoltVari200Million(player.worldObj, player, ListExtraAttributes.VOLTVARI200MILLION);
 			}

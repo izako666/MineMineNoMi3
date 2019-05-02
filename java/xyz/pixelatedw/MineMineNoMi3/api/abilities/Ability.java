@@ -286,12 +286,8 @@ public class Ability
 	
 	protected void sendShounenScream(EntityPlayer player, int part)
 	{
-		if(MainConfig.enableAnimeScreaming && ExtendedEntityData.get(player).getZoanPoint().equalsIgnoreCase("n/a"))
-		{
-    		WyNetworkHelper.sendToAllAround(new PacketShounenScream(player.getCommandSenderName(), WyHelper.getFancyName(this.attr.getAbilityDisplayName()), part), player.dimension, player.posX, player.posY, player.posZ, 15);
-    		if(!this.originalDisplayName.equalsIgnoreCase("n/a") && !this.attr.getAbilityDisplayName().equalsIgnoreCase(this.originalDisplayName) && part != 1)
-    			this.attr.setAbilityDisplayName(originalDisplayName);
-		}
+		if(MainConfig.enableAnimeScreaming)
+    		WyNetworkHelper.sendToAllAround(new PacketShounenScream(player.getCommandSenderName(), this.attr.getAbilityDisplayName(), part), player.dimension, player.posX, player.posY, player.posZ, 15);
 	}
 	
 	public void reset()
