@@ -84,6 +84,7 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.MokuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.NikyuProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.NoroProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OpeProjectiles;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.OriProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.PikaProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.RokushikiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.SniperProjectiles;
@@ -96,7 +97,6 @@ import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.UshiGiraffeProje
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YamiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.ZouProjectiles;
-import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.OriProjectiles;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
 
 public class ListDevilFruits 

@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models;
+package xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
