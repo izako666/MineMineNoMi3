@@ -89,7 +89,7 @@ public class ListMisc
 	}.setHardness(10);
 	public static Block EnchantmentTable = new BlockEnchantmentTable2();
 	public static Block DenDenMushi = new BlockDenDenMushi();
-	public static Block SkyBlock = new NewBlock(Material.cloth);
+	public static Block SkyBlock = new NewBlock(Material.cloth).setLightLevel(0.75F).setLightOpacity(0);
 	public static Block Barrier = new BlockBarrier();
 	public static Block Poison = new BlockPoison();
 	public static Block DemonPoison = new BlockDemonPoison();

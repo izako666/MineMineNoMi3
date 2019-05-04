@@ -36,12 +36,14 @@ public class MorphsHelper
 						{ 
 							"power", 
 							new RenderZoanMorph(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.7f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.6) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.6),
+							null
 						},
 						{ 
 							"speed", 
 							new RenderZoanMorph(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.3) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.3),
+							null
 						}					
 				});
 		morphsMap.put("toritoriphoenix", new Object[][]
@@ -49,12 +51,14 @@ public class MorphsHelper
 						{ 
 							"full", 
 							new RenderZoanMorph(new ModelPhoenixFull(), "phoenixfull", 1.3, new float[] { 0, 0.3f, 0 }), 
-							null 
+							null,
+							null
 						},
 						{ 
 							"hybrid", 
 							new RenderZoanMorph(new ModelPhoenixHybrid(), "phoenixhybrid", 1, new float[] { 0, 0.2f, 0 }), 
-							null 
+							null,
+							null
 						}
 				});
 		morphsMap.put("zouzou", new Object[][]
@@ -62,12 +66,14 @@ public class MorphsHelper
 						{ 
 							"full", 
 							new RenderZoanMorph(new ModelZouFull(), "zoufull", 1.3, new float[] { 0, 0.65f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.3) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.3),
+							null
 						},
 						{ 
 							"hybrid", 
 							new RenderZoanMorph(new ModelZouHybrid(), "zouhybrid", 1.0, new float[] { 0, 0.2f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.8) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 0.8),
+							null
 						}
 				});
 		morphsMap.put("dokudoku", new Object[][]
@@ -75,7 +81,8 @@ public class MorphsHelper
 						{ 
 							"venomDemon", 
 							new RenderZoanMorph(new ModelVenomDemon(), "venomdemon", 1.1, new float[] { 0, 0.5f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.6) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.6),
+							null
 						},
 				});
 		morphsMap.put("yomiyomi", new Object[][]
@@ -83,7 +90,8 @@ public class MorphsHelper
 						{ 
 							"yomi", 
 							new RenderMorphYomi(new ModelYomi(), "skeleton", 1.1, new float[] { 0, 0.3f, 0 }), 
-							null 
+							null,
+							new float[] {-0.25F, 0.6F, -0.05F}
 						},
 				});
 		morphsMap.put("mogumogu", new Object[][]
@@ -91,7 +99,8 @@ public class MorphsHelper
 						{ 
 							"power",
 							new RenderZoanMorph(new ModelMoguPower(), "mogu", 0.9, new float[] { 0, 0.1f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.2)
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.2),
+							null
 						},
 				});
 		morphsMap.put("ushiushigiraffe", new Object[][]
@@ -99,12 +108,14 @@ public class MorphsHelper
 						{ 
 							"power", 
 							new RenderZoanMorph(new ModelGiraffePower(), "giraffehybrid", 1.4, new float[] { 0, 0.7f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.8) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.8),
+							null
 						},
 						{ 
 							"speed", 
 							new RenderZoanMorph(new ModelGiraffeSpeed(), "giraffefull", 1.55, new float[] { 0, 0.95f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.9) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), 1.9),
+							null
 						},
 				});
 		morphsMap.put("minimini", new Object[][]
@@ -112,7 +123,8 @@ public class MorphsHelper
 						{ 
 							"mini", 
 							new RenderZoanMorph(new ModelBiped(), "$playerskin", 0.15, new float[] { 0, -0.9f, 0 }), 
-							new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.8) 
+							new EntityRendererZoanEyes(Minecraft.getMinecraft(), -0.8),
+							null
 						},
 				});
 	}

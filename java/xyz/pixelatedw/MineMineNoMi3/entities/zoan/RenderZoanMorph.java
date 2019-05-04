@@ -1,6 +1,8 @@
 package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.lwjgl.opengl.GL11;
@@ -14,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.entity.Render;
@@ -34,7 +37,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZoanMorph;
+import xyz.pixelatedw.MineMineNoMi3.helpers.MorphsHelper;
 
 public class RenderZoanMorph extends Render
 {
@@ -48,6 +53,7 @@ public class RenderZoanMorph extends Render
 		this.shadowSize = 0;
 		this.model = model;
 		this.scale = 1;
+		
 		if (texture.contentEquals("$playerskin"))
 		{
 			ResourceLocation rs = AbstractClientPlayer.locationStevePng;
@@ -62,6 +68,7 @@ public class RenderZoanMorph extends Render
 		}
 		else
 			this.texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/zoanmorph/" + texture + ".png");
+		
 		this.offset = new float[]
 		{
 				0, 0, 0
@@ -143,7 +150,7 @@ public class RenderZoanMorph extends Render
 		// entity.prevRotationYaw) * v - 180.0F, 0.0F, 1.0F, 0.0F);
 
 		GL11.glScaled(this.scale, this.scale, this.scale);
-		GL11.glScalef(1.0F, 1.0F, 1.0F);
+		//GL11.glScalef(1.0F, 1.0F, 1.0F);
 
 		float ageInTicks = entityLiving.ticksExisted + v;
 
@@ -162,13 +169,18 @@ public class RenderZoanMorph extends Render
 		Minecraft.getMinecraft().renderEngine.bindTexture(this.getEntityTexture(entity));
 		this.model.render(entityLiving, limbSwing, limbSwingAmount, ageInTicks, headYaw - headYawOffset, headPitch, 0.0625F);
 
+		//GL11.glScaled(this.scale/2, this.scale/2, this.scale/2);
 		// In-hand item rendering
 		GL11.glPushMatrix();
 		{
 			GL11.glDisable(GL11.GL_CULL_FACE);
-
-			this.renderEquippedItems(entityLiving, v);
-
+			ModelRenderer hand = ((ModelZoanMorph) this.model).getHandRenderer();
+			if(hand != null)
+			{
+				//System.out.println(hand.rotateAngleY);
+				GL11.glRotated(hand.rotateAngleX * 50, 1, 0, 0);
+				this.renderEquippedItems(entityLiving, v);
+			}
 			/*OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);*/
@@ -186,11 +198,11 @@ public class RenderZoanMorph extends Render
 		GL11.glPopMatrix();
 	}
 
-	protected void renderEquippedItems(EntityLivingBase p_77029_1_, float p_77029_2_)
+	protected void renderEquippedItems(EntityLivingBase entity, float age)
 	{
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-		ItemStack itemstack = p_77029_1_.getHeldItem();
+		ItemStack itemstack = entity.getHeldItem();
 		Item item;
 		float f1;
 
@@ -199,7 +211,22 @@ public class RenderZoanMorph extends Render
 			item = itemstack.getItem();
 			GL11.glPushMatrix();
 
-			GL11.glTranslatef(-0.45F, 0.55F, 0.0625F);
+			ExtendedEntityData props = ExtendedEntityData.get(entity);
+			
+			if(props == null || props.getZoanPoint().equalsIgnoreCase("n/a"))
+				return;
+			
+			Optional<Object[]> opt = Arrays.stream(MorphsHelper.getMorphsMap().get(props.getUsedFruit())).filter(x ->
+			{
+				return props.getZoanPoint().equalsIgnoreCase((String) x[0]);
+			}).findFirst();
+
+			if(opt == null)
+				return;
+			
+			float[] itemOffset = (float[]) opt.get()[3];
+						
+			GL11.glTranslatef(itemOffset[0], itemOffset[1], itemOffset[2]);
 
 			net.minecraftforge.client.IItemRenderer customRenderer = net.minecraftforge.client.MinecraftForgeClient.getItemRenderer(itemstack, net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED);
 			boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED, itemstack, net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D));
@@ -232,7 +259,7 @@ public class RenderZoanMorph extends Render
 					GL11.glTranslatef(0.0F, -0.125F, 0.0F);
 				}
 
-				GL11.glTranslatef(0.0F, 0.1875F, 0.0F);
+				GL11.glTranslatef(0.0F, 0.2F, 0.0F);
 				GL11.glScalef(f1, -f1, f1);
 				GL11.glRotatef(-100.0F, 1.0F, 0.0F, 0.0F);
 				GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
@@ -260,7 +287,7 @@ public class RenderZoanMorph extends Render
 					f2 = (float) (j >> 8 & 255) / 255.0F;
 					float f3 = (float) (j & 255) / 255.0F;
 					GL11.glColor4f(f5, f2, f3, 1.0F);
-					this.renderManager.itemRenderer.renderItem(p_77029_1_, itemstack, i);
+					this.renderManager.itemRenderer.renderItem(entity, itemstack, i);
 				}
 			}
 			else
@@ -270,7 +297,7 @@ public class RenderZoanMorph extends Render
 				f5 = (float) (i >> 8 & 255) / 255.0F;
 				f2 = (float) (i & 255) / 255.0F;
 				GL11.glColor4f(f4, f5, f2, 1.0F);
-				this.renderManager.itemRenderer.renderItem(p_77029_1_, itemstack, 0);
+				this.renderManager.itemRenderer.renderItem(entity, itemstack, 0);
 			}
 
 			GL11.glPopMatrix();

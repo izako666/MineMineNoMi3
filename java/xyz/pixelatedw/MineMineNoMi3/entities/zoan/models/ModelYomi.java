@@ -19,6 +19,7 @@ public class ModelYomi extends ModelZoanMorph
     public ModelRenderer bipedRightLeg;
     public ModelRenderer bipedLeftLeg;
     public ModelRenderer afro;
+	private int heldItemRight;
     
     public ModelYomi()
     {
@@ -83,11 +84,6 @@ public class ModelYomi extends ModelZoanMorph
 
 		this.bipedRightArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
 		this.bipedLeftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
-
-        /*if (this.heldItemRight != 0)
-        {
-            this.bipedRightArm.rotateAngleX = this.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * (float)this.heldItemRight;
-        }*/
 		
 		if (entity.isSwingInProgress)
 		{
@@ -107,6 +103,12 @@ public class ModelYomi extends ModelZoanMorph
 			bipedRightArm.rotateAngleY = 0;
 			bipedRightArm.rotateAngleZ = 0.1F;
 		}
+		
+		//if (this.heldItemRight != 0)
+		//{
+		//this.bipedRightArm.rotateAngleX = this.bipedRightArm.rotateAngleX * 0.5F - ((float)Math.PI / 10F) * 1;
+		//}
+
     }
     
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
