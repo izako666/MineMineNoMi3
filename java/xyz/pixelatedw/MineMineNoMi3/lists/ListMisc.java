@@ -48,6 +48,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityString;
 import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPoster;
+import xyz.pixelatedw.MineMineNoMi3.blocks.tileentities.TileEntityWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMiBox;
 import xyz.pixelatedw.MineMineNoMi3.items.BellyPouch;
 import xyz.pixelatedw.MineMineNoMi3.items.CharacterCreator;
@@ -322,7 +323,7 @@ public class ListMisc
 		addBLOCK(StringWall, "String Wall", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(StringMid, "String Mid", Float.POSITIVE_INFINITY, TileEntityString.class, null);
 		addBLOCK(SunaSand, "Suna Sand", 0.2F, null, null);
-		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, null, null);
+		addBLOCK(WantedPostersPackage, "Posters Package", 1.0F, TileEntityWantedPostersPackage.class, null);
 		addBLOCK(WantedPosterBlock, "Wanted Poster Block", 0.1F, TileEntityWantedPoster.class, null);
 		addBLOCK(OriBars, "Ori Bars", 40.0F, null, null);
 		addBLOCK(KairosekiBars, "Kairoseki Bars", 30.0F, null, ListCreativeTabs.tabMisc);

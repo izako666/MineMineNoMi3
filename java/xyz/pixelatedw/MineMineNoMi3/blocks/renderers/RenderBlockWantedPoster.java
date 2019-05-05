@@ -146,17 +146,17 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 
 				Tessellator tessellator = Tessellator.instance;
 				tessellator.startDrawingQuads();
-				tessellator.addVertexWithUV(x			, y + v			, 0, 0.11, 0.5);
-				tessellator.addVertexWithUV(x + u		, y + v			, 0, 0.265, 0.5);
-				tessellator.addVertexWithUV(x + u		, y        		, 0, 0.265, 0.25);
-				tessellator.addVertexWithUV(x			, y         	, 0, 0.11, 0.25);
+				tessellator.addVertexWithUV(x			, y + v			, 0, 0.125, 0.5);
+				tessellator.addVertexWithUV(x + u		, y + v			, 0, 0.25, 0.5);
+				tessellator.addVertexWithUV(x + u		, y        		, 0, 0.25, 0.25);
+				tessellator.addVertexWithUV(x			, y         	, 0, 0.125, 0.25);
 				tessellator.draw();
 				
 				ResourceLocation background = new ResourceLocation(ID.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + te2.getBackground() + ".png");
 								
 				this.bindTexture(background);
 
-				GL11.glTranslated(-0.05, -0.04, 0.001);
+				GL11.glTranslated(-0.059, -0.04, 0.001);
 				GL11.glScalef(1.02F, 1.25F, 1.0F);
 				
 				u = 0.3;
