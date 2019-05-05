@@ -160,35 +160,7 @@ public class EventsCore
 			{
 				if(ID.DEV_EARLYACCESS && !WyDebug.isDebug())
 				{
-					try 
-					{
-						URL url = new URL("https://dl.dropboxusercontent.com/s/cs2cv9ezaatzgd3/earlyaccess.txt?dl=0");
-						Scanner scanner = new Scanner(url.openStream());
-						boolean flag = false;
-						
-						while(scanner.hasNextLine())
-						{
-							String uuid = scanner.nextLine();
-							if(uuid.startsWith("$"))
-								continue;
-													
-							if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equalsIgnoreCase(uuid.replace("& ", ""))))
-							{
-								flag = true;
-								break;
-							}
-						}
-						
-						if(!flag)
-							((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");														
-						
-						scanner.close();
-					} 
-					catch (IOException e) 
-					{
-						((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");						
-						e.printStackTrace();
-					}				
+					WyHelper.isPatreon(player);
 				}
 				
 				if(MainConfig.enableUpdateMsg)

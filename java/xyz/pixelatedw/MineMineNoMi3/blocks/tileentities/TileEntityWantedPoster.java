@@ -12,6 +12,7 @@ public class TileEntityWantedPoster extends TileEntity
 	private String entityName = "";
 	private String bounty = "";
 	private String date = "";
+	private String background = "";
 
 	public String getEntityName()
 	{
@@ -23,6 +24,16 @@ public class TileEntityWantedPoster extends TileEntity
 		this.entityName = name;
 	}
 
+	public String getBackground()
+	{
+		return this.background;
+	}
+
+	public void setBackground(String background)
+	{
+		this.background = background;
+	}
+	
 	public void setPosterBounty(String bounty)
 	{
 		this.bounty = bounty;
@@ -46,10 +57,11 @@ public class TileEntityWantedPoster extends TileEntity
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		if(this.entityName == null || this.bounty  == null || this.date == null) return;
+		if(this.entityName == null || this.bounty  == null || this.date == null || this.background == null) return;
 		nbt.setString("Name", this.entityName);
 		nbt.setString("Bounty", this.bounty);
 		nbt.setString("Date", this.date);
+		nbt.setString("Background", this.background);
 	}
 
 	public void readFromNBT(NBTTagCompound nbt)
@@ -58,6 +70,7 @@ public class TileEntityWantedPoster extends TileEntity
 		this.entityName = nbt.getString("Name");
 		this.bounty = nbt.getString("Bounty");
 		this.date = nbt.getString("Date");
+		this.background = nbt.getString("Background");
 	}
 
 	public Packet getDescriptionPacket()

@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
@@ -29,6 +30,15 @@ import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 public class ItemsHelper
 {
 
+	private static String[] wantedPostersBackgrounds = new String[] 
+			{
+					"forest1", "forest2", 
+					"jungle1", "jungle2",
+					"hills1", "hills2", "hills3", 
+					"plains1", "plains2", "plains3", 
+					"taiga1", "taiga2",
+			};
+	
 	public static void dropWantedPosters(World world, int posX, int posY, int posZ)
 	{
     	ExtendedWorldData worldData = ExtendedWorldData.get(world);
@@ -43,7 +53,7 @@ public class ItemsHelper
     			return x instanceof EntityPlayer && ExtendedEntityData.get(x).isPirate() && worldData.getBounty(x.getCommandSenderName()) != 0;
     		}).forEach(x -> 
     		{
-    			SimpleEntry<String, Long> se = new SimpleEntry<String, Long>( x.getCommandSenderName().toLowerCase(), worldData.getBounty(x.getCommandSenderName()) );
+    			SimpleEntry<String, Long> se = new SimpleEntry<String, Long>( x.getCommandSenderName(), worldData.getBounty(x.getCommandSenderName()) );
     			bountiesInPackage.add( se );
     		});
     	}
@@ -68,6 +78,8 @@ public class ItemsHelper
 
 		data.setString("Name", entityName);
 		data.setLong("Bounty", bounty);
+		int randomBg = (int) WyMathHelper.randomWithRange(0, wantedPostersBackgrounds.length - 1);
+		data.setString("Background", wantedPostersBackgrounds[randomBg]);
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String dateString = format.format(new Date());

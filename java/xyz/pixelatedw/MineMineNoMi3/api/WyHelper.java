@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -31,12 +34,14 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -577,5 +582,41 @@ public class WyHelper
 	{
 		if (player.inventory.mainInventory[index] != null)
 			player.inventory.mainInventory[index] = null;
+	}
+	
+	public static boolean isPatreon(EntityPlayer player)
+	{
+		boolean flag = false;
+		
+		try 
+		{
+			URL url = new URL("https://dl.dropboxusercontent.com/s/cs2cv9ezaatzgd3/earlyaccess.txt?dl=0");
+			Scanner scanner = new Scanner(url.openStream());
+			
+			while(scanner.hasNextLine())
+			{
+				String uuid = scanner.nextLine();
+				if(uuid.startsWith("$"))
+					continue;
+										
+				if(player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().equalsIgnoreCase(uuid.replace("& ", ""))))
+				{
+					flag = true;
+					break;
+				}
+			}
+			
+			if(!flag)
+				((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");														
+			
+			scanner.close();
+		} 
+		catch (IOException e) 
+		{
+			((EntityPlayerMP)player).playerNetServerHandler.kickPlayerFromServer(EnumChatFormatting.BOLD + "" + EnumChatFormatting.RED + "WARNING! \n\n " + EnumChatFormatting.RESET + "You don't have access to this version yet!");						
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 }

@@ -52,6 +52,7 @@ public class WantedPoster extends Item
 					{
 						tileEntity.setEntityName(itemStack.getTagCompound().getString("Name"));
 						tileEntity.setPosterBounty(itemStack.getTagCompound().getString("Bounty"));
+						tileEntity.setBackground(itemStack.getTagCompound().getString("Background"));
 						tileEntity.setIssuedDate(itemStack.getTagCompound().getString("Date"));
 						tileEntity.markDirty();
 					}

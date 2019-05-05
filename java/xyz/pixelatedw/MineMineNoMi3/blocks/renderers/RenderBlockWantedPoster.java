@@ -1,15 +1,22 @@
 package xyz.pixelatedw.MineMineNoMi3.blocks.renderers;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 
 import org.lwjgl.opengl.GL11;
+
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.realms.RealmsScreen;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
@@ -43,9 +50,9 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 
 		int rawRot = te2.getBlockMetadata();
 
-		double posterX = 0, textX = 0;
-		double posterY = 0, textY = 0;
-		double posterZ = 0, textZ = 0;
+		double posterX = 0, textX = 0, pictureX = 0;
+		double posterY = 0, textY = 0, pictureY = 0;
+		double posterZ = 0, textZ = 0, pictureZ = 0;
 		int posterRotation = 90, textRotation = 90;
 
 		if (rawRot == 2)
@@ -54,6 +61,9 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 			posterZ = 0.16;
 			posterRotation = 180;
 			
+			pictureX = 0.25;
+			pictureZ = 0.7;
+						
 			textX = 0.38;
 			textZ = 0.55;
 			textRotation = 0;
@@ -64,6 +74,9 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 			posterZ = -0.9;
 			posterRotation = 0;
 			
+			pictureX = 0.71;
+			pictureZ = -0.25;
+						
 			textX = 0.57;
 			textY = 0.01;
 			textZ = -0.41;
@@ -75,6 +88,9 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 			posterZ = -0.74;
 			posterRotation = -90;
 			
+			pictureX = 0.97;
+			pictureZ = 0.44;
+						
 			textX = 0.98;
 			textY = 0.005;
 			textZ = 0.165;
@@ -100,6 +116,64 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 			}
 			GL11.glPopMatrix();
 
+			GL11.glPushMatrix();
+			{
+				GL11.glDepthMask(true);
+				
+				GL11.glTranslated(pictureX + 0.06, pictureY + 0.3, pictureZ - 0.60);
+				GL11.glRotatef(-textRotation, 0F, 1F, 0F);
+				GL11.glScalef(2.2F, 2.0F, 1.6F);
+			
+				String name = te2.getEntityName();
+				Minecraft minecraft = Minecraft.getMinecraft();
+				
+				if(name == null || name.isEmpty())
+					return;
+				
+				ResourceLocation rs = AbstractClientPlayer.locationStevePng;
+				
+				EntityPlayer player = minecraft.theWorld.getPlayerEntityByName(name);
+								
+				if(player != null)
+					rs = ((AbstractClientPlayer)player).getLocationSkin();
+
+				this.bindTexture(rs);
+	
+				int x = 0;
+				int y = 0;
+				double u = 0.2;
+				double v = 0.2;
+
+				Tessellator tessellator = Tessellator.instance;
+				tessellator.startDrawingQuads();
+				tessellator.addVertexWithUV(x			, y + v			, 0, 0.11, 0.5);
+				tessellator.addVertexWithUV(x + u		, y + v			, 0, 0.265, 0.5);
+				tessellator.addVertexWithUV(x + u		, y        		, 0, 0.265, 0.25);
+				tessellator.addVertexWithUV(x			, y         	, 0, 0.11, 0.25);
+				tessellator.draw();
+				
+				ResourceLocation background = new ResourceLocation(ID.PROJECT_ID, "textures/gui/wantedposters/backgrounds/" + te2.getBackground() + ".png");
+								
+				this.bindTexture(background);
+
+				GL11.glTranslated(-0.05, -0.04, 0.001);
+				GL11.glScalef(1.02F, 1.25F, 1.0F);
+				
+				u = 0.3;
+				v = 0.2;
+				
+				tessellator = Tessellator.instance;
+				tessellator.startDrawingQuads();
+				tessellator.addVertexWithUV(x			, y + v			, 0, 0.0, 1.0);
+				tessellator.addVertexWithUV(x + u		, y + v			, 0, 1.0, 1.0);
+				tessellator.addVertexWithUV(x + u		, y        		, 0, 1.0, 0.0);
+				tessellator.addVertexWithUV(x			, y         	, 0, 0.0, 0.0);
+				tessellator.draw();
+				
+				GL11.glDepthMask(false);
+			}
+			GL11.glPopMatrix();
+			
 			GL11.glPushMatrix();
 			{
 				GL11.glNormal3f(0.0F, 1.0F, -1.0F);
@@ -150,6 +224,19 @@ public class RenderBlockWantedPoster extends TileEntitySpecialRenderer
 			GL11.glDepthMask(true);
 		}
 		GL11.glPopMatrix();
-
 	}
+	
+    public void drawTexturedModalRect(int p_73729_1_, int p_73729_2_, int p_73729_3_, int p_73729_4_, int p_73729_5_, int p_73729_6_)
+    {
+    	int zLevel = 1;
+        float f = 0.00390625F;
+        float f1 = 0.00390625F;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV((double)(p_73729_1_ + 0), (double)(p_73729_2_ + p_73729_6_), (double)zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + p_73729_6_) * f1));
+        tessellator.addVertexWithUV((double)(p_73729_1_ + p_73729_5_), (double)(p_73729_2_ + p_73729_6_), (double)zLevel, (double)((float)(p_73729_3_ + p_73729_5_) * f), (double)((float)(p_73729_4_ + p_73729_6_) * f1));
+        tessellator.addVertexWithUV((double)(p_73729_1_ + p_73729_5_), (double)(p_73729_2_ + 0), (double)zLevel, (double)((float)(p_73729_3_ + p_73729_5_) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.addVertexWithUV((double)(p_73729_1_ + 0), (double)(p_73729_2_ + 0), (double)zLevel, (double)((float)(p_73729_3_ + 0) * f), (double)((float)(p_73729_4_ + 0) * f1));
+        tessellator.draw();
+    }
 }

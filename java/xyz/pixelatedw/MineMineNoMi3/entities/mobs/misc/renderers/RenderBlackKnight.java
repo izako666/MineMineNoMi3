@@ -14,6 +14,7 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.realms.RealmsScreen;
 import net.minecraft.util.ResourceLocation;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -38,10 +39,7 @@ public class RenderBlackKnight extends MobRenderer
 		ResourceLocation rs = AbstractClientPlayer.locationStevePng;
 		
         Minecraft minecraft = Minecraft.getMinecraft();
-        Map map = minecraft.func_152342_ad().func_152788_a(minecraft.thePlayer.getGameProfile());
-
-        if (map.containsKey(Type.SKIN))
-            rs = minecraft.func_152342_ad().func_152792_a((MinecraftProfileTexture)map.get(Type.SKIN), Type.SKIN);
+        rs = ((AbstractClientPlayer)minecraft.thePlayer).getLocationSkin();
         
 		return rs;
 	}
