@@ -212,7 +212,7 @@ public class RenderZoanMorph extends Render
 			GL11.glPushMatrix();
 
 			ExtendedEntityData props = ExtendedEntityData.get(entity);
-			
+
 			if(props == null || props.getZoanPoint().equalsIgnoreCase("n/a"))
 				return;
 			

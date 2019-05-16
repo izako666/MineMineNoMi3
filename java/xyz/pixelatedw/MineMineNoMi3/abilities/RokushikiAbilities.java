@@ -57,6 +57,23 @@ public class RokushikiAbilities
 		{
 			super(ListAttributes.TEKKAI); 
 		}
+		
+		public void duringPassive(EntityPlayer player, int passiveTimer)
+		{
+			if(passiveTimer > 1200)
+			{
+				this.setPassiveActive(false);
+				this.startCooldown();
+				this.startExtUpdate(player);
+				super.endPassive(player);
+			}
+		}
+		
+		public void endPassive(EntityPlayer player)
+		{
+			this.startCooldown();
+			this.startExtUpdate(player);	
+		}
 	}
 	
 	public static class Geppo extends Ability

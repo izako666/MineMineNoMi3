@@ -23,6 +23,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import xyz.pixelatedw.MineMineNoMi3.ID;
+import xyz.pixelatedw.MineMineNoMi3.abilities.RokushikiAbilities;
 import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
@@ -108,7 +109,6 @@ public class EventsPassives
 
 			if (props.getUsedFruit().equals("yomiyomi") && props.getZoanPoint().equalsIgnoreCase("yomi"))
 			{
-
 				player.getFoodStats().addStats(9999, 9999);
 
 				player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 100, 0, true));
@@ -214,6 +214,12 @@ public class EventsPassives
 						}
 					}
 				}
+			}
+			
+			Ability tekkai = abilityProps.getAbilityFromName(RokushikiAbilities.TEKKAI.getAttribute().getAttributeName());
+			if(tekkai != null && tekkai.isPassiveActive())
+			{
+				player.motionY -= 5;
 			}
 
 			if (props.hasHakiActive())

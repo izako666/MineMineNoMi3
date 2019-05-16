@@ -47,6 +47,7 @@ import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedWorldData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
 import xyz.pixelatedw.MineMineNoMi3.items.AkumaNoMi;
+import xyz.pixelatedw.MineMineNoMi3.lists.ListAttributes;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListMisc;
 import xyz.pixelatedw.MineMineNoMi3.lists.ListQuests;
 
@@ -105,6 +106,20 @@ public class DevilFruitsHelper
 		return map;
 	}
 	
+	
+	public static boolean canUseSwordsmanAbilities(EntityPlayer player)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		Ability sparClaw = AbilityProperties.get(player).getAbilityFromName(ListAttributes.SPARCLAW.getAttributeName());
+		
+		if(props.getUsedFruit().equalsIgnoreCase("supasupa") && sparClaw != null && sparClaw.isPassiveActive())
+		{
+			return true;
+		}
+		
+		
+		return false;
+	}
 	
 	public static boolean checkForRestriction(EntityPlayer player)
 	{

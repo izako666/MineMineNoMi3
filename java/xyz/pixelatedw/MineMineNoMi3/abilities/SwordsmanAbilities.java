@@ -47,7 +47,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
+			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{	
 				if(!this.isOnCooldown)
 				{
@@ -79,7 +79,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
+			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				this.projectile = new SwordsmanProjectiles.Yakkodori(player.worldObj, player, ListAttributes.YAKKODORI);
 				if(!this.isOnCooldown)
@@ -101,7 +101,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()))
+			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				if(!this.isOnCooldown)
 				{
@@ -147,7 +147,7 @@ public class SwordsmanAbilities
 			
 		public void use(EntityPlayer player)
 		{
-			if(player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem()) )
+			if((player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) || DevilFruitsHelper.canUseSwordsmanAbilities(player))
 			{
 				this.projectile = new SwordsmanProjectiles.SanbyakurokujuPoundHo(player.worldObj, player, ListAttributes.SANBYAKUROKUJUPOUNDHO);
 				if(!this.isOnCooldown)

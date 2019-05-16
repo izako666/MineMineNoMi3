@@ -14,6 +14,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -74,6 +75,22 @@ public class ItemCoreWeapon extends Item
 			itemStack.getTagCompound().setDouble("multiplier", multiplier);
 		}
 	}
+	
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        player.setItemInUse(itemStack, this.getMaxItemUseDuration(itemStack));
+        return itemStack;
+    }
+	
+    public int getMaxItemUseDuration(ItemStack itemStack)
+    {
+        return 72000;
+    }
+
+    public EnumAction getItemUseAction(ItemStack itemStack)
+    {
+        return EnumAction.block;
+    }
 	
     public int getItemEnchantability()
     {
