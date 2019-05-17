@@ -37,7 +37,7 @@ public class RenderBlockDial extends TileEntitySpecialRenderer
 			GL11.glScalef(1, 1, 1);
 			GL11.glRotatef(180, 0F, 0F, 1F);
 			
-			if(this.texture.getResourcePath().contains("impactdial") || this.texture.getResourcePath().contains("axedial"))
+			if(this.texture.getResourcePath().contains("impactdial") || this.texture.getResourcePath().contains("flashdial") || this.texture.getResourcePath().contains("axedial"))
 			{
 				GL11.glTranslated(1.25, 1.45, 0);
 				GL11.glRotatef(90, 0, 0, 1);

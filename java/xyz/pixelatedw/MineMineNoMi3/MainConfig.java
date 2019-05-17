@@ -30,14 +30,16 @@ public class MainConfig
 	public static boolean enableYamiSpecialPower;
 	public static double rateDFDrops;
 	public static double rateShipsSpawn;
+	public static double rateWantedPostersPackagesSpawn;
 	public static int maxDojoSpawn;
 	
 	public static boolean enableTelemetry;
 	public static boolean enableUpdateMsg;
 	public static boolean enableFOVModifier;	
 	
-	public static int enchantmentDialImpactId = 169;
-	public static int enchantmentKairosekiId = 170;
+	public static int enchantmentDialImpactId;
+	public static int enchantmentKairosekiId;
+	public static int enchantmentDialFlashId;
 	
 	public static int commandPermissionRemoveDF = 2;
 	public static int commandPermissionDoriki = 2;
@@ -56,32 +58,33 @@ public class MainConfig
 		config.load();
 		
 		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto").getString();
-		statsToKepp = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();
-		
-		enableShips = config.get(Configuration.CATEGORY_GENERAL, "Allow Ships to Spawn", true).getBoolean();
-		rateShipsSpawn = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Spawning Ships", 5).getDouble();
+		statsToKepp = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();		
 		//enableCamps = config.get(Configuration.CATEGORY_GENERAL, "Allow Camps to Spawn", true).getBoolean();
 		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true).getBoolean();
 		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false).getBoolean();
 		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false).getBoolean();
-		enableWantedPostersPackages  = config.get(Configuration.CATEGORY_GENERAL, "Allow Wanted Poster Packages", true).getBoolean();
 		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false).getBoolean();
 		enableYamiSpecialPower = config.get(Configuration.CATEGORY_GENERAL, "Allow Yami Users to eat another Devil Fruit", true).getBoolean();
-		
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
 		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
-
 		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true).getBoolean();
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true).getBoolean();
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true).getBoolean();
 		
-		enableQuests = config.get(Configuration.CATEGORY_GENERAL, "Allow Quests", true).getBoolean();
-		enableQuestProgression = config.get(Configuration.CATEGORY_GENERAL, "Allow Quest Progression", false).getBoolean();
-		maxDojoSpawn = config.get(Configuration.CATEGORY_GENERAL, "Max Dojos to Spawn per World", 5).getInt();
+		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
+		rateShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
+		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
+
+		enableQuests = config.get("quests", "Allow Quests", true).getBoolean();
+		enableQuestProgression = config.get("quests", "Allow Quest Progression", false).getBoolean();
 		
+		rateWantedPostersPackagesSpawn = config.get("bounty", "Rate at which Wanted Poster Packages will drop", 18000, "Represented in minecraft ticks, 20 ticks = 1 second, 18000 ticks = 15 min").getInt();
+		enableWantedPostersPackages  = config.get("bounty", "Allow Wanted Poster Packages", true).getBoolean();
+
 		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 200).getInt();
 		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 201).getInt();
-		
+		enchantmentDialFlashId = config.get("ids", "Enchantment ID : Dial Flash", 202).getInt();
+
 		enableTelemetry = config.get("system", "Allow Telemetry", true).getBoolean();
 		enableUpdateMsg = config.get("system", "Allow Update Message", true).getBoolean();	
 		enableFOVModifier = config.get("system", "Allow FOV Modifiers", false).getBoolean();

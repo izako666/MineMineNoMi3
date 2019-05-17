@@ -47,11 +47,11 @@ public class WySchematicHelper
 			{ 
 				Block b = Block.getBlockById(sch.getBlocks()[i]);						
 				
-				if(b != Blocks.air || b != Blocks.torch || b != Blocks.wooden_door)  
+				if(b != Blocks.air)  
 				{
 					if(world.getBlock(posX + sx, posY + sy, posZ + sz) != b)
 					{					
-						world.setBlockToAir(posX + sx, posY + sy, posZ + sz);	
+						//world.setBlockToAir(posX + sx, posY + sy, posZ + sz);	
 						world.setBlock(posX + sx, posY + sy, posZ + sz, b, sch.getData()[i], 2);
 						if(world.getBlock(posX + sx, posY + sy, posZ + sz) == Blocks.water || world.getBlock(posX + sx, posY + sy, posZ + sz) == Blocks.flowing_water)
 							world.markBlockForUpdate(posX + sx, posY + sy, posZ + sz);

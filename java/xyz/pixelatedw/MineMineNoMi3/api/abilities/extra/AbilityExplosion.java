@@ -14,9 +14,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.ChunkPosition;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
@@ -177,7 +179,8 @@ public class AbilityExplosion
 				double d10 = (double)this.worldObj.getBlockDensity(vec3, entity.boundingBox);
                 double d11 = (1.0D - d4) * d10;
                 float damage = (float)((int)((d11 * d11 + d11) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
-                entity.attackEntityFrom(DamageSource.causeMobDamage((EntityLivingBase) this.exploder), damage);
+                DamageSource damageSource = DamageSource.causeMobDamage((EntityLivingBase) this.exploder);
+                entity.attackEntityFrom(this.setExplosionSource(this), damage);
 			}
 		}
 
@@ -224,4 +227,9 @@ public class AbilityExplosion
 			}
 		}
 	}
+	
+    public static DamageSource setExplosionSource(AbilityExplosion explosion)
+    {
+        return explosion != null && explosion.exploder != null ? (new EntityDamageSource("explosion.player", explosion.exploder)).setDifficultyScaled().setExplosion() : (new DamageSource("explosion")).setDifficultyScaled().setExplosion();
+    }
 }

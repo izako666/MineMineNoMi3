@@ -15,8 +15,10 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.models.ModelRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityAxeDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityBreathDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityEisenDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlameDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityRejectDial;
@@ -170,7 +172,9 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityImpactDial.class, new RenderBlockDial(new ModelImpactDial(), "impactdial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMilkyDial.class, new RenderBlockDial(new ModelMilkyDial(), "milkydial"));
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRejectDial.class, new RenderBlockDial(new ModelRejectDial(), "rejectdial"));
-		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlashDial.class, new RenderBlockDial(new ModelImpactDial(), "flashdial"));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBreathDial.class, new RenderBlockDial(new ModelMilkyDial(), "breathdial"));
+
 		//Temp Shit
 		//RenderingRegistry.registerEntityRenderingHandler(TempEntityDummy.class, new RenderZoanMorph(new Model(), texture));
 

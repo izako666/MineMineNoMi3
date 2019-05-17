@@ -92,13 +92,13 @@ public class WyRegistry
 		EntityRegistry.addSpawn(entity, rarity, min, max, EnumCreatureType.creature, biomes);		
 	}
 	
-	/*public void registerEnchantment(Enchantment enc, String name)
+	public static void registerEnchantment(Enchantment enc, String name)
 	{
 		String truename = WyHelper.getFancyName(name);
-		GameRegistry.register(enc.setName(truename));
+		//GameRegistry.register(enc.setName(truename));
 		enc.setName(truename);
 		registerName("enchantment." + truename, name);
-	}*/
+	}
 	
 	/*public void registerDimension(String name, int id, Class<? extends WorldProvider> clazz)
 	{

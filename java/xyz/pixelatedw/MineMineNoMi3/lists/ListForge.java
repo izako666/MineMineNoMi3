@@ -7,11 +7,13 @@ import xyz.pixelatedw.MineMineNoMi3.MainKeys;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsBounty;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCombatMode;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsCore;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsCrafting;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsDrops;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsEnchantments;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsMorphs;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsOnGain;
 import xyz.pixelatedw.MineMineNoMi3.events.EventsQuestsProgress;
+import xyz.pixelatedw.MineMineNoMi3.events.EventsSpecialEffects;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsAbilityValidation;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsDFWeaknesses;
 import xyz.pixelatedw.MineMineNoMi3.events.devilfruits.EventsEffectOverlay;
@@ -35,12 +37,18 @@ public class ListForge
 		// Handles the drop events from different sources
 		MinecraftForge.EVENT_BUS.register(new EventsDrops());
 		
+		// Handles the crafting events, only anvil logic
+		MinecraftForge.EVENT_BUS.register(new EventsCrafting());
+		
 		// Handles the custom enchantment effects added by this mod
 		MinecraftForge.EVENT_BUS.register(new EventsEnchantments());
 		
 		// Handles all the custom onGain events added by this mod
 		MinecraftForge.EVENT_BUS.register(new EventsOnGain());
 
+		// Handles all the custom effects like kairoseki and dial related enchantments
+		MinecraftForge.EVENT_BUS.register(new EventsSpecialEffects());
+		
 		// Handles the quest related stuff, accepting quests or progressing them throught different means
 		MinecraftForge.EVENT_BUS.register(new EventsQuestsProgress());
 		

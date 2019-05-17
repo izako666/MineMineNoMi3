@@ -31,14 +31,18 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockSunaSand;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockWantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockWantedPostersPackage;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockAxeDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockBreathDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockEisenDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockFlameDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.BlockRejectDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityAxeDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityBreathDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityEisenDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlameDial;
+import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityFlashDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityImpactDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityMilkyDial;
 import xyz.pixelatedw.MineMineNoMi3.blocks.dials.tileentities.TileEntityRejectDial;
@@ -59,8 +63,10 @@ import xyz.pixelatedw.MineMineNoMi3.items.SeaKingMeat;
 import xyz.pixelatedw.MineMineNoMi3.items.UltraCola;
 import xyz.pixelatedw.MineMineNoMi3.items.WantedPoster;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialAxe;
+import xyz.pixelatedw.MineMineNoMi3.items.dials.DialBreath;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialEisen;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialFire;
+import xyz.pixelatedw.MineMineNoMi3.items.dials.DialFlash;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialImpact;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialMilky;
 import xyz.pixelatedw.MineMineNoMi3.items.dials.DialReject;
@@ -132,9 +138,10 @@ public class ListMisc
 	public static Block DialAxeBlock = new BlockAxeDial();
 	public static Block DialImpactBlock = new BlockImpactDial();
 	public static Block DialMilkyBlock = new BlockMilkyDial();
-	public static Block DialFlashBlock = null;
+	public static Block DialFlashBlock = new BlockFlashDial();
 	public static Block DialRejectBlock = new BlockRejectDial();
-
+	public static Block DialBreathBlock = new BlockBreathDial();
+	
 	public static Item CharacterCreator = new CharacterCreator();
 	public static Item Kairoseki = new Item();
 	public static Item DenseKairoseki = new Item();
@@ -154,9 +161,10 @@ public class ListMisc
 	public static Item DialAxe = new DialAxe();
 	public static Item DialImpact = new DialImpact();
 	public static Item DialMilky = new DialMilky();
-	public static Item DialFlash = null;
+	public static Item DialFlash = new DialFlash();
 	public static Item DialReject = new DialReject();
-
+	public static Item DialBreath = new DialBreath();
+	
 	public static Item Bullets = new Item();
 	public static Item KairosekiBullets = new Item();
 	public static Item KujaArrow = new Item();
@@ -306,6 +314,8 @@ public class ListMisc
 		addITEM(DialImpact, "Impact Dial", ListCreativeTabs.tabMisc);
 		addITEM(DialMilky, "Milky Dial", ListCreativeTabs.tabMisc);
 		addITEM(DialReject, "Reject Dial", ListCreativeTabs.tabMisc);
+		addITEM(DialFlash, "Flash Dial", ListCreativeTabs.tabMisc);
+		addITEM(DialBreath, "Breath Dial", ListCreativeTabs.tabMisc);
 
 		addBLOCK(Ope, "Ope", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(OpeMid, "Ope Mid", Float.POSITIVE_INFINITY, TileEntityOpe.class, null);
@@ -338,6 +348,8 @@ public class ListMisc
 		addBLOCK(DialImpactBlock, "Impact Dial Block", .3F, TileEntityImpactDial.class, null);
 		addBLOCK(DialMilkyBlock, "Milky Dial Block", .3F, TileEntityMilkyDial.class, null);
 		addBLOCK(DialRejectBlock, "Reject Dial Block", .3F, TileEntityRejectDial.class, null);
+		addBLOCK(DialBreathBlock, "Breath Dial Block", .3F, TileEntityBreathDial.class, null);
+		addBLOCK(DialFlashBlock, "Flash Dial Block", .3F, TileEntityFlashDial.class, null);
 
 		WyRegistry.registerName("race.n/a.name", "N/A");
 		WyRegistry.registerName("faction.n/a.name", "N/A");

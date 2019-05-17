@@ -8,14 +8,16 @@ import xyz.pixelatedw.MineMineNoMi3.api.WyRegistry;
 
 public class ListEffects 
 {
-	public static Enchantment dialImpact, dialFlash, dialAxe, kairoseki;
+	public static Enchantment dialImpact, dialFlash, kairoseki;
 	
 	public static void init()
 	{		
-		dialImpact = new MainEnchantment(MainConfig.enchantmentDialImpactId, 1, EnumEnchantmentType.weapon, "Impact");
+		dialImpact = new MainEnchantment(MainConfig.enchantmentDialImpactId, 1, EnumEnchantmentType.weapon, "Impact Dial");
 		kairoseki  = new MainEnchantment(MainConfig.enchantmentKairosekiId, 1, EnumEnchantmentType.weapon, "Kairoseki");
-		
-		//WyRegistry.registerEnchantment(dialImpact, "Impact");
-		//WyRegistry.registerEnchantment(kairoseki, "Kairoseki");
+		dialFlash = new MainEnchantment(MainConfig.enchantmentDialFlashId, 1, EnumEnchantmentType.weapon, "Breath Dial");
+
+		WyRegistry.registerEnchantment(dialImpact, "Impact Dial");
+		WyRegistry.registerEnchantment(kairoseki, "Kairoseki");
+		WyRegistry.registerEnchantment(dialFlash, "Flash Dial");
 	}
 }

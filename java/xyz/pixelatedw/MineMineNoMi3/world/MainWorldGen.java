@@ -45,10 +45,10 @@ public class MainWorldGen implements IWorldGenerator
 				
 		if(MainConfig.enableShips)
 		{
-			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i * 2, j * 2, 1, 1, 2.5 * MainConfig.rateShipsSpawn);
-			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i * 2, j * 2, 1, 1, 2.8 * MainConfig.rateShipsSpawn);
-			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i * 2, j * 2, 1, 1, 2.3 * MainConfig.rateShipsSpawn);
-			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i * 2, j * 2, 1, 1, 2.4 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("marineShip"), world, random, i, j, 1, 1, 1.5 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("pyrateShip"), world, random, i, j, 1, 1, 1.8 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("pyrateLargeShip"), world, random, i, j, 1, 1, 1.3 * MainConfig.rateShipsSpawn);
+			this.addStructureSpawn(WySchematicHelper.load("marineLargeShip"), world, random, i, j, 1, 1, 1.4 * MainConfig.rateShipsSpawn);
 		}
 		
 		this.addStructureSpawn(WySchematicHelper.load("dojo"), world, random, i, j, 1, 1, 25);
@@ -58,6 +58,8 @@ public class MainWorldGen implements IWorldGenerator
 		this.addDialSpawn(ListMisc.DialAxeBlock, world, random, i, j, 1, 1, 70);
 		this.addDialSpawn(ListMisc.DialMilkyBlock, world, random, i, j, 1, 1, 20);
 		this.addDialSpawn(ListMisc.DialRejectBlock, world, random, i, j, 1, 1, 10);
+		this.addDialSpawn(ListMisc.DialBreathBlock, world, random, i, j, 1, 1, 50);
+		this.addDialSpawn(ListMisc.DialFlashBlock, world, random, i, j, 1, 1, 45);
 		
 		/*if(MainConfig.enableCamps)
 		{

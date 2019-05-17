@@ -14,6 +14,7 @@ import com.google.common.collect.Multimap;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -87,6 +88,14 @@ public class ItemsHelper
 		data.setString("Date", dateString);
 
 		return data;
+	}
+	
+	public static boolean isBow(ItemStack itemStack)
+	{	
+		if (itemStack.getItemUseAction() == EnumAction.bow)
+			return true;
+		
+		return false;
 	}
 	
 	public static boolean isSword(ItemStack itemStack)

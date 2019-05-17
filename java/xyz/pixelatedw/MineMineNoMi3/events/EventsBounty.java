@@ -23,7 +23,7 @@ public class EventsBounty
 				//System.out.println("" + event.player.ticksExisted);
 				
 				// Every ~15 minutes
-				if(event.player.ticksExisted % 18000 == 0)
+				if(event.player.ticksExisted % MainConfig.rateWantedPostersPackagesSpawn == 0)
 				{
 					if(BountyHelper.issueBountyForPlayer(event.player))
 					{				
