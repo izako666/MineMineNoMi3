@@ -17,7 +17,13 @@ public class CommandGetWantedPoster extends CommandBase
 {
 	public void processCommand(ICommandSender sender, String[] str)
 	{
-		EntityPlayer player = this.getCommandSenderAsPlayer(sender);
+		EntityPlayer player = null;
+		
+		if(str.length == 1)
+			player = this.getPlayer(sender, str[0]);
+		else
+			player = this.getCommandSenderAsPlayer(sender);
+		
 		ExtendedEntityData props = ExtendedEntityData.get(player);
 		ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
 
@@ -30,6 +36,9 @@ public class CommandGetWantedPoster extends CommandBase
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 

@@ -13,6 +13,7 @@ import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -21,93 +22,121 @@ public class CommandBelly extends CommandBase
 {		
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
-		if(str.length >= 2)
-		{
-			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
-			EntityPlayer target = null;
-			int plusBelly = 0;		
-			
-			if(!str[1].equals("INF"))
-				plusBelly = Integer.decode(str[1]);
-			
-			if(str.length == 2)
-				target = this.getCommandSenderAsPlayer(sender);
-			if(str.length == 3)
-			{
-				if(MainConfig.commandPermissionBelly != 1)				
-					target = getPlayer(sender, str[2]);
-				else
-				{
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
-					return;
-				}
-			}
-			
-			ExtendedEntityData props = ExtendedEntityData.get(target);
+		// Checking if the basic formula is used
+		if(str.length < 2)
+			throw new WrongUsageException(this.getCommandUsage(sender), new Object[0]);
 
-			if(str[0].equals("+"))
-			{
-				if(plusBelly + props.getBelly() <= Values.MAX_GENERAL)
-				{
-					props.alterBelly(plusBelly);
-					if(props.getBellyFromCommand() + plusBelly <= Values.MAX_GENERAL)
-						props.alterBellyFromCommand(plusBelly);
-				}
-				else
-				{
-					props.setBelly(Values.MAX_GENERAL);
-					props.alterBellyFromCommand( Values.MAX_GENERAL - plusBelly );
-				}
-				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBelly + " belly to " + target.getCommandSenderName()); 
-			}
-			else if(str[0].equals("-"))
-			{
-				if(props.getBelly() - plusBelly <= 0)
-				{			
-					props.setBelly(0);
-					if(props.getBellyFromCommand() - plusBelly > 0)
-						props.alterBellyFromCommand( -(props.getBellyFromCommand() - plusBelly) );
-					else
-						props.setBellyFromCommand(0);
-				}
-				else
-				{
-					props.alterBelly(-plusBelly);	
-					if(props.getBellyFromCommand() - plusBelly > 0)
-						props.alterBellyFromCommand( -(props.getBellyFromCommand() - plusBelly) );
-					else
-						props.setBellyFromCommand(0);
-				}
-				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBelly + " belly from " + target.getCommandSenderName()); 
-			}
-			else if(str[0].equals("="))
-			{
-				if(str[1].equals("INF"))
-				{
-					props.setBellyFromCommand( Values.MAX_GENERAL );
-					props.setBelly( Values.MAX_GENERAL );
-					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " belly"); 
-				}
-				else if(plusBelly <= Values.MAX_GENERAL)
-				{
-					props.setBellyFromCommand(plusBelly);
-					props.setBelly(plusBelly);
-					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBelly + " belly"); 
-				}				
-			}
-			 
-			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
-		}	
+		// Initializing the variables
+		EntityPlayer target = null;
+		int value = 0;
+		
+		// Check if the sender is a player
+		if(sender instanceof EntityPlayer)
+		{
+			// If it's a player check for permissions and command format, if one of them is false, return the actual sender as a target
+			if(str.length == 3 && MainConfig.commandPermissionBelly != 1)
+				target = this.getPlayer(sender, str[2]);
+			else
+				target = this.getCommandSenderAsPlayer(sender);		
+		}
 		else
-			throw new WrongUsageException("/belly <+|-|=> <amount> [player]", new Object[0]);
+		{
+			// If it's not a player then the [player] parameter is mandatory, @p works as well, otherwise return an error in the logs (for good measure)
+			if(str.length == 3)
+				target = this.getPlayer(sender, str[2]);
+			else
+			{
+				WyDebug.error("A player must be provided when the command is not used by a player !");
+				return;
+			}
+		}
+
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+		
+		if(str[1].equalsIgnoreCase("inf") || str[1].equalsIgnoreCase("max"))
+			value = Values.MAX_GENERAL;
+		else
+			value = Integer.decode(str[1]);
+					
+		switch(str[0])
+		{
+			case "+":
+				add(target, value); break;
+			case "-":
+				subtract(target, value); break;
+			case "=":
+				equal(target, value); break;
+		}
+		
+		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
+
+	}
+		
+	private void equal(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(value <= Values.MAX_GENERAL)
+		{
+			props.setBellyFromCommand(value);
+			props.setBelly(value);
+			
+			if(WyDebug.isDebug())
+				WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + value + " belly"); 
+		}	
+	}
+
+	private void subtract(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(props.getBelly() - value <= 0)
+		{			
+			props.setBelly(0);
+			if(props.getBellyFromCommand() - value > 0)
+				props.alterBellyFromCommand( -(props.getBellyFromCommand() - value) );
+			else
+				props.setBellyFromCommand(0);
+		}
+		else
+		{
+			props.alterBelly(-value);	
+			if(props.getBellyFromCommand() - value > 0)
+				props.alterBellyFromCommand( -(props.getBellyFromCommand() - value) );
+			else
+				props.setBellyFromCommand(0);
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + value + " belly from " + target.getCommandSenderName()); 		
+	}
+
+	private void add(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+		
+		if(value + props.getBelly() <= Values.MAX_GENERAL)
+		{
+			props.alterBelly(value);
+			if(props.getBellyFromCommand() + value <= Values.MAX_GENERAL)
+				props.alterBellyFromCommand(value);
+		}
+		else
+		{
+			props.setBelly(Values.MAX_GENERAL);
+			props.alterBellyFromCommand( Values.MAX_GENERAL - value );
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + value + " belly to " + target.getCommandSenderName()); 
+		
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{		
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		

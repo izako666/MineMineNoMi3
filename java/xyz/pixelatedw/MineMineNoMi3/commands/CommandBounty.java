@@ -14,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
@@ -23,93 +24,120 @@ public class CommandBounty extends CommandBase
 {
 	public void processCommand(ICommandSender sender, String[] str)
 	{
-		if (str.length >= 2)
+		// Checking if the basic formula is used
+		if(str.length < 2)
+			throw new WrongUsageException(this.getCommandUsage(sender), new Object[0]);
+
+		// Initializing the variables
+		EntityPlayer target = null;
+		long value = 0;
+		
+		// Check if the sender is a player
+		if(sender instanceof EntityPlayer)
 		{
-			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
-			EntityPlayer target = null;
-			int plusBounty = 0;
-
-			if (!str[1].equals("INF"))
-				plusBounty = Integer.decode(str[1]);
-
-			if (str.length == 2)
-				target = this.getCommandSenderAsPlayer(sender);
-			if (str.length == 3)
-			{
-				if (MainConfig.commandPermissionBounty != 1)
-					target = getPlayer(sender, str[2]);
-				else
-				{
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
-					return;
-				}
-			}
-
-			ExtendedEntityData props = ExtendedEntityData.get(target);
-
-			if (str[0].equals("+"))
-			{
-				if (plusBounty + props.getBounty() <= Values.MAX_BOUNTY)
-				{
-					props.alterBounty(plusBounty);
-					if (props.getBountyFromCommand() + plusBounty <= Values.MAX_BOUNTY)
-						props.alterBountyFromCommand(plusBounty);
-				}
-				else
-				{
-					props.setBounty(Values.MAX_BOUNTY);
-					props.alterBountyFromCommand(Values.MAX_BOUNTY - plusBounty);
-				}
-
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusBounty + " bounty to " + target.getCommandSenderName());
-			}
-			else if (str[0].equals("-"))
-			{
-				if (props.getBounty() - plusBounty <= 0)
-				{
-					props.setBounty(0);
-					if (props.getBountyFromCommand() - plusBounty > 0)
-						props.alterBountyFromCommand(-(props.getBountyFromCommand() - plusBounty));
-					else
-						props.setBountyFromCommand(0);
-				}
-				else
-				{
-					props.alterBounty(-plusBounty);
-					if (props.getBountyFromCommand() - plusBounty > 0)
-						props.alterBountyFromCommand(-(props.getBountyFromCommand() - plusBounty));
-					else
-						props.setBountyFromCommand(0);
-				}
-
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusBounty + " bounty from " + target.getCommandSenderName());
-			}
-			else if (str[0].equals("="))
-			{
-				if (str[1].equals("INF"))
-				{
-					props.setBountyFromCommand(Values.MAX_BOUNTY);
-					props.setBounty(Values.MAX_BOUNTY);
-
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_BOUNTY + " bounty");
-				}
-				else if (plusBounty <= Values.MAX_BOUNTY)
-				{
-					props.setBountyFromCommand(plusBounty);
-					props.setBounty(plusBounty);
-
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusBounty + " bounty");
-				}
-			}
-
-			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) target);
+			// If it's a player check for permissions and command format, if one of them is false, return the actual sender as a target
+			if(str.length == 3 && MainConfig.commandPermissionBounty != 1)
+				target = this.getPlayer(sender, str[2]);
+			else
+				target = this.getCommandSenderAsPlayer(sender);		
 		}
 		else
-			throw new WrongUsageException("/bounty <+|-|=> <amount> [player]", new Object[0]);
+		{
+			// If it's not a player then the [player] parameter is mandatory, @p works as well, otherwise return an error in the logs (for good measure)
+			if(str.length == 3)
+				target = this.getPlayer(sender, str[2]);
+			else
+			{
+				WyDebug.error("A player must be provided when the command is not used by a player !");
+				return;
+			}
+		}
+
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+		
+		if(str[1].equalsIgnoreCase("inf") || str[1].equalsIgnoreCase("max"))
+			value = Values.MAX_BOUNTY;
+		else
+			value = Integer.decode(str[1]);
+					
+		switch(str[0])
+		{
+			case "+":
+				add(target, value); break;
+			case "-":
+				subtract(target, value); break;
+			case "=":
+				equal(target, value); break;
+		}
+		
+		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
+
+	}
+
+	private void equal(EntityPlayer target, long value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if (value <= Values.MAX_BOUNTY)
+		{
+			props.setBountyFromCommand(value);
+			props.setBounty(value);
+
+			if(WyDebug.isDebug())
+				WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + value + " bounty");
+		}
+	}
+
+	private void subtract(EntityPlayer target, long value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if (props.getBounty() - value <= 0)
+		{
+			props.setBounty(0);
+			if (props.getBountyFromCommand() - value > 0)
+				props.alterBountyFromCommand(-(props.getBountyFromCommand() - value));
+			else
+				props.setBountyFromCommand(0);
+		}
+		else
+		{
+			props.alterBounty(-value);
+			if (props.getBountyFromCommand() - value > 0)
+				props.alterBountyFromCommand(-(props.getBountyFromCommand() - value));
+			else
+				props.setBountyFromCommand(0);
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + value + " bounty from " + target.getCommandSenderName());		
+	}
+
+	private void add(EntityPlayer target, long value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if (value + props.getBounty() <= Values.MAX_BOUNTY)
+		{
+			props.alterBounty(value);
+			if (props.getBountyFromCommand() + value <= Values.MAX_BOUNTY)
+				props.alterBountyFromCommand(value);
+		}
+		else
+		{
+			props.setBounty(Values.MAX_BOUNTY);
+			props.alterBountyFromCommand(Values.MAX_BOUNTY - value);
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + value + " bounty to " + target.getCommandSenderName());		
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 

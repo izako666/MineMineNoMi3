@@ -26,11 +26,7 @@ public class CommandAbilityProtection extends CommandBase
 			TileEntityAbilityProtection center = new TileEntityAbilityProtection().setRadius(areaSize);
 			player.worldObj.setTileEntity((int)player.posX, (int)player.posY, (int)player.posZ, center);
 
-			System.out.println("1 : " + center.getRadius());
-			
-			player.worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.AbilityProtectionBlock);
-			
-			System.out.println("3 : " + ((TileEntityAbilityProtection) player.worldObj.getTileEntity((int)player.posX, (int)player.posY, (int)player.posZ)).getRadius() );
+			player.worldObj.setBlock((int)player.posX, (int)player.posY, (int)player.posZ, ListMisc.AbilityProtectionBlock);		
 		}
 	}
 

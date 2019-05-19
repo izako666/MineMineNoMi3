@@ -22,27 +22,17 @@ public class CommandRemoveDF extends CommandBase
 {		
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
-		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
-		EntityPlayer target = null;
-		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
+		EntityPlayer player = null;
 		
-		if(str.length >= 1)
-		{
-			if(MainConfig.commandPermissionRemoveDF != 1)		
-				target = MinecraftServer.getServer().getConfigurationManager().func_152612_a(str[0]);
-			else
-			{
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
-				return;
-			}
-		}
+		if(str.length == 1)
+			player = this.getPlayer(sender, str[0]);
 		else
-		{
-			target = senderEntity;
-		}
+			player = this.getCommandSenderAsPlayer(sender);
 		
-		ExtendedEntityData props = ExtendedEntityData.get(target);
-		AbilityProperties abilityProps = AbilityProperties.get(target);
+		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(player.getGameProfile());
+		
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		AbilityProperties abilityProps = AbilityProperties.get(player);
 
 		props.setUsedFruit("N/A");
 		props.setYamiPower(false);
@@ -53,19 +43,22 @@ public class CommandRemoveDF extends CommandBase
 		
 		abilityProps.clearHotbar();
 		abilityProps.clearDevilFruitAbilities();
-		target.clearActivePotions();
+		player.clearActivePotions();
 
 		props.setZoanPoint("n/a");
 		
-		target.clearActivePotions();
+		player.clearActivePotions();
 		
-		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);	
-		WyNetworkHelper.sendToAll(new PacketSyncInfo(target.getDisplayName(), props));	
-		WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP)target);	
+		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)player);	
+		WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));	
+		WyNetworkHelper.sendTo(new PacketAbilitySync(abilityProps), (EntityPlayerMP)player);	
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
-	{		
+	{
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		

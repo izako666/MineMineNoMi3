@@ -18,38 +18,47 @@ public class CommandIssueBounty extends CommandBase
 {
 	public void processCommand(ICommandSender sender, String[] str)
 	{
-		if(str.length >= 0)
+		EntityPlayer player = null;
+		boolean allFlag = false;
+		
+		if(str.length == 1)
 		{
-			if(str.length == 0)
+			if(str[0].equalsIgnoreCase("all"))
 			{
-				EntityPlayer player = this.getCommandSenderAsPlayer(sender);
-				ExtendedEntityData props = ExtendedEntityData.get(player);
-				ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
-				
-				worldData.issueBounty(player.getCommandSenderName(), props.getBounty());
+				allFlag = true;
+				player = this.getCommandSenderAsPlayer(sender);
 			}
 			else
+				player = this.getPlayer(sender, str[0]);
+		}
+		else
+			player = this.getCommandSenderAsPlayer(sender);
+			
+		ExtendedEntityData props = ExtendedEntityData.get(player);
+		ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
+		
+		if(!allFlag)
+		{
+			worldData.issueBounty(player.getCommandSenderName(), props.getBounty());
+		}
+		else
+		{
+			player.worldObj.loadedEntityList.stream().filter(x -> 
 			{
-				if(str[1].equalsIgnoreCase("all"))
-				{
-					EntityPlayer player = this.getCommandSenderAsPlayer(sender);
-					ExtendedWorldData worldData = ExtendedWorldData.get(player.worldObj);
-							
-					player.worldObj.loadedEntityList.stream().filter(x -> 
-					{
-						return x instanceof EntityPlayer && ExtendedEntityData.get((EntityLivingBase) x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && ExtendedEntityData.get((EntityLivingBase) x).getBounty() > 0;
-					}).forEach(x ->
-					{
-						EntityPlayer pirate = (EntityPlayer) x;
-						worldData.issueBounty(pirate.getCommandSenderName(), ExtendedEntityData.get(pirate).getBounty());
-					});
-				}
-			}
+				return x instanceof EntityPlayer && ExtendedEntityData.get((EntityLivingBase) x).getFaction().equalsIgnoreCase(ID.FACTION_PIRATE) && ExtendedEntityData.get((EntityLivingBase) x).getBounty() > 0;
+			}).forEach(x ->
+			{
+				EntityPlayer pirate = (EntityPlayer) x;
+				worldData.issueBounty(pirate.getCommandSenderName(), ExtendedEntityData.get(pirate).getBounty());
+			});
 		}
 	}
 	
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 

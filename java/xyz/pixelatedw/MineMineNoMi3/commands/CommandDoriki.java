@@ -14,6 +14,7 @@ import net.minecraftforge.common.MinecraftForge;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.events.customevents.DorikiEvent;
@@ -23,105 +24,130 @@ public class CommandDoriki extends CommandBase
 {		
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
-		if(str.length >= 2)
-		{
-			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
-			EntityPlayer target = null;
-			int plusDoriki = 0;	
-			
-			if(!str[1].equals("INF"))
-				plusDoriki = Integer.decode(str[1]);
-			
-			if(str.length == 2)
-				target = this.getCommandSenderAsPlayer(sender);
-			if(str.length == 3)
-			{
-				if(MainConfig.commandPermissionDoriki != 1)			
-				{
-					target = getPlayer(sender, str[2]);
-				}
-				else
-				{
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
-					return;
-				}			
-			}
-			
-			ExtendedEntityData props = ExtendedEntityData.get(target);
+		// Checking if the basic formula is used
+		if(str.length < 2)
+			throw new WrongUsageException(this.getCommandUsage(sender), new Object[0]);
 
-			if(str[0].equals("+"))
-			{
-				if(plusDoriki + props.getDoriki() <= Values.MAX_DORIKI)
-				{
-					props.alterDoriki(plusDoriki);
-					if(props.getDorikiFromCommand() + plusDoriki <= Values.MAX_DORIKI)
-						props.alterDorikiFromCommand(plusDoriki);
-				}
-				else
-				{
-					props.setDoriki(Values.MAX_DORIKI);
-					props.alterDorikiFromCommand( Values.MAX_DORIKI - plusDoriki );
-				}
-				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusDoriki + " doriki to " + target.getCommandSenderName()); 
-			}
-			else if(str[0].equals("-"))
-			{
-				if(props.getDoriki() - plusDoriki <= 0)
-				{			
-					props.setDoriki(0);
-					if(props.getDorikiFromCommand() - plusDoriki > 0)
-						props.alterDorikiFromCommand( -(props.getDorikiFromCommand() - plusDoriki) );
-					else
-						props.setDorikiFromCommand(0);
-				}
-				else
-				{
-					props.alterDoriki(-plusDoriki);	
-					if(props.getDorikiFromCommand() - plusDoriki > 0)
-						props.alterDorikiFromCommand( -(props.getDorikiFromCommand() - plusDoriki) );
-					else
-						props.setDorikiFromCommand(0);
-				}
-				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusDoriki + " doriki from " + target.getCommandSenderName()); 
-			}
-			else if(str[0].equals("="))
-			{
-				if(str[1].equals("INF"))
-				{
-					props.setDorikiFromCommand( Values.MAX_DORIKI );
-					props.setDoriki( Values.MAX_DORIKI );
-					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_DORIKI + " doriki"); 
-				}
-				else if(plusDoriki <= Values.MAX_DORIKI)
-				{
-					props.setDorikiFromCommand(plusDoriki);
-					props.setDoriki(plusDoriki);
-					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusDoriki + " doriki"); 
-				}				
-			}
-			 
-			DorikiEvent e = new DorikiEvent(target);
-			if (MinecraftForge.EVENT_BUS.post(e))
-				return;
-			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
-		}	
+		// Initializing the variables
+		EntityPlayer target = null;
+		int value = 0;
+		
+		// Check if the sender is a player
+		if(sender instanceof EntityPlayer)
+		{
+			// If it's a player check for permissions and command format, if one of them is false, return the actual sender as a target
+			if(str.length == 3 && MainConfig.commandPermissionDoriki != 1)
+				target = this.getPlayer(sender, str[2]);
+			else
+				target = this.getCommandSenderAsPlayer(sender);		
+		}
 		else
-			throw new WrongUsageException("/doriki <+|-|=> <amount> [player]", new Object[0]);
+		{
+			// If it's not a player then the [player] parameter is mandatory, @p works as well, otherwise return an error in the logs (for good measure)
+			if(str.length == 3)
+				target = this.getPlayer(sender, str[2]);
+			else
+			{
+				WyDebug.error("A player must be provided when the command is not used by a player !");
+				return;
+			}
+		}
+
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+		
+		if(str[1].equalsIgnoreCase("inf") || str[1].equalsIgnoreCase("max"))
+			value = Values.MAX_DORIKI;
+		else
+			value = Integer.decode(str[1]);
+					
+		switch(str[0])
+		{
+			case "+":
+				add(target, value); break;
+			case "-":
+				subtract(target, value); break;
+			case "=":
+				equal(target, value); break;
+		}
+
+		DorikiEvent e = new DorikiEvent(target);
+		if (MinecraftForge.EVENT_BUS.post(e))
+			return;
+		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
+
 	}
 
+	private void equal(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(value <= Values.MAX_DORIKI)
+		{
+			props.setDorikiFromCommand(value);
+			props.setDoriki(value);
+			
+			if(WyDebug.isDebug())
+				WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + value + " doriki"); 
+		}		
+	}
+
+	private void subtract(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(props.getDoriki() - value <= 0)
+		{			
+			props.setDoriki(0);
+			if(props.getDorikiFromCommand() - value > 0)
+				props.alterDorikiFromCommand( -(props.getDorikiFromCommand() - value) );
+			else
+				props.setDorikiFromCommand(0);
+		}
+		else
+		{
+			props.alterDoriki(-value);	
+			if(props.getDorikiFromCommand() - value > 0)
+				props.alterDorikiFromCommand( -(props.getDorikiFromCommand() - value) );
+			else
+				props.setDorikiFromCommand(0);
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + value + " doriki from " + target.getCommandSenderName()); 	
+	}
+
+	private void add(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(value + props.getDoriki() <= Values.MAX_DORIKI)
+		{
+			props.alterDoriki(value);
+			if(props.getDorikiFromCommand() + value <= Values.MAX_DORIKI)
+				props.alterDorikiFromCommand(value);
+		}
+		else
+		{
+			props.setDoriki(Values.MAX_DORIKI);
+			props.alterDorikiFromCommand( Values.MAX_DORIKI - value );
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + value + " doriki to " + target.getCommandSenderName()); 
+	}
+	
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		
 		if( (MainConfig.commandPermissionDoriki == 2 && flag) || MainConfig.commandPermissionDoriki < 2 )
 			return true;
 		else	
-			return false;	
+			return false;
 	}
 	
 	public String getCommandUsage(ICommandSender icommandsender)

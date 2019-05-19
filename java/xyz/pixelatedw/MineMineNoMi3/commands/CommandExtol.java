@@ -13,6 +13,7 @@ import net.minecraft.util.EnumChatFormatting;
 import xyz.pixelatedw.MineMineNoMi3.MainConfig;
 import xyz.pixelatedw.MineMineNoMi3.Values;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
+import xyz.pixelatedw.MineMineNoMi3.api.debug.WyDebug;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
 import xyz.pixelatedw.MineMineNoMi3.packets.PacketSync;
@@ -21,93 +22,120 @@ public class CommandExtol extends CommandBase
 {		
 	public void processCommand(ICommandSender sender, String[] str) 
 	{
-		if(str.length >= 2)
-		{
-			EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
-			EntityPlayer target = null;
-			int plusExtol = 0;		
-			
-			if(!str[1].equals("INF"))
-				plusExtol = Integer.decode(str[1]);
-			
-			if(str.length == 2)
-				target = this.getCommandSenderAsPlayer(sender);
-			if(str.length == 3)
-			{
-				if(MainConfig.commandPermissionExtol != 1)				
-					target = getPlayer(sender, str[2]);
-				else
-				{
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.RED + "You don't have permission to use this command !");
-					return;
-				}			
-			}
-			
-			ExtendedEntityData props = ExtendedEntityData.get(target);
+		// Checking if the basic formula is used
+		if(str.length < 2)
+			throw new WrongUsageException(this.getCommandUsage(sender), new Object[0]);
 
-			if(str[0].equals("+"))
-			{
-				if(plusExtol + props.getExtol() <= Values.MAX_GENERAL)
-				{
-					props.alterExtol(plusExtol);
-					if(props.getExtolFromCommand() + plusExtol <= Values.MAX_GENERAL)
-						props.alterExtolFromCommand(plusExtol);
-				}
-				else
-				{
-					props.setExtol(Values.MAX_GENERAL);
-					props.alterExtolFromCommand( Values.MAX_GENERAL - plusExtol );
-				}
-				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + plusExtol + " extol to " + target.getCommandSenderName()); 
-			}
-			else if(str[0].equals("-"))
-			{
-				if(props.getExtol() - plusExtol <= 0)
-				{			
-					props.setExtol(0);
-					if(props.getExtolFromCommand() - plusExtol > 0)
-						props.alterExtolFromCommand( -(props.getExtolFromCommand() - plusExtol) );
-					else
-						props.setExtolFromCommand(0);
-				}
-				else
-				{
-					props.alterExtol(-plusExtol);	
-					if(props.getExtolFromCommand() - plusExtol > 0)
-						props.alterExtolFromCommand( -(props.getExtolFromCommand() - plusExtol) );
-					else
-						props.setExtolFromCommand(0);
-				}
-				
-				WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + plusExtol + " extol from " + target.getCommandSenderName()); 
-			}
-			else if(str[0].equals("="))
-			{
-				if(str[1].equals("INF"))
-				{
-					props.setExtolFromCommand( Values.MAX_GENERAL );
-					props.setExtol( Values.MAX_GENERAL );
-					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + Values.MAX_GENERAL + " extol"); 
-				}
-				else if(plusExtol <= Values.MAX_GENERAL)
-				{
-					props.setExtolFromCommand(plusExtol);
-					props.setExtol(plusExtol);
-					
-					WyHelper.sendMsgToPlayer(senderEntity, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + plusExtol + " extol"); 
-				}				
-			}
-			 
-			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
-		}		
+		// Initializing the variables
+		EntityPlayer target = null;
+		int value = 0;
+		
+		// Check if the sender is a player
+		if(sender instanceof EntityPlayer)
+		{
+			// If it's a player check for permissions and command format, if one of them is false, return the actual sender as a target
+			if(str.length == 3 && MainConfig.commandPermissionExtol != 1)
+				target = this.getPlayer(sender, str[2]);
+			else
+				target = this.getCommandSenderAsPlayer(sender);		
+		}
 		else
-			throw new WrongUsageException("/extol <+|-|=> <amount> [player]", new Object[0]);
+		{
+			// If it's not a player then the [player] parameter is mandatory, @p works as well, otherwise return an error in the logs (for good measure)
+			if(str.length == 3)
+				target = this.getPlayer(sender, str[2]);
+			else
+			{
+				WyDebug.error("A player must be provided when the command is not used by a player !");
+				return;
+			}
+		}
+
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+		
+		if(str[1].equalsIgnoreCase("inf") || str[1].equalsIgnoreCase("max"))
+			value = Values.MAX_GENERAL;
+		else
+			value = Integer.decode(str[1]);
+					
+		switch(str[0])
+		{
+			case "+":
+				add(target, value); break;
+			case "-":
+				subtract(target, value); break;
+			case "=":
+				equal(target, value); break;
+		}
+		
+		WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP)target);
+
+	}
+
+	private void equal(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(value <= Values.MAX_GENERAL)
+		{
+			props.setExtolFromCommand(value);
+			props.setExtol(value);
+			
+			if(WyDebug.isDebug())
+				WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] " + target.getCommandSenderName() + " now has " + value + " extol"); 
+		}			
+	}
+
+	private void subtract(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(props.getExtol() - value <= 0)
+		{			
+			props.setExtol(0);
+			if(props.getExtolFromCommand() - value > 0)
+				props.alterExtolFromCommand( -(props.getExtolFromCommand() - value) );
+			else
+				props.setExtolFromCommand(0);
+		}
+		else
+		{
+			props.alterExtol(-value);	
+			if(props.getExtolFromCommand() - value > 0)
+				props.alterExtolFromCommand( -(props.getExtolFromCommand() - value) );
+			else
+				props.setExtolFromCommand(0);
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Subtracted " + value + " extol from " + target.getCommandSenderName()); 		
+	}
+
+	private void add(EntityPlayer target, int value)
+	{
+		ExtendedEntityData props = ExtendedEntityData.get(target);
+
+		if(value + props.getExtol() <= Values.MAX_GENERAL)
+		{
+			props.alterExtol(value);
+			if(props.getExtolFromCommand() + value <= Values.MAX_GENERAL)
+				props.alterExtolFromCommand(value);
+		}
+		else
+		{
+			props.setExtol(Values.MAX_GENERAL);
+			props.alterExtolFromCommand( Values.MAX_GENERAL - value );
+		}
+		
+		if(WyDebug.isDebug())
+			WyHelper.sendMsgToPlayer(target, EnumChatFormatting.GREEN + "" + EnumChatFormatting.ITALIC + "[DEBUG] Added " + value + " extol to " + target.getCommandSenderName()); 		
 	}
 
 	public boolean canCommandSenderUseCommand(ICommandSender sender)
 	{
+		if(!(sender instanceof EntityPlayer))
+			return true;
+		
 		EntityPlayer senderEntity = this.getCommandSenderAsPlayer(sender);
 		boolean flag = FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().func_152596_g(senderEntity.getGameProfile());
 		
