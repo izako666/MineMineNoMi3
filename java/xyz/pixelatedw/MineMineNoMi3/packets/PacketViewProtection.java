@@ -52,8 +52,8 @@ public class PacketViewProtection implements IMessage
 			ExtendedEntityData props = ExtendedEntityData.get(player);
 			AbilityProperties abilityProps = AbilityProperties.get(player);
 			
-			WyHelper.createEmptyCube(player.worldObj, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] {10, 10, 10}, ListMisc.AbilityProtectionAreaBlock, "all");
-			WyHelper.createEmptySphere(player.worldObj, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, ListMisc.AbilityProtectionCenterBlock, "air");
+			WyHelper.createEmptyCube(player.worldObj, message.midPoint[0], message.midPoint[1], message.midPoint[2], new int[] {100, 100, 100}, ListMisc.AbilityProtectionAreaBlock, "air", "liquids");
+			WyHelper.createEmptySphere(player.worldObj, message.midPoint[0], message.midPoint[1], message.midPoint[2], 1, ListMisc.AbilityProtectionCenterBlock, "air", "liquids");
 
 			return null;
 		}

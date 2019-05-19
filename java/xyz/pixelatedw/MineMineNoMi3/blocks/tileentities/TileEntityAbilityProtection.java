@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityAbilityProtection extends TileEntity
 {
 
-	private int protectedRadius = 10;
+	private int protectedRadius = 100;
 
 	public TileEntityAbilityProtection setRadius(int radius) { protectedRadius = radius; return this; }
 	public int getRadius() { return protectedRadius; }
