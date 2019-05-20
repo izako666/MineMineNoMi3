@@ -29,8 +29,9 @@ public class MainConfig
 	public static boolean enableOneFruitPerWorld;
 	public static boolean enableYamiSpecialPower;
 	public static double rateDFDrops;
-	public static double rateShipsSpawn;
+	public static double modifierShipsSpawn;
 	public static double rateWantedPostersPackagesSpawn;
+	public static double modifierDorikiReward;
 	public static int maxDojoSpawn;
 	
 	public static boolean enableTelemetry;
@@ -70,9 +71,10 @@ public class MainConfig
 		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true).getBoolean();
 		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true).getBoolean();
 		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true).getBoolean();
+		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1, "Multiplier for the doriki reward when killing a mob").getDouble();
 		
 		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
-		rateShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
+		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
 		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
 
 		enableQuests = config.get("quests", "Allow Quests", true).getBoolean();

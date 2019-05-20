@@ -184,6 +184,8 @@ public class EventsOnGain
 						plusDoriki = (int) Math.round(((i + j) / 10) / Math.PI) + rng;
 						plusBounty = (int) Math.round((i + j) / 10) + rng;
 						plusBelly = 1;
+						
+						plusDoriki *= MainConfig.modifierDorikiReward;
 
 					}
 					else

@@ -41,8 +41,7 @@ public class EventsBounty
 						double cachedPosZ = positions[1];
 						
 						boolean flagPosX = Math.abs(currentPosX - cachedPosX) > 100;
-						boolean flagPosZ = Math.abs(currentPosZ - cachedPosZ) > 100;
-						
+						boolean flagPosZ = Math.abs(currentPosZ - cachedPosZ) > 100;						
 						
 						if(flagPosX || flagPosZ)
 						{						
