@@ -61,34 +61,34 @@ public class MainConfig
 		enableKeepIEEPAfterDeath = config.get(Configuration.CATEGORY_GENERAL, "Keep stats after death", "auto").getString();
 		statsToKepp = config.get(Configuration.CATEGORY_GENERAL, "Data to Keep", new String[] {"Doriki", "Bounty", "Belly", "Race", "Faction", "Fighting Style", "Devil Fruit"}).getStringList();		
 		//enableCamps = config.get(Configuration.CATEGORY_GENERAL, "Allow Camps to Spawn", true).getBoolean();
-		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true).getBoolean();
-		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false).getBoolean();
-		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false).getBoolean();
-		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false).getBoolean();
-		enableYamiSpecialPower = config.get(Configuration.CATEGORY_GENERAL, "Allow Yami Users to eat another Devil Fruit", true).getBoolean();
+		enableGriefing = config.get(Configuration.CATEGORY_GENERAL, "Allow Griefing in Worlds", true, "Allows abilities to break or replace blocks, this will make some abilities completly useless; true by default").getBoolean();
+		enableAnimeScreaming  = config.get(Configuration.CATEGORY_GENERAL, "Anime Screaming", false, "Will send a chat message to nearby players with the used ability's name; false by default").getBoolean();
+		enableSpecialFlying  = config.get(Configuration.CATEGORY_GENERAL, "Allow Special Flying", false, "Allows Gasu Gasu no Mi, Moku Moku no Mi and Suna Suna no Mi users to fly, this option does not affect flying Zoans which will be able to fly regardless; false by default").getBoolean();
+		enableOneFruitPerWorld = config.get(Configuration.CATEGORY_GENERAL, "Allow Only One Fruit Per World", false, "Restricts the Devil Fruit spawns to only 1 of each type per world; false by default").getBoolean();
+		enableYamiSpecialPower = config.get(Configuration.CATEGORY_GENERAL, "Allow Yami Users to eat another Devil Fruit", true, "Allows Yami Yami no Mi users to eat an additional fruit; true by default").getBoolean();
 		enableDFtoDrop = config.get(Configuration.CATEGORY_GENERAL, "Allow Devil Fruits to drop from leaves", false).getBoolean();
 		rateDFDrops = config.get(Configuration.CATEGORY_GENERAL, "Rate at which Devil Fruits drop from leaves", 1).getDouble();
-		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true).getBoolean();
-		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true).getBoolean();
-		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true).getBoolean();
+		enableLogiaInvulnerability = config.get(Configuration.CATEGORY_GENERAL, "Allow Logia Invulnerability", true, "Allows logia users to avoid physical attacks; true by default").getBoolean();
+		enableExtraHearts = config.get(Configuration.CATEGORY_GENERAL, "Receive Extra Hearts", true, "Allows players to receive extra hearts based on their doriki; true by default").getBoolean();
+		enableMobRewards = config.get(Configuration.CATEGORY_GENERAL, "Allow Mob Rewards", true, "Allows mobs to reward doriki, bounty or items; true by default").getBoolean();
 		modifierDorikiReward = config.get(Configuration.CATEGORY_GENERAL, "Modifier for Doriki Reward", 1, "Multiplier for the doriki reward when killing a mob").getDouble();
 		
 		enableShips = config.get("structures", "Allow Ships to Spawn", true).getBoolean();
 		modifierShipsSpawn = config.get("structures", "Modifier for Spawning Ships", 5).getDouble();
 		maxDojoSpawn = config.get("structures", "Max Dojos to Spawn per World", 5).getInt();
 
-		enableQuests = config.get("quests", "Allow Quests", true).getBoolean();
-		enableQuestProgression = config.get("quests", "Allow Quest Progression", false).getBoolean();
+		enableQuests = config.get("quests", "Allow Quests", true, "Allows quests to be accepted / completed; true by default").getBoolean();
+		enableQuestProgression = config.get("quests", "Allow Quest Progression", false, "Allows quests to reward players with abilities, otherwise all abilities will be unlocked from the beginning; true by default").getBoolean();
 		
 		rateWantedPostersPackagesSpawn = config.get("bounty", "Rate at which Wanted Poster Packages will drop", 18000, "Represented in minecraft ticks, 20 ticks = 1 second, 18000 ticks = 15 min").getInt();
-		enableWantedPostersPackages  = config.get("bounty", "Allow Wanted Poster Packages", true).getBoolean();
+		enableWantedPostersPackages  = config.get("bounty", "Allow Wanted Poster Packages", true, "Allows wanted poster packages to drop from the sky; true by default").getBoolean();
 
 		enchantmentDialImpactId = config.get("ids", "Enchantment ID : Dial Impact", 200).getInt();
 		enchantmentKairosekiId = config.get("ids", "Enchantment ID : Kairoseki", 201).getInt();
 		enchantmentDialFlashId = config.get("ids", "Enchantment ID : Dial Flash", 202).getInt();
 
-		enableTelemetry = config.get("system", "Allow Telemetry", true).getBoolean();
-		enableUpdateMsg = config.get("system", "Allow Update Message", true).getBoolean();	
+		enableTelemetry = config.get("system", "Allow Telemetry", true, "Allows the game to send data to our server for statistics, no personal information is sent only minor things like which fruit the player ate, what ability was used, which mobs killed etc; true by default").getBoolean();
+		enableUpdateMsg = config.get("system", "Allow Update Message", true, "Allows the game to show a text message when the installed mod is outdated; true by default").getBoolean();	
 		enableFOVModifier = config.get("system", "Allow FOV Modifiers", false).getBoolean();
 		
 		commandPermissionRemoveDF = config.get("permissions", "Permission : /removedf", 2).getInt();

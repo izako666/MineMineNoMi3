@@ -147,16 +147,9 @@ public class ListDevilFruits
 		addITEM(KachiKachiNoMi, "Kachi Kachi no Mi");
 		DoaDoaNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, DoaAbilities.abilitiesArray);
 		addITEM(DoaDoaNoMi, "Doa Doa no Mi");
-		if(WyHelper.afterDate("01.04.2019"))
-		{
-			UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, GiraffeAbilities.abilitiesArray);
-			addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
-		}
-		else
-		{
-			String truename = WyHelper.getFancyName("Ushi Ushi no Mi, Model Giraffe");
-			WyRegistry.registerName("item." + truename + ".name", "Ushi Ushi no Mi, Model Giraffe");
-		}
+		//if(WyHelper.afterDate("01.04.2019"))
+		UshiUshiNoMiGiraffe = new AkumaNoMi(EnumFruitType.ZOAN, GiraffeAbilities.abilitiesArray);
+		addITEM(UshiUshiNoMiGiraffe, "Ushi Ushi no Mi, Model Giraffe");
 		MoguMoguNoMi = new AkumaNoMi(EnumFruitType.ZOAN, MoguAbilities.abilitiesArray);
 		addITEM(MoguMoguNoMi, "Mogu Mogu no Mi");
 		HoruHoruNoMi = new AkumaNoMi(EnumFruitType.PARAMECIA, HoruAbilities.abilitiesArray);

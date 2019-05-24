@@ -94,7 +94,7 @@ public class ItemCoreWeapon extends Item
 	
     public int getItemEnchantability()
     {
-        return 22;
+        return 14;
     }
 
 	public ItemCoreWeapon setMaxDamage(int maxDamage)
