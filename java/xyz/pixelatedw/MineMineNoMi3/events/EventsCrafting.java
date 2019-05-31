@@ -2,6 +2,7 @@ package xyz.pixelatedw.MineMineNoMi3.events;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import xyz.pixelatedw.MineMineNoMi3.helpers.ItemsHelper;
@@ -21,6 +22,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 10;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(ListEffects.kairoseki, 1);
 			}
 			else if(event.right.getItem() == ListMisc.DialFire  && event.right.stackSize >= 3)
@@ -28,6 +30,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.flame, 1);
 			}
 			else if(event.right.getItem() == ListMisc.DialEisen  && event.right.stackSize >= 3)
@@ -40,6 +43,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.power, level);
 			}
 			else if(event.right.getItem() == ListMisc.DialBreath  && event.right.stackSize >= 3)
@@ -52,6 +56,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.punch, level);
 			}
 		}
@@ -62,6 +67,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 10;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(ListEffects.kairoseki, 1);
 			}
 			else if(event.right.getItem() == ListMisc.BlackMetal  && event.right.stackSize >= 5)
@@ -74,6 +80,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 5 * level;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.sharpness, 3 * level);
 				event.output.getItem().setMaxDamage(event.output.getItem().getMaxDamage() + (3000 * level));
 			}
@@ -82,6 +89,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.fireAspect, 1);
 			}
 			else if(event.right.getItem() == ListMisc.DialEisen  && event.right.stackSize >= 3)
@@ -94,6 +102,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.sharpness, level);
 			}
 			else if(event.right.getItem() == ListMisc.DialFlash  && event.right.stackSize >= 3)
@@ -101,6 +110,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(ListEffects.dialFlash, 1);
 			}
 			else if(event.right.getItem() == ListMisc.DialImpact  && event.right.stackSize >= 3)
@@ -113,6 +123,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(ListEffects.dialImpact, level);
 			}
 			else if(event.right.getItem() == ListMisc.DialBreath  && event.right.stackSize >= 3)
@@ -125,6 +136,7 @@ public class EventsCrafting
 				event.cost = 1;
 				event.materialCost = 3 * level;
 				event.output = new ItemStack(event.left.getItem());
+				EnchantmentHelper.setEnchantments(EnchantmentHelper.getEnchantments(event.left), event.output);
 				event.output.addEnchantment(Enchantment.knockback, level);
 			}
 		}
