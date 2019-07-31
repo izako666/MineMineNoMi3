@@ -7,10 +7,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.Values;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.api.math.WyMathHelper;
+import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles.Hiken;
-import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
 public class ItemBellyPouch extends Item
@@ -25,19 +27,8 @@ public class ItemBellyPouch extends Item
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     { 
 		IEntityStats props = EntityStatsCapability.get(player);
-
-		if(!world.isRemote)
-		{
-			/*TestEntity projectile = new TestEntity(player, world);
-			projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
-			player.world.addEntity(projectile);*/
-			
-			Hiken projectile = new Hiken(player.world, player, ModAttributes.HIKEN);
-			projectile.shoot(player, player.rotationPitch, player.rotationYaw, 0, 2f, 1);
-			player.world.addEntity(projectile);
-		}
 		
-		/*if(!world.isRemote)
+		if(!world.isRemote)
 		{
 			int amount = (int) WyMathHelper.randomWithRange(5, 100);		
 			
@@ -54,7 +45,7 @@ public class ItemBellyPouch extends Item
 			
 	    	if(!player.abilities.isCreativeMode)
 	    		WyTelemetry.addMiscStat("bellyEarnedFromPouches", "Belly Earned From Pouches", amount);
-		}*/
+		}
 				
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}

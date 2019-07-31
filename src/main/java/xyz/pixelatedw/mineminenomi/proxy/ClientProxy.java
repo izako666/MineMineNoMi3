@@ -10,9 +10,9 @@ import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.json.WyJSONHelper;
 import xyz.pixelatedw.mineminenomi.events.EventsCombatMode;
-import xyz.pixelatedw.mineminenomi.init.ModAbilityProjectiles;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModKeybindings;
+import xyz.pixelatedw.mineminenomi.init.ModModels;
 
 public class ClientProxy implements IProxy
 {
@@ -35,7 +35,7 @@ public class ClientProxy implements IProxy
 	public static void clientSetup(FMLClientSetupEvent event)
 	{
 		ModMain.LOGGER.info("Client Setup Start");
-		ModAbilityProjectiles.registerRenderers();
+		ModModels.registerRenderers();
 
 		WyHelper.generateLangFiles();
 		WyJSONHelper.generateJSONModels(false);
@@ -62,7 +62,20 @@ public class ClientProxy implements IProxy
 	}
 
 	@Override
-	public boolean spawnParticles(PlayerEntity player, double posX, double posY, double posZ, String fx)
+	public void spawnParticles(World world, String texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	{
+		/*CustomParticle cp = new CustomParticle(world, ID.PARTICLE_ICON_MERA,
+				posX + offsetX, 
+				posY + offsetY,
+				posZ + offsetZ, 
+				0, 0, 0)
+				.setParticleAge(10).setParticleScale(1.3F);
+		
+		Minecraft.getInstance().particles.addEffect(cp);*/
+	}
+	
+	@Override
+	public boolean spawnParticleEffects(PlayerEntity player, double posX, double posY, double posZ, String fx)
 	{
 		return false;
 	}

@@ -62,44 +62,7 @@ import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityManager;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BakuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BaneProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BariProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.BomuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.CyborgProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.DokuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.DoruProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ExtraProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.FishKarateProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GasuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GoeProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GomuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GoroProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.GuraProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.HieProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.HoroProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ItoProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.JuryoProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.KageProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MaguProjectiles;
 import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeraProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MeroProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.MokuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.NikyuProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.NoroProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.OpeProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.OriProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.PikaProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.RokushikiProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SniperProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SukeProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SunaProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SupaProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.SwordsmanProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.ToriPhoenixProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.UshiGiraffeProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YamiProjectiles;
-import xyz.pixelatedw.mineminenomi.entities.abilityprojectiles.YukiProjectiles;
 import xyz.pixelatedw.mineminenomi.items.ItemAkumaNoMi;
 
 @Mod.EventBusSubscriber(modid = ID.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -136,7 +99,7 @@ public class ModDevilFruits
 	public static final HashMap[] ALL_PROJECTILES = new HashMap[] 
 		{
 			// Devil Fruit projectiles
-			MeraProjectiles.projectiles, HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
+			MeraProjectiles.projectiles, /*HieProjectiles.projectiles, BaneProjectiles.projectiles, PikaProjectiles.projectiles, NoroProjectiles.projectiles, SukeProjectiles.projectiles, OpeProjectiles.projectiles,
 			GoroProjectiles.projectiles, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
 			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
 			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,
@@ -144,7 +107,7 @@ public class ModDevilFruits
 			
 			// Special Abilities projectiles
 			RokushikiProjectiles.projectiles, FishKarateProjectiles.projectiles, CyborgProjectiles.projectiles, ExtraProjectiles.projectiles, 
-			SwordsmanProjectiles.projectiles, SniperProjectiles.projectiles
+			SwordsmanProjectiles.projectiles, SniperProjectiles.projectiles*/
 		};
 
 	@SubscribeEvent

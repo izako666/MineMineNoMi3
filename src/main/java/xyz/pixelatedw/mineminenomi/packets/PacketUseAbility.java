@@ -4,9 +4,6 @@ import java.util.function.Supplier;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.concurrent.ThreadTaskExecutor;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xyz.pixelatedw.mineminenomi.api.abilities.Ability;
@@ -52,10 +49,10 @@ public class PacketUseAbility
 								
 				if (currentAbility != null)
 				{
-					ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+					//ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
 					
-					executor.deferTask(() -> 
-					{
+					//executor.deferTask(() -> 
+					//{
 						for (int j = 0; j < 8; j++)
 						{
 							Ability testAbility = abilityDataProps.getHotbarAbilityFromSlot(j);
@@ -84,7 +81,7 @@ public class PacketUseAbility
 							currentAbility.startCharging(player);
 						else
 							currentAbility.use(player);
-					});
+					//});
 				}
 			});
 		}

@@ -13,14 +13,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
-import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
-import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
 
 public class MeraProjectiles
 {
@@ -68,13 +66,7 @@ public class MeraProjectiles
 					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					
-					CustomParticle cp = new CustomParticle(world, ID.PARTICLE_ICON_MERA,
-							posX + offsetX, 
-							posY + offsetY,
-							posZ + offsetZ, 
-							0, 0, 0)
-							.setParticleAge(10).setParticleScale(1.3F);
-					Minecraft.getInstance().particles.addEffect(cp);
+
 
 				}
 				

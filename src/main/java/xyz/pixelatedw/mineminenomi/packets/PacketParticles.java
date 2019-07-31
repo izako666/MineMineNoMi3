@@ -64,7 +64,7 @@ public class PacketParticles
 					
 				String fx = message.fx;
 				
-				boolean pass = ModMain.proxy.spawnParticles(player, message.posX, message.posY, message.posZ, fx);
+				boolean pass = ModMain.proxy.spawnParticleEffects(player, message.posX, message.posY, message.posZ, fx);
 						
 				if(fx.contains("logiaEffect_"))
 				{

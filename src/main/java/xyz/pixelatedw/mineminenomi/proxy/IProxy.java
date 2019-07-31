@@ -12,6 +12,8 @@ public interface IProxy
     
 	void spawnLogiaParticles(World world, String fx, double posX, double posY, double posZ);
 
-	boolean spawnParticles(PlayerEntity player, double posX, double posY, double posZ, String fx);
+	void spawnParticles();
+	
+	boolean spawnParticleEffects(PlayerEntity player, double posX, double posY, double posZ, String fx);
 	
 }

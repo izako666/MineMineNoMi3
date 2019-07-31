@@ -65,7 +65,7 @@ public class BaneAbilities
 			mY *= 3;
 			mZ *= 8;
 
-			//DevilFruitsHelper.changeMotion("=", mX, mY, mZ, player);
+			DevilFruitsHelper.changeMotion("=", mX, mY, mZ, player);
 			
 			super.endCharging(player);
 	    }
