@@ -16,10 +16,21 @@ out
 # gradle
 build
 .gradle
+2.7
 
 # other
+src/main/java/version.txt
+src/main/java/earlyaccess.txt
+src/main/resources/assets/mineminenomi/EXTRA_BOT_FILES
 eclipse
+bin
+config
+logs
+mods
+resourcepacks
+saves
+options.txt
+usernamecache.json
 run
-
-# Files from Forge MDK
-forge*changelog.txt
+cd-scripts
+*~$*
