@@ -1,12 +1,25 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
-java/version.txt
-java/earlyaccess.txt
-resources/assets/mineminenomi/EXTRA_BOT_FILES
-out/
-gradle/
-eclipse/
-.idea/
-.gradle/
-build.gradle
-gradlew
-gradlew.bat
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt

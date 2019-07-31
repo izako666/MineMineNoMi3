@@ -1,0 +1,47 @@
+package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
+
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph.Factory;
+import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZouHybrid;
+import xyz.pixelatedw.MineMineNoMi3.init.ModAttributes;
+
+public class ZoanInfoZouHybrid extends ZoanInfo
+{
+
+	@Override
+	public String getDevilFruit()
+	{
+		return "zouzou";
+	}
+
+	@Override
+	public String getForm()
+	{
+		return "hybrid";
+	}
+
+	@Override
+	public Factory getFactory()
+	{
+		return new RenderZoanMorph.Factory(new ModelZouHybrid(), "zouhybrid", 1.0, new float[] { 0, 1.8f, 0 });
+	}
+
+	@Override
+	public AbilityAttribute getAttribute()
+	{
+		return ModAttributes.ZOU_HYBRID_POINT;
+	}
+
+	@Override
+	public double getWidth()
+	{
+		return 1.2;
+	}
+
+	@Override
+	public double getHeight()
+	{
+		return 2.7;
+	}
+
+}
