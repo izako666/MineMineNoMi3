@@ -108,6 +108,7 @@ public class WyRegistry
 			.setShouldReceiveVelocityUpdates(true)
 			.setUpdateInterval(3)
 			.setCustomClientFactory(clientFactory)
+			.size(1, 1)
 			.build(name)
 			.setRegistryName(ID.PROJECT_ID, name);
 

@@ -10,14 +10,15 @@ import net.minecraft.network.IPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Explosion.Mode;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import xyz.pixelatedw.mineminenomi.api.WyHelper;
-import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.haki.HakiDataCapability;
@@ -136,61 +137,52 @@ public class AbilityProjectile extends ThrowableEntity
 	@Override
 	protected void onImpact(RayTraceResult hit)
 	{
-		if (!this.world.isRemote)
+		if (this.world.isRemote || this.attr == null)
+			return;
+
+		if(hit.getType() == Type.ENTITY)
 		{
-			if (this.attr != null)
-			{
-				if (hit.getType() == Type.ENTITY && hit.hitInfo != null && hit.hitInfo instanceof LivingEntity)
-				{
-					LivingEntity hitEntity = (LivingEntity) hit.hitInfo;
-					IDevilFruit hitDevilFruitProps = DevilFruitCapability.get(hitEntity);
-					IHakiData throwerHakiDataProps = HakiDataCapability.get(this.getThrower());
+			EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
 
-					if(hitDevilFruitProps.isLogia() && this.getAttribute().isProjectilePhysical() && !throwerHakiDataProps.hasBusoHakiActive())
-						return;
-						
-					if (this.attr.getPotionEffectsForProjectile() != null)
-						for (EffectInstance p : this.attr.getPotionEffectsForProjectile())
-							hitEntity.addPotionEffect(new EffectInstance(p));
-
-					if (this.attr.getProjectileExplosionPower() > 0)
-					{
-						AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower());
-						explosion.setDamageOwner(false);
-						explosion.setFireAfterExplosion(this.attr.canProjectileExplosionSetFire());
-						explosion.setDestroyBlocks(this.attr.canProjectileExplosionDestroyBlocks());
-						explosion.doExplosion();
-					}
-
-					if (this.attr.getProjectileDamage() > 0)
-						hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage());
-
-					tasksImapct(hit);
-
-					this.remove();
-				}
-				else
-				{
-					if (this.attr.getProjectileExplosionPower() > 0)
-					{
-						AbilityExplosion explosion = WyHelper.newExplosion(this.getThrower(), this.posX, this.posY, this.posZ, this.attr.getProjectileExplosionPower());
-						explosion.setDamageOwner(false);
-						explosion.setFireAfterExplosion(this.attr.canProjectileExplosionSetFire());
-						explosion.setDestroyBlocks(this.attr.canProjectileExplosionDestroyBlocks());
-						explosion.doExplosion();
-					}
-
-					tasksImapct(hit);
-
-					Material hitMat = this.world.getBlockState(new BlockPos(hit.getHitVec().getX(), hit.getHitVec().getY(), hit.getHitVec().getZ())).getMaterial();
-
-					if (!this.attr.canProjectileMoveThroughBlocks() && hitMat.isSolid())
-						this.remove();
-				}
+			if(entityHit.getEntity() instanceof LivingEntity)
+			{		
+				LivingEntity hitEntity = (LivingEntity) entityHit.getEntity();
+				IDevilFruit hitDevilFruitProps = DevilFruitCapability.get(hitEntity);
+				IHakiData throwerHakiDataProps = HakiDataCapability.get(this.getThrower());
+				
+				if(hitDevilFruitProps.isLogia() && this.getAttribute().isProjectilePhysical() && !throwerHakiDataProps.hasBusoHakiActive())
+					return;
+					
+				if (this.attr.getPotionEffectsForProjectile() != null)
+					for (EffectInstance p : this.attr.getPotionEffectsForProjectile())
+						hitEntity.addPotionEffect(new EffectInstance(p));
+				
+				if (this.attr.getProjectileDamage() > 0)
+					hitEntity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), this.attr.getProjectileDamage());
 			}
-			
-			this.remove();
 		}
+		else if(hit.getType() == Type.BLOCK)
+		{
+			BlockRayTraceResult blockHit = (BlockRayTraceResult) hit;
+
+			Material hitMat = this.world.getBlockState(new BlockPos(blockHit.getHitVec().getX(), blockHit.getHitVec().getY(), blockHit.getHitVec().getZ())).getMaterial();
+
+			if (!this.attr.canProjectileMoveThroughBlocks() && hitMat.isSolid())
+			{
+				this.tasksImapct(hit);
+				this.remove();
+			}
+		}
+		
+		if (this.attr.getProjectileExplosionPower() > 0)
+		{
+			float power = this.attr.getProjectileExplosionPower();
+			
+			this.world.createExplosion(this.getThrower(), this.posX, this.posY, this.posZ, power, Mode.DESTROY);
+		}
+
+		this.tasksImapct(hit);		
+		this.remove();
 	}
 
 	@Override

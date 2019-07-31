@@ -66,8 +66,16 @@ public class MeraProjectiles
 					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					
-
-
+					/*
+					CustomParticle cp = new CustomParticle(world, ID.PARTICLE_ICON_MERA,
+							posX + offsetX, 
+							posY + offsetY,
+							posZ + offsetZ, 
+							0, 0, 0)
+							.setParticleAge(10).setParticleScale(1.3F);
+					
+					Minecraft.getInstance().particles.addEffect(cp);
+					*/
 				}
 				
 				for (int i = 0; i < 2; i++)

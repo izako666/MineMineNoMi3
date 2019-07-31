@@ -62,16 +62,9 @@ public class ClientProxy implements IProxy
 	}
 
 	@Override
-	public void spawnParticles(World world, String texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	public void spawnParticles()//(World world, String texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
 	{
-		/*CustomParticle cp = new CustomParticle(world, ID.PARTICLE_ICON_MERA,
-				posX + offsetX, 
-				posY + offsetY,
-				posZ + offsetZ, 
-				0, 0, 0)
-				.setParticleAge(10).setParticleScale(1.3F);
-		
-		Minecraft.getInstance().particles.addEffect(cp);*/
+		/**/
 	}
 	
 	@Override

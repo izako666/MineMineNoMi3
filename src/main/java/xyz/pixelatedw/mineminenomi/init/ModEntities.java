@@ -11,23 +11,24 @@ import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 
 public class ModEntities
-{	
+{
 	@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-	public static class Registry 
-	{		
+	public static class Registry
+	{
 		@SubscribeEvent
 		public static void registerEntityTypes(RegistryEvent.Register<EntityType<?>> event)
 		{
-	        if (!event.getName().equals(ForgeRegistries.ENTITIES.getRegistryName())) return;
-	        
+			if (!event.getName().equals(ForgeRegistries.ENTITIES.getRegistryName()))
+				return;
+
 			// Register projectiles
-	    	for(HashMap<AbilityAttribute, AbilityProjectile.Data> map : ModDevilFruits.ALL_PROJECTILES)
-	    	{
-	    		map.forEach((key, value) -> 
-	    		{
-	    			event.getRegistry().register(value.getEntityType());
-	    		});
-	    	}
+			for (HashMap<AbilityAttribute, AbilityProjectile.Data> map : ModDevilFruits.ALL_PROJECTILES)
+			{
+				map.forEach((key, value) ->
+				{
+					event.getRegistry().register(value.getEntityType());
+				});
+			}
 		}
 	}
 
