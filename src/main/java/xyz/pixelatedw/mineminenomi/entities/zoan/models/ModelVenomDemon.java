@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
+package xyz.pixelatedw.mineminenomi.entities.zoan.models;
 
 import org.lwjgl.opengl.GL11;
 
@@ -347,7 +347,8 @@ public class ModelVenomDemon extends ModelZoanMorph
         RendererModel.rotateAngleZ = z;
     }
 
-    public RendererModel getHandRenderer() 
+    @Override
+	public RendererModel getHandRenderer() 
 	{
 		GL11.glScaled(1.2, 1.2, 1);
 		GL11.glTranslated(0.2, 0.2, 0.5);

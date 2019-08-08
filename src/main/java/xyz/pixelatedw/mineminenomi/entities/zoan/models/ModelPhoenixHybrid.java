@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
+package xyz.pixelatedw.mineminenomi.entities.zoan.models;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
@@ -96,22 +96,22 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 
 		if (ent.onGround)
 		{
-			Leftarm.rotateAngleX = (float) degToRad(65);
-			Rightarm.rotateAngleX = (float) degToRad(65);
+			Leftarm.rotateAngleX = degToRad(65);
+			Rightarm.rotateAngleX = degToRad(65);
 
-			Leftarm.rotateAngleZ = (float) degToRad(57);
-			Rightarm.rotateAngleZ = (float) degToRad(-57);
+			Leftarm.rotateAngleZ = degToRad(57);
+			Rightarm.rotateAngleZ = degToRad(-57);
 
-			RightWing2.rotateAngleY = (float) degToRad(-10);
-			LeftWing2.rotateAngleY = (float) degToRad(10);
+			RightWing2.rotateAngleY = degToRad(-10);
+			LeftWing2.rotateAngleY = degToRad(10);
 
 			Rightarm.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 0.4F * limbSwingAmount;
 			Leftarm.rotateAngleY = -MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 0.4F * limbSwingAmount;
 		}
 		else
 		{
-			Leftarm.rotateAngleX = (float) degToRad(60);
-			Rightarm.rotateAngleX = (float) degToRad(60);
+			Leftarm.rotateAngleX = degToRad(60);
+			Rightarm.rotateAngleX = degToRad(60);
 
 			Rightarm.rotateAngleY = Rightarm.rotateAngleZ = 3 * MathHelper.cos(ageInTicks * 0.4F) * 0.23F;
 			Leftarm.rotateAngleY = Leftarm.rotateAngleZ = 3 * MathHelper.cos(ageInTicks * 0.4F + (float) Math.PI) * 0.23F;
@@ -126,7 +126,7 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 			Rightarm.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.2F;
 		}
 
-		if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.1F && !entity.isSwingInProgress && ent.onGround)
+		if (MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) <= 0.1F && !entity.isSwingInProgress && ent.onGround)
 		{
 			Rightarm.rotateAngleX = 1.134F;
 			Rightarm.rotateAngleY = -0.261F;
@@ -136,7 +136,7 @@ public class ModelPhoenixHybrid extends ModelZoanMorph
 
 	protected float degToRad(double degrees)
 	{
-		return (float) (degrees * (double) Math.PI / 180);
+		return (float) (degrees * Math.PI / 180);
 	}
 
 	/**

@@ -1,9 +1,9 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
+package xyz.pixelatedw.mineminenomi.entities.zoan.models;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import xyz.pixelatedw.MineMineNoMi3.api.WyRenderHelper;
+import xyz.pixelatedw.mineminenomi.api.WyRenderHelper;
 
 public class ModelPhoenixFull extends ModelZoanMorph
 {
@@ -225,7 +225,7 @@ public class ModelPhoenixFull extends ModelZoanMorph
 
 	protected float degToRad(double degrees)
 	{
-		return (float) (degrees * (double) Math.PI / 180);
+		return (float) (degrees * Math.PI / 180);
 	}
 
 	@Override

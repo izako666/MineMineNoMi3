@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
+package xyz.pixelatedw.mineminenomi.entities.zoan.models;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
@@ -144,6 +144,7 @@ public class ModelZouFull extends ModelZoanMorph
 		RendererModel.rotateAngleZ = z;
 	}
 
+	@Override
 	public RendererModel getHandRenderer()
 	{
 		return null;

@@ -1,12 +1,12 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
+package xyz.pixelatedw.mineminenomi.entities.zoan;
 
 import java.util.Optional;
 
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
@@ -17,30 +17,30 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.MineMineNoMi3.ID;
-import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
-import xyz.pixelatedw.MineMineNoMi3.data.entity.devilfruit.DevilFruitCapability;
-import xyz.pixelatedw.MineMineNoMi3.data.entity.devilfruit.IDevilFruit;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelZoanMorph;
+import xyz.pixelatedw.mineminenomi.ID;
+import xyz.pixelatedw.mineminenomi.api.WyHelper;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
+import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.entities.zoan.models.ModelZoanMorph;
 
-public class RenderZoanMorph extends Render
+public class RenderZoanMorph extends EntityRenderer
 {
 	private ResourceLocation texture = new ResourceLocation(ID.PROJECT_ID, "textures/models/null.png");
 	private EntityModel model;
 	private double scale;
 	private float offset[] = new float[3];
 
-	public RenderZoanMorph(RenderManager renderManager, EntityModel model, String texture)
+	public RenderZoanMorph(EntityRendererManager renderManager, EntityModel model, String texture)
 	{
 		this(renderManager, model, texture, 1);
 	}
 
-	public RenderZoanMorph(RenderManager renderManager, EntityModel model, String texture, double scale)
+	public RenderZoanMorph(EntityRendererManager renderManager, EntityModel model, String texture, double scale)
 	{
 		this(renderManager, model, texture, scale, new float[] {0, 0, 0});
 	}
 
-	public RenderZoanMorph(RenderManager renderManager, EntityModel model, String texture, double scale, float[] offset)
+	public RenderZoanMorph(EntityRendererManager renderManager, EntityModel model, String texture, double scale, float[] offset)
 	{
 		super(renderManager);
 		this.shadowSize = 0;
@@ -231,7 +231,7 @@ public class RenderZoanMorph extends Render
 		}
 		
 		@Override
-		public Render<? super PlayerEntity> createRenderFor(RenderManager manager)
+		public EntityRenderer<? super PlayerEntity> createRenderFor(EntityRendererManager manager)
 		{
 			return new RenderZoanMorph(manager, this.model, this.texture, this.scale, this.offset);
 		}

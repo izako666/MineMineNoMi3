@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
+package xyz.pixelatedw.mineminenomi.entities.zoan.models;
 
 import org.lwjgl.opengl.GL11;
 
@@ -178,13 +178,13 @@ public class ModelBisonPower extends ModelZoanMorph
 			this.rightarm1.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.5F;
 		}
 
-		if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.05F && !entity.isSwingInProgress)
+		if (MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) <= 0.05F && !entity.isSwingInProgress)
 		{
 			this.rightarm1.rotateAngleX = 0;
 			this.rightarm1.rotateAngleY = 0;
 			this.rightarm1.rotateAngleZ = 0.209F;
 		}
-		else if (!entity.isSwingInProgress && ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
+		else if (!entity.isSwingInProgress && MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) > 0)
 		{
 			this.rightarm1.rotateAngleY = 0;
 			this.rightarm1.rotateAngleZ = 0.209F;
@@ -211,6 +211,7 @@ public class ModelBisonPower extends ModelZoanMorph
 		RendererModel.rotateAngleZ = z;
 	}
 
+	@Override
 	public RendererModel getHandRenderer()
 	{
 		GL11.glScaled(1.2, 1.2, 1);

@@ -13,12 +13,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.ID;
+import xyz.pixelatedw.mineminenomi.ModMain;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.mineminenomi.api.abilities.AbilityProjectile.Data;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class MeraProjectiles
 {
@@ -66,16 +69,16 @@ public class MeraProjectiles
 					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					
-					/*
-					CustomParticle cp = new CustomParticle(world, ID.PARTICLE_ICON_MERA,
-							posX + offsetX, 
-							posY + offsetY,
-							posZ + offsetZ, 
-							0, 0, 0)
-							.setParticleAge(10).setParticleScale(1.3F);
+					CustomParticleData data = new CustomParticleData();
+					data.setTexture(ID.PARTICLE_ICON_MERA);
+					data.setPosX(posX + offsetX);
+					data.setPosX(posY + offsetY);
+					data.setPosX(posZ + offsetZ);
 					
-					Minecraft.getInstance().particles.addEffect(cp);
-					*/
+					data.setMaxAge(10);
+					data.setScale(1.3F);
+					
+					ModMain.proxy.spawnParticles(world, data);
 				}
 				
 				for (int i = 0; i < 2; i++)
@@ -84,14 +87,16 @@ public class MeraProjectiles
 					double offsetY = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					double offsetZ = (new Random().nextInt(50) + 1.0D - 25.0D) / 30.0D;
 					
-					/*CustomParticle cp = new CustomParticle(world, ID.PARTICLE_ICON_MOKU,
-							posX + offsetX, 
-							posY + offsetY,
-							posZ + offsetZ, 
-							0, 0, 0)
-							.setParticleAge(7).setParticleScale(1.2F);
-					Minecraft.getInstance().particles.addEffect(cp);*/
-
+					CustomParticleData data = new CustomParticleData();
+					data.setTexture(ID.PARTICLE_ICON_MOKU);
+					data.setPosX(posX + offsetX);
+					data.setPosX(posY + offsetY);
+					data.setPosX(posZ + offsetZ);
+					
+					data.setMaxAge(7);
+					data.setScale(1.2F);
+					
+					ModMain.proxy.spawnParticles(world, data);
 				}
 			}
 			super.tick();

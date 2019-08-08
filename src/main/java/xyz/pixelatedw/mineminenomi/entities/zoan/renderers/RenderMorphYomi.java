@@ -1,24 +1,25 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.renderers;
+package xyz.pixelatedw.mineminenomi.entities.zoan.renderers;
 
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelYomi;
+import xyz.pixelatedw.mineminenomi.entities.zoan.RenderZoanMorph;
+import xyz.pixelatedw.mineminenomi.entities.zoan.models.ModelYomi;
 
 public class RenderMorphYomi extends RenderZoanMorph
 {
 
 	private ModelYomi model;
 	
-	public RenderMorphYomi(RenderManager renderManager, ModelYomi model, String texture, double scale, float[] offset)
+	public RenderMorphYomi(EntityRendererManager renderManager, ModelYomi model, String texture, double scale, float[] offset)
 	{
 		super(renderManager, model, texture, scale, offset);
 		this.model = model;
 	}
 
+	@Override
 	public void doRender(Entity entity, double x, double y, double z, float u, float v)
 	{
 		super.doRender(entity, x, y, z, u, v);
@@ -50,7 +51,7 @@ public class RenderMorphYomi extends RenderZoanMorph
 		}
 		
 		@Override
-		public Render<? super PlayerEntity> createRenderFor(RenderManager manager)
+		public EntityRenderer<? super PlayerEntity> createRenderFor(EntityRendererManager manager)
 		{
 			return new RenderMorphYomi(manager, this.model, this.texture, this.scale, this.offset);
 		}

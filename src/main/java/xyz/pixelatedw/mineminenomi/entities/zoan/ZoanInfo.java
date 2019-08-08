@@ -1,6 +1,6 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
+package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
 
 public abstract class ZoanInfo
 {

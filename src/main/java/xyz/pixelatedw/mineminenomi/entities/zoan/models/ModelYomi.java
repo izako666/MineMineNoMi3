@@ -1,4 +1,4 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan.models;
+package xyz.pixelatedw.mineminenomi.entities.zoan.models;
 
 import org.lwjgl.opengl.GL11;
 
@@ -89,13 +89,13 @@ public class ModelYomi extends ModelZoanMorph
 			bipedRightArm.rotateAngleZ = -MathHelper.cos(entity.swingProgress * 4.0F + (float) Math.PI) * 0.5F;
 		}
 
-		if (ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) <= 0.05F && !entity.isSwingInProgress)
+		if (MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) <= 0.05F && !entity.isSwingInProgress)
 		{
 			bipedRightArm.rotateAngleX = 0;
 			bipedRightArm.rotateAngleY = 0;
 			bipedRightArm.rotateAngleZ = 0.1F;
 		}
-		else if (!entity.isSwingInProgress && ent.getDistance(ent.prevPosX, ent.prevPosY, ent.prevPosZ) > 0)
+		else if (!entity.isSwingInProgress && MathHelper.sqrt(ent.getDistanceSq(ent.prevPosX, ent.prevPosY, ent.prevPosZ)) > 0)
 		{
 			bipedRightArm.rotateAngleY = 0;
 			bipedRightArm.rotateAngleZ = 0.1F;
@@ -115,6 +115,7 @@ public class ModelYomi extends ModelZoanMorph
         RendererModel.rotateAngleZ = z;
     }
     
+	@Override
 	public RendererModel getHandRenderer()
 	{
 		GL11.glTranslated(-0.1, 0, 0);

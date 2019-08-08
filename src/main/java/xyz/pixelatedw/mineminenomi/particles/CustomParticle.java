@@ -47,7 +47,7 @@ public class CustomParticle extends TexturedParticle
 		float x = (float) (this.prevPosX + (this.posX - this.prevPosX) * partialTicks - interpPosX);
 		float y = (float) (this.prevPosY + (this.posY - this.prevPosY) * partialTicks - interpPosY);
 		float z = (float) (this.prevPosZ + (this.posZ - this.prevPosZ) * partialTicks - interpPosZ);
-		
+				
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GlStateManager.disableLighting();
 		RenderHelper.disableStandardItemLighting();

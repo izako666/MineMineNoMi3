@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.proxy;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
+import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class ServerProxy implements IProxy
 {
@@ -25,7 +26,12 @@ public class ServerProxy implements IProxy
 	}
 
 	@Override
-	public boolean spawnParticles(PlayerEntity player, double posX, double posY, double posZ, String fx)
+	public void spawnParticles(World world, CustomParticleData data)
+	{		
+	}
+
+	@Override
+	public boolean spawnParticleEffects(PlayerEntity player, double posX, double posY, double posZ, String fx)
 	{
 		return false;
 	}

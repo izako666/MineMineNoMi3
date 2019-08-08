@@ -1,9 +1,9 @@
-package xyz.pixelatedw.MineMineNoMi3.entities.zoan;
+package xyz.pixelatedw.mineminenomi.entities.zoan;
 
-import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.RenderZoanMorph.Factory;
-import xyz.pixelatedw.MineMineNoMi3.entities.zoan.models.ModelPhoenixFull;
-import xyz.pixelatedw.MineMineNoMi3.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.mineminenomi.entities.zoan.RenderZoanMorph.Factory;
+import xyz.pixelatedw.mineminenomi.entities.zoan.models.ModelPhoenixFull;
+import xyz.pixelatedw.mineminenomi.init.ModAttributes;
 
 public class ZoanInfoPhoenixFull extends ZoanInfo
 {

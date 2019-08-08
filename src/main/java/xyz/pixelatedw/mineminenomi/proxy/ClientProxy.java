@@ -13,6 +13,8 @@ import xyz.pixelatedw.mineminenomi.events.EventsCombatMode;
 import xyz.pixelatedw.mineminenomi.init.ModI18n;
 import xyz.pixelatedw.mineminenomi.init.ModKeybindings;
 import xyz.pixelatedw.mineminenomi.init.ModModels;
+import xyz.pixelatedw.mineminenomi.particles.CustomParticle;
+import xyz.pixelatedw.mineminenomi.particles.CustomParticleData;
 
 public class ClientProxy implements IProxy
 {
@@ -62,9 +64,26 @@ public class ClientProxy implements IProxy
 	}
 
 	@Override
-	public void spawnParticles()//(World world, String texture, double posX, double posY, double posZ, double motionX, double motionY, double motionZ)
+	public void spawnParticles(World world, CustomParticleData data)
 	{
-		/**/
+		CustomParticle cp = new CustomParticle(world, data.getTexture(),
+				data.getPosX(), 
+				data.getPosY(),
+				data.getPosZ(), 
+				data.getMotionX(),
+				data.getMotionY(),
+				data.getMotionZ());
+		
+		if(data.hasCustomGravity())
+			cp.setParticleGravity(data.getGravity());
+		
+		if(data.hasCustomScale())
+			cp.setParticleScale(data.getScale());
+		
+		if(data.hasCustomMaxAge())
+			cp.setParticleAge(data.getMaxAge());
+
+		Minecraft.getInstance().particles.addEffect(cp);
 	}
 	
 	@Override
