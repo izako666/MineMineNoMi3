@@ -133,7 +133,8 @@ public class GUICharacterCreator extends Screen
 		super.render(x, y, f);
 	}
 	
-	public void initGui()
+	@Override
+	public void init()
 	{
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;

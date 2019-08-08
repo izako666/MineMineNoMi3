@@ -23,6 +23,8 @@ import xyz.pixelatedw.mineminenomi.api.telemetry.WyTelemetry;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.mobs.EntityNewMob;
+import xyz.pixelatedw.mineminenomi.entities.mobs.marines.MarineData;
 import xyz.pixelatedw.mineminenomi.events.custom.BountyEvent;
 import xyz.pixelatedw.mineminenomi.events.custom.DorikiEvent;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;

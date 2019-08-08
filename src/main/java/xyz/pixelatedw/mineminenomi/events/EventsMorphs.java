@@ -3,6 +3,7 @@ package xyz.pixelatedw.mineminenomi.events;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -278,7 +279,7 @@ public class EventsMorphs
 			}
 
 			player.setBoundingBox(new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height, posZ + width));
-			ObfuscationReflectionHelper.setPrivateValue(PlayerEntity.class, player, eyeHeight, "eyeHeight");
+			ObfuscationReflectionHelper.setPrivateValue(Entity.class, player, eyeHeight, "eyeHeight");
 		}
 	}
 }

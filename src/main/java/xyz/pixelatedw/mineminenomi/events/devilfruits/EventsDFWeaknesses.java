@@ -13,6 +13,7 @@ import xyz.pixelatedw.mineminenomi.api.data.abilitydata.IAbilityData;
 import xyz.pixelatedw.mineminenomi.api.network.PacketAbilityDataSync;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.entities.mobs.EntityNewMob;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
 import xyz.pixelatedw.mineminenomi.helpers.ItemsHelper;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
@@ -83,10 +84,8 @@ public class EventsDFWeaknesses
 
 					for(int i = 0; i < abilityProps.countAbilitiesInHotbar(); i++)
 					{					
-						if(abilityProps.getHotbarAbilityFromSlot(i) != null && abilityProps.getHotbarAbilityFromSlot(i).isRepeating())
-						{ 					
+						if(abilityProps.getHotbarAbilityFromSlot(i) != null && abilityProps.getHotbarAbilityFromSlot(i).isRepeating())			
 							abilityProps.getHotbarAbilityFromSlot(i).duringRepeater(player);
-						}				
 					}
 
 					if(updateDisabledAbilities)

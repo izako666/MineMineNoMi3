@@ -30,6 +30,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
+import xyz.pixelatedw.mineminenomi.entities.mobs.misc.EntityDoppelman;
 import xyz.pixelatedw.mineminenomi.events.custom.YomiTriggerEvent;
 import xyz.pixelatedw.mineminenomi.helpers.CombatHelper;
 import xyz.pixelatedw.mineminenomi.helpers.DevilFruitsHelper;
@@ -283,12 +284,12 @@ public class EventsPassives
 			{
 				EntityDoppelman doppelman = (EntityDoppelman) WyHelper.getEntitiesNear(attacker, 20, EntityDoppelman.class).stream().findFirst().orElse(null);
 
-				if (doppelman != null)
-					doppelman.forcedTargets.add(attacked);
+				//if (doppelman != null)
+				//	doppelman.forcedTargets.add(attacked);
 			}
 
 			if (devilFruitProps.getDevilFruit().equalsIgnoreCase("dokudoku") && devilFruitProps.getZoanPoint().equalsIgnoreCase("venomDemon"))
-				attacked.addPotionEffect((new EffectInstance(Effects.POISON, 60, 0));
+				attacked.addPotionEffect(new EffectInstance(Effects.POISON, 60, 0));
 
 			if (CombatHelper.isPassiveActive(abilityProps, ModAttributes.BUSOSHOKU_HAKI))
 			{
