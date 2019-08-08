@@ -21,6 +21,14 @@ import xyz.pixelatedw.mineminenomi.commands.CommandGetWantedPoster;
 import xyz.pixelatedw.mineminenomi.commands.CommandIssueBounty;
 import xyz.pixelatedw.mineminenomi.commands.CommandRemoveDF;
 import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.events.EventsCore;
+import xyz.pixelatedw.mineminenomi.events.EventsOnGain;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.EventsAbilityValidation;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.EventsDFWeaknesses;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.EventsLogiaInvulnerability;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.EventsPassives;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.EventsSpecialFlying;
+import xyz.pixelatedw.mineminenomi.events.devilfruits.EventsZoanPassives;
 import xyz.pixelatedw.mineminenomi.init.ModCapabilities;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.proxy.ClientProxy;
@@ -74,13 +82,23 @@ public class ModMain
 	}
 	
 	private static void commonSetup(FMLCommonSetupEvent event)
-	{
-		LOGGER.info("Common Setup Start");
-		
+	{	
 		MinecraftForge.EVENT_BUS.register(new ModCapabilities());
 		ModCapabilities.init();
 		
-		LOGGER.info("Common Setup End");
+		// Handles some core features of the mod, update notifications or Early Access protection
+		MinecraftForge.EVENT_BUS.register(new EventsCore());
+
+		// Handles all the custom onGain events added by this mod
+		MinecraftForge.EVENT_BUS.register(new EventsOnGain());
+		
+		// Core devil fruit events
+		MinecraftForge.EVENT_BUS.register(new EventsAbilityValidation());
+		MinecraftForge.EVENT_BUS.register(new EventsDFWeaknesses());
+		MinecraftForge.EVENT_BUS.register(new EventsSpecialFlying());
+		MinecraftForge.EVENT_BUS.register(new EventsLogiaInvulnerability());
+		MinecraftForge.EVENT_BUS.register(new EventsZoanPassives());
+		MinecraftForge.EVENT_BUS.register(new EventsPassives());
 	}
 	
 	private void serverAboutToStart(FMLServerAboutToStartEvent event)

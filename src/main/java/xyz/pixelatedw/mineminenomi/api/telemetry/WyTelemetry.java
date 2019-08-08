@@ -3,39 +3,23 @@ package xyz.pixelatedw.mineminenomi.api.telemetry;
 import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
-
-import com.google.gson.Gson;
 
 import xyz.pixelatedw.mineminenomi.ID;
+import xyz.pixelatedw.mineminenomi.Values;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 
 public class WyTelemetry
-{
-
-	private static String urlConnection;
-	private static HttpClient httpClient = HttpClientBuilder.create().build();
-	private static Gson gson = new Gson();
-	
+{	
 	private static StatDataCompound structuresDataCompound = new StatDataCompound();
 	private static StatDataCompound killsDataCompound = new StatDataCompound();
 	private static StatDataCompound abilitiesDataCompound = new StatDataCompound();
 	private static StatDataCompound miscDataCompound = new StatDataCompound();
 	private static StatDataCompound devilFruitsDataCompound = new StatDataCompound();
-	
-	static
-	{
-		if (WyDebug.isDebug())
-			urlConnection = "http://localhost/mmnm-webserver/api";
-		else
-			urlConnection = "http://pixelatedw.xyz/api";
-	}
 
 	public static void addStructureStat(String id, String name, int value)
 	{
@@ -93,15 +77,15 @@ public class WyTelemetry
 						if(compound.data.isEmpty())
 							continue;
 						
-						String json = gson.toJson(compound);
-						HttpPost post = new HttpPost(urlConnection + "" + url);
+						String json = Values.gson.toJson(compound);
+						HttpPost post = new HttpPost(Values.urlConnection + "" + url);
 						StringEntity postingString;
 						postingString = new StringEntity(json);
 						String size = WyHelper.formatBytes(json.getBytes().length);
 						debugJSON(compound);
 						post.setEntity(postingString);
 						post.setHeader("Content-Type", "application/json");
-						HttpResponse response = httpClient.execute(post);
+						HttpResponse response = Values.httpClient.execute(post);
 						ResponseHandler<String> handler = new BasicResponseHandler();
 						String body = handler.handleResponse(response);
 						System.out.println(body.isEmpty() ? "Success" : body);
@@ -119,9 +103,11 @@ public class WyTelemetry
 		httpThread.start();
 	}
 
+	
+	
 	private static void debugJSON(StatDataCompound compound)
 	{
-		String json = gson.toJson(compound);
+		String json = Values.gson.toJson(compound);
 		String size = WyHelper.formatBytes(json.getBytes().length);
 		WyDebug.debug("\n JSON: " + json + "\n Size: " + size);
 	}

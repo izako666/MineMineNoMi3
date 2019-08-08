@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+
+import com.google.gson.Gson;
+
 import net.minecraft.item.Item;
+import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.init.ModMiscItems;
 import xyz.pixelatedw.mineminenomi.items.ItemAkumaNoMi;
 
@@ -25,6 +31,18 @@ public class Values
 		{
 				ModMiscItems.kairoseki, ModMiscItems.kairosekiBullets, ModMiscItems.denseKairoseki
 		};
+
+	// Network related stuff
+	public static String urlConnection;
+	public static HttpClient httpClient = HttpClientBuilder.create().build();
+	public static Gson gson = new Gson();
+	static
+	{
+		if (WyDebug.isDebug())
+			urlConnection = "http://localhost/mmnm-webserver/api";
+		else
+			urlConnection = "http://pixelatedw.xyz/api";
+	}
 
 	/*
 	 * public static HashMap<Class, EnumQuestlines> questGivers = createQuestGiversMap();

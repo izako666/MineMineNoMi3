@@ -4,10 +4,8 @@ import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,8 +20,13 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -43,6 +46,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.ID;
+import xyz.pixelatedw.mineminenomi.Values;
 import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
@@ -702,36 +706,43 @@ public class WyHelper
 	public static boolean isPatreon(PlayerEntity player)
 	{
 		boolean flag = false;
+		
+		String url = "/isPatreon";
 
 		try
 		{
-			URL url = new URL("https://dl.dropboxusercontent.com/s/cs2cv9ezaatzgd3/earlyaccess.txt?dl=0");
-			Scanner scanner = new Scanner(url.openStream());
+			String uuid = player.getUniqueID().toString();
+			String json = Values.gson.toJson(uuid);
+						
+			HttpPost post = new HttpPost(Values.urlConnection + "" + url);	
+			StringEntity postingString;
+			postingString = new StringEntity(json);
+			post.setEntity(postingString);
+			post.setHeader("Content-Type", "application/json");
+			
+			HttpResponse response = Values.httpClient.execute(post);
+			ResponseHandler<String> handler = new BasicResponseHandler();
 
-			while (scanner.hasNextLine())
+			String body = handler.handleResponse(response);
+			if(body.isEmpty())
+				((ServerPlayerEntity)player).connection.disconnect(new StringTextComponent(TextFormatting.BOLD + "" + TextFormatting.RED + "WARNING! \n\n " + TextFormatting.RESET + "You don't have access to this version yet!"));
+			else
 			{
-				String uuid = scanner.nextLine();
-				if (uuid.startsWith("$"))
-					continue;
-
-				if (player.getUniqueID().toString().equals(uuid) || (uuid.startsWith("&") && player.getDisplayName().getString().equalsIgnoreCase(uuid.replace("& ", ""))))
-				{
+				int patreonLevel = Integer.parseInt(body);
+				
+				if(patreonLevel <= 2)
+					((ServerPlayerEntity)player).connection.disconnect(new StringTextComponent(TextFormatting.BOLD + "" + TextFormatting.RED + "WARNING! \n\n " + TextFormatting.RESET + "You don't have access to this version yet!"));
+				else
 					flag = true;
-					break;
-				}
 			}
-
-			if (!flag)
-				((ServerPlayerEntity) player).connection.disconnect(new StringTextComponent(TextFormatting.BOLD + "" + TextFormatting.RED + "WARNING! \n\n " + TextFormatting.RESET + "You don't have access to this version yet!"));
-
-			scanner.close();
+			
 		}
-		catch (IOException e)
+		catch(Exception e)
 		{
-			((ServerPlayerEntity) player).connection.disconnect(new StringTextComponent(TextFormatting.BOLD + "" + TextFormatting.RED + "WARNING! \n\n " + TextFormatting.RESET + "You don't have access to this version yet!"));
+			((ServerPlayerEntity)player).connection.disconnect(new StringTextComponent(TextFormatting.BOLD + "" + TextFormatting.RED + "WARNING! \n\n " + TextFormatting.RESET + "You don't have access to this version yet!"));						
 			e.printStackTrace();
 		}
-
+		
 		return flag;
 	}
 }
