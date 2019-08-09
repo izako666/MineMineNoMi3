@@ -71,7 +71,7 @@ public class ItemHeart extends Item
 			{
 				LivingEntity entity = (LivingEntity) world.getEntityByID(itemStack.getTag().getInt("owner"));
 				
-				list.add(new StringTextComponent(TextFormatting.GOLD + "[Owner] " + TextFormatting.RESET + entity.getName().toString()));
+				list.add(new StringTextComponent(TextFormatting.GOLD + "[Owner] " + TextFormatting.RESET + entity.getName().getFormattedText()));
 				list.add(new StringTextComponent(TextFormatting.GOLD + "[HP] " + TextFormatting.RESET + entity.getHealth()));
 				list.add(new StringTextComponent(TextFormatting.GOLD + "[Location] " + TextFormatting.RESET + (int)entity.posX + "X " + (int)entity.posY + "Y " + (int)entity.posZ +"Z"));
 			}

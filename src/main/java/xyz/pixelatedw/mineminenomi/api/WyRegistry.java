@@ -2,6 +2,7 @@ package xyz.pixelatedw.mineminenomi.api;
 
 import java.util.HashMap;
 import java.util.function.BiFunction;
+import java.util.function.Supplier;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -10,6 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.FMLPlayMessages.SpawnEntity;
 import xyz.pixelatedw.mineminenomi.ID;
@@ -68,6 +70,16 @@ public class WyRegistry
 		blocks.put(block, jsonType);
 		
 		return block;
+	}
+	
+	public static TileEntityType<?> registerTileEntity(String id, Supplier factory, Block... blocks)
+	{
+		String name = WyHelper.getFancyName(id);
+
+		TileEntityType<?> type = TileEntityType.Builder.create(factory, blocks).build(null);
+		type.setRegistryName(ID.PROJECT_ID, name);
+		
+		return type;
 	}
 	
 	/*public static void registerBlock(Block block, String localizedName, float hard, CreativeTabs tab, Class<? extends TileEntity> tile)

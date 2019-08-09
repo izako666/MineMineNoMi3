@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.Values;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
@@ -96,7 +97,7 @@ public class ItoAbilities
 				{
 					this.blockList.addAll(WyHelper.createEmptySphere(player.world, (int)player.posX, (int)player.posY, (int)player.posZ, 20, ModMiscBlocks.stringWall, "air", "foliage", "liquids", "nogrief"));
 					player.world.setBlockState(new BlockPos(player.posX, player.posY, player.posZ), ModMiscBlocks.stringMid.getDefaultState());
-					this.blockList.add(new int[] {(int) player.posX, (int) player.posY, (int) player.posZ});
+					this.blockList.add(new int[] {MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)});
 				}
 				
 				super.passive(player);

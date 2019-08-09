@@ -36,6 +36,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.concurrent.ThreadTaskExecutor;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -44,6 +45,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.Values;
@@ -51,6 +54,9 @@ import xyz.pixelatedw.mineminenomi.api.abilities.extra.AbilityExplosion;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 import xyz.pixelatedw.mineminenomi.api.math.ISphere;
 import xyz.pixelatedw.mineminenomi.api.math.Sphere;
+import xyz.pixelatedw.mineminenomi.config.CommonConfig;
+import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
+import xyz.pixelatedw.mineminenomi.init.ModMiscBlocks;
 
 public class WyHelper
 {
@@ -113,17 +119,16 @@ public class WyHelper
 		return placeBlockIfAllowed(world, posX, posY, posZ, toPlace, 3, rules);
 	}
 
+	@SuppressWarnings("resource")
 	public static boolean placeBlockIfAllowed(World world, double posX, double posY, double posZ, Block toPlace, int flag, String... rules)
 	{
 		Block b = world.getBlockState(new BlockPos(posX, posY, posZ)).getBlock();
 		List<Block> bannedBlocks = new ArrayList<Block>();
 		boolean noGriefFlag = Arrays.toString(rules).contains("nogrief");
 
-		/*
-		 * ExtendedWorldData worldData = ExtendedWorldData.get(world);
-		 * if(worldData.isInsideRestrictedArea(posX, posY, posZ))
-		 * return false;
-		 */
+		 ExtendedWorldData worldData = ExtendedWorldData.get(world);
+		 if(worldData.isInsideRestrictedArea((int)posX, (int)posY, (int)posZ))
+			 return false;
 
 		Arrays.stream(rules).forEach(rule ->
 		{
@@ -165,31 +170,32 @@ public class WyHelper
 			{
 
 				bannedBlocks.remove(Blocks.BEDROCK);
-				/*bannedBlocks.remove(ModMiscBlocks.ope);
+				bannedBlocks.remove(ModMiscBlocks.ope);
 				bannedBlocks.remove(ModMiscBlocks.opeMid);
 				bannedBlocks.remove(ModMiscBlocks.stringMid);
 				bannedBlocks.remove(ModMiscBlocks.stringWall);
-				bannedBlocks.remove(ModMiscBlocks.darkness);*/
+				bannedBlocks.remove(ModMiscBlocks.darkness);
 
 			}
 
 		});
 
-		/*if (CommonConfig.instance.getGriefing() || noGriefFlag)
+		if (CommonConfig.instance.getGriefing() || noGriefFlag)
 		{
 			for (Block blk : bannedBlocks)
 			{
 				if (b == blk)
 				{
-					LogicalSidedProvider.WORKQUEUE.<IThreadListener>get(LogicalSide.SERVER).addScheduledTask(() ->
-					{
+		            ThreadTaskExecutor<?> executor = LogicalSidedProvider.WORKQUEUE.get(LogicalSide.SERVER);
+
+					executor.deferTask(() -> {
 						world.setBlockState(new BlockPos(posX, posY, posZ), toPlace.getDefaultState());
 					});
 					// world.setBlockState(posX, posY, posZ, toPlace, 0, flag);
 					return true;
 				}
 			}
-		}*/
+		}
 
 		return false;
 	}
@@ -505,7 +511,7 @@ public class WyHelper
 
 	public static List<LivingEntity> getEntitiesNear(TileEntity e, double radius, Class<? extends Entity> classEntity)
 	{
-		AxisAlignedBB aabb = new AxisAlignedBB(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), e.getPos().getX() + 1, e.getPos().getY() + 1, e.getPos().getZ() + 1).expand(radius, radius, radius);
+		AxisAlignedBB aabb = new AxisAlignedBB(e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), e.getPos().getX() + 1, e.getPos().getY() + 1, e.getPos().getZ() + 1).grow(radius, radius, radius);
 		List list = e.getWorld().getEntitiesWithinAABB(classEntity, aabb);
 		return list;
 	}
@@ -624,13 +630,13 @@ public class WyHelper
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
 
-		try
+		/*try
 		{
 			Thread sphereGenerator = new Thread("Sphere Generator")
 			{
 				@Override
 				public void run()
-				{
+				{*/
 					Sphere.generate(posX, posY, posZ, size, new ISphere()
 					{
 						@Override
@@ -643,7 +649,7 @@ public class WyHelper
 								});
 						}
 					});
-				}
+/*				}
 			};
 			sphereGenerator.start();
 			sphereGenerator.join();
@@ -651,7 +657,7 @@ public class WyHelper
 		catch (InterruptedException e)
 		{
 			e.printStackTrace();
-		}
+		}*/
 
 		return blocks;
 	}

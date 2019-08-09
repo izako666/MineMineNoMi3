@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,6 +17,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
@@ -295,7 +297,7 @@ public class OpeAbilities
 				{
 					this.blockList.addAll(WyHelper.createEmptySphere(player.world, (int)player.posX, (int)player.posY, (int)player.posZ, 20, ModMiscBlocks.ope, "air", "foliage", "liquids", "nogrief"));
 					player.world.setBlockState(new BlockPos(player.posX, player.posY, player.posZ), ModMiscBlocks.opeMid.getDefaultState());
-					this.blockList.add(new int[] {(int) player.posX, (int) player.posY, (int) player.posZ});
+					this.blockList.add(new int[] {MathHelper.floor(player.posX), MathHelper.floor(player.posY), MathHelper.floor(player.posZ)});
 				}
 				
 				super.passive(player);
@@ -307,7 +309,8 @@ public class OpeAbilities
 		{
 			for(int[] blockPos : this.blockList)
 			{
-				if(player.world.getBlockState(new BlockPos(blockPos[0], blockPos[1], blockPos[2])) == ModMiscBlocks.ope.getDefaultState() || player.world.getBlockState(new BlockPos(blockPos[0], blockPos[1], blockPos[2])) == ModMiscBlocks.opeMid.getDefaultState())
+				Block currentBlock = player.world.getBlockState(new BlockPos(blockPos[0], blockPos[1], blockPos[2])).getBlock();
+				if(currentBlock == ModMiscBlocks.ope || currentBlock == ModMiscBlocks.opeMid)
 					player.world.setBlockState(new BlockPos(blockPos[0], blockPos[1], blockPos[2]), Blocks.AIR.getDefaultState());
 			}
             this.blockList = new ArrayList<int[]>();

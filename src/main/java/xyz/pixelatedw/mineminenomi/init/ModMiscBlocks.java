@@ -4,9 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
 import xyz.pixelatedw.mineminenomi.api.json.block.JSONModelBars;
@@ -25,6 +27,8 @@ import xyz.pixelatedw.mineminenomi.blocks.BlockSkyBlock;
 import xyz.pixelatedw.mineminenomi.blocks.BlockStringMid;
 import xyz.pixelatedw.mineminenomi.blocks.BlockStringWall;
 import xyz.pixelatedw.mineminenomi.blocks.BlockSunaSand;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.TileEntityRoom;
+import xyz.pixelatedw.mineminenomi.blocks.tileentities.TileEntityTorikago;
 
 @Mod.EventBusSubscriber(modid = ID.PROJECT_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModMiscBlocks
@@ -102,6 +106,19 @@ public class ModMiscBlocks
         	WyRegistry.registerBlock(oriBars, "Ori Bars", new JSONModelBars("Ori Bars"))
         );
     }
+	
+	@SubscribeEvent
+	public static void registerTE(RegistryEvent.Register<TileEntityType<?>> event) 
+	{
+		if (!event.getName().equals(ForgeRegistries.TILE_ENTITIES.getRegistryName()))
+			return;
+		
+		event.getRegistry().registerAll
+		(
+			TileEntityRoom.ROOM,
+			TileEntityTorikago.TORIKAGO
+		);
+	}
 	
 	@SubscribeEvent
     public static void registerItems(final RegistryEvent.Register<Item> event)
