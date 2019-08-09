@@ -23,7 +23,7 @@ public class ZoanInfoPhoenixFull extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new RenderZoanMorph.Factory(new ModelPhoenixFull(), "phoenixfull", 1.3, new float[] { 0, 1.0f, 0 });
+		return new RenderZoanMorph.Factory(new ModelPhoenixFull(), "phoenixfull", 1.3, new float[] { 0, -0.5f, 0 });
 	}
 
 	@Override

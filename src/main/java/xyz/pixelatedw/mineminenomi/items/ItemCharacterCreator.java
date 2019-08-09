@@ -22,7 +22,8 @@ public class ItemCharacterCreator extends Item
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
     { 
-		Minecraft.getInstance().displayGuiScreen(new GUICharacterCreator(player));
+		if(world.isRemote)
+			Minecraft.getInstance().displayGuiScreen(new GUICharacterCreator(player));
 		return new ActionResult<>(ActionResultType.SUCCESS, player.getHeldItem(hand));
 	}
 

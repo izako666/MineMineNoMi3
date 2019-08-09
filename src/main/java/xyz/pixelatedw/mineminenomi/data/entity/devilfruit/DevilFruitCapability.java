@@ -49,7 +49,7 @@ public class DevilFruitCapability
 	
 	public static IDevilFruit get(final LivingEntity entity)
 	{
-		return entity.getCapability(INSTANCE, null).orElse(null);
+		return entity.getCapability(INSTANCE, null).orElse(new DevilFruitBase());
 	}
 
 	public static ICapabilityProvider createProvider(final IDevilFruit data)

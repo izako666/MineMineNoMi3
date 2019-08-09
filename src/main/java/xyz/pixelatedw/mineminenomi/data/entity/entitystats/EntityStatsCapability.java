@@ -65,7 +65,7 @@ public class EntityStatsCapability
 	
 	public static IEntityStats get(final LivingEntity entity)
 	{
-		return entity.getCapability(INSTANCE, null).orElse(null);
+		return entity.getCapability(INSTANCE, null).orElse(new EntityStatsBase());
 	}
 
 	public static ICapabilityProvider createProvider(final IEntityStats data)

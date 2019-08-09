@@ -23,7 +23,7 @@ public class ZoanInfoMoguPower extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new RenderZoanMorph.Factory(new ModelMoguPower(), "mogu", 0.9, new float[] { 0, 1.7f, 0 });
+		return new RenderZoanMorph.Factory(new ModelMoguPower(), "mogu", 0.9, new float[] { 0, 0.05f, 0 });
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class ZoanInfoVenomDemon  extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new RenderZoanMorph.Factory(new ModelVenomDemon(), "venomdemon", 1.1, new float[] { 0, 1.7f, 0 });
+		return new RenderZoanMorph.Factory(new ModelVenomDemon(), "venomdemon", 1.1, new float[] { 0, 0.3f, 0 });
 	}
 
 	@Override

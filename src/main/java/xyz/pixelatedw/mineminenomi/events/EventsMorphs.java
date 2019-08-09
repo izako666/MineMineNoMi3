@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
@@ -83,6 +84,8 @@ public class EventsMorphs
 
 			event.setCanceled(true);
 
+			//System.out.println(event.getEntity().getName().getFormattedText() + " " + props.getZoanPoint());
+			
 			for (ZoanInfo info : MorphsHelper.getZoanInfoList())
 			{
 				if (!info.getDevilFruit().equalsIgnoreCase(props.getDevilFruit()))
@@ -91,12 +94,9 @@ public class EventsMorphs
 				if (!info.getForm().equalsIgnoreCase(props.getZoanPoint()))
 					continue;
 
-				if (CombatHelper.isPassiveActive(abilityProps, info.getAttribute()))
-				{
-					RenderZoanMorph render = (RenderZoanMorph) info.getFactory().createRenderFor(Minecraft.getInstance().getRenderManager());
-					this.doRenderZoanMorph(render, event.getX(), event.getY(), event.getZ(), event.getEntity());
-					break;
-				}
+				RenderZoanMorph render = (RenderZoanMorph) info.getFactory().createRenderFor(Minecraft.getInstance().getRenderManager());
+				this.doRenderZoanMorph(render, event.getX(), event.getY(), event.getZ(), event.getEntity());
+				break;
 			}
 		}
 
@@ -128,11 +128,11 @@ public class EventsMorphs
 	}
 
 	private void doRenderZoanMorph(RenderZoanMorph render, double x, double y, double z, LivingEntity entity)
-	{
+	{	
 		if (Minecraft.getInstance().player.equals(entity))
-			render.doRender(entity, 0D, -1.625D, 0D, 0F, 0.0625F);
-		else
 			render.doRender(entity, x, y, z, 0F, 0.0625F);
+		else
+			render.doRender(entity, x, y + 1.2, z, 0F, 0.0625F);
 	}
 
 	@SubscribeEvent
@@ -256,7 +256,7 @@ public class EventsMorphs
 			double width = 0.6F / 2;
 			double height = 1.8F;
 
-			float eyeHeight = player.getEyeHeight();
+			float eyeHeight = player.getEyeHeight(Pose.STANDING);
 
 			for (ZoanInfo info : MorphsHelper.getZoanInfoList())
 			{
@@ -271,7 +271,7 @@ public class EventsMorphs
 					width = info.getWidth() / 2;
 					height = info.getHeight();
 
-					eyeHeight = (float) (player.getEyeHeight() * (info.getHeight() / 1.75));
+					eyeHeight = (float) (1.62 * (info.getHeight() / 1.75));
 					eyeHeight = MathHelper.clamp(eyeHeight, 0.22F, eyeHeight);
 
 					break;

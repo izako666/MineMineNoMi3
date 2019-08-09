@@ -23,7 +23,7 @@ public class ZoanInfoBisonPower extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new RenderZoanMorph.Factory(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 2.3f, 0 });
+		return new RenderZoanMorph.Factory(new ModelBisonPower(), "bisonpower", 1.4, new float[] { 0, 0.7f, 0 });
 	}
 
 	@Override

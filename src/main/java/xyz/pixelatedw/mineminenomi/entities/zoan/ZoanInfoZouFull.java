@@ -23,7 +23,7 @@ public class ZoanInfoZouFull extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new RenderZoanMorph.Factory(new ModelZouFull(), "zoufull", 1.3, new float[] { 0, 2.1f, 0 });
+		return new RenderZoanMorph.Factory(new ModelZouFull(), "zoufull", 1.3, new float[] { 0, 0.65f, 0 });
 	}
 
 	@Override

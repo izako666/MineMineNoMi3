@@ -51,7 +51,6 @@ public class EventsPassives
 
 			if (!propz.hasShadow() && entity.getBrightness() > 0.8F)
 				entity.setFire(3);
-
 		}
 
 		if (event.getEntityLiving() instanceof PlayerEntity)

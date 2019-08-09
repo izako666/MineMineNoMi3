@@ -28,7 +28,7 @@ public class EventsDFWeaknesses
 		{
 			LivingEntity entity = event.getEntityLiving();
 			IDevilFruit props = DevilFruitCapability.get(entity);
-
+			
 			if(props.hasDevilFruit() && DevilFruitsHelper.isAffectedByWater(entity))
 			{			
 				if(entity instanceof PlayerEntity && !((PlayerEntity) entity).abilities.isCreativeMode)

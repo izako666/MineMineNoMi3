@@ -10,8 +10,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -22,6 +24,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.DevilFruitCapability;
 import xyz.pixelatedw.mineminenomi.data.entity.devilfruit.IDevilFruit;
+import xyz.pixelatedw.mineminenomi.init.ModMiscBlocks;
 
 public class BlockPoison extends Block
 {
@@ -33,7 +36,14 @@ public class BlockPoison extends Block
 		super(Properties.create(Material.ORGANIC).hardnessAndResistance(0.5F).tickRandomly().noDrops());
 	}
 
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos)
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+	{
+		return SHAPE;
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
 	{
 		return SHAPE;
 	}
@@ -44,28 +54,36 @@ public class BlockPoison extends Block
 	}
 
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos)
+	public BlockRenderLayer getRenderLayer()
 	{
-		return !worldIn.isAirBlock(pos.down());
+		return BlockRenderLayer.TRANSLUCENT;
+	}
+
+	@Override
+	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos)
+	{
+		return !world.isAirBlock(pos.down()) && world.getBlockState(pos.down()).getBlock() != ModMiscBlocks.poison && world.getBlockState(pos.down()).getBlock() != ModMiscBlocks.demonPoison;
 	}
 
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn.updatePostPlacement(facing, facingState, worldIn, currentPos, facingPos);
+		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
 	{
-		return adjacentBlockState.getBlock() == this ? true : state.isSideInvisible(adjacentBlockState, side);
+		return adjacentBlockState.getBlock() == this ? true : false;
 	}
 
-	/*public BlockFaceUV getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
-	{
-		return face == Direction.DOWN ? BlockFaceUV.SOLID : BlockFaceUV.UNDEFINED;
-	}*/
+	/*
+	 * public BlockFaceUV getBlockFaceShape(IBlockReader worldIn, BlockState state, BlockPos pos, Direction face)
+	 * {
+	 * return face == Direction.DOWN ? BlockFaceUV.SOLID : BlockFaceUV.UNDEFINED;
+	 * }
+	 */
 
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
@@ -96,7 +114,7 @@ public class BlockPoison extends Block
 	{
 		world.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(world));
 	}
-	
+
 	@Override
 	public void tick(BlockState state, World world, BlockPos pos, Random random)
 	{

@@ -23,7 +23,7 @@ public class ZoanInfoBisonSpeed extends ZoanInfo
 	@Override
 	public Factory getFactory()
 	{
-		return new RenderZoanMorph.Factory(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 2.4f, 0 });
+		return new RenderZoanMorph.Factory(new ModelBisonSpeed(), "bisonspeed", 1.4, new float[] { 0, 0.8f, 0 });
 	}
 
 	@Override
