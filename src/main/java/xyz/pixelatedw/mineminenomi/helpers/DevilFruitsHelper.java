@@ -33,6 +33,7 @@ import xyz.pixelatedw.mineminenomi.data.entity.entitystats.EntityStatsCapability
 import xyz.pixelatedw.mineminenomi.data.entity.entitystats.IEntityStats;
 import xyz.pixelatedw.mineminenomi.data.world.ExtendedWorldData;
 import xyz.pixelatedw.mineminenomi.init.ModAttributes;
+import xyz.pixelatedw.mineminenomi.init.ModMiscBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.items.ItemAkumaNoMi;
 import xyz.pixelatedw.mineminenomi.packets.PacketMotion;
@@ -133,11 +134,10 @@ public class DevilFruitsHelper
 	
 	public static boolean isAffectedByWater(LivingEntity entity)
 	{
-		Block level1Block = entity.world.getBlockState(new BlockPos(entity.posX, entity.posY - 1, entity.posZ)).getBlock();
-		Block level2Block = entity.world.getBlockState(new BlockPos(entity.posX, entity.posY - 2, entity.posZ)).getBlock();
-		if(entity.isInWater() ||
-				(entity.isWet() && entity.getRidingEntity() != null && 
-				(level1Block == Blocks.WATER && level2Block == Blocks.WATER)))
+		Block level1Block = entity.world.getBlockState(new BlockPos(entity.posX, entity.posY - 0, entity.posZ)).getBlock();
+		Block level2Block = entity.world.getBlockState(new BlockPos(entity.posX, entity.posY + 1, entity.posZ)).getBlock();
+
+		if(entity.isInWater() && entity.getRidingEntity() == null && level1Block == Blocks.WATER && level2Block != Blocks.AIR)
 		{
 			return true;
 		}
@@ -147,12 +147,12 @@ public class DevilFruitsHelper
 	
 	public static boolean isNearbyKairoseki(PlayerEntity player)
 	{
-		/*if (WyHelper.isBlockNearby(player, 4, ModMiscBlocks.kairosekiBlock, ModMiscBlocks.kairosekiOre, ModMiscBlocks.kairosekiBars)
+		if (WyHelper.isBlockNearby(player, 4, ModMiscBlocks.kairosekiBlock, ModMiscBlocks.kairosekiOre, ModMiscBlocks.kairosekiBars)
 				|| ItemsHelper.hasKairosekiItem(player) 
 				|| isAffectedByWater(player))
 		{
 			return true;
-		}*/
+		}
 
 		return false;
 	}

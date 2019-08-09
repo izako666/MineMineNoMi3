@@ -37,6 +37,8 @@ public class GUICharacterCreator extends Screen
 		
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
+		GL11.glTranslated(20, -10, 0);
+		
 		int posX = (this.width - 256) / 2;
 		int posY = (this.height - 256) / 2;
 		
@@ -141,7 +143,7 @@ public class GUICharacterCreator extends Screen
 		
 		IEntityStats props = EntityStatsCapability.get(player);
 		
-		this.addButton(new GUIButtonNoTexture(posX - 78, posY + 73, 90, 36, "", b -> 
+		this.addButton(new GUIButtonNoTexture(posX - 58, posY + 63, 90, 36, "", b -> 
 		{
 			if(page == 0) lastFac = selectedOpt;
 			if(page == 1) lastRace = selectedOpt;
@@ -151,7 +153,7 @@ public class GUICharacterCreator extends Screen
 			selectedOpt = lastFac;
 		}));
 		
-		this.addButton(new GUIButtonNoTexture(posX - 78, (int)(posY + 73 * 1.6), 90, 36, "", b -> 
+		this.addButton(new GUIButtonNoTexture(posX - 58, (int)(posY + 63 * 1.6), 90, 36, "", b -> 
 		{
 			if(page == 0) lastFac = selectedOpt;
 			if(page == 1) lastRace = selectedOpt;
@@ -161,7 +163,7 @@ public class GUICharacterCreator extends Screen
 			selectedOpt = lastRace;
 		}));
 		
-		this.addButton(new GUIButtonNoTexture(posX - 78, (int)(posY + 72 * 2.2), 90, 36, "", b -> 
+		this.addButton(new GUIButtonNoTexture(posX - 58, (int)(posY + 62 * 2.2), 90, 36, "", b -> 
 		{
 			if(page == 0) lastFac = selectedOpt;
 			if(page == 1) lastRace = selectedOpt;
@@ -172,7 +174,7 @@ public class GUICharacterCreator extends Screen
 		}));
 		
 		// Next / Previous buttons
-		this.addButton(new GUIButtonNoTexture(posX + 15, posY + 85, 24, 100, "", b -> 
+		this.addButton(new GUIButtonNoTexture(posX + 35, posY + 75, 24, 100, "", b -> 
 		{
 			if(selectedOpt - 1 > -1)
 				selectedOpt--;
@@ -180,7 +182,7 @@ public class GUICharacterCreator extends Screen
 				selectedOpt = maxOpt - 1;
 		}));
 
-		this.addButton(new GUIButtonNoTexture(posX + 210, posY + 83, 24, 100, "", b -> 
+		this.addButton(new GUIButtonNoTexture(posX + 230, posY + 73, 24, 100, "", b -> 
 		{
 			if(selectedOpt + 1 < maxOpt)
 				selectedOpt++;
@@ -189,7 +191,7 @@ public class GUICharacterCreator extends Screen
 		}));
 		
 		// Finish button
-		this.addButton(new GUIButtonNoTexture(posX + 77, posY + 205, 90, 35, "", b -> 
+		this.addButton(new GUIButtonNoTexture(posX + 97, posY + 195, 90, 35, "", b -> 
 		{
 			if(lastFac == 0) props.setFaction(ID.FACTION_PIRATE);
 			else if(lastFac == 1) props.setFaction(ID.FACTION_MARINE);

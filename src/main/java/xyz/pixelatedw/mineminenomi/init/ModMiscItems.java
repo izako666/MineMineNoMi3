@@ -72,7 +72,11 @@ public class ModMiscItems
         	WyRegistry.registerItem(cola, "Cola"),
         	WyRegistry.registerItem(ultraCola, "Ultra Cola"),
         	WyRegistry.registerItem(heart, "Heart"),
-        	WyRegistry.registerItem(wantedPoster, "Wanted Poster")
+        	WyRegistry.registerItem(wantedPoster, "Wanted Poster"),     	
+        	WyRegistry.registerItem(bullets, "Bullet"),
+        	WyRegistry.registerItem(kairosekiBullets, "Kairoseki Bullet"),
+        	WyRegistry.registerItem(kujaArrow, "Kuja Arrow"),
+        	WyRegistry.registerItem(popGreen, "Pop Green")
         );
     }
 }

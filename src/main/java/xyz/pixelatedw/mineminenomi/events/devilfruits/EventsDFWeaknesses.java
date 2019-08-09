@@ -49,7 +49,7 @@ public class EventsDFWeaknesses
 			if (props.hasDevilFruit() && !player.world.isRemote)
 			{
 				if (ItemsHelper.hasKairosekiItem(player))
-					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 200, 0));
+					player.addPotionEffect(new EffectInstance(Effects.NAUSEA, 100, 0));
 				
 				if (DevilFruitsHelper.isNearbyKairoseki(player))
 				{
