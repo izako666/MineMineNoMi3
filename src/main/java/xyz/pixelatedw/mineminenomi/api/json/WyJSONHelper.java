@@ -17,6 +17,61 @@ import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
 
 public class WyJSONHelper
 {
+	/*
+	 *  Seriously fuck these forced JSONs shoved down our throats only to make script kiddies happy with their datapacks
+	 *  30 lines+ of JSON for a block to drop itself is not more useful or better looking than a few Java variables and methods...
+	 */
+	
+	public static void generateJSONLootTables(boolean override)
+	{
+		if (!WyDebug.isDebug())
+			return;
+		
+		Iterator i = WyRegistry.lootTables.keySet().iterator();
+		File lootTablesFolder = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/loot_tables/");
+		
+		if (!lootTablesFolder.exists())
+			lootTablesFolder.mkdirs();
+		
+		while (i.hasNext())
+		{
+			Object next = i.next();
+			File jsonModel = null;
+			
+			if(next instanceof Block)
+			{
+				Block nextBlock = (Block) next;
+				String name = WyHelper.getFancyName(nextBlock.getRegistryName().getPath());
+
+				jsonModel = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/loot_tables/blocks/" + name + ".json");			
+			}
+			
+			if (jsonModel != null && jsonModel.exists() && !override)
+				continue;
+			
+			try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(jsonModel), "UTF-8")))
+			{
+				String[] model = WyRegistry.lootTables.get(next).getLootTable();
+				
+				if(model == null)
+				{
+					writer.close();
+					Files.delete(jsonModel.toPath());
+					continue;
+				}
+				
+				for(String line : model)
+				{
+					writer.write(line + "\n");
+				}
+				writer.close();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	public static void generateJSONModels(boolean override)
 	{

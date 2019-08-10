@@ -24,7 +24,7 @@ public class JSONModelBars extends JSONModelBlock
 	{
 		for(String component : paneComponents)
 		{
-			this.paneComponentTemplate = new File(ID.PROJECT_RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/json_templates/block/pane" + component + ".json");
+			this.paneComponentTemplate = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/json_templates/models/block/pane" + component + ".json");
 
 			File jsonModel = new File(ID.PROJECT_RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/models/block/" + this.getBlockName() + "" + component + ".json");
 			if (jsonModel.exists())

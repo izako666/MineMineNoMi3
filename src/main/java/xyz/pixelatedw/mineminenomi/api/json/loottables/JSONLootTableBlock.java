@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.json.models;
+package xyz.pixelatedw.mineminenomi.api.json.loottables;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,16 +12,18 @@ import java.util.List;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
-public abstract class JSONModelItem implements IJSONModel
+public abstract class JSONLootTableBlock implements IJSONLootTable
 {
-
-	private String itemName;
 	private File template;
-	
-	public JSONModelItem(String itemName, String template)
+	private int min, max;
+	private String itemName;
+
+	public JSONLootTableBlock(String itemName, int min, int max, String templateName)
 	{
 		this.itemName = WyHelper.getFancyName(itemName);
-		this.template = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/json_templates/models/item/" + template + ".json");
+		this.min = min;
+		this.max = max;
+		this.template = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/json_templates/loot_tables/block/" + templateName + ".json");
 	}
 	
 	protected String[] replaceMarkedElements()
@@ -37,9 +39,15 @@ public abstract class JSONModelItem implements IJSONModel
 				if(line.contains("${modid}"))
 					formattedLine = formattedLine.replace("${modid}", ID.PROJECT_ID);
 				
-				if(line.contains("${texture}"))
-					formattedLine = formattedLine.replace("${texture}", this.getItemName());
-								
+				if(line.contains("${item}"))
+					formattedLine = formattedLine.replace("${item}", this.getItemName());
+				
+				if(line.contains("\"${min}\""))
+					formattedLine = formattedLine.replace("\"${min}\"", this.getMin() + "");
+	
+				if(line.contains("\"${max}\""))
+					formattedLine = formattedLine.replace("\"${max}\"", this.getMax() + "");
+							
 				formattedList.add(formattedLine);
 			}
 			
@@ -52,6 +60,16 @@ public abstract class JSONModelItem implements IJSONModel
 		}
 		
 		return null;
+	}
+	
+	protected int getMin()
+	{
+		return this.min;
+	}
+	
+	protected int getMax()
+	{
+		return this.max;
 	}
 	
 	protected String getItemName()

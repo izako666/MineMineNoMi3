@@ -3,7 +3,7 @@
 	"pools": 
 	[
 		{
-			"name": "mineminenomi:self_drop",
+			"name": "${modid}:drop_pool",
 			"rolls": 1,
 			"entries": 
 			[
@@ -15,13 +15,13 @@
 							"function": "minecraft:set_count",
 							"count": 
 							{
-								"min": 3,
-								"max": 6,
+								"min": "${min}",
+								"max": "${max}",
 								"type": "minecraft:uniform"
 							}
 		                }
 					],
-					"name": "mineminenomi:kairoseki"
+					"name": "${modid}:${item}"
 				}
 			],
 			"conditions": 

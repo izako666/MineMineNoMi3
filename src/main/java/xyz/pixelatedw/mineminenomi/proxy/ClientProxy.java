@@ -48,6 +48,7 @@ public class ClientProxy implements IProxy
 
 		WyHelper.generateLangFiles();
 		WyJSONHelper.generateJSONModels(false);
+		WyJSONHelper.generateJSONLootTables(false);
 		WebAppHelper.generateWebAppJSONs();
 	}
 	

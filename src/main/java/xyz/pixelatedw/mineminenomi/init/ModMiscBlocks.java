@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
+import xyz.pixelatedw.mineminenomi.api.json.loottables.block.JSONLootTableSimpleBlock;
 import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelBars;
 import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelThinBlock;
 import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelSimpleItem;
@@ -86,6 +87,7 @@ public class ModMiscBlocks
 	@SubscribeEvent
     public static void registerBlocks(final RegistryEvent.Register<Block> event)
     {
+		// Register the blocks themselves
         event.getRegistry().registerAll
         (
         	WyRegistry.registerBlock(ope, "Ope"),
@@ -105,6 +107,14 @@ public class ModMiscBlocks
         	WyRegistry.registerBlock(darkness, "Darkness"),
         	WyRegistry.registerBlock(oriBars, "Ori Bars", new JSONModelBars("Ori Bars"))
         );
+        
+        // Register loot tables
+        //Ore
+        WyRegistry.registerLootTable(kairosekiOre, new JSONLootTableSimpleBlock("Kairoseki", 3, 6));
+        
+        //Self Drop
+        WyRegistry.registerLootTable(kairosekiBlock, new JSONLootTableSimpleBlock("Kairoseki Block"));
+        WyRegistry.registerLootTable(kairosekiBars, new JSONLootTableSimpleBlock("Kairoseki Bars"));
     }
 	
 	@SubscribeEvent

@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.FMLPlayMessages.SpawnEntity;
 import xyz.pixelatedw.mineminenomi.ID;
+import xyz.pixelatedw.mineminenomi.api.json.loottables.IJSONLootTable;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelBlock;
 import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelItem;
 import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelSimpleBlock;
@@ -30,8 +31,14 @@ public class WyRegistry
 
 	public static HashMap<Item, JSONModelItem> items = new HashMap<Item, JSONModelItem>();
 	public static HashMap<Block, JSONModelBlock> blocks = new HashMap<Block, JSONModelBlock>();
+	public static HashMap<Object, IJSONLootTable> lootTables = new HashMap<Object, IJSONLootTable>();
 	public static HashMap<String, String> langMap = new HashMap<String, String>();
 
+	public static void registerLootTable(Object obj, IJSONLootTable json)
+	{
+		lootTables.put(obj, json);
+	}
+	
 	public static void registerName(String key, String localizedName)
 	{
 		langMap.put(key, localizedName);
