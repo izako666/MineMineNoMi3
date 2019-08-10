@@ -24,7 +24,10 @@ public abstract class DFEffect
 		this.effect = effect;
 		this.timer = timer;
 		this.props = ExtraEffectCapability.get(entity);
-				
+		
+		if(props == null)
+			return;
+		
 		if(!props.hasExtraEffect(effect))
 		{
 			props.addExtraEffect(effect);
@@ -87,9 +90,11 @@ public abstract class DFEffect
 			}
 			
 			props.removeExtraEffect(effect);
+
 			if(entity instanceof ServerPlayerEntity)
 				ModNetwork.sendTo(new PacketExtraEffectSync(props), (ServerPlayerEntity) entity);
-			//WyNetworkHelper.sendToAll(new PacketSyncInfo(entity.getEntityId(), props));
+			byte syncedData = 0b0010000;
+			ModNetwork.sendToAll(new PacketClientSyncAll(entity.getEntityId(), props, syncedData));
 			
 			onEffectEnd(entity);
 		}

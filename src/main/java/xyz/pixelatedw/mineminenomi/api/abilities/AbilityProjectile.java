@@ -145,7 +145,7 @@ public class AbilityProjectile extends ThrowableEntity
 			EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
 
 			if(entityHit.getEntity() instanceof LivingEntity)
-			{		
+			{
 				LivingEntity hitEntity = (LivingEntity) entityHit.getEntity();
 				IDevilFruit hitDevilFruitProps = DevilFruitCapability.get(hitEntity);
 				IHakiData throwerHakiDataProps = HakiDataCapability.get(this.getThrower());

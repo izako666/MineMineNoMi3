@@ -630,34 +630,18 @@ public class WyHelper
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
 
-		/*try
+		Sphere.generate(posX, posY, posZ, size, new ISphere()
 		{
-			Thread sphereGenerator = new Thread("Sphere Generator")
+			@Override
+			public void call(int x, int y, int z)
 			{
-				@Override
-				public void run()
-				{*/
-					Sphere.generate(posX, posY, posZ, size, new ISphere()
-					{
-						@Override
-						public void call(int x, int y, int z)
-						{
-							placeBlockIfAllowed(world, x, y, z, block, blockRules);
-							blocks.add(new int[]
-								{
-										x, y, z
-								});
-						}
-					});
-/*				}
-			};
-			sphereGenerator.start();
-			sphereGenerator.join();
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}*/
+				placeBlockIfAllowed(world, x, y, z, block, blockRules);
+				blocks.add(new int[]
+				{
+					x, y, z
+				});
+			}
+		});
 
 		return blocks;
 	}
@@ -666,35 +650,19 @@ public class WyHelper
 	{
 		List<int[]> blocks = new ArrayList<int[]>();
 
-		try
+		Sphere.generateFilled(posX, posY, posZ, size, new ISphere()
 		{
-			Thread sphereGenerator = new Thread("Sphere Generator")
+			@Override
+			public void call(int x, int y, int z)
 			{
-				@Override
-				public void run()
+				placeBlockIfAllowed(world, x, y, z, block, blockRules);
+				blocks.add(new int[]
 				{
-					Sphere.generateFilled(posX, posY, posZ, size, new ISphere()
-					{
-						@Override
-						public void call(int x, int y, int z)
-						{
-							placeBlockIfAllowed(world, x, y, z, block, blockRules);
-							blocks.add(new int[]
-								{
-										x, y, z
-								});
-						}
-					});
-				}
-			};
-			sphereGenerator.start();
-			sphereGenerator.join();
-		}
-		catch (InterruptedException e)
-		{
-			e.printStackTrace();
-		}
-
+					x, y, z
+				});
+			}
+		});
+					
 		return blocks;
 	}
 

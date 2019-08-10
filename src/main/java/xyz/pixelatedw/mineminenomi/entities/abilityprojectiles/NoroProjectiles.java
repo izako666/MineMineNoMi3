@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
@@ -50,34 +51,41 @@ public class NoroProjectiles
 		@Override
 		public void tasksImapct(RayTraceResult hit)
 		{
-			if(hit.hitInfo != null && hit.getType() == Type.ENTITY && hit.hitInfo instanceof LivingEntity)
+			if(hit.getType() == Type.ENTITY)
 			{
-				LivingEntity target = ((LivingEntity)hit.hitInfo);
-				if( target.isPotionActive(Effects.SLOWNESS) && target.isPotionActive(Effects.MINING_FATIGUE) )
-				{				
-					int newTimer = 0;
-					int newAmplifier = 0;
-					
-					newTimer = target.getActivePotionEffect(Effects.SLOWNESS).getDuration() + 240;
-					if(target.getActivePotionEffect(Effects.SLOWNESS).getAmplifier() + 10 < 200)
-						newAmplifier = target.getActivePotionEffect(Effects.SLOWNESS).getAmplifier() + 10;
-					else
-						newAmplifier = 200;
-					target.removePotionEffect(Effects.SLOWNESS);
-					target.removePotionEffect(Effects.MINING_FATIGUE);
-					target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, newTimer, newAmplifier));
-					target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, newTimer, newAmplifier));
-					
-					IExtraEffect props = ExtraEffectCapability.get(target);
-					if(!props.hasExtraEffect(ID.EXTRAEFFECT_NORO))
-						new DFEffectNoroSlowness(target, newTimer);
-				}
-				else
+				EntityRayTraceResult entityHit = (EntityRayTraceResult) hit;
+				
+				if(entityHit.getEntity() instanceof LivingEntity)
 				{
-					target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 240, 10));
-					target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 240, 10));
-					new DFEffectNoroSlowness(target, 240);
-				}			
+					LivingEntity target = (LivingEntity) entityHit.getEntity();
+				
+					if( target.isPotionActive(Effects.SLOWNESS) && target.isPotionActive(Effects.MINING_FATIGUE) )
+					{
+						int newTimer = 0;
+						int newAmplifier = 0;
+						
+						newTimer = target.getActivePotionEffect(Effects.SLOWNESS).getDuration() + 240;
+						if(target.getActivePotionEffect(Effects.SLOWNESS).getAmplifier() + 10 < 200)
+							newAmplifier = target.getActivePotionEffect(Effects.SLOWNESS).getAmplifier() + 10;
+						else
+							newAmplifier = 200;
+						target.removePotionEffect(Effects.SLOWNESS);
+						target.removePotionEffect(Effects.MINING_FATIGUE);
+						target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, newTimer, newAmplifier));
+						target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, newTimer, newAmplifier));
+						
+						IExtraEffect props = ExtraEffectCapability.get(target);
+						if(!props.hasExtraEffect(ID.EXTRAEFFECT_NORO))
+							new DFEffectNoroSlowness(target, newTimer);
+						
+					}
+					else
+					{
+						target.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 240, 10));
+						target.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 240, 10));
+						new DFEffectNoroSlowness(target, 240);					
+					}
+				}
 			}
 		}
 	}	

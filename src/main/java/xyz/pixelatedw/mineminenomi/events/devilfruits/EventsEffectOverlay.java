@@ -91,6 +91,7 @@ public class EventsEffectOverlay
 		}
 	}
 
+	@SuppressWarnings("resource")
 	@SubscribeEvent
 	public void onRenderTick(TickEvent.RenderTickEvent event)
 	{

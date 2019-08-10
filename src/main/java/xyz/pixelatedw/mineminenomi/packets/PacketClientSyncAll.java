@@ -80,6 +80,7 @@ public class PacketClientSyncAll
 		return msg;
 	}
 
+	@SuppressWarnings("resource")
 	public static void handle(PacketClientSyncAll message, final Supplier<NetworkEvent.Context> ctx)
 	{
 		if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT)

@@ -41,12 +41,13 @@ public class CommandRemoveDF
 			IAbilityData abilityDataProps = AbilityDataCapability.get(player);
 			
 			devilFruitProps.setDevilFruit("");
-			
+			devilFruitProps.setZoanPoint("");
+
 			abilityDataProps.clearDevilFruitAbilities();
 			abilityDataProps.clearHotbar(player);
 			
-			ModNetwork.sendTo(new PacketDevilFruitSync(devilFruitProps), (ServerPlayerEntity) player);
-			ModNetwork.sendTo(new PacketAbilityDataSync(abilityDataProps), (ServerPlayerEntity) player);
+			ModNetwork.sendTo(new PacketDevilFruitSync(devilFruitProps), player);
+			ModNetwork.sendTo(new PacketAbilityDataSync(abilityDataProps), player);
 		}
 
 		return 1;		

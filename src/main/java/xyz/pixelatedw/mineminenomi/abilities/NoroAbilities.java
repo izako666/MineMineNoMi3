@@ -79,7 +79,7 @@ public class NoroAbilities
 			}
 			else
 				damageFromSlowness = 2;
-
+			
 			super.hitEntity(player, target);
 			target.attackEntityFrom(DamageSource.causePlayerDamage(player), damageFromSlowness);
 		}
