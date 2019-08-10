@@ -20,7 +20,7 @@ public class BlockSunaSand extends FallingBlock
 	
 	public BlockSunaSand()
 	{
-		super(Properties.create(Material.SAND).doesNotBlockMovement());
+		super(Properties.create(Material.SAND).doesNotBlockMovement().noDrops());
 		this.dustColor = WyHelper.hexToRGB("#765038").getRGB();
 	}
 

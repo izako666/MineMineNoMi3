@@ -34,6 +34,7 @@ import xyz.pixelatedw.mineminenomi.init.ModNetwork;
 import xyz.pixelatedw.mineminenomi.proxy.ClientProxy;
 import xyz.pixelatedw.mineminenomi.proxy.IProxy;
 import xyz.pixelatedw.mineminenomi.proxy.ServerProxy;
+import xyz.pixelatedw.mineminenomi.world.ModOreGenerator;
 
 @Mod(ID.PROJECT_ID)
 public class ModMain
@@ -82,7 +83,9 @@ public class ModMain
 	}
 	
 	private static void commonSetup(FMLCommonSetupEvent event)
-	{	
+	{
+		ModOreGenerator.setupOreGen();
+		
 		MinecraftForge.EVENT_BUS.register(new ModCapabilities());
 		ModCapabilities.init();
 		

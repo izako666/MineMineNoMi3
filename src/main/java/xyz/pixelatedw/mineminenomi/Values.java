@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 
 import net.minecraft.item.Item;
 import xyz.pixelatedw.mineminenomi.api.debug.WyDebug;
-import xyz.pixelatedw.mineminenomi.init.ModMiscBlocks;
 import xyz.pixelatedw.mineminenomi.init.ModMiscItems;
 import xyz.pixelatedw.mineminenomi.items.ItemAkumaNoMi;
 
@@ -30,7 +29,7 @@ public class Values
 
 	public static Item[] KAIROSEKI_ITEMS = new Item[]
 		{
-				ModMiscItems.kairoseki, ModMiscItems.kairosekiBullets, ModMiscItems.denseKairoseki, ModMiscBlocks.kairosekiBlock.asItem(), ModMiscBlocks.kairosekiBars.asItem(), ModMiscBlocks.kairosekiOre.asItem()
+				ModMiscItems.kairoseki, ModMiscItems.kairosekiBullets, ModMiscItems.denseKairoseki
 		};
 
 	// Network related stuff

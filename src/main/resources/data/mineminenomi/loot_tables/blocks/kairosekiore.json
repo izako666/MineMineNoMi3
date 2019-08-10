@@ -1,0 +1,35 @@
+{
+	"type": "minecraft:block",
+	"pools": 
+	[
+		{
+			"name": "mineminenomi:oredrops",
+			"rolls": 1,
+			"entries": 
+			[
+				{
+					"type": "minecraft:item",
+					"functions": 
+					[
+						{
+							"function": "minecraft:set_count",
+							"count": 
+							{
+								"min": 3.0,
+								"max": 6.0,
+								"type": "minecraft:uniform"
+							}
+		                }
+					],
+					"name": "mineminenomi:kairoseki"
+				}
+			],
+			"conditions": 
+			[
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		}
+	]
+}

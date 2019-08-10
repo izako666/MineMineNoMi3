@@ -1,5 +1,6 @@
 package xyz.pixelatedw.mineminenomi.api.math;
 
+import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -7,6 +8,27 @@ import xyz.pixelatedw.mineminenomi.api.WyHelper;
 
 public class WyMathHelper
 {	
+	public static List shuffle(List ar)
+	{
+		Random rnd = new Random();
+		
+		for (int i = ar.size() - 1; i > 0; i--)
+		{
+			int index = rnd.nextInt(i + 1);
+			// Simple swap
+			Object a = ar.get(index);
+			ar.set(index, ar.get(i));
+			ar.set(i, a);
+		}
+		
+		return ar;
+	}
+
+	public static float degToRad(double degrees)
+	{
+		return (float) (degrees * Math.PI / 180);
+	}
+	
 	public static double percentage(double i, double j) { return (i / 100) * j; }
 	
     public static double randomWithRange (int min, int max) { return new Random().nextInt(max + 1 - min) + min;}

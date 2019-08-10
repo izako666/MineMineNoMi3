@@ -108,7 +108,7 @@ public class ModMiscBlocks
     }
 	
 	@SubscribeEvent
-	public static void registerTE(RegistryEvent.Register<TileEntityType<?>> event) 
+	public static void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) 
 	{
 		if (!event.getName().equals(ForgeRegistries.TILE_ENTITIES.getRegistryName()))
 			return;

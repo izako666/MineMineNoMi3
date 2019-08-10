@@ -126,7 +126,7 @@ public class ModDevilFruits
 			/*KiloAbilities.abilitiesArray,*/ BakuAbilities.abilitiesArray, OriAbilities.abilitiesArray, /*YomiAbilities.abilitiesArray,*/ ZouAbilities.abilitiesArray,
 			SabiAbilities.abilitiesArray, SupaAbilities.abilitiesArray, MeroAbilities.abilitiesArray, ChiyuAbilities.abilitiesArray, HoruAbilities.abilitiesArray, MoguAbilities.abilitiesArray,
 			DoaAbilities.abilitiesArray, KachiAbilities.abilitiesArray, /*MiniAbilities.abilitiesArray, GiraffeAbilities.abilitiesArray,*/
-				
+
 			// Special Abilities lists
 			RokushikiAbilities.abilitiesArray, FishKarateAbilities.abilitiesArray, CyborgAbilities.abilitiesArray, 
 			SniperAbilities.abilitiesArray, SwordsmanAbilities.abilitiesArray, 
@@ -140,8 +140,8 @@ public class ModDevilFruits
 			GoroProjectiles.projectiles, MokuProjectiles.projectiles, NikyuProjectiles.projectiles, BomuProjectiles.projectiles, GuraProjectiles.projectiles, KageProjectiles.projectiles, SunaProjectiles.projectiles,
 			MaguProjectiles.projectiles, DoruProjectiles.projectiles, DokuProjectiles.projectiles, GasuProjectiles.projectiles, YukiProjectiles.projectiles, ItoProjectiles.projectiles, BariProjectiles.projectiles,
 			HoroProjectiles.projectiles, YamiProjectiles.projectiles, GoeProjectiles.projectiles, GomuProjectiles.projectiles, JuryoProjectiles.projectiles, ToriPhoenixProjectiles.projectiles,
-			BakuProjectiles.projectiles, BakuProjectiles.projectiles, SupaProjectiles.projectiles, MeroProjectiles.projectiles, OriProjectiles.projectiles, UshiGiraffeProjectiles.projectiles,
-			
+			BakuProjectiles.projectiles, SupaProjectiles.projectiles, MeroProjectiles.projectiles, OriProjectiles.projectiles, UshiGiraffeProjectiles.projectiles,
+
 			// Special Abilities projectiles
 			RokushikiProjectiles.projectiles, FishKarateProjectiles.projectiles, CyborgProjectiles.projectiles, ExtraProjectiles.projectiles, 
 			SwordsmanProjectiles.projectiles, SniperProjectiles.projectiles

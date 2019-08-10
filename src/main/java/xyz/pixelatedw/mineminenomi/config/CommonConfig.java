@@ -155,6 +155,16 @@ public class CommonConfig
 		
 		builder.pop();
 	}
+
+	public double getSpawnShipsMultiplier()
+	{
+		return this.multiplierShipsSpawn.get();
+	}
+	
+	public boolean getSpawnShips()
+	{
+		return this.spawnShips.get();
+	}
 	
 	public double getDorikiRewardMultiplier()
 	{
