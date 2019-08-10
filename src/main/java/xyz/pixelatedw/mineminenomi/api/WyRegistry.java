@@ -15,11 +15,11 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.FMLPlayMessages.SpawnEntity;
 import xyz.pixelatedw.mineminenomi.ID;
-import xyz.pixelatedw.mineminenomi.api.json.JSONModelBlock;
-import xyz.pixelatedw.mineminenomi.api.json.JSONModelItem;
-import xyz.pixelatedw.mineminenomi.api.json.block.JSONModelSimpleBlock;
-import xyz.pixelatedw.mineminenomi.api.json.item.JSONModelItemBlock;
-import xyz.pixelatedw.mineminenomi.api.json.item.JSONModelSimpleItem;
+import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelBlock;
+import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelItem;
+import xyz.pixelatedw.mineminenomi.api.json.models.block.JSONModelSimpleBlock;
+import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelItemBlock;
+import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelSimpleItem;
 import xyz.pixelatedw.mineminenomi.init.ModCreativeTabs;
 
 public class WyRegistry

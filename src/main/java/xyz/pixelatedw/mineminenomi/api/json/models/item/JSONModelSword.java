@@ -1,6 +1,6 @@
-package xyz.pixelatedw.mineminenomi.api.json.item;
+package xyz.pixelatedw.mineminenomi.api.json.models.item;
 
-import xyz.pixelatedw.mineminenomi.api.json.JSONModelItem;
+import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelItem;
 
 public class JSONModelSword extends JSONModelItem
 {

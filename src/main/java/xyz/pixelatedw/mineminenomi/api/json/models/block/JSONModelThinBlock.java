@@ -1,8 +1,8 @@
-package xyz.pixelatedw.mineminenomi.api.json.block;
+package xyz.pixelatedw.mineminenomi.api.json.models.block;
 
 import java.io.File;
 
-import xyz.pixelatedw.mineminenomi.api.json.JSONModelBlock;
+import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelBlock;
 
 public class JSONModelThinBlock extends JSONModelBlock
 {

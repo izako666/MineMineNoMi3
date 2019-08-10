@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.json.block;
+package xyz.pixelatedw.mineminenomi.api.json.models.block;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 
 import xyz.pixelatedw.mineminenomi.ID;
-import xyz.pixelatedw.mineminenomi.api.json.JSONModelBlock;
+import xyz.pixelatedw.mineminenomi.api.json.models.JSONModelBlock;
 
 public class JSONModelBars extends JSONModelBlock
 {

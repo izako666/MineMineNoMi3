@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.json;
+package xyz.pixelatedw.mineminenomi.api.json.models;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public abstract class JSONModelItem implements IJSONModel
 	public JSONModelItem(String itemName, String template)
 	{
 		this.itemName = WyHelper.getFancyName(itemName);
-		this.template = new File(ID.PROJECT_RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/json_templates/item/" + template + ".json");
+		this.template = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/json_templates/item/" + template + ".json");
 	}
 	
 	protected String[] replaceMarkedElements()

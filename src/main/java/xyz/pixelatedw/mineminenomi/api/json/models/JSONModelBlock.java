@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.json;
+package xyz.pixelatedw.mineminenomi.api.json.models;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,8 +20,8 @@ public abstract class JSONModelBlock implements IJSONModel
 	public JSONModelBlock(String blockName, String blockTemplate, String blockStateTemplate)
 	{
 		this.blockName = WyHelper.getFancyName(blockName);
-		this.blockTemplate = new File(ID.PROJECT_RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/json_templates/block/" + blockTemplate + ".json");
-		this.blockStateTemplate = new File(ID.PROJECT_RESOURCES_FOLDER + "/assets/" + ID.PROJECT_ID + "/json_templates/blockstate/" + blockStateTemplate + ".json");
+		this.blockTemplate = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/json_templates/block/" + blockTemplate + ".json");
+		this.blockStateTemplate = new File(ID.PROJECT_RESOURCES_FOLDER + "/data/" + ID.PROJECT_ID + "/json_templates/blockstate/" + blockStateTemplate + ".json");
 	}
 
 	public abstract String[] getBlockStateModel();

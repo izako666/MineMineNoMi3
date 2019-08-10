@@ -1,4 +1,4 @@
-package xyz.pixelatedw.mineminenomi.api.json;
+package xyz.pixelatedw.mineminenomi.api.json.models;
 
 public interface IJSONModel
 {

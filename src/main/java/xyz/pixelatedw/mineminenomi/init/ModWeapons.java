@@ -6,8 +6,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.pixelatedw.mineminenomi.ID;
 import xyz.pixelatedw.mineminenomi.api.WyRegistry;
-import xyz.pixelatedw.mineminenomi.api.json.item.JSONModelRod;
-import xyz.pixelatedw.mineminenomi.api.json.item.JSONModelSword;
+import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelRod;
+import xyz.pixelatedw.mineminenomi.api.json.models.item.JSONModelSword;
 import xyz.pixelatedw.mineminenomi.items.weapons.ItemAbilityWeapon;
 import xyz.pixelatedw.mineminenomi.items.weapons.ItemCoreWeapon;
 
