@@ -8,7 +8,10 @@ public class CombatHelper
 {
 
 	public static boolean isPassiveActive(IAbilityData abilityProps, AbilityAttribute attr)
-	{		
+	{
+		if(abilityProps == null)
+			return false;
+		
 		Ability ability = abilityProps.getHotbarAbilityFromName(attr.getAttributeName());
 		if (ability != null && ability.isPassiveActive())
 			return true;

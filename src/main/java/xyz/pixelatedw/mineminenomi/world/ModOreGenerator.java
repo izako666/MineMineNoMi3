@@ -12,7 +12,6 @@ import xyz.pixelatedw.mineminenomi.init.ModMiscBlocks;
 
 public class ModOreGenerator
 {
-	
     public static void setupOreGen()
     {
     	for (Biome biome: ForgeRegistries.BIOMES.getValues())
@@ -35,7 +34,7 @@ public class ModOreGenerator
 						new CountRangeConfig(40, 10, 0, 128)
 					)
 				);
-			}
+			}		
         }
     }
     

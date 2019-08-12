@@ -115,6 +115,7 @@ public class EventsEffectOverlay
 		 * else if (props.hasExtraEffects(ID.EXTRAEFFECT_SPIDEROVERLAY))
 		 * WyRenderHelper.drawColourOnScreen(WyHelper.hexToRGB("#3e4247").getRGB(), 100, 0, 0, sr.getScaledWidth_double(), sr.getScaledHeight_double(), 200);
 		 */
+		
 		if (CombatHelper.isPassiveActive(abilityProps, ModAttributes.AIR_DOOR))
 			WyRenderHelper.drawColourOnScreen(0, 50, 0, 100, 0, 0, mc.mainWindow.getWidth(), mc.mainWindow.getHeight(), 100);
 	}

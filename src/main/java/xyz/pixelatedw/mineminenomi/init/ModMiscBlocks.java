@@ -83,7 +83,7 @@ public class ModMiscBlocks
 	public static Block DialFlashBlock = new BlockFlashDial();
 	public static Block DialRejectBlock = new BlockRejectDial();
 	public static Block DialBreathBlock = new BlockBreathDial();*/
-	
+
 	@SubscribeEvent
     public static void registerBlocks(final RegistryEvent.Register<Block> event)
     {
@@ -107,7 +107,7 @@ public class ModMiscBlocks
         	WyRegistry.registerBlock(darkness, "Darkness"),
         	WyRegistry.registerBlock(oriBars, "Ori Bars", new JSONModelBars("Ori Bars"))
         );
-        
+
         // Register loot tables
         //Ore
         WyRegistry.registerLootTable(kairosekiOre, new JSONLootTableSimpleBlock("Kairoseki", 3, 6));
