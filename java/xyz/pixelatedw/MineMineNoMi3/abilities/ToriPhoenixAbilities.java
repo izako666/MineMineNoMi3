@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import xyz.pixelatedw.MineMineNoMi3.ID;
 import xyz.pixelatedw.MineMineNoMi3.Values;
@@ -201,6 +203,7 @@ public class ToriPhoenixAbilities
 		{
 			super(ListAttributes.PHOENIX_FULLPOINT);
 		}
+		PotionEffect regen = new PotionEffect(Potion.regeneration.id, 100000000, 3);
 
 		public void passive(EntityPlayer player)
 		{
@@ -220,9 +223,11 @@ public class ToriPhoenixAbilities
 				props.setZoanPoint("n/a");
 
 			props.setZoanPoint("full");
+			player.addPotionEffect(regen);
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
 			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
 		}
+		
 		
 		public void endPassive(EntityPlayer player)
 		{
@@ -230,7 +235,8 @@ public class ToriPhoenixAbilities
 
 			props.setZoanPoint("n/a");
 			WyNetworkHelper.sendTo(new PacketSync(props), (EntityPlayerMP) player);
-			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		    WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getDisplayName(), props));
+		player.removePotionEffect(regen.getPotionID());
 		}
 	}
 	
