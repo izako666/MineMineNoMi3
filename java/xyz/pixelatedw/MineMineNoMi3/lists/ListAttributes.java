@@ -29,7 +29,12 @@ public class ListAttributes
 {
 	
 	public static AbilityAttribute MINIMININOFULLREBOUND = new AbilityAttribute("Mini Mini no Full Rebound").setAbilityCooldown(3).setAbilityPassive(true);
-	
+	public static AbilityAttribute YANAGIMOCHI = new AbilityAttribute("Yanagi Mochi").setAbilityCooldown(5).setAbilityDisplayName("Yanagi Mochi").setProjectileTicks(15).setProjectileDamage(10);
+	public static AbilityAttribute KAKUMOCHI = new AbilityAttribute("Kaku Mochi").setAbilityCooldown(5).setAbilityDisplayName("Kaku Mochi").setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5").setProjectileDamage(8).setProjectileTicks(10);
+	public static AbilityAttribute YAKIMOCHI = new AbilityAttribute("Yaki Mochi").setAbilityCooldown(8).setAbilityDisplayName("Yaki Mochi").setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5").setProjectileDamage(12).setProjectileExplosion(3, true);
+    public static AbilityAttribute MOCHITSUKI = new AbilityAttribute("Mochi Tsuki").setAbilityCooldown(12).setAbilityDisplayName("Mochi Tsuki").setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5").setProjectileDamage(15).setProjectileTicks(80);
+	public static AbilityAttribute NAGAREMOCHI = new AbilityAttribute("Nagare Mochi").setAbilityCooldown(12).setAbilityDisplayName("Nagare Mochi");
+	public static AbilityAttribute KARADAMOCHI = new AbilityAttribute("Karado Mochi").setAbilityDisplayName("Karada Mochi").setAbilityCooldown(12).setAbilityPassive();
 	public static AbilityAttribute BIGAN = new AbilityAttribute("Bigan").setAbilityCooldown(8).setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileColor("#6D5E24").setProjectileSize(1, 1, 2.4).setProjectileTicks(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.weakness.id, 600, 0), new PotionEffect(Potion.moveSlowdown.id, 600, 2)).setModelOffsets(0, 1.5, 0);
 	public static AbilityAttribute GIRAFFE_SPEEDPOINT = new AbilityAttribute("Giraffe Speed Point").setAbilityDisplayName("Speed Point").setAbilityTexture("giraffefull").setAbilityCooldown(1).setAbilityPassive(true);
 	public static AbilityAttribute GIRAFFE_POWERPOINT = new AbilityAttribute("Giraffe Power Point").setAbilityDisplayName("Power Point").setAbilityTexture("giraffehybrid").setAbilityCooldown(1).setAbilityPassive(true);

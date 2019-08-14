@@ -22,6 +22,7 @@ import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDemonPoison;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockDenDenMushi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockEnchantmentTable2;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockKage;
+import xyz.pixelatedw.MineMineNoMi3.blocks.BlockMochi;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpe;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockOpeMid;
 import xyz.pixelatedw.MineMineNoMi3.blocks.BlockPoison;
@@ -80,6 +81,7 @@ import xyz.pixelatedw.MineMineNoMi3.world.WorldProviderScenarioArena;
 public class ListMisc
 {
 	public static Block Ope = new BlockOpe();
+	public static Block Mochi = new BlockMochi();
 	public static Block OpeMid = new BlockOpeMid();
 	public static Block KairosekiBlock = new NewBlock(Material.rock).setHardness(10);
 	public static Block KairosekiOre = new NewBlock(Material.rock)
@@ -317,6 +319,7 @@ public class ListMisc
 		addITEM(DialFlash, "Flash Dial", ListCreativeTabs.tabMisc);
 		addITEM(DialBreath, "Breath Dial", ListCreativeTabs.tabMisc);
 
+		addBLOCK(Mochi, "mochi", 0.2F, null, null);
 		addBLOCK(Ope, "Ope", Float.POSITIVE_INFINITY, null, null);
 		addBLOCK(OpeMid, "Ope Mid", Float.POSITIVE_INFINITY, TileEntityOpe.class, null);
 		addBLOCK(KairosekiOre, "Kairoseki Ore", 3.5F, null, ListCreativeTabs.tabMisc);

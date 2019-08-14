@@ -18,7 +18,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	private long bounty, bountyCmd;
 	private String akumaNoMiUsed = "n/a", faction = "n/a", race = "n/a", fightStyle = "n/a", crew = "n/a", zoanPoint = "n/a";
 	private boolean isLogia, hasShadow = true, hasHeart = true, firstTime = true, hasHakiActive = false, hasBusoHakiActive = false, hasKenHakiActive = false, kilo = false, hasYamiPower = false, hasColaBackpack = false, isInAirWorld= false;
-
+    private boolean isMochiFocused = false;
 	private String tempPreviousAbility = "";
 
 	private String[] extraEffects = new String[32];
@@ -79,6 +79,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		props.setBoolean("hasYamiPower", this.hasYamiPower);
 		props.setBoolean("hasColaBackpack", this.hasColaBackpack);
 		props.setBoolean("isInAirWorld", this.isInAirWorld);
+		props.setBoolean("isMochiFocused", this.isMochiFocused);
 		
 		props.setBoolean("isInCombatMode", this.isInCombatMode);		
 		
@@ -125,6 +126,7 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 		this.hasYamiPower = props.getBoolean("hasYamiPower");
 		this.hasColaBackpack = props.getBoolean("hasColaBackpack");
 		this.isInAirWorld = props.getBoolean("isInAirWorld");
+		this.isMochiFocused = props.getBoolean("isMochiFocused");
 		
 		this.isInCombatMode = props.getBoolean("isInCombatMode");
 		
@@ -321,6 +323,9 @@ public class ExtendedEntityData implements IExtendedEntityProperties
 	public boolean isBountyHunter() { return this.faction.equalsIgnoreCase("bountyhunter"); }
 	public boolean hasFaction() { return !this.faction.equalsIgnoreCase("n/a"); }
 	public void setFaction(String i) {this.faction = i;}
+	
+	public boolean setMochiFocus(boolean t) {return this.isMochiFocused = t;}
+	public boolean isMochiFocused() {return this.isMochiFocused;}
 	
 	public String getCrew() {return this.crew;}
 	public void setCrew(String crewName) {this.crew = crewName;}
