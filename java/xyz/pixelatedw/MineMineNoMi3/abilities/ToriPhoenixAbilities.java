@@ -203,7 +203,7 @@ public class ToriPhoenixAbilities
 		{
 			super(ListAttributes.PHOENIX_FULLPOINT);
 		}
-		PotionEffect regen = new PotionEffect(Potion.regeneration.id, 100000000, 3);
+		PotionEffect regen = new PotionEffect(Potion.regeneration.id, Integer.MAX_VALUE, 1);
 
 		public void passive(EntityPlayer player)
 		{
