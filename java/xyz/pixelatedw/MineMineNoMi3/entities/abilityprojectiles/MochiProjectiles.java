@@ -19,6 +19,7 @@ public class MochiProjectiles {
 	static {
 		abilitiesClassesArray.add(new Object[] { KakuMochiProjectile.class, ListAttributes.KAKUMOCHI });
 		abilitiesClassesArray.add(new Object[] { YakiMochiProjectile.class, ListAttributes.YAKIMOCHI });
+		abilitiesClassesArray.add(new Object[] { MochiTsukiProjectile.class, ListAttributes.MOCHITSUKI });
 
 	}
 
@@ -59,6 +60,19 @@ public class MochiProjectiles {
 				hit.entityHit.setFire(10);
 			}
 
+		}
+	}
+	public static class MochiTsukiProjectile extends AbilityProjectile {
+		public MochiTsukiProjectile(World world) {
+			super(world);
+		}
+
+		public MochiTsukiProjectile(World world, double x, double y, double z) {
+			super(world, x, y, z);
+		}
+
+		public MochiTsukiProjectile(World world, EntityLivingBase player, AbilityAttribute attr) {
+			super(world, player, attr);
 		}
 	}
 }

@@ -18,6 +18,7 @@ import xyz.pixelatedw.MineMineNoMi3.abilities.extra.effects.DFEffectHieSlowness;
 import xyz.pixelatedw.MineMineNoMi3.api.WyHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.Ability;
 import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityAttribute;
+import xyz.pixelatedw.MineMineNoMi3.api.abilities.AbilityProjectile;
 import xyz.pixelatedw.MineMineNoMi3.api.math.WyMathHelper;
 import xyz.pixelatedw.MineMineNoMi3.api.network.WyNetworkHelper;
 import xyz.pixelatedw.MineMineNoMi3.data.ExtendedEntityData;
@@ -57,12 +58,12 @@ public class MochiAbilities {
 			super(ListAttributes.KAKUMOCHI);
 		}
 
-		public void use(EntityPlayer player) {
+		public void endCharging(EntityPlayer player) {
 			if (!this.isOnCooldown) {
 				this.projectile = new MochiProjectiles.KakuMochiProjectile(player.worldObj, player,
 						ListAttributes.KAKUMOCHI);
 			}
-			super.use(player);
+			super.endCharging(player);
 		}
 	}
 
@@ -130,11 +131,21 @@ public class MochiAbilities {
 			super(ListAttributes.YANAGIMOCHI);
 
 		}
+		int projectileSpace = 3;
 
 		public void use(EntityPlayer player) {
 			if (!isOnCooldown) {
-				this.projectile = new GomuProjectiles.GomuGomuNoGatling(player.worldObj, player,
+				for(int i = 0; i < 25; i++) {
+					AbilityProjectile proj = null;
+
+				proj = new MochiProjectiles.KakuMochiProjectile(player.worldObj, player,
 						ListAttributes.YANAGIMOCHI);
+				proj.setLocationAndAngles(
+						player.posX + WyMathHelper.randomWithRange(-projectileSpace, projectileSpace) + player.worldObj.rand.nextDouble(), 
+						(player.posY + 0.3) + WyMathHelper.randomWithRange(0, projectileSpace) + player.worldObj.rand.nextDouble(), 
+						player.posZ + WyMathHelper.randomWithRange(-projectileSpace, projectileSpace) + player.worldObj.rand.nextDouble(), 
+						0, 0);
+				player.worldObj.spawnEntityInWorld(proj);}
 			}
 			super.use(player);
 		}
@@ -147,16 +158,17 @@ public class MochiAbilities {
 			super(ListAttributes.MOCHITSUKI);
 		}
 
-		public void use(EntityPlayer player) {
+		public void endCharging(EntityPlayer player) {
 			if (player.getHeldItem() != null && ItemsHelper.isSword(player.getHeldItem())) {
 				if (!isOnCooldown) {
-					this.projectile = new MochiProjectiles.KakuMochiProjectile(player.worldObj, player,
+					this.projectile = new MochiProjectiles.MochiTsukiProjectile(player.worldObj, player,
 							ListAttributes.MOCHITSUKI);
 				}
+				super.endCharging(player);
 			} else {
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 			}
-			super.use(player);
+			
 		}
 
 	}
@@ -165,18 +177,13 @@ public class MochiAbilities {
 		public KaradaMochi() {
 			super(ListAttributes.KARADAMOCHI);
 		}
-		public void passive(EntityPlayer player) {
-			if(!isOnCooldown) {
-				ExtendedEntityData propz = ExtendedEntityData.get(player);
-				propz.setMochiFocus(true);
 
-			}
-			super.passive(player);
-		}
+	
 
 		public void duringPassive(EntityPlayer player, int passivetimer) {
 		
-				if (passivetimer > 20 * 8) {
+			this.setPassiveActive(true);
+				if (passivetimer > 20 * 7) {
 					this.setPassiveActive(false);
 					this.setCooldownActive(true);
 					this.endPassive(player);
@@ -185,10 +192,6 @@ public class MochiAbilities {
 		
 
 		public void endPassive(EntityPlayer player) {
-			ExtendedEntityData propz = ExtendedEntityData.get(player);
-			propz.setMochiFocus(false);
-			WyNetworkHelper.sendTo(new PacketSync(propz), (EntityPlayerMP) player);
-			WyNetworkHelper.sendToAll(new PacketSyncInfo(player.getEntityId(), propz));
 			this.startCooldown();
 			this.startExtUpdate(player);
 

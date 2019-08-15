@@ -9,6 +9,7 @@ import xyz.pixelatedw.MineMineNoMi3.api.abilities.extra.EffectType;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelArrow;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelBrickBat;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFist;
+import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelFoot;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHeart;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelHydra;
 import xyz.pixelatedw.MineMineNoMi3.entities.abilityprojectiles.models.ModelMeigo;
@@ -29,12 +30,12 @@ public class ListAttributes
 {
 	
 	public static AbilityAttribute MINIMININOFULLREBOUND = new AbilityAttribute("Mini Mini no Full Rebound").setAbilityCooldown(3).setAbilityPassive(true);
-	public static AbilityAttribute YANAGIMOCHI = new AbilityAttribute("Yanagi Mochi").setAbilityCooldown(5).setAbilityDisplayName("Yanagi Mochi").setProjectileTicks(15).setProjectileDamage(10);
-	public static AbilityAttribute KAKUMOCHI = new AbilityAttribute("Kaku Mochi").setAbilityCooldown(5).setAbilityDisplayName("Kaku Mochi").setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5").setProjectileDamage(8).setProjectileTicks(10);
-	public static AbilityAttribute YAKIMOCHI = new AbilityAttribute("Yaki Mochi").setAbilityCooldown(8).setAbilityDisplayName("Yaki Mochi").setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5").setProjectileDamage(12).setProjectileExplosion(3, true);
-    public static AbilityAttribute MOCHITSUKI = new AbilityAttribute("Mochi Tsuki").setAbilityCooldown(12).setAbilityDisplayName("Mochi Tsuki").setProjectileModel(new ModelCube()).setProjectileSize(.5, .5, 1).setProjectileColor("#dee1e5").setProjectileDamage(15).setProjectileTicks(80);
+	public static AbilityAttribute YANAGIMOCHI = new AbilityAttribute("Yanagi Mochi").setAbilityCooldown(5).setAbilityDisplayName("Yanagi Mochi").setProjectileTicks(15).setProjectileDamage(8).setProjectileModel(new ModelFoot()).setProjectileSize(4, 4, 4).setModelOffsets(0, 1, 0).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 50, 1));
+	public static AbilityAttribute KAKUMOCHI = new AbilityAttribute("Kaku Mochi").setAbilityCooldown(5).setAbilityDisplayName("Kaku Mochi").setProjectileModel(new ModelFist()).setProjectileSize(1.4, 1.4, 1).setModelOffsets(0, .5, 0).setProjectileColor("#dee1e5").setProjectileDamage(8).setProjectileTicks(7).setAbilityCharges(40).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.moveSlowdown.id, 50, 1 ));
+	public static AbilityAttribute YAKIMOCHI = new AbilityAttribute("Yaki Mochi").setAbilityCooldown(8).setAbilityDisplayName("Yaki Mochi").setProjectileModel(new ModelFist()).setProjectileSize(2, 2, 1).setProjectileColor("#dee1e5").setModelOffsets(0, .5, 0).setProjectileDamage(12).setProjectileExplosion(3, true);
+    public static AbilityAttribute MOCHITSUKI = new AbilityAttribute("Mochi Tsuki").setAbilityCooldown(12).setAbilityDisplayName("Mochi Tsuki").setProjectileSize(1, 1, 1.5).setProjectileColor("#dee1e5").setProjectileDamage(15).setModelOffsets(0, 0.5, 0).setProjectileTicks(80).setProjectileModel(new ModelTrident()).setAbilityCharges(40);
 	public static AbilityAttribute NAGAREMOCHI = new AbilityAttribute("Nagare Mochi").setAbilityCooldown(12).setAbilityDisplayName("Nagare Mochi");
-	public static AbilityAttribute KARADAMOCHI = new AbilityAttribute("Karado Mochi").setAbilityDisplayName("Karada Mochi").setAbilityCooldown(12).setAbilityPassive();
+	public static AbilityAttribute KARADAMOCHI = new AbilityAttribute("Karada Mochi").setAbilityDisplayName("Karada Mochi").setAbilityCooldown(12).setAbilityPassive();
 	public static AbilityAttribute BIGAN = new AbilityAttribute("Bigan").setAbilityCooldown(8).setProjectileDamage(20).setProjectileModel(new ModelCube()).setProjectileColor("#6D5E24").setProjectileSize(1, 1, 2.4).setProjectileTicks(10).addEffects(EffectType.PROJECTILE, new PotionEffect(Potion.weakness.id, 600, 0), new PotionEffect(Potion.moveSlowdown.id, 600, 2)).setModelOffsets(0, 1.5, 0);
 	public static AbilityAttribute GIRAFFE_SPEEDPOINT = new AbilityAttribute("Giraffe Speed Point").setAbilityDisplayName("Speed Point").setAbilityTexture("giraffefull").setAbilityCooldown(1).setAbilityPassive(true);
 	public static AbilityAttribute GIRAFFE_POWERPOINT = new AbilityAttribute("Giraffe Power Point").setAbilityDisplayName("Power Point").setAbilityTexture("giraffehybrid").setAbilityCooldown(1).setAbilityPassive(true);
