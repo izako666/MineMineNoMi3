@@ -164,11 +164,11 @@ public class MochiAbilities {
 					this.projectile = new MochiProjectiles.MochiTsukiProjectile(player.worldObj, player,
 							ListAttributes.MOCHITSUKI);
 				}
-				super.endCharging(player);
 			} else {
 				WyHelper.sendMsgToPlayer(player, "You need a sword to use this ability !");
 			}
-			
+			super.endCharging(player);
+
 		}
 
 	}
